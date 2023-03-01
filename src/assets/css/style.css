@@ -534,7 +534,6 @@ Header TopBar
 }
 
 .dropdown-toggle::after {
-  display: none;
 }
 
 .nav-item.dropdown .dropdown-menu {

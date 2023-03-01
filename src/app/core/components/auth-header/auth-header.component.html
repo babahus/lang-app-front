@@ -1,0 +1,66 @@
+<header>
+  <!-- Main Menu Start -->
+  <div #menu class="site-navigation main_menu menu-style-2" id="mainmenu-area">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <p>
+          <h3>Lang</h3>
+          <h4>App</h4>
+        </a>
+
+        <!-- Toggler -->
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="fa fa-bars"></span>
+        </button>
+
+        <!-- Collapse -->
+        <div class="collapse navbar-collapse" id="navbarMenu">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a routerLink="" class="nav-link js-scroll-trigger">
+                Home<i class="bi bi-house"></i>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a href="#" class="nav-link js-scroll-trigger">
+                Blog
+              </a>
+            </li>
+
+            <li class="nav-item ">
+              <a href="#" class="nav-link js-scroll-trigger">
+                About us
+              </a>
+            </li>
+
+            <li class="nav-item ">
+              <a href="#" class="nav-link js-scroll-trigger">
+                Contact
+              </a>
+            </li>
+          </ul>
+
+          <div class="header-login">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" role="button" style="cursor: pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Menu<i class="bi bi-caret-down"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbar3">
+                  <a class="dropdown-item " href="#">
+                    Dashboard
+                  </a>
+                  <a class="dropdown-item" style="cursor: pointer" (click)="authService.logout()">
+                    Logout
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div> <!-- / .navbar-collapse -->
+      </div> <!-- / .container -->
+    </nav>
+  </div>
+</header>

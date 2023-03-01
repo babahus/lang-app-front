@@ -9,13 +9,16 @@ import {HeaderComponent} from "../core/components/header/header.component";
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {GuestGuard} from "../core/guards/guest.guard";
+import {NotFoundComponent} from "../core/components/not-found/not-found.component";
 
 const routes: Routes = [
   { path : '', component: IndexComponent},
-  { path: 'about', component: AboutComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent},
-  { path: '**', redirectTo: ''}
+  { path: 'register', component: RegisterComponent, canActivate : [GuestGuard] },
+  { path: 'login', component: LoginComponent, canActivate : [GuestGuard]},
+  {
+    path: '**', component: NotFoundComponent
+  }
 ];
 
 @NgModule({

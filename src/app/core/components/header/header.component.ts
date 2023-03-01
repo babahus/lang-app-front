@@ -1,4 +1,5 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-header',
@@ -8,6 +9,7 @@ import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/c
 export class HeaderComponent implements OnInit {
 
   @ViewChild('menu') menuElement!: ElementRef;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -16,7 +18,7 @@ export class HeaderComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     const verticalOffset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    if (verticalOffset > 100) {
+    if (verticalOffset > 50) {
       this.menuElement.nativeElement.classList.add('menu_fixed');
     } else {
       this.menuElement.nativeElement.classList.remove('menu_fixed');

@@ -42,7 +42,7 @@ export class AuthService {
 
   public logout() {
     return new Promise(((resolve, reject) => {
-      this.http.post<any>(this.url + '/logout', {})
+      this.http.get<any>(this.url + '/logout', {})
         .pipe(catchError((error) => {
           reject(error);
           return throwError(error)
