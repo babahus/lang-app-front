@@ -2729,7 +2729,7 @@ ul.order_details li strong {
 }
 
 .woocommerce-form p {
-  margin: 0 0 15px 0;
+  margin: 0 0 10px 0;
 }
 
 .woocommerce-form__label-for-checkbox {
@@ -3060,7 +3060,7 @@ responsive
 }
 
 .woocommerce-form p {
-  margin: 0 0 25px 0;
+  margin: 0 0 0 0;
 }
 
 .woocommerce-form label {
