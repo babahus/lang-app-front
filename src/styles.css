@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+
+.bg-green-uniq {
+  background: #20ad96;
+}
+.panel-icon {
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 16px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  display: block;
+}
+
+.text-light {
+  color: #757575 !important;
+}
+
+.list-group-link {
+  cursor: pointer;
+}
+
+.link-text-color {
+  cursor: pointer;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

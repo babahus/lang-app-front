@@ -4,20 +4,20 @@ import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, throwError} from "rxjs";
 import {FormGroup, ValidationErrors} from "@angular/forms";
+import {BaseService} from "./base-service/base.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-
-  private url: string = environment.apiUrl;
-  private storage: Storage = window.localStorage;
+export class AuthService extends BaseService {
 
   constructor(
-    private http: HttpClient,
-    private route: Router,
-    private router: ActivatedRoute,
-  ) { }
+    protected override http: HttpClient,
+    protected override route: Router,
+    protected override router: ActivatedRoute,
+  ) {
+    super(http, route, router);
+  }
 
   get isAuthenticate() {
     return this.storage.getItem('userToken') !== null;
@@ -75,10 +75,7 @@ export class AuthService {
         this.setToken(data.data.token);
         resolve(data.data);
         // todo: check if get param null
-        if (this.router.snapshot.queryParamMap.get('returnUrl') != null) {
-          const returnUrl = this.router.snapshot.queryParamMap.get('returnUrl');
-          this.route.navigate(this.redirectTo(returnUrl))
-        }
+        this.route.navigate(this.redirectTo('dashboard'))
       });
     }))
   }

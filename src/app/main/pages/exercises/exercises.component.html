@@ -1,0 +1,81 @@
+<div ui-view="" class="ui-view-main ng-scope"><!-- Fixed navbar -->
+
+  <div class="parallax bg-green-uniq page-section ng-scope">
+    <div class="container parallax-layer" data-opacity="true" style="transform: translate3d(0px, 0px, 0px); opacity: 1;">
+      <div class="media v-middle">
+        <div class="media-body">
+          <h1 class="text-display-2 text-white margin-none">Library</h1>
+          <p class="text-light lead">Browse through thousands of lessons.</p>
+        </div>
+        <div class="media-right">
+          <div class="width-100 text-right">
+            <div class="btn-group">
+              <a ng-class="{ 'btn-grey-900': $state.is('website-courses.grid'), 'btn-white': !$state.is('website-courses.grid') }" class="btn btn-white" ui-sref="website-courses.grid" href="#/website-courses/grid"><i class="fa fa-th"></i></a>
+              <a ng-class="{ 'btn-grey-900': $state.is('website-courses.list'), 'btn-white': !$state.is('website-courses.list') }" class="btn btn-white btn-grey-900" ui-sref="website-courses.list" href="#/website-courses/list"><i class="fa fa-list"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container ng-scope">
+
+    <div class="page-section">
+      <div class="row">
+
+        <div *ngIf="exercises != undefined" class="col-md-9">
+
+          <div *ngFor="let exercise of exercises" class="panel panel-default paper-shadow" data-z="0.5">
+            <app-exercise-card [exercise]="exercise" [exerciseType]="this.exerciseType"></app-exercise-card>
+          </div>
+
+          <ul class="pagination margin-top-none">
+            <li class="disabled"><a href="#">«</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">»</a></li>
+          </ul>
+
+          <br>
+          <br>
+
+        </div>
+        <div class="col-md-3">
+
+          <div class="panel panel-default" data-toggle="panel-collapse" data-open="true">
+            <div (click)="toggleMenu()"
+                 [class.collapsed]="isToggle" class="panel-heading panel-collapse-trigger" data-toggle="collapse" data-target="#e6a082d3-675f-b23f-c13a-7a45640dac9d" aria-expanded="true">
+              <h4 class="panel-title">Category</h4>
+              <div class="panel-icon">
+                <i *ngIf="isToggle" class="bi bi-chevron-right"></i>
+                <i *ngIf="!isToggle" class="bi bi-chevron-down"></i>
+              </div>
+            </div>
+
+            <div
+                 [attr.aria-expanded]="!isToggle"
+                 [(ngbCollapse)]="isToggle"  id="e6a082d3-675f-b23f-c13a-7a45640dac9d" class="collapse in">
+              <div class="panel-body list-group">
+              <ul *ngIf="exercises != undefined" class="list-group">
+                <li class="list-group-item" [class.active]="this.exerciseType == 'compile_phrase'">
+                  <span class="badge pull-right">{{this.compilePhraseExercises.length}}</span>
+                  <a class="list-group-link" (click)="getExercises('compile_phrase')">Compile Phrase</a>
+                </li>
+                <li class="list-group-item" [class.active]="this.exerciseType == 'audit'">
+                  <span class="badge pull-right">{{this.auditExercise.length}}</span>
+                  <a class="list-group-link" (click)="getExercises('audit')">Audit</a>
+                </li>
+              </ul>
+            </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
