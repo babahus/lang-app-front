@@ -107,4 +107,28 @@ export class AuthService extends BaseService {
       });
     }))
   }
+
+  getLinkForGoogleAuth(role : string){
+    return new Promise(((resolve, reject) => {
+      return this.http.get(this.url + '/login/google'+'?role='+role )
+        .subscribe((data:any) => {
+          console.log(data)
+          resolve(data.data)
+        })
+    }))
+  }
+
+  sendCodeForGoogleAuth(code : string, role : string){
+    return new Promise(((resolve, reject) => {
+      return this.http.post(this.url + '/login/google/callback', {
+        code: code,
+        role: role,
+      }).subscribe((data: any) => {
+        resolve(data)
+        this.setToken(data.data.token);
+        this.route.navigate(['/']);
+      })
+    }))
+  }
+
 }

@@ -26,6 +26,10 @@ const routes: Routes = [
   { path : '', component: IndexComponent},
   { path : 'register', component: RegisterComponent, canActivate : [GuestGuard] },
   { path : 'login', component: LoginComponent, canActivate : [GuestGuard]},
+  {
+    path: 'google/code',
+    component: LoginComponent,
+  },
   { path : 'dashboard', component : DashboardComponent, canActivate : [AuthGuard]},
   { path : 'exercises', component : ExercisesComponent, canActivate : [AuthGuard]},
   { path : 'exercises-my', component : ExercisesMyComponent, canActivate : [AuthGuard]},

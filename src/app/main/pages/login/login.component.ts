@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../core/services/auth.service";
+import {ActivatedRoute, Params} from "@angular/router";
+import {log} from "util";
 
 @Component({
   selector: 'app-login',
@@ -20,9 +22,26 @@ export class LoginComponent implements OnInit {
       Validators.minLength(6)
     ])
   });
-  constructor(private authService: AuthService) { }
+  private readonly auth_code: any;
+  public role = 'User'
+  constructor(private authService: AuthService,private router: ActivatedRoute) {
+    if (router.snapshot.queryParams !== {}) {
+      this.auth_code = router.snapshot.queryParams;
+    }
+  }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    if (this.auth_code && this.auth_code.code != undefined && this.router.snapshot.queryParamMap.has('scope')) {
+      console.log(this)
+      await this.authService.sendCodeForGoogleAuth(this.auth_code.code, this.role);
+      //await this.profileService.getUserInfo();
+      return;
+    }
+  }
+
+  async loginWithGoogle(){
+    const link = await this.authService.getLinkForGoogleAuth(this.role);
+    window.open(link as string | URL | undefined,"_self")
   }
 
   async onSubmit() {
