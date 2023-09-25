@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   private readonly auth_code: any;
   public role = 'User'
   constructor(private authService: AuthService,private router: ActivatedRoute) {
-    if (router.snapshot.queryParams !== {}) {
+    if (Object.keys(router.snapshot.queryParams).length !== 0) {
       this.auth_code = router.snapshot.queryParams;
     }
   }
