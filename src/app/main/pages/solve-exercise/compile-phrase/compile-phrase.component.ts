@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {
   CdkDragDrop, moveItemInArray,
 } from "@angular/cdk/drag-drop";
@@ -14,8 +14,8 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class CompilePhraseComponent implements OnInit{
 
-  public compilePhraseForm: FormGroup = new FormGroup({
-    data: new FormControl(null, [
+  public compilePhraseForm: UntypedFormGroup = new UntypedFormGroup({
+    data: new UntypedFormControl(null, [
       Validators.required,
     ]),
   });

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {BaseService} from "./base-service/base.service";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormGroup, ValidationErrors} from "@angular/forms";
+import {UntypedFormGroup, ValidationErrors} from "@angular/forms";
 import {catchError, throwError} from "rxjs";
 import {Audit, CompilePhrase, Dictionary} from "../../main/models/exercise";
 import {AttachedExercise} from "../../main/models/attached-exercise";
@@ -68,7 +68,7 @@ export class ExerciseService extends BaseService
     }))
   }
 
-  solveExercise(id : number|string|null, type : string, data : FormGroup) : Promise<any> {
+  solveExercise(id : number|string|null, type : string, data : UntypedFormGroup) : Promise<any> {
     if (type == 'compile_phrase')
     {
       this.body = {

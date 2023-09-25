@@ -3,7 +3,7 @@ import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, throwError} from "rxjs";
-import {FormGroup, ValidationErrors} from "@angular/forms";
+import {UntypedFormGroup, ValidationErrors} from "@angular/forms";
 import {BaseService} from "./base-service/base.service";
 
 @Injectable({
@@ -54,7 +54,7 @@ export class AuthService extends BaseService {
     }))
   }
 
-  login(loginForm: FormGroup, role : string): Promise<any> {
+  login(loginForm: UntypedFormGroup, role : string): Promise<any> {
     return new Promise(((resolve, reject) => {
       this.http.post<any>(this.url + '/login', {
         email: loginForm.get("email")?.value,
@@ -81,7 +81,7 @@ export class AuthService extends BaseService {
     }))
   }
 
-  public register(registerForm: FormGroup) {
+  public register(registerForm: UntypedFormGroup) {
     return new Promise(((resolve, reject) => {
       this.http.post<any>(this.url + '/register', {
         name:     registerForm.get("name")?.value,

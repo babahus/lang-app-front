@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../core/services/auth.service";
 import {ActivatedRoute, Params} from "@angular/router";
 import {log} from "util";
@@ -11,13 +11,13 @@ import {log} from "util";
 })
 export class LoginComponent implements OnInit {
 
-  public loginForm: FormGroup = new FormGroup({
-    email: new FormControl(null, [
+  public loginForm: UntypedFormGroup = new UntypedFormGroup({
+    email: new UntypedFormControl(null, [
       Validators.required,
       Validators.maxLength(100),
       Validators.minLength(5)
     ]),
-    password : new FormControl(null, [
+    password : new UntypedFormControl(null, [
       Validators.required,
       Validators.minLength(6)
     ])
