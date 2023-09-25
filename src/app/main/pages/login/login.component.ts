@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
   }
 
   async onSubmit() {
-    return await this.authService.login(this.loginForm);
+    return await this.authService.login(this.loginForm, this.role);
   }
 
 }

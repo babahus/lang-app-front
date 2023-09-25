@@ -54,10 +54,11 @@ export class AuthService extends BaseService {
     }))
   }
 
-  login(loginForm: FormGroup): Promise<any> {
+  login(loginForm: FormGroup, role : string): Promise<any> {
     return new Promise(((resolve, reject) => {
       this.http.post<any>(this.url + '/login', {
         email: loginForm.get("email")?.value,
+        role: role,
         password: loginForm.get("password")?.value
       }).pipe(catchError((error) => {
         if (error.status === 422) {
@@ -84,6 +85,7 @@ export class AuthService extends BaseService {
     return new Promise(((resolve, reject) => {
       this.http.post<any>(this.url + '/register', {
         name:     registerForm.get("name")?.value,
+        role:     registerForm.get("role")?.value,
         email:    registerForm.get("email")?.value,
         password: registerForm.get("password")?.value,
         password_confirmation: registerForm.get("password_confirmation")?.value,
