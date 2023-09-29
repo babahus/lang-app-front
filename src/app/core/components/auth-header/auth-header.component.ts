@@ -7,13 +7,9 @@ import {AuthService} from "../../services/auth.service";
   templateUrl: './auth-header.component.html',
   styleUrls: ['./auth-header.component.css']
 })
+
 export class AuthHeaderComponent extends HeaderComponent implements OnInit {
 
-  constructor(public authService : AuthService) {
-    super();
-  }
 
-  override ngOnInit(): void {
-  }
 
 }

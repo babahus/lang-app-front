@@ -7,11 +7,12 @@ import { AppComponent } from './app.component';
 import { AuthHeaderComponent } from './core/components/auth-header/auth-header.component';
 import {BearerInterceptor} from "./core/interceptors/bearer.interceptor";
 import { NotFoundComponent } from './core/components/not-found/not-found.component';
-import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { BaseComponent } from './core/components/base-component/base-component.component';
 import { ExerciseCardComponent } from './core/components/exercise-card/exercise-card.component';
 import {MainModule} from "./main/main.module";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { LoaderComponent } from './core/components/loader/loader.component';
 
 @NgModule({
     declarations: [
@@ -19,14 +20,14 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
         AuthHeaderComponent,
         NotFoundComponent,
         BaseComponent,
+        LoaderComponent,
     ],
     imports: [
         BrowserModule,
         MainModule,
         HttpClientModule,
         AppRoutingModule,
-        NgbCollapseModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
     ],
     providers: [
       {provide: HTTP_INTERCEPTORS, useClass: BearerInterceptor, multi: true},

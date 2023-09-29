@@ -6,9 +6,9 @@
       <i *ngIf="!isToggle" class="bi bi-chevron-down"></i>
     </div>
   </div>
-  <div (click)="collapse.toggle()"
+  <div
        [attr.aria-expanded]="!isToggle"
-       #collapse="ngbCollapse" [(ngbCollapse)]="isToggle" id="74a01596-0fe2-1c09-00ce-a6ad770ae598" class="collapse in" aria-expanded="true" style="">
+       id="74a01596-0fe2-1c09-00ce-a6ad770ae598" class="collapse in" aria-expanded="true" style="">
     <div class="panel-body list-group">
       <ul class="list-group list-group-menu">
         <li class="list-group-item" routerLinkActive="active" routerLink="/dashboard" ui-sref-active="active">

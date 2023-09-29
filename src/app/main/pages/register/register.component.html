@@ -1,53 +1,305 @@
-<main class="site-main page-wrapper woocommerce single single-product">
-  <div class="container">
-    <div class="row justify-content-center">
-      <h2 class="font-weight-bold mb-4">Register</h2>
+<main>
+  <section class="bg-[#C3DCE3] pb-24">
+    <div class="md:pb-8 pt-8">
+      <h1 class="text-xl font-bold tracking-wider text-center leading-tight text-[#2B788B] md:text-2xl" style="font-family: DelaGothic">
+        Create and account
+      </h1>
     </div>
-    <div class="row justify-content-center">
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" method="post" class="woocommerce-form woocommerce-form-register register">
-        <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-          <label>User Name&nbsp;<span class="required">*</span></label>
-          <input formControlName="name" type="text" class="woocommerce-Input woocommerce-Input--text input-text form-control" name="user-name" id="" autocomplete="user-name" value="" placeholder="Username">
-        </p>
-        <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-          <label>Role&nbsp;<span class="required">*</span></label>
-          <input formControlName="role" type="text" class="woocommerce-Input woocommerce-Input--text input-text form-control" name="role" id="role" autocomplete="role" value="" placeholder="Role">
-        </p>
-        <div *ngIf="registerForm.controls['name'].errors && registerForm.controls['name'].touched" class="text-danger">
-          <div *ngIf="registerForm.controls['name'].errors['required']">Username is required</div>
-          <div *ngIf="registerForm.controls['name'].errors['minlength']">Username must be at least 6 characters long</div>
-          <div *ngIf="registerForm.controls['name'].errors['maxlength']">Username must be less than 100 characters long</div>
+    <div class="flex flex-col justify-items-center relative items-center justify-center px-3 py-2 mx-auto lg:py-0">
+      <div class="w-full bg-white rounded-lg shadow mt-8 md:mt-0 md:max-w-md xl:p-0 relative overflow-hidden">
+        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4 md:space-y-6" action="#" style="font-family: Montserrat">
+            <div>
+              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Name</label>
+              <input type="text"
+                     name="name"
+                     id="name"
+                     formControlName="name"
+                     class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2.5 " placeholder="Your name" >
+              <div class="error-message" *ngIf="registerForm.errors && registerForm.getError('name')">
+                <p class="mt-2 text-[#945069]  font-medium text-xs">
+                  {{ registerForm.getError('name') }}
+                </p>
+              </div>
+              <div *ngIf="registerForm.get('name')?.hasError('required') && registerForm.controls.name.touched">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  Name is required
+                </p>
+              </div>
+              <div *ngIf="registerForm.get('name')?.hasError('minlength')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  Name should have minimum 3 characters.
+                </p>
+              </div>
+            </div>
+            <div>
+              <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
+              <input type="email"
+                     name="email"
+                     id="email"
+                     formControlName="email"
+                     class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2.5 " placeholder="your@email.com" >
+              <div class="error-message" *ngIf="errorShow">
+                <p class="mt-2 text-[#945069]  font-medium text-xs">
+                  {{ registerForm.getError('email') }}
+                </p>
+              </div>
+              <div *ngIf="registerForm.get('email')?.hasError('required') && registerForm.controls.email.touched">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  Email is required
+                </p>
+              </div>
+              <div *ngIf="registerForm.get('email')?.hasError('email')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  Email must be a valid email address
+                </p>
+              </div>
+            </div>
+            <div>
+              <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
+              <input type="password"
+                     name="password"
+                     id="password"
+                     placeholder="••••••••"
+                     formControlName="password"
+                     class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm  text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2.5" >
+              <div class="error-message" *ngIf="registerForm.getError('password')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  {{ registerForm.getError('password') }}
+                </p>
+              </div>
+              <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.controls.password.touched">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  Password is required
+                </p>
+              </div>
+              <div *ngIf="registerForm.get('password')?.hasError('minlength')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  Password should have minimum 8 characters.
+                </p>
+              </div>
+              <div *ngIf="registerForm.get('password')?.hasError('pattern')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  The password must have a minimum of 1 uppercase letter, 1 lowercase letter and 1 number
+                </p>
+              </div>
+              <div *ngIf="registerForm.get('password')?.hasError('passwordMismatch')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  Password is not match
+                </p>
+              </div>
+            </div>
+            <div>
+              <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900 ">Password confirmation</label>
+              <input type="password"
+                     name="password_confirmation"
+                     id="password_confirmation"
+                     placeholder="••••••••"
+                     formControlName="password_confirmation"
+                     class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm  text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2.5" >
+              <div class="error-message" *ngIf="registerForm.getError('password_confirmation')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  {{ registerForm.getError('password_confirmation') }}
+                </p>
+              </div>
+              <div *ngIf="registerForm.get('password_confirmation')?.hasError('required') && registerForm.controls.password_confirmation.touched">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  Password is required
+                </p>
+              </div>
+              <div *ngIf="registerForm.get('password_confirmation')?.hasError('minlength')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  Password should have minimum 8 characters.
+                </p>
+              </div>
+              <div *ngIf="registerForm.get('password_confirmation')?.hasError('pattern')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  The password must have a minimum of 1 uppercase letter, 1 lowercase letter and 1 number
+                </p>
+              </div>
+              <div *ngIf="registerForm.getError('passwordMismatch')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  Password is not match
+                </p>
+              </div>
+            </div>
+            <div class="relative inline-block text-left">
+              <label class="block mb-2 text-sm font-medium text-gray-900 ">Role</label>
+              <div>
+                <button
+                  type="button"
+                  class="inline-flex bg-blue-50 justify-center w-full rounded-md border border-[#C3DCE3] shadow-sm px-4 py-2 text-sm font-medium text-gray-700"
+                  id="role-selector"
+                  aria-haspopup="listbox"
+                  (click)="toggleDropdown()"
+                >
+                  {{ selectedRole }}
+                  <svg
+                    class="-mr-1 ml-2 h-5 w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              <div
+                class="origin-top-right absolute left-10 mt-2 w-56 font-semibold rounded-md shadow-lg text-sm bg-blue-50 ring-1 ring-black ring-opacity-5"
+                *ngIf="isOpen"
+              >
+                <div
+                  class="gap-y-1"
+                  role="listbox"
+                  aria-labelledby="role-selector"
+                  tabindex="-1"
+                >
+                  <div
+                    *ngFor="let role of roles"
+                    (click)="selectRole(role)"
+                    role="option"
+                    class="cursor-pointer rounded select-none relative px-4 py-2 text-[#757575]"
+                    [class.bg-[#2B788B]]="role === selectedRole"
+                    [class.text-white]="role === selectedRole"
+                  >
+                    {{ role }}
+                    <span
+                      *ngIf="role === selectedRole"
+                      class="absolute inset-y-0 left-0 flex items-center pl-3"
+                    >
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="error-message" *ngIf="errorShow ">
+              <p class="mt-2 text-[#945069] font-medium text-xs">
+                {{ registerForm.getError('role') }}
+              </p>
+            </div>
+
+            <button type="submit"
+                    style="font-family: DelaGothic"
+                    [disabled]="registerForm.invalid"
+                    class="w-full text-white bg-[#5996A5] tracking-widest focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+              Sign Up
+            </button>
+
+            <div *ngIf="errorShow">
+              <p class="mt-2 text-center font-medium text-[#945069] text-xs">
+                {{registerForm.getError('backend')}}
+              </p>
+            </div>
+
+            <div class="grid md:flex justify-start md:space-x-2 pb-4">
+              <div>
+                <p class="text-sm font-light text-gray-500">
+                  Already have an account?
+                </p>
+              </div>
+
+              <div>
+                <button type="button" (click)="redirectToLogin('User')" class="font-semibold flex items-center text-sm text-[#757575] hover:underline">
+                  Sign In
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="inline-flex px-4 relative items-center justify-center w-full">
+              <hr class="w-full  h-px bg-gray-200 border-0 ">
+              <span class="absolute px-3 text-center text-sm font-medium text-[#757575] -translate-x-1/2 bg-white left-1/2 ">Or continue with</span>
+            </div>
+            <div class="w-full md:flex tracking-widest space-y-3 md:space-y-0 md:gap-4" style="font-family: DelaGothic">
+              <div class="flex bg-[#945069] absolute z-0 -bottom-3 -right-3 lg:-bottom-4 lg:-right-5 text-white rounded-2xl lg:rounded-3xl  p-4 lg:p-7 text-sm items-center ">
+                <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="w-7 h-7 lg:w-6 lg:h-6" viewBox="0 0 16 16">
+                  <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
+                </svg>
+              </div>
+              <div class="flex bg-[#5996A5] absolute z-0 -bottom-3 -left-3 lg:-bottom-5 lg:-left-5 text-white rounded-2xl lg:rounded-3xl p-4 lg:p-7 text-sm items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-7 h-7 lg:w-7 lg:h-7" viewBox="0 0 16 16">
+                  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                </svg>
+              </div>
+            </div>
+          </form>
         </div>
-        <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-          <label>Email address&nbsp;<span class="required">*</span></label>
-          <input type="email" formControlName="email" class="woocommerce-Input woocommerce-Input--text input-text form-control" name="email" id="" autocomplete="email" value="" placeholder="Email">
-        </p>
-        <div *ngIf="registerForm.controls['email'].errors && registerForm.controls['email'].touched" class="text-danger">
-          <div *ngIf="registerForm.controls['email'].errors['required']">Email is required</div>
-          <div *ngIf="registerForm.controls['email'].errors['email']">Please enter a valid email address</div>
-        </div>
-        <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-          <label>Password&nbsp;<span class="required">*</span></label>
-          <input type="password" formControlName="password" class="woocommerce-Input woocommerce-Input--text input-text form-control" name="password" id="" autocomplete="password" value="" placeholder="Password">
-        </p>
-        <div *ngIf="registerForm.controls!['password']!.errors && registerForm.controls['password'].touched || (registerForm.errors && registerForm.errors!['passwordMismatch'] == true)" class="text-danger">
-          <div *ngIf="registerForm.controls!['password']!.errors && registerForm.controls!['password']!.errors['required']">Password is required</div>
-          <div *ngIf="registerForm.controls!['password']!.errors && registerForm.controls!['password']!.errors['minlength']">Password must be at least 6 characters long</div>
-          <div *ngIf="registerForm.controls['password'].touched && registerForm.errors!['passwordMismatch'] == true"> Password is not match</div>
-        </div>
-        <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-          <label>Password Confirmation&nbsp; <span class="required">*</span></label>
-          <input type="password" formControlName="password_confirmation" class="woocommerce-Input woocommerce-Input--text input-text form-control" name="password" id="" autocomplete="password" value="" placeholder="Password">
-        </p>
-        <div *ngIf="registerForm.controls!['password_confirmation'].errors && registerForm.controls['password_confirmation'].touched || (registerForm.errors && registerForm.errors!['passwordMismatch'] == true)" class="text-danger">
-          <div *ngIf="registerForm.controls!['password_confirmation'].errors && registerForm.controls!['password_confirmation'].errors!['required']">Password is required</div>
-          <div *ngIf="registerForm.controls!['password_confirmation'].errors && registerForm.controls!['password_confirmation'].errors['minlength']">Password must be at least 6 characters long</div>
-          <div *ngIf="registerForm.controls['password_confirmation'].touched && registerForm.errors && registerForm.errors!['passwordMismatch']"> Password is not match</div>
-        </div>
-        <p class="woocommerce-FormRow form-row mt-4">
-          <button type="submit" [disabled]="registerForm.invalid" class="woocommerce-Button button" name="register" value="Register">Register</button>
-        </p>
-      </form>
+      </div>
+      <div class="hidden xl:block">
+        <img src="./assets/img/register-page/business-3d-astronaut-waving.png"
+             class="object-contain absolute w-72 bottom-[5%]  xl:right-[5%]" alt=""
+        >
+      </div>
+
+      <div class="hidden xl:block">
+        <img src="./assets/img/register-page/business-3d-astronaut-holding-blank-sign.png"
+             class="object-contain absolute w-64 bottom-[5%] xl:left-[10%]" alt=""
+        >
+      </div>
+      <div class="hidden xl:block">
+        <img src="./assets/img/register-page/business-3d-dog-astronaut-sitting.png"
+             class="object-contain absolute w-44 -bottom-[17%] xl:left-[25%]" alt=""
+        >
+      </div>
     </div>
-  </div>
+  </section>
+
+  <!--  <div class="container">-->
+<!--    <div class="row justify-content-center">-->
+<!--      <h2 class="font-weight-bold mb-4">Register</h2>-->
+<!--    </div>-->
+<!--    <div class="row justify-content-center">-->
+<!--      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" method="post" class="woocommerce-form woocommerce-form-register register">-->
+<!--        <p class="woocommerce-form-row woocommerce-form-row&#45;&#45;wide form-row form-row-wide">-->
+<!--          <label>User Name&nbsp;<span class="required">*</span></label>-->
+<!--          <input formControlName="name" type="text" class="woocommerce-Input woocommerce-Input&#45;&#45;text input-text form-control" name="user-name" id="" autocomplete="user-name" value="" placeholder="Username">-->
+<!--        </p>-->
+<!--        <p class="woocommerce-form-row woocommerce-form-row&#45;&#45;wide form-row form-row-wide">-->
+<!--          <label>Role&nbsp;<span class="required">*</span></label>-->
+<!--          <input formControlName="role" type="text" class="woocommerce-Input woocommerce-Input&#45;&#45;text input-text form-control" name="role" id="role" autocomplete="role" value="" placeholder="Role">-->
+<!--        </p>-->
+<!--        <div *ngIf="registerForm.controls['name'].errors && registerForm.controls['name'].touched" class="text-danger">-->
+<!--          <div *ngIf="registerForm.controls['name'].errors['required']">Username is required</div>-->
+<!--          <div *ngIf="registerForm.controls['name'].errors['minlength']">Username must be at least 6 characters long</div>-->
+<!--          <div *ngIf="registerForm.controls['name'].errors['maxlength']">Username must be less than 100 characters long</div>-->
+<!--        </div>-->
+<!--        <p class="woocommerce-form-row woocommerce-form-row&#45;&#45;wide form-row form-row-wide">-->
+<!--          <label>Email address&nbsp;<span class="required">*</span></label>-->
+<!--          <input type="email" formControlName="email" class="woocommerce-Input woocommerce-Input&#45;&#45;text input-text form-control" name="email" id="" autocomplete="email" value="" placeholder="Email">-->
+<!--        </p>-->
+<!--        <div *ngIf="registerForm.controls['email'].errors && registerForm.controls['email'].touched" class="text-danger">-->
+<!--          <div *ngIf="registerForm.controls['email'].errors['required']">Email is required</div>-->
+<!--          <div *ngIf="registerForm.controls['email'].errors['email']">Please enter a valid email address</div>-->
+<!--        </div>-->
+<!--        <p class="woocommerce-form-row woocommerce-form-row&#45;&#45;wide form-row form-row-wide">-->
+<!--          <label>Password&nbsp;<span class="required">*</span></label>-->
+<!--          <input type="password" formControlName="password" class="woocommerce-Input woocommerce-Input&#45;&#45;text input-text form-control" name="password" id="" autocomplete="password" value="" placeholder="Password">-->
+<!--        </p>-->
+<!--        <div *ngIf="registerForm.controls!['password']!.errors && registerForm.controls['password'].touched || (registerForm.errors && registerForm.errors!['passwordMismatch'] == true)" class="text-danger">-->
+<!--          <div *ngIf="registerForm.controls!['password']!.errors && registerForm.controls!['password']!.errors['required']">Password is required</div>-->
+<!--          <div *ngIf="registerForm.controls!['password']!.errors && registerForm.controls!['password']!.errors['minlength']">Password must be at least 6 characters long</div>-->
+<!--          <div *ngIf="registerForm.controls['password'].touched && registerForm.errors!['passwordMismatch'] == true"> Password is not match</div>-->
+<!--        </div>-->
+<!--        <p class="woocommerce-form-row woocommerce-form-row&#45;&#45;wide form-row form-row-wide">-->
+<!--          <label>Password Confirmation&nbsp; <span class="required">*</span></label>-->
+<!--          <input type="password" formControlName="password_confirmation" class="woocommerce-Input woocommerce-Input&#45;&#45;text input-text form-control" name="password" id="" autocomplete="password" value="" placeholder="Password">-->
+<!--        </p>-->
+<!--        <div *ngIf="registerForm.controls!['password_confirmation'].errors && registerForm.controls['password_confirmation'].touched || (registerForm.errors && registerForm.errors!['passwordMismatch'] == true)" class="text-danger">-->
+<!--          <div *ngIf="registerForm.controls!['password_confirmation'].errors && registerForm.controls!['password_confirmation'].errors!['required']">Password is required</div>-->
+<!--          <div *ngIf="registerForm.controls!['password_confirmation'].errors && registerForm.controls!['password_confirmation'].errors['minlength']">Password must be at least 6 characters long</div>-->
+<!--          <div *ngIf="registerForm.controls['password_confirmation'].touched && registerForm.errors && registerForm.errors!['passwordMismatch']"> Password is not match</div>-->
+<!--        </div>-->
+<!--        <p class="woocommerce-FormRow form-row mt-4">-->
+<!--          <button type="submit" [disabled]="registerForm.invalid" class="woocommerce-Button button" name="register" value="Register">Register</button>-->
+<!--        </p>-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
 </main>

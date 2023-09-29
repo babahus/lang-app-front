@@ -1,5 +1,6 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -7,22 +8,25 @@ import {AuthService} from "../../services/auth.service";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  burgerMenu = false;
+  authMenu = false;
 
+  toggleMenus() {
+    this.burgerMenu = !this.burgerMenu;
+    this.authMenu = false;
+  }
+
+  toggleAuthMenu() {
+    this.authMenu = !this.authMenu;
+    this.burgerMenu = false;
+  }
   @ViewChild('menu') menuElement!: ElementRef;
 
-  constructor() { }
+  constructor( public authService:AuthService, private router: Router) { }
 
+  redirectToLogin(role: string) {
+    this.router.navigate(['/login'], { queryParams: { role } });
+  }
   ngOnInit(): void {
   }
-
-  @HostListener('window:scroll', ['$event'])
-  onScroll() {
-    const verticalOffset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    if (verticalOffset > 50) {
-      this.menuElement.nativeElement.classList.add('menu_fixed');
-    } else {
-      this.menuElement.nativeElement.classList.remove('menu_fixed');
-    }
-  }
-
 }

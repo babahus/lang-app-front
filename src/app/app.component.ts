@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {AuthService} from "./core/services/auth.service";
+import {LoaderService} from "./core/services/loader.service";
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,8 @@ import {AuthService} from "./core/services/auth.service";
 export class AppComponent {
   title = 'lang-app-front';
   public constructor(
-    public authService : AuthService
+    public authService : AuthService,
+    public loaderService : LoaderService
   )
   {
 

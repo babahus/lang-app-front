@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import { IndexComponent } from './pages/index/index.component';
 import { AboutComponent } from './pages/about/about.component';
@@ -14,29 +14,37 @@ import {GuestGuard} from "../core/guards/guest.guard";
 import {NotFoundComponent} from "../core/components/not-found/not-found.component";
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import {AuthGuard} from "../core/guards/auth.guard";
-import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { ExercisesComponent } from './pages/exercises/exercises.component';
 import {ExerciseCardComponent} from "../core/components/exercise-card/exercise-card.component";
 import { ExercisesMyComponent } from './pages/exercises-my/exercises-my.component';
 import { ExerciseAttachedCardComponent } from './components/exercise-attached-card/exercise-attached-card.component';
 import { MenuNavigationComponent } from './components/menu-navigation/menu-navigation.component';
 import { CompilePhraseComponent } from './pages/solve-exercise/compile-phrase/compile-phrase.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path : '', component: IndexComponent},
-  { path : 'register', component: RegisterComponent, canActivate : [GuestGuard] },
-  { path : 'login', component: LoginComponent, canActivate : [GuestGuard]},
+  { path : 'register', component: RegisterComponent },
+  { path : 'login', component: LoginComponent},
+  { path: 'forgot-password', component: ForgotPasswordComponent},
+  { path: 'reset-password', component: ResetPasswordComponent },
   {
-    path: 'google/code',
+    path: 'api/login/google/callback',
     component: LoginComponent,
   },
-  { path : 'dashboard', component : DashboardComponent, canActivate : [AuthGuard]},
-  { path : 'exercises', component : ExercisesComponent, canActivate : [AuthGuard]},
-  { path : 'exercises-my', component : ExercisesMyComponent, canActivate : [AuthGuard]},
-  { path : 'exercises/compile_phrase/:id', component : CompilePhraseComponent, canActivate : [AuthGuard]},
   {
-    path : '**', component: NotFoundComponent
-  }
+      path: 'api/login/facebook/callback',
+      component: LoginComponent,
+  },
+  { path : 'dashboard', component : DashboardComponent, canActivate : [AuthGuard]},
+  // { path : 'exercises', component : ExercisesComponent, canActivate : [AuthGuard]},
+  // { path : 'exercises-my', component : ExercisesMyComponent, canActivate : [AuthGuard]},
+  // { path : 'exercises/compile_phrase/:id', component : CompilePhraseComponent, canActivate : [AuthGuard]},
+  // {
+  //   path : '**', component: NotFoundComponent
+  // }
 ];
 
 @NgModule({
@@ -54,7 +62,9 @@ const routes: Routes = [
     ExercisesMyComponent,
     ExerciseAttachedCardComponent,
     MenuNavigationComponent,
-    CompilePhraseComponent
+    CompilePhraseComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   exports: [
     HeaderComponent,
@@ -66,7 +76,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-    NgbCollapseModule
+    NgOptimizedImage,
   ]
 })
 export class MainModule { }

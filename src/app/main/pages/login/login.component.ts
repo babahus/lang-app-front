@@ -1,8 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
+import {
+  FormBuilder,
+  ValidationErrors,
+  Validators
+} from "@angular/forms";
 import {AuthService} from "../../../core/services/auth.service";
 import {ActivatedRoute, Params} from "@angular/router";
-import {log} from "util";
 
 @Component({
   selector: 'app-login',
@@ -10,42 +13,61 @@ import {log} from "util";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  errorShow: boolean = false;
+  role: string = '';
 
-  public loginForm: UntypedFormGroup = new UntypedFormGroup({
-    email: new UntypedFormControl(null, [
-      Validators.required,
-      Validators.maxLength(100),
-      Validators.minLength(5)
-    ]),
-    password : new UntypedFormControl(null, [
-      Validators.required,
-      Validators.minLength(6)
-    ])
-  });
+  loginForm = this.fb.group({
+    email: this.fb.control('', Validators.compose([Validators.required, Validators.email])),
+    password: this.fb.control('', Validators.compose([Validators.required, Validators.minLength(8),Validators.pattern('^(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]+$')])),
+  })
+
   private readonly auth_code: any;
-  public role = 'User'
-  constructor(private authService: AuthService,private router: ActivatedRoute) {
+  constructor(
+    private authService: AuthService,
+    private router: ActivatedRoute,
+    private fb: FormBuilder,
+  ) {
+    this.router.queryParams.subscribe(params => {
+      this.role = params['role'];
+    });
     if (Object.keys(router.snapshot.queryParams).length !== 0) {
       this.auth_code = router.snapshot.queryParams;
     }
   }
 
-  async ngOnInit(): Promise<void> {
-    if (this.auth_code && this.auth_code.code != undefined && this.router.snapshot.queryParamMap.has('scope')) {
-      console.log(this)
-      await this.authService.sendCodeForGoogleAuth(this.auth_code.code, this.role);
-      //await this.profileService.getUserInfo();
-      return;
-    }
-  }
+    async ngOnInit(): Promise<void> {
+        const roleFromStorage = sessionStorage.getItem('role') || '';
 
-  async loginWithGoogle(){
-    const link = await this.authService.getLinkForGoogleAuth(this.role);
+        if (this.auth_code && this.auth_code.code != undefined) {
+            if (this.router.snapshot.queryParamMap.has('scope')) {
+                await this.authService.sendCodeForSocialAuth(this.auth_code.code, roleFromStorage, 'google');
+            } else {
+                await this.authService.sendCodeForSocialAuth(this.auth_code.code, roleFromStorage, 'facebook');
+            }
+
+            sessionStorage.removeItem('role');
+            return;
+        }
+    }
+
+
+  async loginWithGoogle(provider: string){
+    sessionStorage.setItem('role', this.role);
+    const link = await this.authService.getLinkForSocialAuth(this.role, provider);
     window.open(link as string | URL | undefined,"_self")
   }
 
   async onSubmit() {
-    return await this.authService.login(this.loginForm, this.role);
+    try {
+      const result = await this.authService.login(this.loginForm, this.role);
+    } catch (error) {
+      this.errorShow = true;
+
+      setTimeout(() => {
+        this.errorShow = false;
+      }, 5000);
+    }
   }
 
+  protected readonly AuthService = AuthService;
 }

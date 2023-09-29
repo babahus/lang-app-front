@@ -1,47 +1,47 @@
-<div ui-view="" class="ui-view-main ng-scope">
-  <div class="parallax bg-green-uniq page-section ng-scope">
-    <div class="parallax-layer container" data-opacity="true" style="transform: translate3d(0px, 0px, 0px); opacity: 1;">
-      <div class="media v-middle">
-        <div class="media-left">
-          <span class="icon-block s60 bg-lightred"><i class="fa fa-github"></i></span>
-        </div>
-        <div class="media-body">
-          <h1 class="text-white text-display-1 margin-none">Compile Phrase {{id}}</h1>
-        </div>
-        <div class="media-right">
-          <a class="btn btn-white" ui-sref="website-courses.grid" >Library</a>
-        </div>
-      </div>
-    </div>
-  </div>
+<!--<div ui-view="" class="ui-view-main ng-scope">-->
+<!--  <div class="parallax bg-green-uniq page-section ng-scope">-->
+<!--    <div class="parallax-layer container" data-opacity="true" style="transform: translate3d(0px, 0px, 0px); opacity: 1;">-->
+<!--      <div class="media v-middle">-->
+<!--        <div class="media-left">-->
+<!--          <span class="icon-block s60 bg-lightred"><i class="fa fa-github"></i></span>-->
+<!--        </div>-->
+<!--        <div class="media-body">-->
+<!--          <h1 class="text-white text-display-1 margin-none">Compile Phrase {{id}}</h1>-->
+<!--        </div>-->
+<!--        <div class="media-right">-->
+<!--          <a class="btn btn-white" ui-sref="website-courses.grid" >Library</a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 
-  <div class="container ng-scope">
-    <div class="row">
-      <form [formGroup]="compilePhraseForm">
-        <div  class="col-lg-9 col-md-8">
-          <div class="page-section">
-            <p>
-              <strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit. Ad aperiam autem cumque deleniti dicta iusto laboriosam laudantium omnis, possimus praesentium provident quam quas, sapiente sint, ut! Adipisci aliquid assumenda consequuntur
-              cupiditate deleniti dicta dolore dolorem
-              <strong>dolores enim </strong>eos hic illo inventore iure libero magnam minima minus obcaecati optio pariatur porro quibusdam quos reiciendis, sapiente sint veritatis. Eveniet in magni sunt?</p>
+<!--  <div class="container ng-scope">-->
+<!--    <div class="row">-->
+<!--      <form [formGroup]="compilePhraseForm">-->
+<!--        <div  class="col-lg-9 col-md-8">-->
+<!--          <div class="page-section">-->
+<!--            <p>-->
+<!--              <strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit. Ad aperiam autem cumque deleniti dicta iusto laboriosam laudantium omnis, possimus praesentium provident quam quas, sapiente sint, ut! Adipisci aliquid assumenda consequuntur-->
+<!--              cupiditate deleniti dicta dolore dolorem-->
+<!--              <strong>dolores enim </strong>eos hic illo inventore iure libero magnam minima minus obcaecati optio pariatur porro quibusdam quos reiciendis, sapiente sint veritatis. Eveniet in magni sunt?</p>-->
 
-            <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
-              <div class="example-box" *ngFor="let word of this.compilePhraseForm.get('data')?.value" cdkDrag>{{word}}</div>
-            </div>
-            <div class="mt-2 error" *ngIf="compilePhraseForm.errors">
-              {{compilePhraseForm.errors}}
-            </div>
-          </div>
+<!--            <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">-->
+<!--              <div class="example-box" *ngFor="let word of this.compilePhraseForm.get('data')?.value" cdkDrag>{{word}}</div>-->
+<!--            </div>-->
+<!--            <div class="mt-2 error" *ngIf="compilePhraseForm.errors">-->
+<!--              {{compilePhraseForm.errors}}-->
+<!--            </div>-->
+<!--          </div>-->
 
-          <a class="btn btn-solid-border" (click)="onSubmit()">Answer</a>
+<!--          <a class="btn btn-solid-border" (click)="onSubmit()">Answer</a>-->
 
-        </div>
-      </form>
-    </div>
+<!--        </div>-->
+<!--      </form>-->
+<!--    </div>-->
 
-  </div>
+<!--  </div>-->
 
-  <div class="bg-white page-section ng-scope">
+<!--  <div class="bg-white page-section ng-scope">-->
 
-  </div>
-  </div>
+<!--  </div>-->
+<!--  </div>-->

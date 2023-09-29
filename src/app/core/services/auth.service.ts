@@ -10,7 +10,6 @@ import {BaseService} from "./base-service/base.service";
   providedIn: 'root'
 })
 export class AuthService extends BaseService {
-
   constructor(
     protected override http: HttpClient,
     protected override route: Router,
@@ -35,7 +34,7 @@ export class AuthService extends BaseService {
     return this.storage.getItem('userToken');
   }
 
-  public removeAuthData(){
+  public  removeAuthData(){
     this.storage.removeItem('userToken');
     this.storage.removeItem('WSToken')
   }
@@ -54,65 +53,91 @@ export class AuthService extends BaseService {
     }))
   }
 
-  login(loginForm: UntypedFormGroup, role : string): Promise<any> {
-    return new Promise(((resolve, reject) => {
+  private handleError(error: any, form: UntypedFormGroup) {
+    if (error.status === 422) {
+      let errorsToForm: ValidationErrors | null = {};
+      for (const key of Object.keys(error.error.errors)) {
+        errorsToForm[key] = error.error.errors[key][0];
+      }
+      form.setErrors(errorsToForm);
+    } else {
+      form.setErrors({ backend: error.error.data });
+    }
+    return throwError(error);
+  }
+
+  login(loginForm: UntypedFormGroup, role: string): Promise<any> {
+    return new Promise((resolve, reject) => {
       this.http.post<any>(this.url + '/login', {
         email: loginForm.get("email")?.value,
         role: role,
         password: loginForm.get("password")?.value
-      }).pipe(catchError((error) => {
-        if (error.status === 422) {
-          let errorsToForm: ValidationErrors | null = [];
-          for (const key of Object.keys(error.error.errors)) {
-            errorsToForm[key] = error.error.errors[key][0];
-          }
-          loginForm.setErrors(errorsToForm)
-        } else {
-          loginForm.setErrors( {backend: error.error.error});
-        }
-        reject(error);
-        return throwError(error)
-      })).subscribe((data:  any) => {
+      }).pipe(
+        catchError((error) => {
+          this.handleError(error, loginForm);
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
         this.setToken(data.data.token);
         resolve(data.data);
-        // todo: check if get param null
-        this.route.navigate(this.redirectTo('dashboard'))
+        this.route.navigate(this.redirectTo('dashboard'));
       });
-    }))
+    });
   }
 
-  public register(registerForm: UntypedFormGroup) {
-    return new Promise(((resolve, reject) => {
+  public register(registerForm: UntypedFormGroup, role: string) {
+    return new Promise((resolve, reject) => {
       this.http.post<any>(this.url + '/register', {
-        name:     registerForm.get("name")?.value,
-        role:     registerForm.get("role")?.value,
-        email:    registerForm.get("email")?.value,
+        name: registerForm.get("name")?.value,
+        role: role,
+        email: registerForm.get("email")?.value,
         password: registerForm.get("password")?.value,
         password_confirmation: registerForm.get("password_confirmation")?.value,
-      }).pipe(catchError((error) => {
-        reject(error);
-        if (error.status === 422) {
-          let errorsToForm: ValidationErrors | null = [];
-          for (const key of Object.keys(error.error.errors)) {
-            errorsToForm[key] = error.error.errors[key][0];
-            //registerForm.setErrors({[key]: error.error.errors[key][0]})
-          }
-          registerForm.setErrors(errorsToForm)
-          console.log(registerForm.getError('email'))
-        } else {
-          registerForm.setErrors({backend: error.error.error});
-        }
-        return throwError(error)
-      })).subscribe((data: any) => {
+      }).pipe(
+        catchError((error) => {
+          this.handleError(error, registerForm);
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
         this.setToken(data.data.token);
         resolve(data.data);
+        this.route.navigate(this.redirectTo('dashboard'));
       });
-    }))
+    });
   }
 
-  getLinkForGoogleAuth(role : string){
+  forgotPassword(forgotForm: UntypedFormGroup): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post<any>(this.url + '/forgot-password', {
+        email: forgotForm.get("email")?.value,
+      }).pipe(
+        catchError((error) => this.handleError(error, forgotForm))
+      ).subscribe((data: any) => {
+        resolve(data.data);
+      });
+    });
+  }
+
+  resetPassword(token: string, resetForm: UntypedFormGroup, email: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post<any>(this.url + '/reset-password', {
+        token: token,
+        password: resetForm.get("password")?.value,
+        password_confirmation: resetForm.get("password_confirmation")?.value,
+        email: email,
+      }).pipe(
+        catchError((error) => this.handleError(error, resetForm))
+      ).subscribe((data: any) => {
+        resolve(data.data);
+      });
+    });
+  }
+
+  getLinkForSocialAuth(role : string, provider: string){
     return new Promise(((resolve, reject) => {
-      return this.http.get(this.url + '/login/google'+'?role='+role )
+      return this.http.get(this.url + '/login/' + provider +'?role='+role )
         .subscribe((data:any) => {
           console.log(data)
           resolve(data.data)
@@ -120,9 +145,9 @@ export class AuthService extends BaseService {
     }))
   }
 
-  sendCodeForGoogleAuth(code : string, role : string){
+  sendCodeForSocialAuth(code : string, role: string, provider: string){
     return new Promise(((resolve, reject) => {
-      return this.http.post(this.url + '/login/google/callback', {
+      return this.http.post(this.url + '/login/' + provider + '/callback', {
         code: code,
         role: role,
       }).subscribe((data: any) => {

@@ -22,31 +22,31 @@ export class DashboardComponent extends BaseComponent implements OnInit {
     this.exerciseService = exerciseService;
   }
 
-  override async ngOnInit() {
-    this.attachedExercises = await this.exerciseService.getAttachedExercise();
-    this.checkCountOfAttachedExercises();
-  }
+  // override async ngOnInit() {
+  //   this.attachedExercises = await this.exerciseService.getAttachedExercise();
+  //   this.checkCountOfAttachedExercises();
+  // }
 
-  checkCountOfAttachedExercises(){
-    if (this.attachedExercises.compilePhrase_exercise.length > 1)
-    {
-      this.exercisesForDisplay = this.attachedExercises.compilePhrase_exercise;
-
-      return;
-    }
-
-    if (this.attachedExercises.audit_exercise.length > 1)
-    {
-      this.exercisesForDisplay = this.attachedExercises.audit_exercise;
-
-      return;
-    }
-
-    if (this.attachedExercises.dictionary_exercise.length > 1){
-      this.exercisesForDisplay = this.attachedExercises.dictionary_exercise
-
-      return
-    }
-  }
+  // checkCountOfAttachedExercises(){
+  //   if (this.attachedExercises.compilePhrase_exercise.length > 1)
+  //   {
+  //     this.exercisesForDisplay = this.attachedExercises.compilePhrase_exercise;
+  //
+  //     return;
+  //   }
+  //
+  //   if (this.attachedExercises.audit_exercise.length > 1)
+  //   {
+  //     this.exercisesForDisplay = this.attachedExercises.audit_exercise;
+  //
+  //     return;
+  //   }
+  //
+  //   if (this.attachedExercises.dictionary_exercise.length > 1){
+  //     this.exercisesForDisplay = this.attachedExercises.dictionary_exercise
+  //
+  //     return
+  //   }
+  // }
 
 }

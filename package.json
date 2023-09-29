@@ -16,14 +16,13 @@
     "@angular/compiler": "^16.2.6",
     "@angular/core": "^16.2.6",
     "@angular/forms": "^16.2.6",
+    "@angular/localize": "^16.2.6",
     "@angular/material": "^16.2.5",
     "@angular/platform-browser": "^16.2.6",
     "@angular/platform-browser-dynamic": "^16.2.6",
     "@angular/router": "^16.2.6",
-    "@ng-bootstrap/ng-bootstrap": "^12.1.2",
     "@popperjs/core": "^2.11.6",
-    "bootstrap": "^5.2.3",
-    "bootstrap-icons": "^1.10.3",
+    "@types/ws": "^8.5.4",
     "draggabilly": "^3.0.0",
     "isotope-layout": "^3.0.6",
     "packery": "^2.1.2",
@@ -40,12 +39,15 @@
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "@types/packery": "^1.4.32",
+    "autoprefixer": "^10.4.16",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.9.5"
+    "postcss": "^8.4.30",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.1.6"
   }
 }
