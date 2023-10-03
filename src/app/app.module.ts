@@ -13,6 +13,8 @@ import { ExerciseCardComponent } from './core/components/exercise-card/exercise-
 import {MainModule} from "./main/main.module";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { LoaderComponent } from './core/components/loader/loader.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 
 @NgModule({
     declarations: [
@@ -28,6 +30,7 @@ import { LoaderComponent } from './core/components/loader/loader.component';
         HttpClientModule,
         AppRoutingModule,
         NoopAnimationsModule,
+        SweetAlert2Module.forRoot()
     ],
     providers: [
       {provide: HTTP_INTERCEPTORS, useClass: BearerInterceptor, multi: true},

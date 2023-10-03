@@ -14,7 +14,6 @@ import {GuestGuard} from "../core/guards/guest.guard";
 import {NotFoundComponent} from "../core/components/not-found/not-found.component";
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import {AuthGuard} from "../core/guards/auth.guard";
-// import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { ExercisesComponent } from './pages/exercises/exercises.component';
 import {ExerciseCardComponent} from "../core/components/exercise-card/exercise-card.component";
 import { ExercisesMyComponent } from './pages/exercises-my/exercises-my.component';
@@ -23,13 +22,19 @@ import { MenuNavigationComponent } from './components/menu-navigation/menu-navig
 import { CompilePhraseComponent } from './pages/solve-exercise/compile-phrase/compile-phrase.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import {EmailVerificationComponent} from "./pages/email-verification/email-verification.component";
+import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
+import {ProfileComponent} from "./pages/profile/profile.component";
+
+
 
 const routes: Routes = [
   { path : '', component: IndexComponent},
-  { path : 'register', component: RegisterComponent },
-  { path : 'login', component: LoginComponent},
-  { path: 'forgot-password', component: ForgotPasswordComponent},
-  { path: 'reset-password', component: ResetPasswordComponent },
+  { path : 'register', component: RegisterComponent, canActivate: [GuestGuard]},
+  { path : 'login', component: LoginComponent, canActivate: [GuestGuard]},
+  { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [GuestGuard]},
+  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [GuestGuard]},
+  { path: 'api/email/verify/:id/:hash', component: EmailVerificationComponent, canActivate: [AuthGuard]},
   {
     path: 'api/login/google/callback',
     component: LoginComponent,
@@ -39,12 +44,13 @@ const routes: Routes = [
       component: LoginComponent,
   },
   { path : 'dashboard', component : DashboardComponent, canActivate : [AuthGuard]},
+  { path : 'profile', component : ProfileComponent, canActivate : [AuthGuard]},
   // { path : 'exercises', component : ExercisesComponent, canActivate : [AuthGuard]},
   // { path : 'exercises-my', component : ExercisesMyComponent, canActivate : [AuthGuard]},
   // { path : 'exercises/compile_phrase/:id', component : CompilePhraseComponent, canActivate : [AuthGuard]},
-  // {
-  //   path : '**', component: NotFoundComponent
-  // }
+  {
+    path : '**', component: NotFoundComponent
+  }
 ];
 
 @NgModule({
@@ -64,7 +70,9 @@ const routes: Routes = [
     MenuNavigationComponent,
     CompilePhraseComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    EmailVerificationComponent,
+    ProfileComponent
   ],
   exports: [
     HeaderComponent,
@@ -77,6 +85,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     NgOptimizedImage,
+    SweetAlert2Module,
   ]
 })
 export class MainModule { }

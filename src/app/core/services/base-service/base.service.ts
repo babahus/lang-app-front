@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Audit, CompilePhrase, Dictionary} from "../../../main/models/exercise";
 
 @Injectable({
   providedIn: 'root'

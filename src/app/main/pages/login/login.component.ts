@@ -6,6 +6,7 @@ import {
 } from "@angular/forms";
 import {AuthService} from "../../../core/services/auth.service";
 import {ActivatedRoute, Params} from "@angular/router";
+import {LoaderService} from "../../../core/services/loader.service";
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ import {ActivatedRoute, Params} from "@angular/router";
 export class LoginComponent implements OnInit {
   errorShow: boolean = false;
   role: string = '';
+  passwordVisible: boolean = false;
 
   loginForm = this.fb.group({
     email: this.fb.control('', Validators.compose([Validators.required, Validators.email])),
@@ -35,6 +37,9 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  togglePasswordVisibility() {
+    this.passwordVisible = !this.passwordVisible;
+  }
     async ngOnInit(): Promise<void> {
         const roleFromStorage = sessionStorage.getItem('role') || '';
 
@@ -50,7 +55,6 @@ export class LoginComponent implements OnInit {
         }
     }
 
-
   async loginWithGoogle(provider: string){
     sessionStorage.setItem('role', this.role);
     const link = await this.authService.getLinkForSocialAuth(this.role, provider);
@@ -62,7 +66,6 @@ export class LoginComponent implements OnInit {
       const result = await this.authService.login(this.loginForm, this.role);
     } catch (error) {
       this.errorShow = true;
-
       setTimeout(() => {
         this.errorShow = false;
       }, 5000);

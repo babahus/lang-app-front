@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
-import {catchError, throwError} from "rxjs";
+import {catchError, Observable, throwError} from "rxjs";
 import {UntypedFormGroup, ValidationErrors} from "@angular/forms";
 import {BaseService} from "./base-service/base.service";
 
@@ -34,23 +34,23 @@ export class AuthService extends BaseService {
     return this.storage.getItem('userToken');
   }
 
-  public  removeAuthData(){
+  public removeAuthData(){
     this.storage.removeItem('userToken');
     this.storage.removeItem('WSToken')
   }
 
   public logout() {
-    return new Promise(((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       this.http.get<any>(this.url + '/logout', {})
         .pipe(catchError((error) => {
           reject(error);
           return throwError(error)
         })).subscribe((data: any) => {
-        this.removeAuthData()
+        this.removeAuthData();
         this.route.navigate(['/']);
-        return data;
+        resolve(data);
       });
-    }))
+    });
   }
 
   private handleError(error: any, form: UntypedFormGroup) {
@@ -63,6 +63,7 @@ export class AuthService extends BaseService {
     } else {
       form.setErrors({ backend: error.error.data });
     }
+
     return throwError(error);
   }
 
@@ -135,11 +136,15 @@ export class AuthService extends BaseService {
     });
   }
 
+  emailVerification(id: string, hash: string, expires: string, signature: string): Observable<any> {
+    const url = `${this.url}/email/verify/${id}/${hash}?expires=${expires}&signature=${signature}`;
+    return this.http.get<any>(url);
+  }
+
   getLinkForSocialAuth(role : string, provider: string){
     return new Promise(((resolve, reject) => {
       return this.http.get(this.url + '/login/' + provider +'?role='+role )
         .subscribe((data:any) => {
-          console.log(data)
           resolve(data.data)
         })
     }))

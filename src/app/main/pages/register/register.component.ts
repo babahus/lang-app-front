@@ -14,9 +14,19 @@ export class RegisterComponent implements OnInit {
   selectedRole: string = 'Choose a role';
   isOpen: boolean = false;
   roles: string[] = ['User', 'Teacher'];
+  showPassword: boolean = false;
+  showPasswordConfirmation: boolean = false;
 
   toggleDropdown() {
     this.isOpen = !this.isOpen;
+  }
+
+  toggleShowPassword(fieldName: string) {
+    if (fieldName === 'password') {
+      this.showPassword = !this.showPassword;
+    } else if (fieldName === 'password_confirmation') {
+      this.showPasswordConfirmation = !this.showPasswordConfirmation;
+    }
   }
 
   selectRole(role: string) {
@@ -50,7 +60,6 @@ export class RegisterComponent implements OnInit {
         this.errorShow = false;
       }, 5000);
     }
-
   }
 
 }

@@ -22,11 +22,13 @@
     "@angular/platform-browser-dynamic": "^16.2.6",
     "@angular/router": "^16.2.6",
     "@popperjs/core": "^2.11.6",
+    "@sweetalert2/ngx-sweetalert2": "^12.2.0",
     "@types/ws": "^8.5.4",
     "draggabilly": "^3.0.0",
     "isotope-layout": "^3.0.6",
     "packery": "^2.1.2",
     "rxjs": "~7.5.0",
+    "sweetalert2": "^11.7.31",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.3"
   },

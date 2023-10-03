@@ -1,5 +1,7 @@
 <app-header *ngIf="!authService.isAuthenticate"></app-header>
 <app-auth-header *ngIf="authService.isAuthenticate"></app-auth-header>
-<app-loader *ngIf="loaderService.isLoading | async"></app-loader>
+<ng-container *ngIf="loaderService.isLoading | async">
+  <app-loader></app-loader>
+</ng-container>
 <router-outlet></router-outlet>
 <app-footer></app-footer>

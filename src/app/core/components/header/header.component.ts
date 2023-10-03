@@ -1,6 +1,7 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
+import {NavigationEnd, Router} from "@angular/router";
+import {filter} from "rxjs";
 
 @Component({
   selector: 'app-header',
@@ -20,9 +21,27 @@ export class HeaderComponent implements OnInit {
     this.authMenu = !this.authMenu;
     this.burgerMenu = false;
   }
+
+  closeMenus() {
+    this.burgerMenu = false;
+    this.authMenu = false;
+  }
   @ViewChild('menu') menuElement!: ElementRef;
 
-  constructor( public authService:AuthService, private router: Router) { }
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    if (!this.menuElement.nativeElement.contains(event.target)) {
+      this.closeMenus();
+    }
+  }
+
+  constructor( public authService:AuthService, private router: Router) {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.closeMenus();
+      });
+  }
 
   redirectToLogin(role: string) {
     this.router.navigate(['/login'], { queryParams: { role } });

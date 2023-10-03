@@ -1,36 +1,36 @@
-<div class="panel panel-default" data-toggle="panel-collapse" data-open="true">
-  <div (click)="toggleMenu()" class="panel-heading panel-collapse-trigger" [class.collapsed]="isToggle" aria-expanded="true">
-    <h4 class="panel-title">My Account</h4>
-    <div class="panel-icon">
-      <i *ngIf="isToggle" class="bi bi-chevron-right"></i>
-      <i *ngIf="!isToggle" class="bi bi-chevron-down"></i>
-    </div>
-  </div>
-  <div
-       [attr.aria-expanded]="!isToggle"
-       id="74a01596-0fe2-1c09-00ce-a6ad770ae598" class="collapse in" aria-expanded="true" style="">
-    <div class="panel-body list-group">
-      <ul class="list-group list-group-menu">
-        <li class="list-group-item" routerLinkActive="active" routerLink="/dashboard" ui-sref-active="active">
-          <a class="link-text-color" ui-sref="website-student.dashboard">Dashboard</a>
-        </li>
-        <li class="list-group-item" routerLinkActive="active" ui-sref-active="active">
-          <a class="link-text-color" ui-sref="website-student.courses" routerLink="/exercises">Exercise Library</a>
-        </li>
-        <li class="list-group-item" routerLinkActive="active" ui-sref-active="active">
-          <a class="link-text-color" ui-sref="website-student.courses" routerLink="/exercises-my">My Exercises</a>
-        </li>
-        <li class="list-group-item" routerLinkActive="active" ui-sref-active="active">
-          <a class="link-text-color" ui-sref="website-student.private-profile" href="">Profile</a>
-        </li>
-        <li class="list-group-item" routerLinkActive="active" ui-sref-active="active">
-          <a class="link-text-color" ui-sref="website-student.messages" href="">Messages</a>
-        </li>
-        <li class="list-group-item">
-          <a class="link-text-color" ui-sref="login" (click)="authService.logout()"><span>Logout</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
+<!--<div class="panel panel-default" data-toggle="panel-collapse" data-open="true">-->
+<!--  <div (click)="toggleMenu()" class="panel-heading panel-collapse-trigger" [class.collapsed]="isToggle" aria-expanded="true">-->
+<!--    <h4 class="panel-title">My Account</h4>-->
+<!--    <div class="panel-icon">-->
+<!--      <i *ngIf="isToggle" class="bi bi-chevron-right"></i>-->
+<!--      <i *ngIf="!isToggle" class="bi bi-chevron-down"></i>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div-->
+<!--       [attr.aria-expanded]="!isToggle"-->
+<!--       id="74a01596-0fe2-1c09-00ce-a6ad770ae598" class="collapse in" aria-expanded="true" style="">-->
+<!--    <div class="panel-body list-group">-->
+<!--      <ul class="list-group list-group-menu">-->
+<!--        <li class="list-group-item" routerLinkActive="active" routerLink="/dashboard" ui-sref-active="active">-->
+<!--          <a class="link-text-color" ui-sref="website-student.dashboard">Dashboard</a>-->
+<!--        </li>-->
+<!--        <li class="list-group-item" routerLinkActive="active" ui-sref-active="active">-->
+<!--          <a class="link-text-color" ui-sref="website-student.courses" routerLink="/exercises">Exercise Library</a>-->
+<!--        </li>-->
+<!--        <li class="list-group-item" routerLinkActive="active" ui-sref-active="active">-->
+<!--          <a class="link-text-color" ui-sref="website-student.courses" routerLink="/exercises-my">My Exercises</a>-->
+<!--        </li>-->
+<!--        <li class="list-group-item" routerLinkActive="active" ui-sref-active="active">-->
+<!--          <a class="link-text-color" ui-sref="website-student.private-profile" href="">Profile</a>-->
+<!--        </li>-->
+<!--        <li class="list-group-item" routerLinkActive="active" ui-sref-active="active">-->
+<!--          <a class="link-text-color" ui-sref="website-student.messages" href="">Messages</a>-->
+<!--        </li>-->
+<!--        <li class="list-group-item">-->
+<!--          <a class="link-text-color" ui-sref="login" (click)="authService.logout()"><span>Logout</span>-->
+<!--          </a>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

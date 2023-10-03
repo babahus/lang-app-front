@@ -17,7 +17,8 @@
                      name="email"
                      id="email"
                      formControlName="email"
-                     class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2.5 " placeholder="your@email.com" >
+                     class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2.5 " placeholder="your@email.com"
+              >
               <div class="error-message" *ngIf="loginForm.errors && loginForm.getError('email')">
                 <p class="mt-2 text-[#945069]  font-medium text-xs">
                   {{ loginForm.getError('email') }}
@@ -36,12 +37,24 @@
             </div>
             <div>
               <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
-              <input type="password"
-                     name="password"
-                     id="password"
-                     placeholder="••••••••"
-                     formControlName="password"
-                     class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm  text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2.5" >
+              <div class="relative">
+                <input type="{{ passwordVisible ? 'text' : 'password' }}"
+                       name="password"
+                       id="password"
+                       placeholder="••••••••"
+                       formControlName="password"
+                       class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm  text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2.5"
+                >
+                <button type="button" class="absolute text-[#2B788B] inset-y-0 right-0 px-3 flex items-center" (click)="togglePasswordVisibility()">
+                  <svg [ngClass]="{'hidden' : !passwordVisible}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <svg [ngClass]="{'hidden' : passwordVisible}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                  </svg>
+                </button>
+              </div>
               <div class="error-message" *ngIf="loginForm.getError('password')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
                   {{ loginForm.getError('password') }}
@@ -71,7 +84,7 @@
             <div class="grid-cols-1 md:flex items-center justify-between">
               <div class="flex items-start">
                 <div class="flex items-center h-5">
-                  <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300" required="">
+                  <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300" required="">
                 </div>
                 <div class="ml-3 text-sm">
                   <label for="remember" class="font-medium text-[#757575]">Remember me</label>
@@ -84,7 +97,7 @@
             <button type="submit"
                     style="font-family: DelaGothic"
                     [disabled]="loginForm.invalid"
-                    class="w-full text-white bg-[#5996A5] tracking-widest focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign in</button>
+                    class="w-full text-white bg-[#5996A5] cursor-pointer tracking-widest focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign in</button>
 
             <div *ngIf="errorShow">
               <p class="mt-2 text-center font-medium text-[#945069] text-xs">
@@ -103,7 +116,7 @@
                 </p>
               </div>
               <div>
-                <a routerLink="/register" class="font-semibold flex items-center text-sm text-[#757575] hover:underline">
+                <a routerLink="/register" class="font-semibold cursor-pointer flex items-center text-sm text-[#757575] hover:underline">
                   Sign up
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
@@ -116,12 +129,12 @@
               <span class="absolute px-3 text-center text-sm font-medium text-[#757575] -translate-x-1/2 bg-white left-1/2 ">Or continue with</span>
             </div>
             <div class="w-full md:flex tracking-widest space-y-3 md:space-y-0 md:gap-4" style="font-family: DelaGothic">
-              <div (click)="loginWithGoogle('google')" class="flex bg-[#945069] absolute z-0 -bottom-2 -right-2 lg:-bottom-4 lg:-right-5 text-white rounded-full p-4 lg:p-8 text-sm items-center ">
+              <div (click)="loginWithGoogle('google')" class="flex cursor-pointer bg-[#945069] absolute z-0 -bottom-2 -right-2 lg:-bottom-4 lg:-right-5 text-white rounded-full p-4 lg:p-8 text-sm items-center ">
                 <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="w-5 h-5" viewBox="0 0 16 16">
                   <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
                 </svg>
               </div>
-              <div (click)="loginWithGoogle('facebook')" class="flex bg-[#5996A5] absolute z-0 -bottom-2 -left-2  lg:-bottom-5 lg:-left-6 text-white rounded-full  p-3 lg:p-8 text-sm items-center">
+              <div (click)="loginWithGoogle('facebook')" class="flex cursor-pointer bg-[#5996A5] absolute z-0 -bottom-2 -left-2  lg:-bottom-5 lg:-left-6 text-white rounded-full  p-3 lg:p-8 text-sm items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-7 w-7 lg:w-6 lg:h-6" viewBox="0 0 16 16">
                   <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
                 </svg>

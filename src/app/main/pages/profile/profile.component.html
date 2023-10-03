@@ -1,0 +1,253 @@
+<section class="bg-[#C3DCE3] w-full min-h-screen flex justify-center">
+  <div *ngIf="userData" class="grid-cols-1 md:max-w-md lg:min-w-[50%] justify-center px-3 pt-4 lg:pt-8 space-y-4 lg:space-y-8 pb-12">
+    <div>
+      <h2 class="text-lg lg:text-xl font-medium text-gray-900" style="font-family: DelaGothic">
+        Profile
+      </h2>
+    </div>
+    <div class="flex gap-4 lg:gap-8 p-4 lg:p-6 pt-4 bg-white items-center  justify-items-center rounded-lg shadow-md px-3">
+      <div >
+        <img *ngIf="userData.role == 'User'" class="w-24 lg:w-32" src="./assets/img/profile-page/casual-life-3d-profile-picture-of-man-in-green-shirt-and-orange-hat.png" alt="">
+        <img *ngIf="userData.role == 'Teacher'" class="w-24 lg:w-32" src="./assets/img/profile-page/casual-life-3d-profile-picture-of-person-in-glasses-and-orange-shirt.png" alt="">
+      </div>
+      <div class="space-y-3">
+        <p class="text-sm lg:text-xl" style="font-family: DelaGothic">
+          {{userData.name}}
+        </p>
+        <p class="text-xs lg:text-base" style="font-family: DelaGothic">
+          {{userData.email}}
+        </p>
+        <p class="text-xs lg:text-sm" style="font-family: Montserrat">
+          In every face - a history of the world.
+        </p>
+      </div>
+    </div>
+    <div class="shadow-md">
+      <div class="bg-[#2B788B] rounded-t-lg p-2 lg:px-6">
+        <p class="text-sm lg:text-base text-white" style="font-family: DelaGothic">
+          Update e-mail.
+        </p>
+      </div>
+      <div class="grid-cols-1 space-y-3 p-4 pt-4 bg-white rounded-b-lg  px-3 lg:px-6 pb-8" style="font-family: Montserrat">
+        <p class="text-[#757575] text-xs lg:text-sm   lg:font-medium">
+          Please ensure that your new email address is accessible.
+        </p>
+        <form [formGroup]="emailForm" (ngSubmit)="onSubmitEmail()">
+          <div class="space-y-2 lg:space-y-3 lg:pt-4">
+            <label for="email" class="block mb-2 text-xs lg:text-sm font-medium text-gray-900">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              formControlName="email"
+              class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm lg:text-base rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2"
+            >
+            <div class="error-message" *ngIf="emailForm.errors && emailForm.getError('email')">
+              <p class="mt-2 text-[#945069]  font-medium text-xs">
+                {{ emailForm.getError('email') }}
+              </p>
+            </div>
+            <div *ngIf="emailForm.get('email')?.hasError('required') && emailForm.controls.email.touched">
+              <p class="mt-2 text-[#945069] font-medium text-xs">
+                Email is required
+              </p>
+            </div>
+            <div *ngIf="emailForm.get('email')?.hasError('email')">
+              <p class="mt-2 text-[#945069] font-medium text-xs">
+                Email must be a valid email address
+              </p>
+            </div>
+            <div class="w-1/2 pt-2 flex gap-4">
+              <button type="submit"
+                      style="font-family: DelaGothic"
+                      [disabled]="emailForm.invalid"
+                      class="text-white bg-[#2B788B] cursor-pointer tracking-widest focus:ring-4 focus:outline-none focus:ring-primary-300 font-light  rounded-lg text-sm lg:text-base p-1.5 lg:p-2 lg:px-5 px-3 text-center">
+                Save
+              </button>
+              <div *ngIf="savedEmail" class="flex justify-center items-end ">
+                <p
+                  class="text-sm font-medium text-[#757575]" style="font-family: Montserrat"
+                >
+                  {{resultChangeEmail}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+    <div class="shadow-md">
+      <div class="bg-[#2B788B] rounded-t-lg p-2 lg:px-6">
+        <p class="text-sm lg:text-base text-white" style="font-family: DelaGothic">
+          Update Password.
+        </p>
+      </div>
+      <div class="grid-cols-1 space-y-3 p-4 pt-4 bg-white rounded-b-lg px-3 lg:px-6 pb-8" style="font-family: Montserrat">
+        <p class="text-[#757575] text-xs lg:text-sm   lg:font-medium">
+          Ensure your account is using a long, random password to stay secure.
+        </p>
+        <form [formGroup]="passwordForm" (ngSubmit)="onSubmitPassword()">
+          <div class="space-y-2 lg:space-y-3 lg:pt-4">
+            <div>
+              <label for="current_password" class="block mb-2 text-xs lg:text-sm font-medium text-gray-900">Current Password</label>
+              <div class="relative">
+                <input
+                  type="{{ showCurrentPassword ? 'text' : 'password' }}"
+                  name="current_password"
+                  id="current_password"
+                  formControlName="current_password"
+                  class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm lg:text-base rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2"
+                >
+                <button type="button"
+                        class="absolute inset-y-0 text-[#2B788B] right-0 pr-2 flex items-center focus:outline-none"
+                        (click)="showCurrentPassword = !showCurrentPassword"
+                >
+                  <svg [ngClass]="{'hidden' : !showCurrentPassword}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 lg:h-6 lg:w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <svg [ngClass]="{'hidden' : showCurrentPassword}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 lg:h-6 lg:w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                  </svg>
+                </button>
+              </div>
+              <div class="error-message" *ngIf="passwordForm.getError('current_password')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  {{ passwordForm.getError('current_password') }}
+                </p>
+              </div>
+              <div *ngIf="passwordForm.get('current_password')?.hasError('required') && passwordForm.controls.current_password.touched">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  Password is required
+                </p>
+              </div>
+              <div *ngIf="passwordForm.get('current_password')?.hasError('minlength')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  Password should have minimum 8 characters.
+                </p>
+              </div>
+              <div *ngIf="passwordForm.get('current_password')?.hasError('pattern')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  The password must have a minimum of 1 uppercase letter, 1 lowercase letter and 1 number
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <label for="new_password" class="block mb-2 text-xs lg:text-sm font-medium text-gray-900">New Password</label>
+              <div class="relative">
+                <input
+                  type="{{ showNewPassword ? 'text' : 'password' }}"
+                  name="new_password"
+                  id="new_password"
+                  formControlName="new_password"
+                  class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm lg:text-base rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2"
+                >
+                <button type="button"
+                        class="absolute inset-y-0 text-[#2B788B] right-0 pr-2 flex items-center focus:outline-none"
+                        (click)="showNewPassword = !showNewPassword"
+                >
+                  <svg [ngClass]="{'hidden' : !showNewPassword}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 lg:h-6 lg:w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <svg [ngClass]="{'hidden' : showNewPassword}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 lg:h-6 lg:w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                  </svg>
+                </button>
+              </div>
+              <div class="error-message" *ngIf="passwordForm.getError('new_password')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  {{ passwordForm.getError('new_password') }}
+                </p>
+              </div>
+              <div *ngIf="passwordForm.get('new_password')?.hasError('required') && passwordForm.controls.new_password.touched">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  Password is required
+                </p>
+              </div>
+              <div *ngIf="passwordForm.get('new_password')?.hasError('minlength')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  Password should have minimum 8 characters.
+                </p>
+              </div>
+              <div *ngIf="passwordForm.get('new_password')?.hasError('pattern')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  The password must have a minimum of 1 uppercase letter, 1 lowercase letter and 1 number
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <label for="password_confirmation" class="block mb-2 text-xs lg:text-sm font-medium text-gray-900">Password Confirmation</label>
+              <div class="relative">
+                <input
+                  type="{{ showPasswordConfirmation ? 'text' : 'password' }}"
+                  name="password_confirmation"
+                  id="password_confirmation"
+                  formControlName="password_confirmation"
+                  class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm lg:text-base rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2"
+                >
+                <button type="button"
+                        class="absolute inset-y-0 text-[#2B788B] right-0 pr-2 flex items-center focus:outline-none"
+                        (click)="showPasswordConfirmation = !showPasswordConfirmation"
+                >
+                  <svg [ngClass]="{'hidden' : !showPasswordConfirmation}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 lg:h-6 lg:w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <svg [ngClass]="{'hidden' : showPasswordConfirmation}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 lg:h-6 lg:w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                  </svg>
+                </button>
+              </div>
+              <div class="error-message" *ngIf="passwordForm.getError('password_confirmation')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  {{ passwordForm.getError('password_confirmation') }}
+                </p>
+              </div>
+              <div *ngIf="passwordForm.get('password_confirmation')?.hasError('required') && passwordForm.controls.password_confirmation.touched">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  Password is required
+                </p>
+              </div>
+              <div *ngIf="passwordForm.get('password_confirmation')?.hasError('minlength')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  Password should have minimum 8 characters.
+                </p>
+              </div>
+              <div *ngIf="passwordForm.get('password_confirmation')?.hasError('pattern')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  The password must have a minimum of 1 uppercase letter, 1 lowercase letter and 1 number
+                </p>
+              </div>
+              <div *ngIf="passwordForm.getError('passwordMismatch')">
+                <p class="mt-2 text-[#945069] font-medium text-xs">
+                  Password is not match
+                </p>
+              </div>
+            </div>
+            <div class="w-1/2 pt-2 flex gap-4">
+              <button type="submit"
+                      style="font-family: DelaGothic"
+                      [disabled]="emailForm.invalid"
+
+                      class="text-white bg-[#2B788B] cursor-pointer tracking-widest focus:ring-4 focus:outline-none focus:ring-primary-300 font-light  rounded-lg text-sm lg:text-base p-1.5 lg:p-2 lg:px-5 px-3 text-center">
+                Save
+              </button>
+              <div *ngIf="savedPassword" class="flex justify-center items-end ">
+                <p
+                  class="text-sm font-medium text-[#757575]" style="font-family: Montserrat"
+                >
+                  Saved.
+                </p>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>
