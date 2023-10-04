@@ -2,6 +2,7 @@ import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/c
 import {AuthService} from "../../services/auth.service";
 import {NavigationEnd, Router} from "@angular/router";
 import {filter} from "rxjs";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-header',
@@ -9,12 +10,35 @@ import {filter} from "rxjs";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  switchLanguage(language: string) {
+    this.translate.use(language);
+    if (language === 'en') {
+      this.currentLanguage = 'English';
+    } else if (language === 'ua') {
+      this.currentLanguage = 'Українська';
+    } else if (language === 'ru') {
+      this.currentLanguage = 'Русский';
+    }
+  }
+
   burgerMenu = false;
   authMenu = false;
+  languageDropdownOpen = false;
+  currentLanguage = 'English';
 
   toggleMenus() {
     this.burgerMenu = !this.burgerMenu;
     this.authMenu = false;
+  }
+
+  toggleLanguageMenu(){
+    this.languageDropdownOpen = !this.languageDropdownOpen;
+    this.authMenu = !this.authMenu;
+  }
+
+  toggleLanguageDropdown() {
+    this.languageDropdownOpen = !this.languageDropdownOpen;
+    this.authMenu = !this.authMenu;
   }
 
   toggleAuthMenu() {
@@ -25,6 +49,7 @@ export class HeaderComponent implements OnInit {
   closeMenus() {
     this.burgerMenu = false;
     this.authMenu = false;
+    this.languageDropdownOpen = false;
   }
   @ViewChild('menu') menuElement!: ElementRef;
 
@@ -35,7 +60,8 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  constructor( public authService:AuthService, private router: Router) {
+  constructor( public authService:AuthService, private router: Router, private translate: TranslateService) {
+    this.translate.setDefaultLang('en');
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {

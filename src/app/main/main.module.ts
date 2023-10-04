@@ -25,6 +25,7 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
 import {EmailVerificationComponent} from "./pages/email-verification/email-verification.component";
 import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 import {ProfileComponent} from "./pages/profile/profile.component";
+import {TranslateModule} from "@ngx-translate/core";
 
 
 
@@ -79,13 +80,14 @@ const routes: Routes = [
     FooterComponent,
     ExerciseCardComponent
   ],
-  imports: [
-    DragDropModule,
-    CommonModule,
-    RouterModule.forChild(routes),
-    ReactiveFormsModule,
-    NgOptimizedImage,
-    SweetAlert2Module,
-  ]
+    imports: [
+        DragDropModule,
+        CommonModule,
+        RouterModule.forChild(routes),
+        ReactiveFormsModule,
+        NgOptimizedImage,
+        SweetAlert2Module,
+        TranslateModule,
+    ]
 })
 export class MainModule { }

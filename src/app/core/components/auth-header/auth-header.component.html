@@ -30,16 +30,16 @@
               </svg>
             </li>
             <li class="hover:scale-105 hover:text-[#2B788B] hover:bg-[#C3DCE3] p-3 px-4 rounded cursor-pointer">
-              <a class="block  rounded">Home</a>
+              <a routerLink="/" class="block  rounded">{{ 'home' | translate }}</a>
             </li>
             <li class="hover:scale-105 hover:text-[#2B788B] hover:bg-[#C3DCE3] p-3 px-4 rounded cursor-pointer">
-              <a href="#" >Blog</a>
+              <a href="#" >{{ 'blog' | translate }}</a>
             </li>
             <li class="hover:scale-105 hover:text-[#2B788B] hover:bg-[#C3DCE3] p-3 px-4 rounded cursor-pointer">
-              <a href="#" class="block   rounded">About us</a>
+              <a href="#" class="block   rounded">{{ 'aboutUs' | translate }}</a>
             </li>
             <li class="hover:scale-105 hover:text-[#2B788B] hover:bg-[#C3DCE3] p-3 px-4 rounded cursor-pointer">
-              <a href="#" class="block   rounded">Contact</a>
+              <a href="#" class="block   rounded">{{ 'contactUs' | translate }}</a>
             </li>
           </ul>
         </div>
@@ -55,10 +55,40 @@
             </div>
 
             <div [ngClass]="{'hidden': !authMenu }" class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" style="font-family: Montserrat">
-              <a routerLink="/dashboard" class="block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">Dashboard</a>
-              <a routerLink="/profile" class=" cursor-pointer block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">Profile</a>
-              <a href="#" class="cursor-pointer block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">My Exercise</a>
-              <a (click)="authService.logout()" class=" cursor-pointer block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">Log Out</a>
+              <a routerLink="/dashboard" class="block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">{{'dashboard' | translate}}</a>
+              <a routerLink="/profile" class=" cursor-pointer block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">{{'profile' | translate}}</a>
+              <a href="#" class="cursor-pointer block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">{{'myExercise' | translate}}</a>
+              <a (click)="toggleLanguageDropdown()"
+                 class="block cursor-pointer px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50"
+              >
+                {{ currentLanguage }}
+              </a>
+              <a (click)="authService.logout()" class=" cursor-pointer block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">{{'logout' | translate}}</a>
+            </div>
+            <div [ngClass]="{'hidden': !languageDropdownOpen}" class="absolute  right-0 z-40 mt-2 w-56 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="language-dropdown" style="font-family: Montserrat">
+              <div class="flex items-center justify-start gap-4 mx-auto text-center text-sm font-semibold text-[#757575] tracking-wider" role="menuitem">
+                <div (click)="toggleLanguageMenu()" class="cursor-pointer text-[#757575] rounded-full p-2 hover:text-[#2B788B] hover:bg-gray-50">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
+                  </svg>
+                </div>
+                <p class="text-start">
+                  {{'selectLanguage' | translate}}
+                </p>
+              </div>
+              <hr>
+
+              <div class="flex flex-col text-center justify-center">
+                <button (click)="switchLanguage('en')" class="block   cursor-pointer px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50" role="menuitem">
+                  English
+                </button>
+                <button (click)="switchLanguage('ua')" class="block   cursor-pointer px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50" role="menuitem">
+                  Українська
+                </button>
+                <button (click)="switchLanguage('ru')" class="block   cursor-pointer px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50" role="menuitem">
+                  Русский
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -69,16 +99,16 @@
       <div class="bg-[#F6F5F4] w-full h-full p-4 flex justify-center items-center">
         <ul class="space-y-4 text-center font-semibold text-[#757575] tracking-wider text-lg" style="font-family: Montserrat">
           <li>
-            <a routerLink="/" class="block hover:text-[#2B788B] cursor-pointer" >Home</a>
+            <a routerLink="/" class="block hover:text-[#2B788B] cursor-pointer" >{{ 'home' | translate }}</a>
           </li>
           <li>
-            <a href="#" class="block hover:text-[#2B788B] cursor-pointer">Blog</a>
+            <a href="#" class="block hover:text-[#2B788B] cursor-pointer">{{ 'blog' | translate }}</a>
           </li>
           <li>
-            <a href="#" class="block hover:text-[#2B788B] cursor-pointer">About us</a>
+            <a href="#" class="block hover:text-[#2B788B] cursor-pointer">{{ 'aboutUs' | translate }}</a>
           </li>
           <li>
-            <a href="#" class="block hover:text-[#2B788B] cursor-pointer">Contact</a>
+            <a href="#" class="block hover:text-[#2B788B] cursor-pointer">{{ 'contactUs' | translate }}</a>
           </li>
         </ul>
       </div>

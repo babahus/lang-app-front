@@ -2,7 +2,7 @@
   <div *ngIf="userData" class="grid-cols-1 md:max-w-md lg:min-w-[50%] justify-center px-3 pt-4 lg:pt-8 space-y-4 lg:space-y-8 pb-12">
     <div>
       <h2 class="text-lg lg:text-xl font-medium text-gray-900" style="font-family: DelaGothic">
-        Profile
+        {{ 'profile' | translate}}
       </h2>
     </div>
     <div class="flex gap-4 lg:gap-8 p-4 lg:p-6 pt-4 bg-white items-center  justify-items-center rounded-lg shadow-md px-3">
@@ -18,23 +18,23 @@
           {{userData.email}}
         </p>
         <p class="text-xs lg:text-sm" style="font-family: Montserrat">
-          In every face - a history of the world.
+          {{'faceHistory' | translate}}
         </p>
       </div>
     </div>
     <div class="shadow-md">
       <div class="bg-[#2B788B] rounded-t-lg p-2 lg:px-6">
         <p class="text-sm lg:text-base text-white" style="font-family: DelaGothic">
-          Update e-mail.
+          {{'updateEmail' | translate}}
         </p>
       </div>
       <div class="grid-cols-1 space-y-3 p-4 pt-4 bg-white rounded-b-lg  px-3 lg:px-6 pb-8" style="font-family: Montserrat">
         <p class="text-[#757575] text-xs lg:text-sm   lg:font-medium">
-          Please ensure that your new email address is accessible.
+          {{'ensureEmailAccessibility' | translate}}
         </p>
         <form [formGroup]="emailForm" (ngSubmit)="onSubmitEmail()">
           <div class="space-y-2 lg:space-y-3 lg:pt-4">
-            <label for="email" class="block mb-2 text-xs lg:text-sm font-medium text-gray-900">Email</label>
+            <label for="email" class="block mb-2 text-xs lg:text-sm font-medium text-gray-900">{{'emailLabel' | translate}}</label>
             <input
               type="email"
               name="email"
@@ -49,12 +49,12 @@
             </div>
             <div *ngIf="emailForm.get('email')?.hasError('required') && emailForm.controls.email.touched">
               <p class="mt-2 text-[#945069] font-medium text-xs">
-                Email is required
+                {{'emailRequired' | translate}}
               </p>
             </div>
             <div *ngIf="emailForm.get('email')?.hasError('email')">
               <p class="mt-2 text-[#945069] font-medium text-xs">
-                Email must be a valid email address
+                {{'emailInvalid' | translate}}
               </p>
             </div>
             <div class="w-1/2 pt-2 flex gap-4">
@@ -62,7 +62,7 @@
                       style="font-family: DelaGothic"
                       [disabled]="emailForm.invalid"
                       class="text-white bg-[#2B788B] cursor-pointer tracking-widest focus:ring-4 focus:outline-none focus:ring-primary-300 font-light  rounded-lg text-sm lg:text-base p-1.5 lg:p-2 lg:px-5 px-3 text-center">
-                Save
+                {{'save' | translate}}
               </button>
               <div *ngIf="savedEmail" class="flex justify-center items-end ">
                 <p
@@ -80,17 +80,17 @@
     <div class="shadow-md">
       <div class="bg-[#2B788B] rounded-t-lg p-2 lg:px-6">
         <p class="text-sm lg:text-base text-white" style="font-family: DelaGothic">
-          Update Password.
+          {{'updatePassword' | translate}}
         </p>
       </div>
       <div class="grid-cols-1 space-y-3 p-4 pt-4 bg-white rounded-b-lg px-3 lg:px-6 pb-8" style="font-family: Montserrat">
         <p class="text-[#757575] text-xs lg:text-sm   lg:font-medium">
-          Ensure your account is using a long, random password to stay secure.
+          {{'ensurePasswordSecurity' | translate}}
         </p>
         <form [formGroup]="passwordForm" (ngSubmit)="onSubmitPassword()">
           <div class="space-y-2 lg:space-y-3 lg:pt-4">
             <div>
-              <label for="current_password" class="block mb-2 text-xs lg:text-sm font-medium text-gray-900">Current Password</label>
+              <label for="current_password" class="block mb-2 text-xs lg:text-sm font-medium text-gray-900">{{'passwordCurrentLabel' | translate}}</label>
               <div class="relative">
                 <input
                   type="{{ showCurrentPassword ? 'text' : 'password' }}"
@@ -119,23 +119,23 @@
               </div>
               <div *ngIf="passwordForm.get('current_password')?.hasError('required') && passwordForm.controls.current_password.touched">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Password is required
+                  {{'passwordRequired' | translate}}
                 </p>
               </div>
               <div *ngIf="passwordForm.get('current_password')?.hasError('minlength')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Password should have minimum 8 characters.
+                  {{'passwordMinLength' | translate}}
                 </p>
               </div>
               <div *ngIf="passwordForm.get('current_password')?.hasError('pattern')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  The password must have a minimum of 1 uppercase letter, 1 lowercase letter and 1 number
+                  {{'passwordPattern' | translate}}
                 </p>
               </div>
             </div>
 
             <div>
-              <label for="new_password" class="block mb-2 text-xs lg:text-sm font-medium text-gray-900">New Password</label>
+              <label for="new_password" class="block mb-2 text-xs lg:text-sm font-medium text-gray-900">{{'passwordNewLabel' | translate}}</label>
               <div class="relative">
                 <input
                   type="{{ showNewPassword ? 'text' : 'password' }}"
@@ -164,23 +164,23 @@
               </div>
               <div *ngIf="passwordForm.get('new_password')?.hasError('required') && passwordForm.controls.new_password.touched">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Password is required
+                  {{'passwordRequired' | translate}}
                 </p>
               </div>
               <div *ngIf="passwordForm.get('new_password')?.hasError('minlength')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Password should have minimum 8 characters.
+                  {{'passwordMinLength' | translate}}
                 </p>
               </div>
               <div *ngIf="passwordForm.get('new_password')?.hasError('pattern')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  The password must have a minimum of 1 uppercase letter, 1 lowercase letter and 1 number
+                  {{'passwordPattern' | translate}}
                 </p>
               </div>
             </div>
 
             <div>
-              <label for="password_confirmation" class="block mb-2 text-xs lg:text-sm font-medium text-gray-900">Password Confirmation</label>
+              <label for="password_confirmation" class="block mb-2 text-xs lg:text-sm font-medium text-gray-900">{{'passwordConfirmationLabel'| translate}}</label>
               <div class="relative">
                 <input
                   type="{{ showPasswordConfirmation ? 'text' : 'password' }}"
@@ -209,22 +209,22 @@
               </div>
               <div *ngIf="passwordForm.get('password_confirmation')?.hasError('required') && passwordForm.controls.password_confirmation.touched">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Password is required
+                  {{'passwordRequired' | translate}}
                 </p>
               </div>
               <div *ngIf="passwordForm.get('password_confirmation')?.hasError('minlength')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Password should have minimum 8 characters.
+                  {{'passwordMinLength' | translate}}
                 </p>
               </div>
               <div *ngIf="passwordForm.get('password_confirmation')?.hasError('pattern')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  The password must have a minimum of 1 uppercase letter, 1 lowercase letter and 1 number
+                  {{'passwordPattern' | translate}}
                 </p>
               </div>
               <div *ngIf="passwordForm.getError('passwordMismatch')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Password is not match
+                  {{'passwordMismatch' | translate}}
                 </p>
               </div>
             </div>
@@ -234,13 +234,13 @@
                       [disabled]="emailForm.invalid"
 
                       class="text-white bg-[#2B788B] cursor-pointer tracking-widest focus:ring-4 focus:outline-none focus:ring-primary-300 font-light  rounded-lg text-sm lg:text-base p-1.5 lg:p-2 lg:px-5 px-3 text-center">
-                Save
+                {{'save' | translate}}
               </button>
               <div *ngIf="savedPassword" class="flex justify-center items-end ">
                 <p
                   class="text-sm font-medium text-[#757575]" style="font-family: Montserrat"
                 >
-                  Saved.
+                  {{'saved' | translate}}
                 </p>
               </div>
             </div>

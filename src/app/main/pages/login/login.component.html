@@ -1,10 +1,10 @@
   <section class="bg-[#C3DCE3] pb-24">
     <div class="md:pb-8 pt-8">
       <h1 *ngIf="this.role == 'User'" class="text-xl font-bold tracking-wider text-center leading-tight text-[#2B788B] md:text-2xl" style="font-family: DelaGothic">
-        Login as a Student
+        {{'loginAsStudent' | translate}}
       </h1>
       <h1 *ngIf="this.role == 'Teacher'" class="text-xl font-bold tracking-wider text-center leading-tight text-[#2B788B] md:text-2xl" style="font-family: DelaGothic">
-        Login as a Teacher
+        {{'loginAsTeacher' | translate}}
       </h1>
     </div>
     <div class="flex flex-col relative items-center justify-center px-3 py-2 mx-auto lg:py-0">
@@ -12,7 +12,7 @@
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4 md:space-y-6" action="#" style="font-family: Montserrat">
             <div>
-              <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
+              <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">{{'emailLabel' | translate}}</label>
               <input type="email"
                      name="email"
                      id="email"
@@ -26,17 +26,17 @@
               </div>
               <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.controls.email.touched">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Email is required
+                  {{'emailRequired' | translate}}
                 </p>
               </div>
               <div *ngIf="loginForm.get('email')?.hasError('email')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Email must be a valid email address
+                  {{'emailInvalid' | translate}}
                 </p>
               </div>
             </div>
             <div>
-              <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
+              <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">{{'passwordLabel' | translate}}</label>
               <div class="relative">
                 <input type="{{ passwordVisible ? 'text' : 'password' }}"
                        name="password"
@@ -62,22 +62,22 @@
               </div>
               <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.controls.password.touched">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Password is required
+                 {{'passwordRequired' | translate}}
                 </p>
               </div>
               <div *ngIf="loginForm.get('password')?.hasError('minlength')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Password should have minimum 8 characters.
+                  {{'passwordMinLength' | translate}}
                 </p>
               </div>
               <div *ngIf="loginForm.get('password')?.hasError('pattern')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  The password must have a minimum of 1 uppercase letter, 1 lowercase letter and 1 number
+                  {{'passwordPattern' | translate}}
                 </p>
               </div>
               <div *ngIf="loginForm.get('password')?.hasError('passwordMismatch')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Password is not match
+                  {{'passwordMismatch' | translate}}
                 </p>
               </div>
             </div>
@@ -87,17 +87,20 @@
                   <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300" required="">
                 </div>
                 <div class="ml-3 text-sm">
-                  <label for="remember" class="font-medium text-[#757575]">Remember me</label>
+                  <label for="remember" class="font-medium text-[#757575]">{{'rememberMeLabel' | translate}}</label>
                 </div>
               </div>
               <div class="pt-2 md:pt-0">
-                <a routerLink="/forgot-password" class="text-sm font-bold text-[#2B788B] hover:underline">Forgot password?</a>
+                <a routerLink="/forgot-password" class="text-sm font-bold text-[#2B788B] hover:underline">{{'forgotPasswordLink' | translate}}</a>
               </div>
             </div>
             <button type="submit"
                     style="font-family: DelaGothic"
                     [disabled]="loginForm.invalid"
-                    class="w-full text-white bg-[#5996A5] cursor-pointer tracking-widest focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign in</button>
+                    class="w-full text-white bg-[#5996A5] cursor-pointer tracking-widest focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            >
+              {{'signInButton' | translate}}
+            </button>
 
             <div *ngIf="errorShow">
               <p class="mt-2 text-center font-medium text-[#945069] text-xs">
@@ -112,12 +115,12 @@
             <div class="grid md:flex justify-start md:space-x-2">
               <div>
                 <p class="text-sm font-light text-gray-500">
-                  Don’t have an account yet?
+                  {{'dontHaveAccountText' | translate}}
                 </p>
               </div>
               <div>
                 <a routerLink="/register" class="font-semibold cursor-pointer flex items-center text-sm text-[#757575] hover:underline">
-                  Sign up
+                  {{'signUpLink' | translate}}
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
                   </svg>
@@ -126,7 +129,7 @@
             </div>
             <div class="inline-flex px-4 pt-4 relative items-center justify-center w-full">
               <hr class="w-full  h-px bg-gray-200 border-0 ">
-              <span class="absolute px-3 text-center text-sm font-medium text-[#757575] -translate-x-1/2 bg-white left-1/2 ">Or continue with</span>
+              <span class="absolute px-3 text-center text-sm font-medium text-[#757575] -translate-x-1/2 bg-white left-1/2 ">{{'continueWithText' | translate}}</span>
             </div>
             <div class="w-full md:flex tracking-widest space-y-3 md:space-y-0 md:gap-4" style="font-family: DelaGothic">
               <div (click)="loginWithGoogle('google')" class="flex cursor-pointer bg-[#945069] absolute z-0 -bottom-2 -right-2 lg:-bottom-4 lg:-right-5 text-white rounded-full p-4 lg:p-8 text-sm items-center ">
@@ -140,24 +143,6 @@
                 </svg>
               </div>
             </div>
-<!--            <div class="w-full md:flex tracking-widest space-y-3 md:space-y-0 md:gap-4" style="font-family: DelaGothic">-->
-<!--              <div class="flex bg-[#945069] pl-6 md:pl-2 text-white rounded-lg w-full p-2 text-sm items-center space-x-8 md:space-x-2" (click)="loginWithGoogle()">-->
-<!--                <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="w-5 h-5" viewBox="0 0 16 16">-->
-<!--                  <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>-->
-<!--                </svg>-->
-<!--                <a class="focus:ring-2 focus:outline-none focus:ring-[#3b5998]/50 font-medium  text-center inline-flex items-center">-->
-<!--                  Google-->
-<!--                </a>-->
-<!--              </div>-->
-<!--              <div class="flex bg-[#5996A5] pl-6 md:pl-2 text-white rounded-lg w-full p-2 text-sm items-center space-x-8 md:space-x-2">-->
-<!--                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5" viewBox="0 0 16 16">-->
-<!--                  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>-->
-<!--                </svg>-->
-<!--                <a  class=" focus:ring-2 focus:outline-none focus:ring-[#3b5998]/50 font-medium text-center inline-flex items-center">-->
-<!--                  Facebook-->
-<!--                </a>-->
-<!--              </div>-->
-<!--            </div>-->
           </form>
         </div>
       </div>

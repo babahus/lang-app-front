@@ -1,4 +1,4 @@
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -14,7 +14,12 @@ import {MainModule} from "./main/main.module";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { LoaderComponent } from './core/components/loader/loader.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 
+export function HttpLoaderFactory(http:HttpClient){
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
     declarations: [
@@ -30,7 +35,15 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
         HttpClientModule,
         AppRoutingModule,
         NoopAnimationsModule,
-        SweetAlert2Module.forRoot()
+        SweetAlert2Module.forRoot(),
+        HttpClientModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+          }
+        })
     ],
     providers: [
       {provide: HTTP_INTERCEPTORS, useClass: BearerInterceptor, multi: true},

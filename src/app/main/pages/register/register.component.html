@@ -2,7 +2,7 @@
   <section class="bg-[#C3DCE3] pb-24">
     <div class="md:pb-8 pt-8">
       <h1 class="text-xl font-bold tracking-wider text-center leading-tight text-[#2B788B] md:text-2xl" style="font-family: DelaGothic">
-        Create and account
+        {{'createAndAccount' | translate}}
       </h1>
     </div>
     <div class="flex flex-col justify-items-center relative items-center justify-center px-3 py-2 mx-auto lg:py-0">
@@ -10,7 +10,7 @@
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
           <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4 md:space-y-6" action="#" style="font-family: Montserrat">
             <div>
-              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Name</label>
+              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">{{'name' | translate}}</label>
               <input type="text"
                      name="name"
                      id="name"
@@ -23,17 +23,17 @@
               </div>
               <div *ngIf="registerForm.get('name')?.hasError('required') && registerForm.controls.name.touched">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Name is required
+                  {{'nameRequired' | translate}}
                 </p>
               </div>
               <div *ngIf="registerForm.get('name')?.hasError('minlength')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Name should have minimum 3 characters.
+                  {{'nameMinLength' | translate}}
                 </p>
               </div>
             </div>
             <div>
-              <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
+              <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">{{'emailLabel' | translate}}</label>
               <input type="email"
                      name="email"
                      id="email"
@@ -46,17 +46,17 @@
               </div>
               <div *ngIf="registerForm.get('email')?.hasError('required') && registerForm.controls.email.touched">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Email is required
+                  {{'emailRequired' | translate}}
                 </p>
               </div>
               <div *ngIf="registerForm.get('email')?.hasError('email')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Email must be a valid email address
+                  {{'emailInvalid' | translate}}
                 </p>
               </div>
             </div>
             <div>
-              <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
+              <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">{{'passwordLabel' | translate}}</label>
               <div class="relative">
                 <input type="{{ showPassword ? 'text' : 'password' }}"
                        name="password"
@@ -84,27 +84,27 @@
               </div>
               <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.controls.password.touched">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Password is required
+                  {{'passwordRequired' | translate}}
                 </p>
               </div>
               <div *ngIf="registerForm.get('password')?.hasError('minlength')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Password should have minimum 8 characters.
+                  {{'passwordMinLength' | translate}}
                 </p>
               </div>
               <div *ngIf="registerForm.get('password')?.hasError('pattern')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  The password must have a minimum of 1 uppercase letter, 1 lowercase letter and 1 number
+                  {{'passwordPattern' | translate}}
                 </p>
               </div>
               <div *ngIf="registerForm.get('password')?.hasError('passwordMismatch')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Password is not match
+                  {{'passwordMismatch' | translate }}
                 </p>
               </div>
             </div>
             <div>
-              <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900 ">Password confirmation</label>
+              <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900 ">{{'passwordConfirmationLabel' | translate}}</label>
               <div class="relative">
                 <input type="{{ showPasswordConfirmation ? 'text' : 'password' }}"
                        name="password_confirmation"
@@ -132,27 +132,27 @@
               </div>
               <div *ngIf="registerForm.get('password_confirmation')?.hasError('required') && registerForm.controls.password_confirmation.touched">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Password is required
+                 {{'passwordRequired' | translate}}
                 </p>
               </div>
               <div *ngIf="registerForm.get('password_confirmation')?.hasError('minlength')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Password should have minimum 8 characters.
+                  {{'passwordMinLength' | translate}}
                 </p>
               </div>
               <div *ngIf="registerForm.get('password_confirmation')?.hasError('pattern')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  The password must have a minimum of 1 uppercase letter, 1 lowercase letter and 1 number
+                  {{'passwordPattern' | translate}}
                 </p>
               </div>
               <div *ngIf="registerForm.getError('passwordMismatch')">
                 <p class="mt-2 text-[#945069] font-medium text-xs">
-                  Password is not match
+                  {{'passwordMismatch' | translate }}
                 </p>
               </div>
             </div>
             <div class="relative inline-block text-left">
-              <label class="block mb-2 text-sm font-medium text-gray-900 ">Role</label>
+              <label class="block mb-2 text-sm font-medium text-gray-900 ">{{'role' | translate}}</label>
               <div>
                 <button
                   type="button"
@@ -216,7 +216,7 @@
                     style="font-family: DelaGothic"
                     [disabled]="registerForm.invalid"
                     class="w-full  cursor-pointer text-white bg-[#5996A5] tracking-widest focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-              Sign Up
+              {{'signUpLink' | translate}}
             </button>
 
             <div *ngIf="errorShow">
@@ -228,13 +228,13 @@
             <div class="grid md:flex justify-start md:space-x-2 pb-4">
               <div>
                 <p class="text-sm font-light text-gray-500">
-                  Already have an account?
+                  {{'alreadyHaveAnAccount' | translate}}
                 </p>
               </div>
 
               <div>
                 <button type="button" (click)="redirectToLogin('User')" class="font-semibold cursor-pointer flex items-center text-sm text-[#757575] hover:underline">
-                  Sign In
+                  {{'signInButton' | translate}}
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
                   </svg>
@@ -243,7 +243,7 @@
             </div>
             <div class="inline-flex px-4 relative items-center justify-center w-full">
               <hr class="w-full  h-px bg-gray-200 border-0 ">
-              <span class="absolute px-3 text-center text-sm font-medium text-[#757575] -translate-x-1/2 bg-white left-1/2 ">Or continue with</span>
+              <span class="absolute px-3 text-center text-sm font-medium text-[#757575] -translate-x-1/2 bg-white left-1/2 ">{{'continueWithText' | translate}}</span>
             </div>
             <div class="w-full md:flex tracking-widest space-y-3 md:space-y-0 md:gap-4" style="font-family: DelaGothic">
               <div class="flex cursor-pointer bg-[#945069] absolute z-0 -bottom-3 -right-3 lg:-bottom-4 lg:-right-5 text-white rounded-2xl lg:rounded-3xl  p-4 lg:p-7 text-sm items-center ">

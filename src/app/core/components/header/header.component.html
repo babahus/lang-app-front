@@ -1,5 +1,5 @@
 <header #menu class="w-full z-50" [ngClass]="{'fixed top-0': burgerMenu }">
-  <nav class="bg-[#F6F5F4]">
+  <nav class="bg-[#F6F5F4] relative">
     <div class="mx-auto px-2 sm:px-6 flex justify-center lg:px-8 border border-b ">
       <div class="relative max-w-screen-lg  w-full md:w-[90%] lg:w-[70%] flex h-16 items-center justify-between">
         <div class="flex items-center lg:hidden">
@@ -30,16 +30,16 @@
               </svg>
             </li>
             <li class="hover:scale-105 hover:text-[#2B788B] hover:bg-[#C3DCE3] cursor-pointer p-3 px-4 rounded">
-              <a routerLink="/" class="block  rounded">Home</a>
+              <a routerLink="/" class="block  rounded">{{ 'home' | translate }}</a>
             </li>
             <li class="hover:scale-105 hover:text-[#2B788B] hover:bg-[#C3DCE3] cursor-pointer p-3 px-4 rounded">
-              <a href="#" >Blog</a>
+              <a href="#" >{{ 'blog' | translate }}</a>
             </li>
             <li class="hover:scale-105 hover:text-[#2B788B] hover:bg-[#C3DCE3] cursor-pointer p-3 px-4 rounded">
-              <a href="#" class="block   rounded">About us</a>
+              <a href="#" class="block   rounded">{{ 'aboutUs' | translate }}</a>
             </li>
             <li class="hover:scale-105 hover:text-[#2B788B] hover:bg-[#C3DCE3] cursor-pointer p-3 px-4 rounded">
-              <a href="#" class="block   rounded">Contact</a>
+              <a href="#" class="block   rounded">{{ 'contactUs' | translate }}</a>
             </li>
           </ul>
         </div>
@@ -47,7 +47,7 @@
           <!-- Dropdown auth -->
           <div class="relative ml-3">
             <div class="flex items-center space-x-2">
-              <button type="button" (click)="toggleAuthMenu()" class="relative cursor-pointer flex rounded-full text-gray-700 hover:scale-105 hover:text-[#2B788B]" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+              <button type="button" (click)="toggleAuthMenu()"  class="relative cursor-pointer flex rounded-full text-gray-700 hover:scale-105 hover:text-[#2B788B]" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-7 h-7">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
@@ -55,9 +55,40 @@
             </div>
 
             <div [ngClass]="{'hidden': !authMenu }" class="absolute right-0 z-40 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" style="font-family: Montserrat">
-              <a  (click)="redirectToLogin('User')" class="block cursor-pointer px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50" role="menuitem" tabindex="-1" id="user-menu-item-0">Sign as Student</a>
-              <a  (click)="redirectToLogin('Teacher')" class="block cursor-pointer px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50" role="menuitem" tabindex="-1" id="user-menu-item-1">Sign as Teacher</a>
-              <a routerLink="register" class="block px-4 py-2 text-sm cursor-pointer font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50" role="menuitem" tabindex="-1" id="user-menu-item-2">Registration</a>
+              <a (click)="redirectToLogin('User')" class="block cursor-pointer px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50" role="menuitem" tabindex="-1" id="user-menu-item-0">{{'signInStudent' | translate}}</a>
+              <a (click)="redirectToLogin('Teacher')" class="block cursor-pointer px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50" role="menuitem" tabindex="-1" id="user-menu-item-1">{{'signInTeacher' | translate}}</a>
+              <a routerLink="register" class="block px-4 py-2 text-sm cursor-pointer font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50" role="menuitem" tabindex="-1" id="user-menu-item-2">{{'registration' | translate}}</a>
+              <a (click)="toggleLanguageDropdown()"
+                class="block cursor-pointer px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50"
+              >
+                {{ currentLanguage }}
+              </a>
+            </div>
+
+            <div [ngClass]="{'hidden': !languageDropdownOpen}" class="absolute  right-0 z-40 mt-2 w-56 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="language-dropdown" style="font-family: Montserrat">
+              <div class="flex items-center justify-start gap-4 mx-auto text-center text-sm font-semibold text-[#757575] tracking-wider" role="menuitem">
+                <div (click)="toggleLanguageMenu()" class="cursor-pointer text-[#757575] rounded-full p-2 hover:text-[#2B788B] hover:bg-gray-50">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
+                  </svg>
+                </div>
+                <p class="text-start">
+                  {{'selectLanguage' | translate}}
+                </p>
+              </div>
+              <hr>
+
+              <div class="flex flex-col text-center justify-center">
+                <button (click)="switchLanguage('en')" class="block   cursor-pointer px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50" role="menuitem">
+                  English
+                </button>
+                <button (click)="switchLanguage('ua')" class="block   cursor-pointer px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50" role="menuitem">
+                  Українська
+                </button>
+                <button (click)="switchLanguage('ru')" class="block   cursor-pointer px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50" role="menuitem">
+                  Русский
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -68,16 +99,16 @@
       <div class="bg-[#F6F5F4] w-full h-full p-4 flex justify-center items-center">
         <ul class="space-y-4 text-center font-semibold text-[#757575] tracking-wider text-lg" style="font-family: Montserrat">
           <li>
-            <a  routerLink="/" class="block hover:text-[#2B788B]" >Home</a>
+            <a  routerLink="/" class="block hover:text-[#2B788B]" >{{ 'home' | translate }}</a>
           </li>
           <li>
-            <a href="#" class="block hover:text-[#2B788B]">Blog</a>
+            <a href="#" class="block hover:text-[#2B788B]">{{ 'blog' | translate }}</a>
           </li>
           <li>
-            <a href="#" class="block hover:text-[#2B788B]">About us</a>
+            <a href="#" class="block hover:text-[#2B788B]">{{ 'aboutUs' | translate }}</a>
           </li>
           <li>
-            <a href="#" class="block hover:text-[#2B788B]">Contact</a>
+            <a href="#" class="block hover:text-[#2B788B]">{{ 'contactUs' | translate }}</a>
           </li>
         </ul>
       </div>
