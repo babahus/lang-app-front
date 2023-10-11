@@ -26,6 +26,9 @@ import {EmailVerificationComponent} from "./pages/email-verification/email-verif
 import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 import {ProfileComponent} from "./pages/profile/profile.component";
 import {TranslateModule} from "@ngx-translate/core";
+import { CoursesComponent } from './pages/courses/courses.component';
+import { ExercisesCreateComponent } from './pages/exercises-create/exercises-create.component';
+import { CourseCreateComponent } from './pages/course-create/course-create.component';
 
 
 
@@ -35,6 +38,7 @@ const routes: Routes = [
   { path : 'login', component: LoginComponent, canActivate: [GuestGuard]},
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [GuestGuard]},
   { path: 'reset-password', component: ResetPasswordComponent, canActivate: [GuestGuard]},
+  { path : 'about', component : AboutComponent},
   { path: 'api/email/verify/:id/:hash', component: EmailVerificationComponent, canActivate: [AuthGuard]},
   {
     path: 'api/login/google/callback',
@@ -44,11 +48,16 @@ const routes: Routes = [
       path: 'api/login/facebook/callback',
       component: LoginComponent,
   },
+
+  { path : 'exercises-create', component : ExercisesCreateComponent, canActivate : [AuthGuard]},
+  { path : 'courses-create', component : CourseCreateComponent, canActivate : [AuthGuard]},
+
   { path : 'dashboard', component : DashboardComponent, canActivate : [AuthGuard]},
   { path : 'profile', component : ProfileComponent, canActivate : [AuthGuard]},
-  // { path : 'exercises', component : ExercisesComponent, canActivate : [AuthGuard]},
-  // { path : 'exercises-my', component : ExercisesMyComponent, canActivate : [AuthGuard]},
-  // { path : 'exercises/compile_phrase/:id', component : CompilePhraseComponent, canActivate : [AuthGuard]},
+  { path : 'exercises', component : ExercisesComponent, canActivate : [AuthGuard]},
+  { path : 'courses', component : CoursesComponent, canActivate : [AuthGuard]},
+  { path : 'exercises-my', component : ExercisesMyComponent, canActivate : [AuthGuard]},
+  { path : 'exercises/compile_phrase/:id', component : CompilePhraseComponent, canActivate : [AuthGuard]},
   {
     path : '**', component: NotFoundComponent
   }
@@ -73,7 +82,10 @@ const routes: Routes = [
     ForgotPasswordComponent,
     ResetPasswordComponent,
     EmailVerificationComponent,
-    ProfileComponent
+    ProfileComponent,
+    CoursesComponent,
+    ExercisesCreateComponent,
+    CourseCreateComponent
   ],
   exports: [
     HeaderComponent,

@@ -28,8 +28,20 @@
       <div class="row">
 
         <div *ngIf="attachedExercises != undefined" class="col-md-9">
+          <ng-container *ngFor="let exercise of data">
+            <div class="text-black">
+              <p>
+                {{exercise.type}}
+              </p>
+              <div *ngFor="let exe of exercise.data | keyvalue">
+                <p>
+                  {{exe.key}}: {{exe.value}}
+                </p>
+              </div>
+            </div>
+          </ng-container>
 
-          <div *ngIf="exerciseCategory == 'compile_phrase'">
+        <div *ngIf="exerciseCategory == 'compile_phrase'">
             <div *ngFor="let exercise of attachedExercises.compilePhrase_exercise" class="panel panel-default paper-shadow" data-z="0.5">
               <app-exercise-attached-card [exercise]="exercise" [exerciseType]="exerciseCategory"></app-exercise-attached-card>
             </div>

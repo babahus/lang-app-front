@@ -9,8 +9,9 @@ export const AuthGuard: CanActivateFn = (next: ActivatedRouteSnapshot, state: Ro
   if (auth.isAuthenticate) {
     return true;
   }
+  const role: string = 'User'
 
-  router.navigate(['login'])
+  router.navigate(['/login'], { queryParams: {role} });
 
   return false;
 }

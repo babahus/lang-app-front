@@ -10,22 +10,34 @@ import {Audit, CompilePhrase, Dictionary} from "../../models/exercise";
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent extends BaseComponent implements OnInit {
+export class DashboardComponent implements OnInit {
 
   authService : AuthService;
   exerciseService : ExerciseService;
-  attachedExercises! : AttachedExercise;
+  attachedExercises : any;
+  listExercise = false;
   exercisesForDisplay! : (Audit|CompilePhrase|Dictionary)[];
   constructor(authService : AuthService, exerciseService : ExerciseService) {
-    super();
     this.authService = authService;
     this.exerciseService = exerciseService;
   }
 
-  // override async ngOnInit() {
-  //   this.attachedExercises = await this.exerciseService.getAttachedExercise();
-  //   this.checkCountOfAttachedExercises();
-  // }
+  ngOnInit() {
+    this.exerciseService.getAttachedExercise()
+      .then((response) => {
+        console.log(response);
+        this.attachedExercises = response;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // console.log(this.attachedExercises);
+    // this.checkCountOfAttachedExercises();
+  }
+
+  showExercise(){
+    this.listExercise = !this.listExercise;
+  }
 
   // checkCountOfAttachedExercises(){
   //   if (this.attachedExercises.compilePhrase_exercise.length > 1)

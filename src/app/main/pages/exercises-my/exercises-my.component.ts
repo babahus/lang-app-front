@@ -19,8 +19,11 @@ export class ExercisesMyComponent extends BaseComponent implements OnInit {
     this.exerciseService = exerciseService;
   }
 
+  data: any;
+
   override async ngOnInit(): Promise<void> {
     this.attachedExercises = await this.exerciseService.getAttachedExercise();
+    this.data = this.attachedExercises;
     console.log(this.attachedExercises)
   }
 

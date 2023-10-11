@@ -1,7 +1,7 @@
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthHeaderComponent } from './core/components/auth-header/auth-header.component';
@@ -31,6 +31,7 @@ export function HttpLoaderFactory(http:HttpClient){
     ],
     imports: [
         BrowserModule,
+        FormsModule,
         MainModule,
         HttpClientModule,
         AppRoutingModule,

@@ -1,0 +1,15 @@
+.link-block{
+  border: 1px solid #fff;
+  color: #e8e8e8;
+  font-size: medium ;
+  transition: font-size,font-family,text-decoration,color,scale 0.6s ease;
+}
+
+.link-block:hover {
+  background-color: #f4f4f4;
+  color: #565454;
+  border: 1px solid #000000;
+  scale: 1.2;
+  font-size: x-large ;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
