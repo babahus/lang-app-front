@@ -16,6 +16,7 @@ import { LoaderComponent } from './core/components/loader/loader.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {LoaderInterceptor} from "./core/interceptors/request.interceptor";
 
 export function HttpLoaderFactory(http:HttpClient){
   return new TranslateHttpLoader(http);
@@ -48,6 +49,7 @@ export function HttpLoaderFactory(http:HttpClient){
     ],
     providers: [
       {provide: HTTP_INTERCEPTORS, useClass: BearerInterceptor, multi: true},
+      {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
     ],
     exports: [
     ],

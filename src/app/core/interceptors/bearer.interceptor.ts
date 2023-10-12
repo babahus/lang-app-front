@@ -17,8 +17,6 @@ export class BearerInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.loaderService.show();
-
     if (this.auth.isAuthenticate) {
       let modifiedRequest = request.clone({
         setHeaders: {
@@ -26,17 +24,10 @@ export class BearerInterceptor implements HttpInterceptor {
         }
       });
 
-      return next.handle(modifiedRequest).pipe(
-        finalize(() => {
-          this.loaderService.hide();
-        })
-      );
+      return next.handle(modifiedRequest);
     }
 
-    return next.handle(request).pipe(
-      finalize(() => {
-        this.loaderService.hide();
-      })
-    );
+    return next.handle(request);
+
   }
 }

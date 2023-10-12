@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CourseService} from "../../../core/services/course.service";
+import {LoaderService} from "../../../core/services/loader.service";
 
 @Component({
   selector: 'app-courses',
@@ -8,6 +9,8 @@ import {CourseService} from "../../../core/services/course.service";
 })
 export class CoursesComponent implements OnInit {
   openDetails = false;
+  isLoading: boolean = false;
+
   activeStages: { [key: string]: boolean } = {
     stage1: true,
     stage2: false,
@@ -16,6 +19,27 @@ export class CoursesComponent implements OnInit {
     stage5: false,
     stage6: false,
   };
+
+  public showFreeCourses = true;
+  public showPaidCourses = true;
+  public courses: any[] = [];
+  public filteredCourses: any[] = [];
+
+  constructor(private courseService: CourseService, private loaderService: LoaderService) {
+  }
+
+  async ngOnInit(): Promise<void> {
+    try {
+      this.isLoading = true;
+      this.courses = await this.courseService.getCourses();
+      this.filteredCourses = [...this.courses]; // initially, show all courses
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
   openListExercise(){
     this.openDetails = !this.openDetails;
   }
@@ -30,19 +54,11 @@ export class CoursesComponent implements OnInit {
     }
   }
 
-  courses: any;
-
-  constructor(private courseService: CourseService) {
-  }
-
-  ngOnInit(): void {
-    this.courseService.getCourses()
-      .then((response) => {
-        this.courses = response;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  filterCourses(event: Event) {
+    this.filteredCourses = this.courses.filter(course =>
+      (this.showFreeCourses && course.price === 0) ||
+      (this.showPaidCourses && course.price > 0)
+    );
   }
 
 }

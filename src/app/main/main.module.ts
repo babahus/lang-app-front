@@ -29,7 +29,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import { CoursesComponent } from './pages/courses/courses.component';
 import { ExercisesCreateComponent } from './pages/exercises-create/exercises-create.component';
 import { CourseCreateComponent } from './pages/course-create/course-create.component';
-
+import { FormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
@@ -99,6 +99,7 @@ const routes: Routes = [
         ReactiveFormsModule,
         NgOptimizedImage,
         SweetAlert2Module,
+        FormsModule,
         TranslateModule,
     ]
 })

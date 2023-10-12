@@ -19,44 +19,50 @@
         <ul class="font-semibold text-[#757575]">
           <li class="hover:bg-blue-50 p-2 rounded hover:text-[#2B788B]">
             <div class="flex items-center space-x-2 h-5 ">
-              <input id="rememberCompile" aria-describedby="remember" type="checkbox" class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#2B788B]" required="">
-              <label for="rememberCompile" class="uppercase cursor-pointer">
-                compile phrase
+              <input id="remember_free_courses" aria-describedby="remember" type="checkbox"
+                     class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#2B788B]"
+                     required="" [(ngModel)]="showFreeCourses" (change)="filterCourses($event)">
+              <label for="remember_free_courses" class="uppercase cursor-pointer">
+<!--                Free Courses-->
+                {{'free_courses' | translate}}
               </label>
             </div>
           </li>
           <li class="hover:bg-blue-50 p-2 rounded hover:text-[#2B788B]">
             <div class="flex items-center space-x-2 h-5 ">
-              <input id="rememberAudit" aria-describedby="remember" type="checkbox" class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#2B788B]" required="">
-              <label for="rememberAudit" class="uppercase cursor-pointer">
-                audit
+              <input id="remember_paid_courses" aria-describedby="remember" type="checkbox"
+                     class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#2B788B]"
+                     required="" [(ngModel)]="showPaidCourses" (change)="filterCourses($event)" >
+              <label for="remember_paid_courses" class="uppercase cursor-pointer">
+<!--                Paid Courses-->
+                {{'paid_courses' | translate}}
               </label>
             </div>
           </li>
-          <li class="hover:bg-blue-50 p-2 rounded hover:text-[#2B788B]">
-            <div class="flex items-center space-x-2 h-5">
-              <input id="rememberPair" aria-describedby="remember" type="checkbox" class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#2B788B]" required="">
-              <label for="rememberPair" class="uppercase  cursor-pointer">
-                pair
-              </label>
-            </div>
-          </li>
-          <li class="hover:bg-blue-50 p-2 rounded hover:text-[#2B788B]">
-            <div class="flex items-center space-x-2 h-5 ">
-              <input id="rememberPicture" aria-describedby="remember" type="checkbox" class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#2B788B]" required="">
-              <label for="rememberPicture" class="uppercase cursor-pointer">
-                picture
-              </label>
-            </div>
-          </li>
-          <li class="hover:bg-blue-50 p-2 rounded hover:text-[#2B788B]">
-            <div class="flex items-center space-x-2 h-5 ">
-              <input id="rememberSentence" aria-describedby="remember" type="checkbox" class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#2B788B]" required="">
-              <label for="rememberSentence" class="uppercase cursor-pointer">
-                sentence
-              </label>
-            </div>
-          </li>
+<!--          <li class="hover:bg-blue-50 p-2 rounded hover:text-[#2B788B]">-->
+<!--            <div class="flex items-center space-x-2 h-5">-->
+<!--              <input id="rememberPair" aria-describedby="remember" type="checkbox" class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#2B788B]" required="">-->
+<!--              <label for="rememberPair" class="uppercase  cursor-pointer">-->
+<!--                pair-->
+<!--              </label>-->
+<!--            </div>-->
+<!--          </li>-->
+<!--          <li class="hover:bg-blue-50 p-2 rounded hover:text-[#2B788B]">-->
+<!--            <div class="flex items-center space-x-2 h-5 ">-->
+<!--              <input id="rememberPicture" aria-describedby="remember" type="checkbox" class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#2B788B]" required="">-->
+<!--              <label for="rememberPicture" class="uppercase cursor-pointer">-->
+<!--                picture-->
+<!--              </label>-->
+<!--            </div>-->
+<!--          </li>-->
+<!--          <li class="hover:bg-blue-50 p-2 rounded hover:text-[#2B788B]">-->
+<!--            <div class="flex items-center space-x-2 h-5 ">-->
+<!--              <input id="rememberSentence" aria-describedby="remember" type="checkbox" class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#2B788B]" required="">-->
+<!--              <label for="rememberSentence" class="uppercase cursor-pointer">-->
+<!--                sentence-->
+<!--              </label>-->
+<!--            </div>-->
+<!--          </li>-->
         </ul>
       </div>
 
@@ -146,7 +152,7 @@
     <div class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-1 px-3 md:px-5 lg:grid-cols-2">
 
 <!--///////////-->
-      <ng-container *ngFor="let course of courses">
+      <ng-container *ngFor="let course of filteredCourses">
         <div class="items-center relative bg-gray-50 overflow-hidden rounded-lg shadow sm:flex">
           <div class="h-48 md:h-full md:rounded-l-lg  w-full md:w-1/2 lg:w-1/2 relative ">
             <img src="./assets/img/courses-page/eleven-talking-points-tw.jpeg" class="rounded-l-lg object-cover object-center w-full h-full" alt="">

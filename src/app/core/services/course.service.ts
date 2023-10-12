@@ -16,7 +16,8 @@ export class CourseService extends BaseService {
   ) {
     super(http, route, router);
   }
-  getCourses(): Promise<any>{
+
+  getCourses(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.get<any>(this.url + '/course').pipe(
         catchError((error) => {
@@ -27,6 +28,21 @@ export class CourseService extends BaseService {
         resolve(data.data);
       });
     });
+  }
 
+  attachCourse(studentId: number, courseId: number): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post<any>(this.url + '/course', {
+        studentId: studentId,
+        courseId: courseId,
+      }).pipe(
+        catchError((error) => {
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
+        resolve(data.data);
+      });
+    });
   }
 }
