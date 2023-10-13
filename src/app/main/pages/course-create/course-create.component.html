@@ -1,23 +1,120 @@
 <section class="min-h-screen bg-[#C3DCE3]">
-    <div class="flex justify-start pt-4 pb-4 pl-8">
-        <h2 class="text-lg lg:text-xl font-medium text-gray-900" style="font-family: DelaGothic">
-            Create a New Course:
-        </h2>
-    </div>
-    <div class="flex">
-        <div class="w-1/3">
+    <div class="flex lg:pt-8 justify-center ">
+        <div class="hidden lg:block lg:w-1/3">
             <div class="w-full p-4">
                 <img class="w-full h-full" src="./assets/img/courses-create-page/3d-casual-life-young-woman-explaining-lesson-material.png" alt="">
             </div>
         </div>
-        <div class="flex flex-col w-2/3 p-4">
-            <div class="bg-white rounded-lg p-4">
-                <div class="w-full md:mx-auto md:w-[60%] lg:w-2/5 space-y-4">
-                    <p class="text-2xl md:text-3xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">Hello, dear teacher!</p>
-                    <p class="text-sm md:text-md font-medium text-[#757575]" style="font-family: Montserrat">On this page, you can create your own course and share your knowledge with students. Please fill in the following fields to get started:</p>
+        <div class="flex flex-col md:max-w-md lg:max-w-3xl p-4 lg:px-12">
+            <div class="md:max-w-2xl lg:w-max-w-5xl mx-auto space-y-8">
+                <div class="bg-white rounded-lg mx-auto shadow-md space-y-3 p-4 lg:px-6 lg:p-4">
+                    <div class="w-full space-y-4 lg:px-4">
+                        <p class="text-2xl text-center lg:text-start text-[#2B788B] md:text-3xl md:px-8 lg:px-0" style="font-family: DelaGothic">Hello, dear teacher!</p>
+                        <p class="text-xs text-center lg:text-start md:text-base font-medium text-[#757575]" style="font-family: Montserrat">On this page, you can create your own course and share your knowledge with students. Please fill in the following fields to get started:</p>
+                    </div>
+                    <hr>
+                    <div class="w-full md:px-4 lg:w-2/3 space-y-3">
+                        <form [formGroup]="courseForm" (ngSubmit)="submitCourse()" class="space-y-3">
+                        <div class="rounded-r-lg space-y-2 w-full">
+                            <p class="text-sm md:text-base lg:text-lg text-[#2B788B]" style="font-family: DelaGothic">
+                                Course Title :
+                            </p>
+                            <div class="lg:pl-8 space-y-2 lg:space-y-4" style="font-family: Montserrat">
+                                <p class="text-[#757575] text-xs lg:text-sm   lg:font-medium">
+                                    Enter the title of your course. This will be the first thing your prospective students see.
+                                </p>
+                                <input type="text"
+                                       name="title"
+                                       id="title"
+                                       formControlName="title"
+                                       class="bg-blue-50  w-full border border-[#C3DCE3] text-gray-900 text-xs md:text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block p-2 " placeholder="Course title..." >
+
+                                <div *ngIf="courseForm.get('title')?.hasError('required') && courseForm.controls.title.touched" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        Title is required.
+                                    </p>
+                                </div>
+                                <div *ngIf="courseForm.get('title')?.hasError('minlength')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        Title should have a minimum of 5 characters
+                                    </p>
+                                </div>
+                                <div *ngIf="errorShow && courseForm.errors && courseForm.getError('title')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        {{courseForm.getError('title')}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rounded-r-lg  space-y-2  w-full">
+                            <p class="text-sm md:text-base lg:text-lg text-[#2B788B]" style="font-family: DelaGothic">
+                                Course Description :
+                            </p>
+                            <div class="lg:pl-8 space-y-2 lg:space-y-4" style="font-family: Montserrat">
+                                <p class="text-[#757575] text-xs lg:text-sm   lg:font-medium">
+                                    Describe the content and goals of your course. Share why your course is special.
+                                </p>
+                                <textarea type="text"
+                                          name="description"
+                                          id="description"
+                                          formControlName="description"
+                                          class="bg-blue-50 w-full border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block p-2 " placeholder="Course description..." ></textarea>
+
+                                <div *ngIf="courseForm.get('description')?.hasError('required') && courseForm.controls.description.touched" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        Description is required.
+                                    </p>
+                                </div>
+                                <div *ngIf="courseForm.get('description')?.hasError('minlength')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        Description should have a minimum of 12 characters
+                                    </p>
+                                </div>
+                                <div *ngIf="errorShow && courseForm.errors && courseForm.getError('description')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        {{courseForm.getError('description')}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rounded-r-lg space-y-2 w-full">
+                            <p class="text-sm md:text-base lg:text-lg text-[#2B788B]" style="font-family: DelaGothic">
+                                Price :
+                            </p>
+                            <div class="lg:pl-8 space-y-2 lg:space-y-4" style="font-family: Montserrat">
+                                <p class="text-[#757575] text-xs lg:text-sm   lg:font-medium">
+                                    If your course is paid, indicate the cost. If it's free, simply leave this field blank.
+                                </p>
+                                <input type="number"
+                                       name="price"
+                                       id="price"
+                                       formControlName="price"
+                                       class="bg-blue-50 w-32 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block p-2 " placeholder="Course price..." >
+
+                                <div *ngIf="courseForm.get('price')?.hasError('negativeNumber')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        Price cannot be negative.
+                                    </p>
+                                </div>
+                                <div *ngIf="errorShow && courseForm.errors && courseForm.getError('price')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        {{courseForm.getError('price')}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full px-12 pt-4 flex md:justify-center lg:justify-end" style="font-family: DelaGothic">
+                            <button type="submit" [disabled]="courseForm.invalid" class="inline-flex w-full justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:ml-3 sm:w-auto">Create Course</button>
+                        </div>
+                        <div *ngIf="errorShow" class="error-message">
+                            <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                {{courseForm.getError('backend')}}
+                            </p>
+                        </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 </section>

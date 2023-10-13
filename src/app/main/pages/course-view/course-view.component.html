@@ -1,0 +1,366 @@
+<section class="min-h-screen bg-[#C3DCE3] flex items-center justify-center gap-12 px-[10%] ">
+    <div class="rounded-lg bg-white shadow-lg w-1/2 relative overflow-hidden">
+        <div *ngIf="showImg" class="w-full flex justify-center p-4 h-96">
+            <img src="./assets/img/course-view-page/experimental-modern-house-with-a-backdrop-of-hills.png" alt="">
+        </div>
+
+        <!--Edit Form Start-->
+        <div *ngIf="showMenuEditForm" class="min-h-[28rem]">
+            <div class="p-4">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="text-xl text-black md:text-2xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">Course Edit</p>
+                    </div>
+                    <div class="text-black">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="pt-6">
+                    <form [formGroup]="courseEditForm" (ngSubmit)="submitCourseEdit()" class="space-y-4 bg-blue-50 p-6 rounded-lg">
+                        <div class="rounded-r-lg space-y-2 w-full">
+                            <div class="space-y-2" style="font-family: Montserrat">
+                                <label for="title" class="block mb-2 text-xs lg:text-sm font-semibold text-gray-700">Title</label>
+                                <input type="text"
+                                       name="title"
+                                       id="title"
+                                       formControlName="title"
+                                       class="bg-[#C3DCE3]  w-full text-[#2B788B] font-semibold placeholder-[#80a4ad] text-xs md:text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block p-2 " placeholder="Course title..." >
+
+                                <div *ngIf="courseEditForm.get('title')?.hasError('required') && courseEditForm.controls.title.touched" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        Title is required.
+                                    </p>
+                                </div>
+                                <div *ngIf="courseEditForm.get('title')?.hasError('minlength')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        Title should have a minimum of 5 characters
+                                    </p>
+                                </div>
+                                <div *ngIf="errorShow && courseEditForm.errors && courseEditForm.getError('title')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        {{courseEditForm.getError('title')}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rounded-r-lg  space-y-2  w-full">
+                            <div class="space-y-2" style="font-family: Montserrat">
+                                <label for="description" class="block mb-2 text-xs lg:text-sm font-semibold text-gray-700">Description</label>
+                                <textarea type="text"
+                                          name="description"
+                                          id="description"
+                                          formControlName="description"
+                                          class="bg-[#C3DCE3]  w-full text-[#2B788B] font-semibold placeholder-[#80a4ad] sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block p-2 " placeholder="Course description..." ></textarea>
+
+                                <div *ngIf="courseEditForm.get('description')?.hasError('required') && courseEditForm.controls.description.touched" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        Description is required.
+                                    </p>
+                                </div>
+                                <div *ngIf="courseEditForm.get('description')?.hasError('minlength')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        Description should have a minimum of 12 characters
+                                    </p>
+                                </div>
+                                <div *ngIf="errorShow && courseEditForm.errors && courseEditForm.getError('description')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        {{courseEditForm.getError('description')}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rounded-r-lg space-y-2 w-full">
+                            <div class="space-y-2" style="font-family: Montserrat">
+                                <label for="price" class="block mb-2 text-xs lg:text-sm font-semibold text-gray-700">Price</label>
+                                <div class="flex flex-row h-10 w-1/3 rounded-lg relative bg-transparent mt-1">
+                                    <button type="button" (click)="decrementPrice()" class="bg-[#C3DCE3] text-[#2B788B] hover:bg-[#5996A5] hover:text-white h-full w-20 rounded-l flex justify-center items-center cursor-pointer outline-none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+                                        </svg>
+                                    </button>
+                                    <input formControlName="price" type="number" inputmode="numeric" id="price" class="outline-none focus:outline-none text-center bg-[#C3DCE3]  w-full text-[#2B788B] font-semibold placeholder-[#80a4ad] md:text-base cursor-default flex items-center" name="custom-input-number">
+                                    <button type="button" (click)="incrementPrice()" class="bg-[#C3DCE3] text-[#2B788B] hover:text-white hover:bg-[#5996A5] h-full w-20 rounded-r flex justify-center items-center cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div *ngIf="courseEditForm.get('price')?.hasError('negativeNumber')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        Price cannot be negative.
+                                    </p>
+                                </div>
+                                <div *ngIf="errorShow && courseEditForm.errors && courseEditForm.getError('price')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        {{courseEditForm.getError('price')}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 md:justify-center lg:justify-end" style="font-family: Montserrat">
+                            <button type="button" (click)="editCourse('editCourse')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
+                            <button type="submit" [disabled]="courseEditForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Edit Course</button>
+                        </div>
+                        <div *ngIf="errorShow" class="error-message">
+                            <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                {{courseEditForm.getError('backend')}}
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--Edit Form End-->
+
+        <!--Create Stage Form Start-->
+        <div *ngIf="showMenuCreateStage" class="min-h-[28rem] relative">
+            <div class="p-4">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="text-xl text-black md:text-2xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">Create Stage</p>
+                    </div>
+                    <div class="text-black">
+                        <button type="button" (click)="toggleCardVisibility()">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+                            </svg>
+                        </button>
+                        <div class="absolute top-0 left-0 bg-white shadow-lg" *ngIf="isCardInfoVisible">
+                            <div>
+                                <div class='text-sm'  style="font-family: Montserrat">
+                                    <p class="indent-4"><strong>Stage</strong> - this is a part of your course that students will progress through sequentially.</p>
+                                    <ul class="px-4 list-disc text-xs list-inside">
+                                        <li class="flex gap-2 items-start">
+                                            <div class="text-[#2B788B]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                                </svg>
+                                            </div>
+                                            <p>Please provide a title and description for the stage to help students better understand what to expect.</p>
+                                        </li>
+                                        <li class="flex gap-2 items-start">
+                                            <div class="text-[#2B788B]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                                </svg>
+                                            </div>
+                                            <p>Keep in mind that stages organize the course and represent its logical sections. Each stage can contain multiple exercises.</p>
+                                        </li>
+                                        <li class="flex gap-2 items-start">
+                                            <div class="text-[#2B788B]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                                </svg>
+                                            </div>
+                                            <p>After creating the stage, you can link your exercises to it. </p>
+                                        </li>
+                                        <li class="flex gap-2 items-start">
+                                            <div class="text-[#2B788B]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                                </svg>
+                                            </div>
+                                            <p>If you encounter any issues or difficulties while creating a stage, don't hesitate to contact our support team.</p>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="pt-6">
+                    <form [formGroup]="courseEditForm" (ngSubmit)="submitCourseEdit()" class="space-y-4 bg-blue-50 p-6 rounded-lg">
+                        <div class="rounded-r-lg space-y-2 w-full">
+                            <div class="space-y-2" style="font-family: Montserrat">
+                                <label for="title" class="block mb-2 text-xs lg:text-sm font-semibold text-gray-700">Title</label>
+                                <input type="text"
+                                       name="title"
+                                       id="title"
+                                       formControlName="title"
+                                       class="bg-[#C3DCE3]  w-full text-[#2B788B] font-semibold placeholder-[#80a4ad] text-xs md:text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block p-2 " placeholder="Course title..." >
+
+                                <div *ngIf="courseEditForm.get('title')?.hasError('required') && courseEditForm.controls.title.touched" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        Title is required.
+                                    </p>
+                                </div>
+                                <div *ngIf="courseEditForm.get('title')?.hasError('minlength')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        Title should have a minimum of 5 characters
+                                    </p>
+                                </div>
+                                <div *ngIf="errorShow && courseEditForm.errors && courseEditForm.getError('title')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        {{courseEditForm.getError('title')}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rounded-r-lg  space-y-2  w-full">
+                            <div class="space-y-2" style="font-family: Montserrat">
+                                <label for="description" class="block mb-2 text-xs lg:text-sm font-semibold text-gray-700">Description</label>
+                                <textarea type="text"
+                                          name="description"
+                                          id="description"
+                                          formControlName="description"
+                                          class="bg-[#C3DCE3]  w-full text-[#2B788B] font-semibold placeholder-[#80a4ad] sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block p-2 " placeholder="Course description..." ></textarea>
+
+                                <div *ngIf="courseEditForm.get('description')?.hasError('required') && courseEditForm.controls.description.touched" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        Description is required.
+                                    </p>
+                                </div>
+                                <div *ngIf="courseEditForm.get('description')?.hasError('minlength')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        Description should have a minimum of 12 characters
+                                    </p>
+                                </div>
+                                <div *ngIf="errorShow && courseEditForm.errors && courseEditForm.getError('description')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        {{courseEditForm.getError('description')}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rounded-r-lg space-y-2 w-full">
+                            <div class="space-y-2" style="font-family: Montserrat">
+                                <label for="price" class="block mb-2 text-xs lg:text-sm font-semibold text-gray-700">Price</label>
+                                <div class="flex flex-row h-10 w-1/3 rounded-lg relative bg-transparent mt-1">
+                                    <button type="button" (click)="decrementPrice()" class="bg-[#C3DCE3] text-[#2B788B] hover:bg-[#5996A5] hover:text-white h-full w-20 rounded-l flex justify-center items-center cursor-pointer outline-none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+                                        </svg>
+                                    </button>
+                                    <input formControlName="price" type="number" inputmode="numeric" id="price" class="outline-none focus:outline-none text-center bg-[#C3DCE3]  w-full text-[#2B788B] font-semibold placeholder-[#80a4ad] md:text-base cursor-default flex items-center" name="custom-input-number">
+                                    <button type="button" (click)="incrementPrice()" class="bg-[#C3DCE3] text-[#2B788B] hover:text-white hover:bg-[#5996A5] h-full w-20 rounded-r flex justify-center items-center cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div *ngIf="courseEditForm.get('price')?.hasError('negativeNumber')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        Price cannot be negative.
+                                    </p>
+                                </div>
+                                <div *ngIf="errorShow && courseEditForm.errors && courseEditForm.getError('price')" class="error-message">
+                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                        {{courseEditForm.getError('price')}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 md:justify-center lg:justify-end" style="font-family: Montserrat">
+                            <button type="button" (click)="editCourse('createStage')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
+                            <button type="submit" [disabled]="courseEditForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Edit Course</button>
+                        </div>
+                        <div *ngIf="errorShow" class="error-message">
+                            <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                                {{courseEditForm.getError('backend')}}
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--Create Stage Form End-->
+
+    </div>
+    <div class="bg-white shadow-lg rounded-lg w-1/2 p-4 h-[28rem]">
+        <div class="w-full flex flex-col justify-between h-full">
+
+            <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="text-xl text-black md:text-2xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">{{courseData.title}}</p>
+                    </div>
+                    <div class="text-black" style="font-family: DelaGothic">
+                        <p class="text-end text-lg p-2 px-4 rounded-lg" *ngIf="courseData.price == 0">Free</p>
+                        <p class="text-end p-2 px-4 rounded-lg" *ngIf="courseData.price !== 0">${{courseData.price}}</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center">
+                    <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                    <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                    <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                    <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                    <svg class="w-4 h-4 text-gray-400 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                    <p class="ml-2 text-sm font-medium text-gray-500" style="font-family: Montserrat">4.95 out of 5</p>
+                </div>
+
+                <div class="pt-4">
+                    <p class="text-xs md:text-sm font-medium text-[#757575]" style="font-family: Montserrat">{{courseData.description}} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam, ratione similique. Consequuntur.</p>
+                </div>
+
+                <div class="flex gap-4 w-full  pt-6">
+                    <div class="bg-[#C3DCE3] relative rounded w-1/2 overflow-hidden p-4 flex justify-between space-y-2">
+                        <div class="flex flex-col justify-between gap-8 h-full z-10">
+                            <div>
+                                <p class="text-lg text-[#2B788B] md:text-xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">
+                                    Attach Stages :
+                                </p>
+                            </div>
+                            <div>
+                                <button type="button" class="bg-[#2B788B] text-white hover:text-[#2B788B] hover:bg-gray-50 p-2 rounded">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                        </div>
+                        <img class="h-28 absolute transform -translate-y-1/2 top-1/2 right-2 z-0" src="./assets/img/course-view-page/3d-chart-column.png" alt="">
+                    </div>
+
+                    <div class="bg-[#F2D4DC] rounded w-1/2 p-4 flex relative overflow-hidden justify-between space-y-2">
+                        <div class="flex flex-col justify-between gap-8 z-10 h-full">
+                            <div>
+                                <p class="text-lg text-[#945069] md:text-xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">
+                                    Attach Exercises:
+                                </p>
+                            </div>
+                            <div>
+                                <button type="button" class="bg-[#945069] text-white hover:text-[#945069] hover:bg-gray-50 p-2 rounded">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                </button>
+
+                            </div>
+                        </div>
+                        <img class="h-32 absolute transform -translate-y-1/2 top-1/2 right-0 z-0" src="./assets/img/course-view-page/casual-life-3d-blue-notebook-highlighter-pen-and-tape.png" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center gap-4 p-2 border-t border-gray-200" style="font-family: Montserrat">
+                <div>
+                    <button type="button" (click)="editCourse('createStage')"  class="inline-flex w-full justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Create Stage</button>
+                </div>
+                <div class="flex gap-4 items-center">
+                    <button type="button" (click)="editCourse('editCourse')" class="inline-flex w-full justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Edit</button>
+                    <div class="w-px h-6 bg-gray-300"></div>
+                    <button type="submit" class="inline-flex w-full justify-center rounded-lg bg-[#945069] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Delete</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
