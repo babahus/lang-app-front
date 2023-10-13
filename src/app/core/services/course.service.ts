@@ -32,7 +32,7 @@ export class CourseService extends BaseService {
 
   attachCourse(studentId: number, courseId: number): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.post<any>(this.url + '/course', {
+      this.http.post<any>(this.url + '/course/attach', {
         studentId: studentId,
         courseId: courseId,
       }).pipe(
@@ -42,6 +42,35 @@ export class CourseService extends BaseService {
         })
       ).subscribe((data: any) => {
         resolve(data.data);
+      });
+    });
+  }
+
+  detachCourse(studentId: number, courseId: number): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post<any>(this.url + '/course/detach', {
+        studentId: studentId,
+        courseId: courseId,
+      }).pipe(
+        catchError((error) => {
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
+        resolve(data.data);
+      });
+    });
+  }
+
+  getCoursesByUser(studentId: number, page: number = 1): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get<any>(this.url + '/courses/user/'+studentId).pipe(
+        catchError((error) => {
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
+        resolve(data.data.courses);
       });
     });
   }

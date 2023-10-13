@@ -37,6 +37,8 @@ export class AuthService extends BaseService {
   public removeAuthData(){
     this.storage.removeItem('userToken');
     this.storage.removeItem('WSToken')
+    sessionStorage.removeItem('role');
+    sessionStorage.removeItem('id');
   }
 
   public logout() {
@@ -81,6 +83,7 @@ export class AuthService extends BaseService {
         })
       ).subscribe((data: any) => {
         this.setToken(data.data.token);
+        this.addDataInSessionStorage(data.data.role,data.data.id)
         resolve(data.data);
         this.route.navigate(this.redirectTo('dashboard'));
       });
@@ -103,6 +106,7 @@ export class AuthService extends BaseService {
         })
       ).subscribe((data: any) => {
         this.setToken(data.data.token);
+        this.addDataInSessionStorage(data.data.role,data.data.id)
         resolve(data.data);
         this.route.navigate(this.redirectTo('dashboard'));
       });
@@ -158,9 +162,15 @@ export class AuthService extends BaseService {
       }).subscribe((data: any) => {
         resolve(data)
         this.setToken(data.data.token);
+        this.addDataInSessionStorage(data.data.role,data.data.id)
         this.route.navigate(['/']);
       })
     }))
+  }
+
+  addDataInSessionStorage(role : string, id : number){
+    sessionStorage.setItem('role', role);
+    sessionStorage.setItem('id', String(id));
   }
 
 }

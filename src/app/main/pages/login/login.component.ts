@@ -49,13 +49,11 @@ export class LoginComponent implements OnInit {
                 await this.authService.sendCodeForSocialAuth(this.auth_code.code, roleFromStorage, 'facebook');
             }
 
-            sessionStorage.removeItem('role');
             return;
         }
     }
 
   async loginWithGoogle(provider: string){
-    sessionStorage.setItem('role', this.role);
     const link = await this.authService.getLinkForSocialAuth(this.role, provider);
     window.open(link as string | URL | undefined,"_self")
   }

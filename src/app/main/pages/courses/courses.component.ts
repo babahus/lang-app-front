@@ -4,6 +4,8 @@ import {LoaderService} from "../../../core/services/loader.service";
 import {Course} from "../../models/course.model";
 import {Pagination} from "../../models/pagination.model";
 import {HttpClient} from "@angular/common/http";
+import {error} from "@angular/compiler-cli/src/transformers/util";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-courses',
@@ -29,17 +31,21 @@ export class CoursesComponent implements OnInit {
   public filteredCourses: Course[] = [];
   public pagination: Pagination|null = null;
   pages: number[] = [0];
+  public attachedCourses: Course[] = [];
+  private studentId: string | null;
 
   constructor(private courseService: CourseService) {
+    this.studentId = sessionStorage.getItem('id');
   }
 
-  async ngOnInit(): Promise<void> {
+  async getCourses(page : number = 1){
     try {
-      this.courseService.getCourses().then((response: any) => {
+      this.courseService.getCourses(page).then(async (response: any) => {
         this.courses = response.courses;
         this.pagination = response.pagination;
-        this.pages = Array.from({ length: this.pagination!.last_page }, (_, i) => i + 1)
+        this.pages = Array.from({length: this.pagination!.last_page}, (_, i) => i + 1)
         this.filteredCourses = [...this.courses]; // initially, show all courses
+        this.attachedCourses = await this.courseService.getCoursesByUser(Number(this.studentId));
       }).catch((error) => {
         console.error('Error fetching courses:', error);
       });
@@ -47,6 +53,10 @@ export class CoursesComponent implements OnInit {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  async ngOnInit(): Promise<void> {
+    await this.getCourses();
   }
 
   openListExercise(){
@@ -70,22 +80,70 @@ export class CoursesComponent implements OnInit {
     );
   }
 
-  goToPage(url: number | null) {
-      if (url) {
-        try {
-          this.courseService.getCourses(url).then((response: any) => {
-            this.courses = response.courses;
-            this.pagination = response.pagination;
-            this.pages = Array.from({ length: this.pagination!.last_page }, (_, i) => i + 1)
-            this.filteredCourses = [...this.courses]; // initially, show all courses
-          }).catch((error) => {
-            console.error('Error fetching courses:', error);
-          });
-        } catch (error) {
-          console.error(error);
-        } finally {
-          this.isLoading = false;
-        }
-      }
+  async goToPage(url: number | null) {
+    if (url) {
+      await this.getCourses(url);
+    }
+  }
+
+  attachCourseToUser(courseId : number){
+    this.courseService.attachCourse(Number(this.studentId), courseId).then(async (response: any) => {
+      await Swal.fire({
+        title: 'Success',
+        text: response,
+        icon: 'success',
+        width: 600,
+        padding: '3em',
+        color: '#2B788B',
+        background: '#F6F5F4'
+      });
+      this.attachedCourses = await this.courseService.getCoursesByUser(Number(this.studentId));
+    }).catch((error) => {
+      Swal.fire({
+        title: 'Access Denied',
+        text: 'Curse is already attached',
+        icon: 'error',
+        showCancelButton: true,
+        cancelButtonText: 'Cancel',
+        width: 600,
+        padding: '3em',
+        color: '#2B788B',
+        background: '#F6F5F4'
+      })
+    });
+  }
+
+  detachCourseFromUser(courseId : number){
+    this.courseService.detachCourse(Number(this.studentId), courseId).then(async (response: any) => {
+      await Swal.fire({
+        title: 'Success',
+        text: response,
+        icon: 'success',
+        width: 600,
+        padding: '3em',
+        color: '#2B788B',
+        background: '#F6F5F4'
+      });
+      this.attachedCourses = await this.courseService.getCoursesByUser(Number(this.studentId));
+    }).catch((error) => {
+      Swal.fire({
+        title: 'Access Denied',
+        text: 'Curse is already detached',
+        icon: 'error',
+        showCancelButton: true,
+        cancelButtonText: 'Cancel',
+        width: 600,
+        padding: '3em',
+        color: '#2B788B',
+        background: '#F6F5F4'
+      })
+    });
+  }
+
+  isCourseAttached(courseId: number): boolean {
+    if (Array.isArray(this.attachedCourses)) {
+      return this.attachedCourses.some(course => course.id === courseId);
+    }
+    return false;
   }
 }
