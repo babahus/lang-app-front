@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {CourseService} from "../../../core/services/course.service";
 import {LoaderService} from "../../../core/services/loader.service";
+import {Course} from "../../models/course.model";
+import {Pagination} from "../../models/pagination.model";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-courses',
@@ -22,21 +25,27 @@ export class CoursesComponent implements OnInit {
 
   public showFreeCourses = true;
   public showPaidCourses = true;
-  public courses: any[] = [];
-  public filteredCourses: any[] = [];
+  public courses: Course[] = [];
+  public filteredCourses: Course[] = [];
+  public pagination: Pagination|null = null;
+  pages: number[] = [0];
 
-  constructor(private courseService: CourseService, private loaderService: LoaderService) {
+  constructor(private courseService: CourseService) {
   }
 
   async ngOnInit(): Promise<void> {
     try {
-      this.isLoading = true;
-      this.courses = await this.courseService.getCourses();
-      this.filteredCourses = [...this.courses]; // initially, show all courses
+      this.courseService.getCourses().then((response: any) => {
+        this.courses = response.courses;
+        this.pagination = response.pagination;
+        this.pages = Array.from({ length: this.pagination!.last_page }, (_, i) => i + 1)
+        this.filteredCourses = [...this.courses]; // initially, show all courses
+      }).catch((error) => {
+        console.error('Error fetching courses:', error);
+      });
+      console.log(this.courses);
     } catch (error) {
       console.error(error);
-    } finally {
-      this.isLoading = false;
     }
   }
 
@@ -61,4 +70,22 @@ export class CoursesComponent implements OnInit {
     );
   }
 
+  goToPage(url: number | null) {
+      if (url) {
+        try {
+          this.courseService.getCourses(url).then((response: any) => {
+            this.courses = response.courses;
+            this.pagination = response.pagination;
+            this.pages = Array.from({ length: this.pagination!.last_page }, (_, i) => i + 1)
+            this.filteredCourses = [...this.courses]; // initially, show all courses
+          }).catch((error) => {
+            console.error('Error fetching courses:', error);
+          });
+        } catch (error) {
+          console.error(error);
+        } finally {
+          this.isLoading = false;
+        }
+      }
+  }
 }

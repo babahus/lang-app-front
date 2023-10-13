@@ -149,7 +149,7 @@
     </div>
   </div>
   <div class="pt-6 mx-auto max-w-5xl lg:pt-12 pb-12 ">
-    <div class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-1 px-3 md:px-5 lg:grid-cols-2">
+    <div *ngIf="filteredCourses" class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-1 px-3 md:px-5 lg:grid-cols-2 justify-items-center items-center">
 
 <!--///////////-->
       <ng-container *ngFor="let course of filteredCourses">
@@ -208,8 +208,50 @@
           </div>
         </div>
       </ng-container>
+      <!--      ///////-->
+    </div>
 
-<!--      ///////-->
+    <div *ngIf="pagination" class="flex justify-center items-center space-x-2">
+      <!-- Начальный элемент "страница назад" -->
+      <button
+        [disabled]="pagination!.current_page === 1"
+        (click)="goToPage(pagination!.current_page - 1)"
+        class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-teal-500 bg-transparent text-teal-500 hover:bg-teal-100"
+      >
+        &lt;
+      </button>
+
+      <!-- Цикл для отображения страниц -->
+      <ng-container *ngFor="let page of pages">
+        <ng-container *ngIf="page === 1 || page === pagination!.last_page || (page >= pagination!.current_page - 2 && page <= pagination!.current_page + 2)">
+          <button
+            [class.bg-teal-500]="pagination!.current_page === page"
+            [class.text-white]="pagination!.current_page === page"
+            [class.text-teal-500]="pagination!.current_page !== page"
+            (click)="goToPage(page)"
+            class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-teal-500 hover:bg-teal-100 hover:text-teal-500"
+          >
+            {{ page }}
+          </button>
+        </ng-container>
+
+        <!-- Троеточие для пропущенных страниц -->
+        <span *ngIf="page === 1 && pagination!.current_page > 4" class="w-8 h-8 flex items-center justify-center rounded-full text-teal-500">
+      ...
+          </span>
+        <span *ngIf="page === pagination!.last_page && pagination!.current_page < pagination!.last_page - 3" class="w-8 h-8 flex items-center justify-center rounded-full text-teal-500">
+      ...
+          </span>
+      </ng-container>
+
+      <!-- Конечный элемент "страница вперед" -->
+      <button
+        [disabled]="pagination!.current_page === pagination!.last_page"
+        (click)="goToPage(pagination!.current_page + 1)"
+        class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-teal-500 text-teal-500 hover:bg-teal-100"
+      >
+        &gt;
+      </button>
     </div>
   </div>
 </section>

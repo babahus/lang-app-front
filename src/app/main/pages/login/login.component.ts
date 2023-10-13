@@ -6,7 +6,6 @@ import {
 } from "@angular/forms";
 import {AuthService} from "../../../core/services/auth.service";
 import {ActivatedRoute, Params} from "@angular/router";
-import {LoaderService} from "../../../core/services/loader.service";
 
 @Component({
   selector: 'app-login',
@@ -71,6 +70,4 @@ export class LoginComponent implements OnInit {
       }, 5000);
     }
   }
-
-  protected readonly AuthService = AuthService;
 }

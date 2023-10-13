@@ -1,3 +1,8 @@
+export interface Exercise {
+  id: number;
+  [key: string]: any;
+}
+
 export interface Audit {
   id : number
   path : string

@@ -17,9 +17,9 @@ export class CourseService extends BaseService {
     super(http, route, router);
   }
 
-  getCourses(): Promise<any> {
+  getCourses(page : number = 1): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.get<any>(this.url + '/course').pipe(
+      this.http.get<any>(this.url + '/course?page='+page).pipe(
         catchError((error) => {
           reject(error);
           return throwError(error);
