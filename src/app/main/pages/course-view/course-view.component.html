@@ -1,5 +1,42 @@
 <section class="min-h-screen bg-[#C3DCE3] flex items-center justify-center gap-12 px-[10%] ">
-    <div class="rounded-lg bg-white shadow-lg w-1/2 relative overflow-hidden">
+
+
+
+
+
+<!--  <a class="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden-->
+<!--    font-medium transition-all bg-white rounded hover:bg-white group">-->
+<!--    <span class="w-48 h-48 rounded rotate-[-40deg]-->
+<!--    bg-purple-600 absolute bottom-0 left-0 -translate-x-full ease-out duration-700-->
+<!--     transition-all translate-y-full group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>-->
+<!--    <span class="relative w-96 text-black transition-colors duration-700 ease-in-out group-hover:text-white">Button Text</span>-->
+<!--  </a>-->
+
+<!--  <div class="p-4">-->
+<!--    <h2 class="text-2xl font-semibold">Favorite Fruits</h2>-->
+<!--    <div class="mt-4">-->
+<!--      <div class="flex space-x-2">-->
+<!--        <mat-form-field class="w-1/2">-->
+<!--          <mat-label>Select a Fruit</mat-label>-->
+<!--          <mat-select [(value)]="selectedFruit">-->
+<!--            <mat-option *ngFor="let fruit of allFruits" [value]="fruit">{{ fruit }}</mat-option>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
+<!--        <button class="p-2 bg-blue-500 text-white rounded" (click)="addSelectedFruit()">Add</button>-->
+<!--      </div>-->
+<!--      <div class="mt-2">-->
+<!--        <div *ngFor="let fruit of selectedFruits" class="inline-flex items-center bg-blue-200 text-blue-800 px-2 py-1 rounded m-1">-->
+<!--          {{ fruit }}-->
+<!--          <button class="ml-2 p-1 bg-red-500 text-white rounded" (click)="removeSelectedFruit(fruit)">Remove</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+
+
+
+  <div class="rounded-lg bg-white shadow-lg w-1/2 relative overflow-hidden">
         <div *ngIf="showImg" class="w-full flex justify-center p-4 h-96">
             <img src="./assets/img/course-view-page/experimental-modern-house-with-a-backdrop-of-hills.png" alt="">
         </div>
@@ -100,7 +137,7 @@
                             </div>
                         </div>
                         <div class="flex gap-4 md:justify-center lg:justify-end" style="font-family: Montserrat">
-                            <button type="button" (click)="editCourse('editCourse')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
+                            <button type="button" (click)="showModalWindow('editCourse')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
                             <button type="submit" [disabled]="courseEditForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Edit Course</button>
                         </div>
                         <div *ngIf="errorShow" class="error-message">
@@ -122,13 +159,13 @@
                         <p class="text-xl text-black md:text-2xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">Create Stage</p>
                     </div>
                     <div class="text-black">
-                        <button type="button" (click)="toggleCardVisibility()">
+                        <button type="button" (click)="toggleCardVisibility()" class="bg-amber-400 hover:bg-amber-500 p-2 rounded-full">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
                             </svg>
                         </button>
-                        <div class="absolute top-0 left-0 bg-white shadow-lg" *ngIf="isCardInfoVisible">
-                            <div>
+                        <div class="absolute top-[10%] left-[10%] bg-white rounded-lg shadow-lg z-10 w-3/4" *ngIf="isCardInfoVisible">
+                            <div class="p-4">
                                 <div class='text-sm'  style="font-family: Montserrat">
                                     <p class="indent-4"><strong>Stage</strong> - this is a part of your course that students will progress through sequentially.</p>
                                     <ul class="px-4 list-disc text-xs list-inside">
@@ -173,94 +210,66 @@
                     </div>
                 </div>
                 <div class="pt-6">
-                    <form [formGroup]="courseEditForm" (ngSubmit)="submitCourseEdit()" class="space-y-4 bg-blue-50 p-6 rounded-lg">
+                    <form [formGroup]="stageCreateForm" (ngSubmit)="submitStageCreate()" class="space-y-4 bg-blue-50 p-6 rounded-lg">
                         <div class="rounded-r-lg space-y-2 w-full">
                             <div class="space-y-2" style="font-family: Montserrat">
-                                <label for="title" class="block mb-2 text-xs lg:text-sm font-semibold text-gray-700">Title</label>
+                                <label for="titleStage" class="block mb-2 text-xs lg:text-sm font-semibold text-gray-700">Title</label>
                                 <input type="text"
-                                       name="title"
-                                       id="title"
+                                       name="titleStage"
+                                       id="titleStage"
                                        formControlName="title"
                                        class="bg-[#C3DCE3]  w-full text-[#2B788B] font-semibold placeholder-[#80a4ad] text-xs md:text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block p-2 " placeholder="Course title..." >
 
-                                <div *ngIf="courseEditForm.get('title')?.hasError('required') && courseEditForm.controls.title.touched" class="error-message">
+                                <div *ngIf="stageCreateForm.get('title')?.hasError('required') && stageCreateForm.controls.title.touched" class="error-message">
                                     <p class="mt-2 text-start font-medium text-[#945069] text-xs">
                                         Title is required.
                                     </p>
                                 </div>
-                                <div *ngIf="courseEditForm.get('title')?.hasError('minlength')" class="error-message">
+                                <div *ngIf="stageCreateForm.get('title')?.hasError('minlength')" class="error-message">
                                     <p class="mt-2 text-start font-medium text-[#945069] text-xs">
                                         Title should have a minimum of 5 characters
                                     </p>
                                 </div>
-                                <div *ngIf="errorShow && courseEditForm.errors && courseEditForm.getError('title')" class="error-message">
+                                <div *ngIf="errorShow && stageCreateForm.errors && stageCreateForm.getError('title')" class="error-message">
                                     <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                                        {{courseEditForm.getError('title')}}
+                                        {{stageCreateForm.getError('title')}}
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div class="rounded-r-lg  space-y-2  w-full">
                             <div class="space-y-2" style="font-family: Montserrat">
-                                <label for="description" class="block mb-2 text-xs lg:text-sm font-semibold text-gray-700">Description</label>
+                                <label for="descriptionStage" class="block mb-2 text-xs lg:text-sm font-semibold text-gray-700">Description</label>
                                 <textarea type="text"
-                                          name="description"
-                                          id="description"
+                                          name="descriptionStage"
+                                          id="descriptionStage"
                                           formControlName="description"
                                           class="bg-[#C3DCE3]  w-full text-[#2B788B] font-semibold placeholder-[#80a4ad] sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block p-2 " placeholder="Course description..." ></textarea>
 
-                                <div *ngIf="courseEditForm.get('description')?.hasError('required') && courseEditForm.controls.description.touched" class="error-message">
+                                <div *ngIf="stageCreateForm.get('description')?.hasError('required') && stageCreateForm.controls.description.touched" class="error-message">
                                     <p class="mt-2 text-start font-medium text-[#945069] text-xs">
                                         Description is required.
                                     </p>
                                 </div>
-                                <div *ngIf="courseEditForm.get('description')?.hasError('minlength')" class="error-message">
+                                <div *ngIf="stageCreateForm.get('description')?.hasError('minlength')" class="error-message">
                                     <p class="mt-2 text-start font-medium text-[#945069] text-xs">
                                         Description should have a minimum of 12 characters
                                     </p>
                                 </div>
-                                <div *ngIf="errorShow && courseEditForm.errors && courseEditForm.getError('description')" class="error-message">
+                                <div *ngIf="errorShow && stageCreateForm.errors && stageCreateForm.getError('description')" class="error-message">
                                     <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                                        {{courseEditForm.getError('description')}}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="rounded-r-lg space-y-2 w-full">
-                            <div class="space-y-2" style="font-family: Montserrat">
-                                <label for="price" class="block mb-2 text-xs lg:text-sm font-semibold text-gray-700">Price</label>
-                                <div class="flex flex-row h-10 w-1/3 rounded-lg relative bg-transparent mt-1">
-                                    <button type="button" (click)="decrementPrice()" class="bg-[#C3DCE3] text-[#2B788B] hover:bg-[#5996A5] hover:text-white h-full w-20 rounded-l flex justify-center items-center cursor-pointer outline-none">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
-                                        </svg>
-                                    </button>
-                                    <input formControlName="price" type="number" inputmode="numeric" id="price" class="outline-none focus:outline-none text-center bg-[#C3DCE3]  w-full text-[#2B788B] font-semibold placeholder-[#80a4ad] md:text-base cursor-default flex items-center" name="custom-input-number">
-                                    <button type="button" (click)="incrementPrice()" class="bg-[#C3DCE3] text-[#2B788B] hover:text-white hover:bg-[#5996A5] h-full w-20 rounded-r flex justify-center items-center cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                        </svg>
-                                    </button>
-                                </div>
-                                <div *ngIf="courseEditForm.get('price')?.hasError('negativeNumber')" class="error-message">
-                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                                        Price cannot be negative.
-                                    </p>
-                                </div>
-                                <div *ngIf="errorShow && courseEditForm.errors && courseEditForm.getError('price')" class="error-message">
-                                    <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                                        {{courseEditForm.getError('price')}}
+                                        {{stageCreateForm.getError('description')}}
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div class="flex gap-4 md:justify-center lg:justify-end" style="font-family: Montserrat">
-                            <button type="button" (click)="editCourse('createStage')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
-                            <button type="submit" [disabled]="courseEditForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Edit Course</button>
+                            <button type="button" (click)="showModalWindow('createStage')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
+                            <button type="submit" [disabled]="stageCreateForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Create</button>
                         </div>
                         <div *ngIf="errorShow" class="error-message">
                             <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                                {{courseEditForm.getError('backend')}}
+                                {{stageCreateForm.getError('backend')}}
                             </p>
                         </div>
                     </form>
@@ -268,6 +277,181 @@
             </div>
         </div>
         <!--Create Stage Form End-->
+
+      <!--   Start of the modal window for course deletion-->
+      <div [ngClass]="{'hidden' : !deleteModalCourse}" class="relative z-20" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div class="flex min-h-full items-center justify-center p-2 md:p-4 text-center sm:items-center sm:p-0">
+            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+
+                <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                  <div class="sm:flex sm:items-start">
+                    <div class="mt-3 text-left sm:ml-4 sm:mt-0 sm:text-left">
+                      <h3 style="font-family: DelaGothic" class="text-base font-semibold leading-6 text-gray-900">
+                        Deleting a course: WARNING!
+                      </h3>
+                      <div class="mt-2">
+                        <p style="font-family: Montserrat" class="text-sm text-gray-500">You are about to delete the course. Please make sure you have a backup of all the necessary data.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                  <button type="button" (click)="deleteCourse()" class="inline-flex w-full justify-center rounded-md bg-[#945069] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:ml-3 sm:w-auto">Delete</button>
+                  <button (click)="deleteModalCourse = false"  type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--   end of the modal window for course deletion -->
+
+      <!--Attach the exercise to the stage Start-->
+      <div *ngIf="showMenuAttachExerciseStage" class="min-h-[28rem] relative overflow-visible" >
+        <div class="p-4">
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-xl text-black md:text-2xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">Stages</p>
+            </div>
+            <div class="text-black">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+              </svg>
+            </div>
+          </div>
+          <div class="pt-6 space-y-4 bg-blue-50 p-6 rounded-lg">
+
+
+
+<!--            <a class="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden-->
+<!--    font-medium transition-all bg-white rounded hover:bg-white group">-->
+<!--              <span class="w-48 h-48 rounded rotate-[-40deg]-->
+<!--    bg-purple-600 absolute bottom-0 left-0 -translate-x-full ease-out duration-700-->
+<!--     transition-all translate-y-full group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>-->
+<!--              <span class="relative w-96 text-black transition-colors duration-700 ease-in-out group-hover:text-white">Button Text</span>-->
+<!--            </a>-->
+
+            <div *ngFor="let stage of courseData.course_stages; let i = index">
+              <div (click)="toggleCheck(i)" (click)="selectStage(stage)" class="relative cursor-pointer w-full bg-[#C3DCE3] items-center justify-start py-3 overflow-hidden font-medium transition-all rounded group" style="font-family: Montserrat">
+                <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all ease-out duration-700 translate-x-0 left-0 w-full h-48': stage.isClicked}" class="-translate-x-full"></div>
+                <div class="flex items-center px-2">
+                  <div [ngClass]="{'block': stage.isClicked, 'hidden': !stage.isClicked}">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-white duration-700 ease-in-out transform transition-all z-20" [ngClass]="{'translate-x-1': stage.isClicked}">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span class="relative z-50 px-3 font-bold" [ngClass]="{'transform translate-x-1 transition-colors duration-700 ease-in-out text-white': stage.isClicked, 'text-[#2B788B]': !stage.isClicked}">{{ stage.title }}</span>
+                </div>
+              </div>
+              <div *ngIf="stage.isClicked" class="bg-[#C3DCE3] rounded-lg p-4">
+                <div class="bg-white text-start p-4 rounded-lg grid grid-cols-2 " style="font-family: Montserrat">
+                  <div *ngFor="let type of exerciseTypes" class="">
+                    <button (click)="fetchExerciseData(type)" class="w-48 mb-3 h-48 bg-blue-100">
+                      <span *ngIf="type == 'compile_phrase'">Compile Phrase</span>
+                      <span *ngIf="type == 'audit'">Phonetic Transcript</span>
+                      <span *ngIf="type == 'pair_exercise'">Pairs of Meaning</span>
+                      <span *ngIf="type == 'picture_exercise'">Picture Association</span>
+                      <span *ngIf="type == 'sentence'">Missing links</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="exerciseData" class="absolute top-0 left-0 z-50 bg-violet-100 rounded-lg p-3">
+                <div *ngIf="selectedType === 'compile_phrase'">
+                  <div *ngFor="let exercise of exerciseData.data">
+                    <p>{{exercise.id}}</p>
+                    <p>{{exercise.phrase}}</p>
+                  </div>
+                </div>
+                <div *ngIf="selectedType === 'audit'">
+                  <div *ngFor="let exercise of exerciseData.data">
+                    <p>{{exercise.id}}</p>
+                    <p>{{exercise.text}}</p>
+                  </div>
+                </div>
+                <div *ngIf="selectedType === 'pair_exercise'">
+                  <div *ngFor="let exercise of exerciseData.data">
+                    <p>{{exercise.id}}</p>
+                    <div *ngFor="let option of exercise.options">
+                      <p>
+                        {{option.word}}
+                      </p>
+                      <p>
+                        {{option.translation}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="selectedType === 'picture_exercise'">
+                  <div *ngFor="let exercise of exerciseData.data">
+                    <p>{{exercise.id}}</p>
+                    <div *ngFor="let option of exercise.options">
+                      <p>
+                        {{option.text}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="selectedType === 'sentence'">
+                  <div *ngFor="let exercise of exerciseData.data">
+                    <p>{{exercise.id}}</p>
+                    <p>{{exercise.sentence_with_gaps}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!--            <div class="flex items-center gap-3 cursor-pointer p-3 rounded font-bold" [ngClass]="{'bg-[#C3DCE3]': !isClicked, 'bg-[#2B788B]': isClicked}" style="font-family: Montserrat">-->
+<!--              <div [ngClass]="{'block': isClicked, 'hidden': !isClicked}">-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"-->
+<!--                     class="w-6 h-6 text-white transform transition-transform"-->
+<!--                     [ngClass]="{'translate-x-1': isClicked}">-->
+<!--                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />-->
+<!--                </svg>-->
+<!--              </div>-->
+<!--              <span (click)="toggleCheck()" [ngClass]="{'translate-x-3, text-white': isClicked, 'text-[#2B788B]': !isClicked}">Lorem ipsum.</span>-->
+<!--            </div>-->
+
+            <!--            <div class="space-y-2">-->
+<!--              <div class="text-lg font-bold">Stages:</div>-->
+<!--              <div *ngFor="let stage of courseData.course_stages">-->
+<!--                <div class="flex items-center space-x-2 cursor-pointer transition-transform transform-gpu hover:scale-105">-->
+<!--                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-500">-->
+<!--                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />-->
+<!--                  </svg>-->
+<!--                  <span>{{ stage.title }}</span>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+
+
+<!--            <div *ngFor="let stage of courseData.course_stages" class="px-8">-->
+<!--              <div class="bg-[#C3DCE3] p-2 rounded-lg flex items-center">-->
+<!--                <p class="text-lg font-bold text-[#2B788B] " style="font-family: DelaGothic">{{ stage.title }}</p>-->
+<!--              </div>-->
+<!--            </div>-->
+            <div class="flex gap-4 md:justify-center lg:justify-end" style="font-family: Montserrat">
+              <button type="button" (click)="showModalWindow('editCourse')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
+              <button type="submit" [disabled]="courseEditForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Edit Course</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Attach the exercise to the stage End-->
 
     </div>
     <div class="bg-white shadow-lg rounded-lg w-1/2 p-4 h-[28rem]">
@@ -316,9 +500,12 @@
                                 </p>
                             </div>
                             <div>
-                                <button type="button" class="bg-[#2B788B] text-white hover:text-[#2B788B] hover:bg-gray-50 p-2 rounded">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                <button type="button" (click)="showModalWindow('attachExercise')" class="bg-[#2B788B] text-white hover:text-[#2B788B] hover:bg-gray-50 p-2 rounded">
+                                    <svg *ngIf="!showMenuAttachExerciseStage" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                    <svg *ngIf="showMenuAttachExerciseStage" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
                                     </svg>
                                 </button>
                             </div>
@@ -350,12 +537,12 @@
 
             <div class="flex justify-between items-center gap-4 p-2 border-t border-gray-200" style="font-family: Montserrat">
                 <div>
-                    <button type="button" (click)="editCourse('createStage')"  class="inline-flex w-full justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Create Stage</button>
+                    <button type="button" (click)="showModalWindow('createStage')"  class="inline-flex w-full justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Create Stage</button>
                 </div>
                 <div class="flex gap-4 items-center">
-                    <button type="button" (click)="editCourse('editCourse')" class="inline-flex w-full justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Edit</button>
+                    <button type="button" (click)="showModalWindow('editCourse')" class="inline-flex w-full justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Edit</button>
                     <div class="w-px h-6 bg-gray-300"></div>
-                    <button type="submit" class="inline-flex w-full justify-center rounded-lg bg-[#945069] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Delete</button>
+                    <button type="button" (click)="deleteModalCourse = true" class="inline-flex w-full justify-center rounded-lg bg-[#945069] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Delete</button>
                 </div>
             </div>
 
