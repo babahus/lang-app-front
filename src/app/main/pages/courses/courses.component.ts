@@ -4,7 +4,6 @@ import {LoaderService} from "../../../core/services/loader.service";
 import {Course} from "../../models/course.model";
 import {Pagination} from "../../models/pagination.model";
 import {HttpClient} from "@angular/common/http";
-import {error} from "@angular/compiler-cli/src/transformers/util";
 import Swal from "sweetalert2";
 
 @Component({
@@ -27,12 +26,15 @@ export class CoursesComponent implements OnInit {
 
   public showFreeCourses = true;
   public showPaidCourses = true;
+  public showCourseDetailModal = false;
   public courses: Course[] = [];
+  selectedCourse: null|Course = null;
   public filteredCourses: Course[] = [];
   public pagination: Pagination|null = null;
   pages: number[] = [0];
   public attachedCourses: Course[] = [];
   private studentId: string | null;
+  selectedStage: any;
 
   constructor(private courseService: CourseService) {
     this.studentId = sessionStorage.getItem('id');
@@ -144,6 +146,22 @@ export class CoursesComponent implements OnInit {
     if (Array.isArray(this.attachedCourses)) {
       return this.attachedCourses.some(course => course.id === courseId);
     }
+
     return false;
+  }
+
+  openCourseDetailModal(course: Course) {
+    this.selectedCourse = course;
+    this.showCourseDetailModal = true;
+  }
+
+  toggleCheck(index: number) {
+    this.selectedCourse!.course_stages.forEach((stage, i) => {
+      if (i !== index) {
+        stage.isClicked = false;
+      }
+    });
+
+    this.selectedCourse!.course_stages[index].isClicked = !this.selectedCourse!.course_stages[index].isClicked;
   }
 }

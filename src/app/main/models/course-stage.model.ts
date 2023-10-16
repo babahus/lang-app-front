@@ -5,4 +5,5 @@ export interface CourseStage {
   title: string;
   description: string;
   stage_exercises: Exercise[];
+  isClicked: boolean;
 }
