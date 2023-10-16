@@ -18,6 +18,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {LoaderInterceptor} from "./core/interceptors/request.interceptor";
 
+
 export function HttpLoaderFactory(http:HttpClient){
   return new TranslateHttpLoader(http);
 }
@@ -45,7 +46,8 @@ export function HttpLoaderFactory(http:HttpClient){
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]
           }
-        })
+        }),
+
     ],
     providers: [
       {provide: HTTP_INTERCEPTORS, useClass: BearerInterceptor, multi: true},

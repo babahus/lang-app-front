@@ -31,6 +31,8 @@ import { ExercisesCreateComponent } from './pages/exercises-create/exercises-cre
 import { CourseCreateComponent } from './pages/course-create/course-create.component';
 import { FormsModule } from '@angular/forms';
 
+import { CourseViewComponent } from './pages/course-view/course-view.component';
+import { MaterialModule } from './material/material.module';
 
 const routes: Routes = [
   { path : '', component: IndexComponent},
@@ -51,6 +53,7 @@ const routes: Routes = [
 
   { path : 'exercises-create', component : ExercisesCreateComponent, canActivate : [AuthGuard]},
   { path : 'courses-create', component : CourseCreateComponent, canActivate : [AuthGuard]},
+  { path : 'course/:id', component : CourseViewComponent, canActivate : [AuthGuard]},
 
   { path : 'dashboard', component : DashboardComponent, canActivate : [AuthGuard]},
   { path : 'profile', component : ProfileComponent, canActivate : [AuthGuard]},
@@ -85,7 +88,8 @@ const routes: Routes = [
     ProfileComponent,
     CoursesComponent,
     ExercisesCreateComponent,
-    CourseCreateComponent
+    CourseCreateComponent,
+    CourseViewComponent,
   ],
   exports: [
     HeaderComponent,
@@ -101,6 +105,7 @@ const routes: Routes = [
         SweetAlert2Module,
         FormsModule,
         TranslateModule,
+        MaterialModule
     ]
 })
 export class MainModule { }

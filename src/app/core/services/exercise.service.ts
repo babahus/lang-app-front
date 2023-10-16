@@ -110,6 +110,19 @@ export class ExerciseService extends BaseService
         return throwError(error);
     }
 
+  getExerciseData(type: string): Promise<any>{
+    return  new Promise((resolve, reject) => {
+      this.http.get(this.url + `/exercise/${type}`).pipe(
+        catchError((error) => {
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
+        resolve(data);
+      });
+    });
+  }
+
     createExercise(form: UntypedFormGroup, type: string): Promise<any> {
         return new Promise(((resolve, reject) => {
             const data: any = this.checkTypeExercise(form, type);

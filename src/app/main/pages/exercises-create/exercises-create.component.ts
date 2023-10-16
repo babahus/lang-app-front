@@ -3,7 +3,6 @@ import {FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Valida
 import {Router} from "@angular/router";
 import {ExerciseService} from "../../../core/services/exercise.service";
 import Swal from "sweetalert2";
-import {WordPair} from "../modelPages/wordPair";
 
 @Component({
   selector: 'app-exercises-create',
@@ -179,11 +178,11 @@ export class ExercisesCreateComponent {
             this.sentenceModalShow = false;
         } catch (error) {
             console.log(error);
-            // this.errorShow = true;
-            //
-            // setTimeout(() => {
-            //     this.errorShow = false;
-            // }, 5000);
+            this.errorShow = true;
+
+            setTimeout(() => {
+                this.errorShow = false;
+            }, 5000);
         }
     }
   successCreateExercise(){
