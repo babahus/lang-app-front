@@ -35,6 +35,7 @@ export class CoursesComponent implements OnInit {
   public attachedCourses: Course[] = [];
   private studentId: string | null;
   selectedStage: any;
+  isCardInfoVisible = false;
 
   constructor(private courseService: CourseService) {
     this.studentId = sessionStorage.getItem('id');

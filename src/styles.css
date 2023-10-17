@@ -37,3 +37,12 @@ button[disabled] {
   cursor: pointer;
   font-size: 1.5rem;
 }
+
+.underline-header::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px; /* или любая другая высота, которую вы предпочитаете для подчеркивания */
+  background-color: rgba(87, 87, 87, 0.69); /* цвет подчеркивания */
+  margin-top: 2px; /* отступ сверху */
+}
