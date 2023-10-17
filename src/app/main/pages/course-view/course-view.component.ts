@@ -24,12 +24,12 @@ export class CourseViewComponent implements OnInit{
   };
 
   errorShow= false;
-  showImg= false;
   showMenuEditForm = false;
   showMenuCreateStage = false;
-  showMenuAttachExerciseStage = true;
+  showMenuAttachExerciseStage = false;
   isCardInfoVisible = false;
   deleteModalCourse = false;
+  showMenuEditStage = false;
 
   selectedType: string = '';
   exerciseData: any;
@@ -39,7 +39,11 @@ export class CourseViewComponent implements OnInit{
 
   selectStage(stage: any) {
     this.selectedStage = stage;
-    console.log(this.selectedStage);
+  }
+
+  handleButtonClick(stage: any) {
+    this.showModalWindow('editStage');
+    this.selectStage(stage);
   }
 
   selectExerciseType(type: string) {
@@ -80,6 +84,11 @@ export class CourseViewComponent implements OnInit{
     description: this.fb.control('', Validators.compose([Validators.required, Validators.minLength(12)])),
   })
 
+  stageEditForm = this.fb.group({
+    title: this.fb.control('', Validators.compose([Validators.required, Validators.minLength(5)])),
+    description: this.fb.control('', Validators.compose([Validators.required, Validators.minLength(12)])),
+  })
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       const courseId = params['id'];
@@ -101,7 +110,6 @@ export class CourseViewComponent implements OnInit{
     try {
       await this.courseService.courseEdit(this.courseEditForm, this.courseData.id);
       this.success('You have successfully changed this course');
-      this.showImg = true;
       this.courseEditForm.reset();
       this.showMenuEditForm = false;
     } catch (error) {
@@ -111,13 +119,36 @@ export class CourseViewComponent implements OnInit{
 
   async submitStageCreate(){
     try {
-      await this.courseService.stageCreate(this.stageCreateForm, this.courseData.id);
+      await this.stageService.stageCreate(this.stageCreateForm, this.courseData.id);
       this.success('You have successfully created this stage');
-      this.showImg = true;
       this.stageCreateForm.reset();
       this.showMenuCreateStage = false;
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  async submitStageEdit(){
+    console.log(this.selectedStage.id);
+    console.log(this.courseData.id);
+    console.log(this.stageEditForm);
+    try {
+      await this.stageService.stageEdit(this.selectedStage.id, this.stageEditForm, this.courseData.id);
+      this.success('You have successfully changed this stage');
+      this.stageEditForm.reset();
+      this.showMenuEditStage = false;
+    } catch (error:any) {
+      const errorDelete: any = error.error.data;
+      Swal.fire({
+        title: 'Error 403',
+        text: errorDelete.message,
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        width: 600,
+        padding: '3em',
+        color: '#2B788B',
+        background: '#F6F5F4'
+      })
     }
   }
 
@@ -156,25 +187,49 @@ export class CourseViewComponent implements OnInit{
   async fetchExerciseData(type: string) {
     try {
       this.selectedType = type;
-       this.exerciseData = await this.exerciseService.getExerciseData(type);
-       console.log( this.exerciseData);
+      this.selectedExercises = this.filterExercisesByType(type);
+      this.exerciseData = await this.exerciseService.getExerciseData(type);
     } catch (error) {
       console.log(error);
     }
   }
 
-
-  showModalWindow(index : string){
-    if (index === 'editCourse'){
-      this.showMenuEditForm = !this.showMenuEditForm;
-    } else if (index === 'createStage') {
-      this.showMenuCreateStage = !this.showMenuCreateStage;
-    } else if (index === 'attachExercise') {
-      // const stages =  this.stageService.getStages(this.courseData.id);
-      this.showMenuAttachExerciseStage = !this.showMenuAttachExerciseStage;
+  filterExercisesByType(type: string) {
+    if (this.selectedStage && this.selectedStage.stage_exercises) {
+      return this.selectedStage.stage_exercises
+        .filter((exercise: any) => exercise.type === type)
+        .map((exercise: any) => exercise.data);
+    } else {
+      return [];
     }
+  }
 
-    this.showImg = !this.showImg;
+  showModalWindow(index: string) {
+    if (index === 'editCourse') {
+      this.showMenuEditForm = !this.showMenuEditForm;
+      this.showMenuCreateStage = false;
+      this.showMenuAttachExerciseStage = false;
+      this.showMenuEditStage = false;
+    } else if (index === 'createStage') {
+      this.showMenuEditForm = false;
+      this.showMenuCreateStage = !this.showMenuCreateStage;
+      this.showMenuAttachExerciseStage = false;
+      this.showMenuEditStage = false;
+    } else if (index === 'attachExercise') {
+      this.showMenuEditForm = false;
+      this.showMenuCreateStage = false;
+      this.showMenuEditStage = false;
+      this.showMenuAttachExerciseStage = !this.showMenuAttachExerciseStage;
+    } else if (index === 'editStage'){
+      this.showMenuEditForm = false;
+      this.showMenuCreateStage = false;
+      this.showMenuAttachExerciseStage = false;
+      this.showMenuEditStage = !this.showMenuEditStage;
+    } else {
+      this.showMenuEditForm = false;
+      this.showMenuCreateStage = false;
+      this.showMenuAttachExerciseStage = false;
+    }
   }
 
   decrementPrice() {
@@ -206,44 +261,109 @@ export class CourseViewComponent implements OnInit{
     })
   }
 
-
-    // async getAllExercise(): Promise<any>{
-    //   return new Promise((resolve, reject) => {
-    //     this.http.get<any>(this.url + '/exercises/teacher/').pipe(
-    //       catchError((error) => {
-    //         reject(error);
-    //         return throwError(error);
-    //       })
-    //     ).subscribe((data: any) => {
-    //       resolve(data);
-    //     });
-    //   });
-    // }
-
-
-
-
-
-
-
-  selectedFruit: string = '';
-  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
-  selectedFruits: string[] = [];
-
-  addSelectedFruit(): void {
-    if (this.selectedFruit && !this.selectedFruits.includes(this.selectedFruit)) {
-      this.selectedFruits.push(this.selectedFruit);
+  async attachExerciseForStage(stageId: number, courseId: number, exerciseId: number, type: string) {
+    try {
+      const result = await this.exerciseService.attachExerciseForStage(
+        stageId,
+        courseId,
+        exerciseId,
+        type
+      );
+    } catch (error) {
+      console.log(error);
     }
   }
 
-  removeSelectedFruit(fruit: string): void {
-    const index = this.selectedFruits.indexOf(fruit);
+  async detachExerciseForStage(stageId: number, courseId: number, exerciseId: number, type: string) {
+    try {
+      const result = await this.exerciseService.detachExerciseForStage(
+        stageId,
+        courseId,
+        exerciseId,
+        type
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  toggleIsClicked(stage: any) {
+    stage.isClicked = !stage.isClicked;
+    this.exerciseData = null;
+    this.selectedExercises = [];
+  }
+
+  selectedExercise: any = null;
+  selectedExercises: any[] = [];
+  addSelectedExercise() {
+    if (this.selectedExercise && !this.selectedExercises.includes(this.selectedExercise)) {
+      this.attachExerciseForStage(
+        this.selectedStage.id,
+        this.courseData.id,
+        this.selectedExercise.id,
+        this.selectedType
+      );
+      this.selectedExercises.push(this.selectedExercise);
+    }
+  }
+
+  removeSelectedExercise(exercise: any): void {
+    this.detachExerciseForStage(
+      this.selectedStage.id,
+      this.courseData.id,
+      exercise.id,
+      this.selectedType
+    );
+    const index = this.selectedExercises.indexOf(exercise);
+
     if (index !== -1) {
-      this.selectedFruits.splice(index, 1);
+      this.selectedExercises.splice(index, 1);
     }
   }
 
+  showDeleteCourseMenu(){
+    this.deleteModalCourse = !this.deleteModalCourse;
+  }
 
+  modalDeleteStage = false;
+  showModalDeleteStage(){
+    this.modalDeleteStage = !this.modalDeleteStage;
+  }
 
+  showDeleteStage(stage: any){
+    this.modalDeleteStage = !this.modalDeleteStage;
+    this.selectedStage = stage;
+  }
+
+  async deleteStage(){
+    try {
+      await this.stageService.deleteStage(this.selectedStage.id);
+      this.selectedStage = [];
+      this.modalDeleteStage = false;
+      Swal.fire({
+        title: 'Success',
+        text: 'Successfully delete stage',
+        icon: 'success',
+        confirmButtonText: 'Ok',
+        width: 600,
+        padding: '3em',
+        color: '#2B788B',
+        background: '#F6F5F4'
+      })
+    } catch (error:any) {
+      const errorDelete: any = error.error.data;
+      Swal.fire({
+        title: 'Error 403',
+        text: errorDelete.message,
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        width: 600,
+        padding: '3em',
+        color: '#2B788B',
+        background: '#F6F5F4'
+      })
+      this.modalDeleteStage = false;
+    }
+  }
 
 }

@@ -123,6 +123,41 @@ export class ExerciseService extends BaseService
     });
   }
 
+  attachExerciseForStage(stageId: number, courseId: number, exerciseId: number, type: string): Promise<any>{
+    return new Promise((resolve, reject) => {
+      this.http.post(this.url + '/exercise/attach', {
+        id: exerciseId,
+        exercise_type: type,
+        stage_id: stageId,
+        course_id: courseId
+      }).pipe(
+        catchError((error) => {
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
+        resolve(data);
+      });
+    });
+  }
+
+  detachExerciseForStage(stageId: number, courseId: number, exerciseId: number, type: string): Promise<any>{
+    return new Promise((resolve, reject) => {
+      this.http.post(this.url + '/exercise/detach', {
+        id: exerciseId,
+        exercise_type: type,
+        stage_id: stageId,
+        course_id: courseId
+      }).pipe(
+        catchError((error) => {
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
+        resolve(data);
+      });
+    });
+  }
     createExercise(form: UntypedFormGroup, type: string): Promise<any> {
         return new Promise(((resolve, reject) => {
             const data: any = this.checkTypeExercise(form, type);
