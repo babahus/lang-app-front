@@ -140,24 +140,6 @@ export class CourseService extends BaseService {
     })
   }
 
-  stageCreate(stageCreateForm: UntypedFormGroup, courseId: number){
-    return new Promise((resolve, reject) => {
-      this.http.post<any>(this.url +  '/stage', {
-        title: stageCreateForm.get('title')?.value,
-        description: stageCreateForm.get('description')?.value,
-        course_id: courseId
-      }).pipe(
-        catchError((error) => {
-          this.handleError(error, stageCreateForm);
-          reject(error);
-          return throwError(error);
-        })
-      ).subscribe((data: any) => {
-        resolve(data);
-      })
-    })
-  }
-
   private handleError(error: any, form: UntypedFormGroup) {
     if (error.status === 422) {
       let errorsToForm: ValidationErrors | null = {};

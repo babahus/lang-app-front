@@ -1,9 +1,4 @@
-<section class="min-h-screen bg-[#C3DCE3] flex items-center justify-center gap-12 px-[10%] ">
-
-
-
-
-
+<section class="min-h-screen bg-[#C3DCE3] w-full flex items-center justify-center p-3 lg:gap-12 lg:px-[10%] ">
 <!--  <a class="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden-->
 <!--    font-medium transition-all bg-white rounded hover:bg-white group">-->
 <!--    <span class="w-48 h-48 rounded rotate-[-40deg]-->
@@ -12,41 +7,79 @@
 <!--    <span class="relative w-96 text-black transition-colors duration-700 ease-in-out group-hover:text-white">Button Text</span>-->
 <!--  </a>-->
 
-<!--  <div class="p-4">-->
-<!--    <h2 class="text-2xl font-semibold">Favorite Fruits</h2>-->
-<!--    <div class="mt-4">-->
-<!--      <div class="flex space-x-2">-->
-<!--        <mat-form-field class="w-1/2">-->
-<!--          <mat-label>Select a Fruit</mat-label>-->
-<!--          <mat-select [(value)]="selectedFruit">-->
-<!--            <mat-option *ngFor="let fruit of allFruits" [value]="fruit">{{ fruit }}</mat-option>-->
-<!--          </mat-select>-->
-<!--        </mat-form-field>-->
-<!--        <button class="p-2 bg-blue-500 text-white rounded" (click)="addSelectedFruit()">Add</button>-->
-<!--      </div>-->
-<!--      <div class="mt-2">-->
-<!--        <div *ngFor="let fruit of selectedFruits" class="inline-flex items-center bg-blue-200 text-blue-800 px-2 py-1 rounded m-1">-->
-<!--          {{ fruit }}-->
-<!--          <button class="ml-2 p-1 bg-red-500 text-white rounded" (click)="removeSelectedFruit(fruit)">Remove</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+  <!--   Start of the modal window for course deletion-->
+  <div *ngIf="deleteModalCourse" class="relative z-50">
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+    <div class="fixed inset-0 z-10 w-full overflow-y-auto">
+      <div class="flex min-h-full items-center justify-center p-3 md:p-4 text-center sm:items-center sm:p-0">
+        <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
 
+          <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+            <div class="sm:flex sm:items-start">
+              <div class="mt-3 text-left sm:ml-4 sm:mt-0 sm:text-left">
+                <h3 style="font-family: DelaGothic" class="text-base font-semibold leading-6 text-gray-900">
+                  Deleting a course: WARNING!
+                </h3>
+                <div class="mt-2">
+                  <p style="font-family: Montserrat" class="text-sm text-gray-500">You are about to delete the course. Please make sure you have a backup of all the necessary data.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+            <button type="button" (click)="deleteCourse()" class="inline-flex w-full justify-center rounded-md bg-[#945069] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:ml-3 sm:w-auto">Delete</button>
+            <button (click)="showDeleteCourseMenu()"  type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+          </div>
 
-
-
-  <div class="rounded-lg bg-white shadow-lg w-1/2 relative overflow-hidden">
-        <div *ngIf="showImg" class="w-full flex justify-center p-4 h-96">
-            <img src="./assets/img/course-view-page/experimental-modern-house-with-a-backdrop-of-hills.png" alt="">
         </div>
+      </div>
+    </div>
+  </div>
+  <!--   end of the modal window for course deletion -->
 
+  <!--   Start of the modal window for stage deletion-->
+  <div *ngIf="modalDeleteStage" class="relative z-50">
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+    <div class="fixed inset-0 z-10 w-full overflow-y-auto">
+      <div class="flex min-h-full items-center justify-center p-3 md:p-4 text-center sm:items-center sm:p-0">
+        <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+
+          <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+            <div class="sm:flex sm:items-start">
+              <div class="mt-3 text-left sm:ml-4 sm:mt-0 sm:text-left">
+                <h3 style="font-family: DelaGothic" class="text-base font-semibold leading-6 text-gray-900">
+                  Deleting a stage: WARNING!
+                </h3>
+                <div class="mt-2">
+                  <p style="font-family: Montserrat" class="text-sm text-gray-500">You are about to delete a stage. Make sure you have a backup of all the data you need.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+            <button type="button" (click)="deleteStage()" class="inline-flex w-full justify-center rounded-md bg-[#945069] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:ml-3 sm:w-auto">Delete</button>
+            <button (click)="showModalDeleteStage()"  type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--   end of the modal window for stage deletion -->
+
+
+  <div [ngClass]="'block ' + (showMenuEditForm || showMenuCreateStage || showMenuAttachExerciseStage || showMenuEditStage? '' : 'hidden')" class="rounded-lg bg-white shadow-lg md:max-w-lg w-full relative overflow-hidden">
+<!--        <div *ngIf="!showMenuEditForm && !showMenuCreateStage && !showMenuAttachExerciseStage" class="hidden w-full lg:flex justify-center p-4 h-96">-->
+<!--            <img src="./assets/img/course-view-page/experimental-modern-house-with-a-backdrop-of-hills.png" alt="">-->
+<!--        </div>-->
+<!--        <div *ngIf="showMenuEditForm" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity lg:hidden"></div>-->
         <!--Edit Form Start-->
-        <div *ngIf="showMenuEditForm" class="min-h-[28rem]">
-            <div class="p-4">
+        <div *ngIf="showMenuEditForm" class="lg:min-h-[28rem]">
+
+            <div class="p-3 md:p-6 lg:p-4">
                 <div class="flex justify-between items-center">
                     <div>
-                        <p class="text-xl text-black md:text-2xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">Course Edit</p>
+                        <span class="text-xl text-black md:text-2xl lg:px-0" style="font-family: DelaGothic">Course Edit</span>
                     </div>
                     <div class="text-black">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
@@ -54,11 +87,11 @@
                         </svg>
                     </div>
                 </div>
-                <div class="pt-6">
-                    <form [formGroup]="courseEditForm" (ngSubmit)="submitCourseEdit()" class="space-y-4 bg-blue-50 p-6 rounded-lg">
+                <div class="pt-3 md:pt-4 lg:pt-6">
+                    <form [formGroup]="courseEditForm" (ngSubmit)="submitCourseEdit()" class="space-y-4 bg-blue-50 p-2 md:p-4 lg:p-6 rounded-lg">
                         <div class="rounded-r-lg space-y-2 w-full">
                             <div class="space-y-2" style="font-family: Montserrat">
-                                <label for="title" class="block mb-2 text-xs lg:text-sm font-semibold text-gray-700">Title</label>
+                                <label for="title" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">Title</label>
                                 <input type="text"
                                        name="title"
                                        id="title"
@@ -84,7 +117,7 @@
                         </div>
                         <div class="rounded-r-lg  space-y-2  w-full">
                             <div class="space-y-2" style="font-family: Montserrat">
-                                <label for="description" class="block mb-2 text-xs lg:text-sm font-semibold text-gray-700">Description</label>
+                                <label for="description" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">Description</label>
                                 <textarea type="text"
                                           name="description"
                                           id="description"
@@ -110,16 +143,16 @@
                         </div>
                         <div class="rounded-r-lg space-y-2 w-full">
                             <div class="space-y-2" style="font-family: Montserrat">
-                                <label for="price" class="block mb-2 text-xs lg:text-sm font-semibold text-gray-700">Price</label>
-                                <div class="flex flex-row h-10 w-1/3 rounded-lg relative bg-transparent mt-1">
+                                <label for="price" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">Price</label>
+                                <div class="flex flex-row h-8 md:h-9 lg:h-10 w-1/3 rounded-lg relative bg-transparent mt-1">
                                     <button type="button" (click)="decrementPrice()" class="bg-[#C3DCE3] text-[#2B788B] hover:bg-[#5996A5] hover:text-white h-full w-20 rounded-l flex justify-center items-center cursor-pointer outline-none">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 md:w-6 md:h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
                                         </svg>
                                     </button>
                                     <input formControlName="price" type="number" inputmode="numeric" id="price" class="outline-none focus:outline-none text-center bg-[#C3DCE3]  w-full text-[#2B788B] font-semibold placeholder-[#80a4ad] md:text-base cursor-default flex items-center" name="custom-input-number">
                                     <button type="button" (click)="incrementPrice()" class="bg-[#C3DCE3] text-[#2B788B] hover:text-white hover:bg-[#5996A5] h-full w-20 rounded-r flex justify-center items-center cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 md:w-6 md:h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                         </svg>
                                     </button>
@@ -136,9 +169,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flex gap-4 md:justify-center lg:justify-end" style="font-family: Montserrat">
-                            <button type="button" (click)="showModalWindow('editCourse')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
-                            <button type="submit" [disabled]="courseEditForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Edit Course</button>
+                        <div class="flex gap-4 justify-end" style="font-family: Montserrat">
+                            <button type="button" (click)="showModalWindow('editCourse')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
+                            <button type="submit" [disabled]="courseEditForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">Edit Course</button>
                         </div>
                         <div *ngIf="errorShow" class="error-message">
                             <p class="mt-2 text-start font-medium text-[#945069] text-xs">
@@ -152,11 +185,11 @@
         <!--Edit Form End-->
 
         <!--Create Stage Form Start-->
-        <div *ngIf="showMenuCreateStage" class="min-h-[28rem] relative">
-            <div class="p-4">
+        <div *ngIf="showMenuCreateStage" class="relative">
+            <div class="p-3 md:p-6 lg:p-4">
                 <div class="flex justify-between items-center">
                     <div>
-                        <p class="text-xl text-black md:text-2xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">Create Stage</p>
+                        <span class="text-xl text-black md:text-2xl px-4 md:px-0" style="font-family: DelaGothic">Create Stage</span>
                     </div>
                     <div class="text-black">
                         <button type="button" (click)="toggleCardVisibility()" class="bg-amber-400 hover:bg-amber-500 p-2 rounded-full">
@@ -164,56 +197,62 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
                             </svg>
                         </button>
-                        <div class="absolute top-[10%] left-[10%] bg-white rounded-lg shadow-lg z-10 w-3/4" *ngIf="isCardInfoVisible">
-                            <div class="p-4">
-                                <div class='text-sm'  style="font-family: Montserrat">
-                                    <p class="indent-4"><strong>Stage</strong> - this is a part of your course that students will progress through sequentially.</p>
-                                    <ul class="px-4 list-disc text-xs list-inside">
-                                        <li class="flex gap-2 items-start">
-                                            <div class="text-[#2B788B]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                                </svg>
-                                            </div>
-                                            <p>Please provide a title and description for the stage to help students better understand what to expect.</p>
-                                        </li>
-                                        <li class="flex gap-2 items-start">
-                                            <div class="text-[#2B788B]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                                </svg>
-                                            </div>
-                                            <p>Keep in mind that stages organize the course and represent its logical sections. Each stage can contain multiple exercises.</p>
-                                        </li>
-                                        <li class="flex gap-2 items-start">
-                                            <div class="text-[#2B788B]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                                </svg>
-                                            </div>
-                                            <p>After creating the stage, you can link your exercises to it. </p>
-                                        </li>
-                                        <li class="flex gap-2 items-start">
-                                            <div class="text-[#2B788B]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                                </svg>
-                                            </div>
-                                            <p>If you encounter any issues or difficulties while creating a stage, don't hesitate to contact our support team.</p>
-                                        </li>
-                                    </ul>
-
-                                </div>
+                        <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg z-10 p-3 w-[90%] md:w-3/4 overflow-y-auto" *ngIf="isCardInfoVisible">
+                          <div class="p-2 md:pt-4 lg:p-4 ">
+                            <div class="absolute top-1 right-1">
+                              <button type="button" (click)="toggleCardVisibility()" class="bg-[#945069] hover:opacity-90 text-white p-1 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                              </button>
                             </div>
-                        </div>
+                            <div class='text-sm'  style="font-family: Montserrat">
+                                <p class="indent-4"><strong>Stage</strong> - this is a part of your course that students will progress through sequentially.</p>
+                                <ul class="px-4 list-disc text-xs list-inside">
+                                    <li class="flex gap-2 items-start">
+                                        <div class="text-[#2B788B]">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                            </svg>
+                                        </div>
+                                        <p>Please provide a title and description for the stage to help students better understand what to expect.</p>
+                                    </li>
+                                    <li class="flex gap-2 items-start">
+                                        <div class="text-[#2B788B]">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                            </svg>
+                                        </div>
+                                        <p>Keep in mind that stages organize the course and represent its logical sections. Each stage can contain multiple exercises.</p>
+                                    </li>
+                                    <li class="flex gap-2 items-start">
+                                        <div class="text-[#2B788B]">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                            </svg>
+                                        </div>
+                                        <p>After creating the stage, you can link your exercises to it. </p>
+                                    </li>
+                                    <li class="flex gap-2 items-start">
+                                        <div class="text-[#2B788B]">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                            </svg>
+                                        </div>
+                                        <p>If you encounter any issues or difficulties while creating a stage, don't hesitate to contact our support team.</p>
+                                    </li>
+                                </ul>
 
+                            </div>
+                          </div>
+                        </div>
                     </div>
                 </div>
-                <div class="pt-6">
-                    <form [formGroup]="stageCreateForm" (ngSubmit)="submitStageCreate()" class="space-y-4 bg-blue-50 p-6 rounded-lg">
+                <div class="pt-3 lg:pt-6">
+                    <form [formGroup]="stageCreateForm" (ngSubmit)="submitStageCreate()" class="space-y-4 bg-blue-50 p-2 md:p-4 lg:p-6 rounded-lg">
                         <div class="rounded-r-lg space-y-2 w-full">
                             <div class="space-y-2" style="font-family: Montserrat">
-                                <label for="titleStage" class="block mb-2 text-xs lg:text-sm font-semibold text-gray-700">Title</label>
+                                <label for="titleStage" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">Title</label>
                                 <input type="text"
                                        name="titleStage"
                                        id="titleStage"
@@ -239,7 +278,7 @@
                         </div>
                         <div class="rounded-r-lg  space-y-2  w-full">
                             <div class="space-y-2" style="font-family: Montserrat">
-                                <label for="descriptionStage" class="block mb-2 text-xs lg:text-sm font-semibold text-gray-700">Description</label>
+                                <label for="descriptionStage" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">Description</label>
                                 <textarea type="text"
                                           name="descriptionStage"
                                           id="descriptionStage"
@@ -263,9 +302,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flex gap-4 md:justify-center lg:justify-end" style="font-family: Montserrat">
-                            <button type="button" (click)="showModalWindow('createStage')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
-                            <button type="submit" [disabled]="stageCreateForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Create</button>
+                        <div class="flex gap-4 justify-end" style="font-family: Montserrat">
+                          <button type="button" (click)="showModalWindow('createStage')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
+                          <button type="submit" [disabled]="stageCreateForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">Create</button>
                         </div>
                         <div *ngIf="errorShow" class="error-message">
                             <p class="mt-2 text-start font-medium text-[#945069] text-xs">
@@ -278,228 +317,487 @@
         </div>
         <!--Create Stage Form End-->
 
-      <!--   Start of the modal window for course deletion-->
-      <div [ngClass]="{'hidden' : !deleteModalCourse}" class="relative z-20" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-          <div class="flex min-h-full items-center justify-center p-2 md:p-4 text-center sm:items-center sm:p-0">
-            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+    <!--Edit Stage Start-->
+    <div *ngIf="showMenuEditStage" class="lg::min-h-[28rem]">
 
-                <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                  <div class="sm:flex sm:items-start">
-                    <div class="mt-3 text-left sm:ml-4 sm:mt-0 sm:text-left">
-                      <h3 style="font-family: DelaGothic" class="text-base font-semibold leading-6 text-gray-900">
-                        Deleting a course: WARNING!
-                      </h3>
-                      <div class="mt-2">
-                        <p style="font-family: Montserrat" class="text-sm text-gray-500">You are about to delete the course. Please make sure you have a backup of all the necessary data.</p>
+      <div class="p-3 md:p-6 lg:p-4">
+        <div class="flex justify-between items-center">
+          <div>
+            <span class="text-xl text-black md:text-2xl md:px-0" style="font-family: DelaGothic">Stage Edit</span>
+          </div>
+          <div class="text-black">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+            </svg>
+          </div>
+        </div>
+        <div class="pt-3 md:pt-4 lg:pt-6">
+          <form [formGroup]="stageEditForm" (ngSubmit)="submitStageEdit()" class="space-y-4 bg-blue-50 p-2 md:p-4 lg:p-6 rounded-lg">
+            <div class="rounded-r-lg space-y-2 w-full">
+              <div class="space-y-2" style="font-family: Montserrat">
+                <label for="titleStageEdit" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">Title</label>
+                <input type="text"
+                       name="title"
+                       id="titleStageEdit"
+                       formControlName="title"
+                       class="bg-[#C3DCE3]  w-full text-[#2B788B] font-semibold placeholder-[#80a4ad] text-xs md:text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block p-2 " placeholder="Course title..." >
+
+                <div *ngIf="stageEditForm.get('title')?.hasError('required') && stageEditForm.controls.title.touched" class="error-message">
+                  <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                    Title is required.
+                  </p>
+                </div>
+                <div *ngIf="stageEditForm.get('title')?.hasError('minlength')" class="error-message">
+                  <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                    Title should have a minimum of 5 characters
+                  </p>
+                </div>
+                <div *ngIf="errorShow && stageEditForm.errors && stageEditForm.getError('title')" class="error-message">
+                  <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                    {{stageEditForm.getError('title')}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-r-lg  space-y-2  w-full">
+              <div class="space-y-2" style="font-family: Montserrat">
+                <label for="descriptionStageEdit" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">Description</label>
+                <textarea type="text"
+                          name="description"
+                          id="descriptionStageEdit"
+                          formControlName="description"
+                          class="bg-[#C3DCE3]  w-full text-[#2B788B] font-semibold placeholder-[#80a4ad] sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block p-2 " placeholder="Course description..." ></textarea>
+
+                <div *ngIf="stageEditForm.get('description')?.hasError('required') && stageEditForm.controls.description.touched" class="error-message">
+                  <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                    Description is required.
+                  </p>
+                </div>
+                <div *ngIf="stageEditForm.get('description')?.hasError('minlength')" class="error-message">
+                  <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                    Description should have a minimum of 12 characters
+                  </p>
+                </div>
+                <div *ngIf="errorShow && stageEditForm.errors && stageEditForm.getError('description')" class="error-message">
+                  <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                    {{stageEditForm.getError('description')}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="errorShow" class="error-message">
+              <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                {{stageEditForm.getError('backend')}}
+              </p>
+            </div>
+            <div class="flex gap-4 justify-end" style="font-family: Montserrat">
+              <button type="button" (click)="showModalWindow('editStage')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
+              <button type="submit" [disabled]="stageEditForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--Edit Stage End-->
+
+      <!--Attach the exercise to the stage Start-->
+      <div *ngIf="showMenuAttachExerciseStage" class="relative overflow-visible" >
+        <div class="p-3 md:p-6 lg:p-4">
+          <div class="flex mb-2 md:mb-4 justify-between items-center">
+            <div>
+              <span class="text-xl text-black md:text-2xl px-4 md:px-0" style="font-family: DelaGothic">Stages</span>
+            </div>
+            <div class="text-black">
+              <button type="button" (click)="toggleCardVisibility()" class="bg-amber-400 hover:bg-amber-500 p-2 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+                </svg>
+              </button>
+              <div class="fixed top-0 lg:top-1/2 lg:-translate-y-1/2 left-1/2 transform -translate-x-1/2 bg-white border border-[#2B788B] rounded-lg shadow-lg z-40 w-[90%] lg:w-2/5 overflow-y-auto" *ngIf="isCardInfoVisible">
+                <div class="p-4 relative">
+                  <div class="absolute top-1 right-1">
+                    <button type="button" (click)="toggleCardVisibility()" class="bg-[#945069] hover:opacity-90 text-white p-1 rounded-full">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div class='text-sm'  style="font-family: Montserrat">
+                    <ul class="lg:px-4 list-disc text-xs list-inside">
+                      <li class="flex flex-col">
+                        <span class="text-xs font-medium text-gray-900">
+                          Selecting a Stage:
+                        </span>
+                        <div class="flex gap-2 items-start">
+                          <div class="text-[#2B788B]">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                          </div>
+                          <p>Choose the stage to which you want to add exercises. Click on the stage, and its details will be displayed.</p>
+                        </div>
+                      </li>
+                      <li class="flex flex-col">
+                        <span class="text-xs font-medium text-gray-900">
+                          Choosing Exercise Types:
+                        </span>
+                        <div class="flex gap-2 items-start">
+                          <div class="text-[#2B788B]">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                          </div>
+                          <p>Select the type of exercises you wish to add to this stage. You have various exercise types available, such as "Compile Phrase," "Phonetic Transcript," "Pairs of Meaning," "Picture Association," and "Missing Links."</p>
+                        </div>
+                      </li>
+                      <li class="flex flex-col">
+                        <span class="text-xs font-medium text-gray-900">
+                          Adding Exercises:
+                        </span>
+                        <div class="flex gap-2 items-start">
+                          <div class="text-[#2B788B]">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                          </div>
+                          <p>After selecting the exercise type, you will see a list of available exercises of that type. Pick the desired exercise from the list, and it will automatically be attached to your stage.</p>
+                        </div>
+                      </li>
+                      <li class="flex flex-col">
+                        <span class="text-xs font-medium text-gray-900">
+                          Detaching Exercises:
+                        </span>
+                        <div class="flex gap-2 items-start">
+                          <div class="text-[#2B788B]">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                          </div>
+                          <p>If you change your mind about using a particular exercise for a stage, you can easily detach it. Just click the corresponding button to detach the exercise.</p>
+                        </div>
+                      </li>
+                      <li class="flex flex-col">
+                        <span class="text-xs font-medium text-gray-900">
+                          Navigating Between Stages:
+                        </span>
+                        <div class="flex gap-2 items-start">
+                          <div class="text-[#2B788B]">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                          </div>
+                          <p>After filling one stage with exercises, you can move on to another stage. Select a different stage from the list.</p>
+                        </div>
+                      </li>
+                      <li class="flex flex-col">
+                        <span class="text-xs font-medium text-gray-900">
+                          Creating a New Stage:
+                        </span>
+                        <div class="flex gap-2 items-start">
+                          <div class="text-[#2B788B]">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                          </div>
+                          <p> If you need to create a new stage, you have that option available.</p>
+                        </div>
+                      </li>
+                      <li class="flex flex-col">
+                        <span class="text-xs font-medium text-gray-900">
+                          Support and Assistance:
+                        </span>
+                        <div class="flex gap-2 items-start">
+                          <div class="text-[#2B788B]">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                          </div>
+                          <p>Should you encounter any issues or difficulties when attaching or detaching exercises from stages, feel free to reach out to our customer support. We are here to help and address any questions you may have.</p>
+                        </div>
+                      </li>
+                    </ul>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-2 md:p-4 lg:pt-6 space-y-4 bg-blue-50 lg:p-6 rounded-lg">
+            <div *ngFor="let stage of courseData.course_stages; let i = index">
+              <div class="grid grid-cols-1 gap-2">
+                <div (click)="toggleCheck(i)" (click)="selectStage(stage)" class="relative cursor-pointer w-full bg-[#C3DCE3] p-2 items-center justify-start lg:py-3 overflow-hidden font-medium transition-all rounded group" style="font-family: Montserrat">
+                  <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all ease-out duration-700 translate-x-0 left-0 w-full h-48': stage.isClicked}" class="-translate-x-full"></div>
+                  <div class="flex items-center lg:px-2">
+                    <div [ngClass]="{'block': stage.isClicked, 'hidden': !stage.isClicked}">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-white duration-700 ease-in-out transform transition-all z-20" [ngClass]="{'translate-x-1': stage.isClicked}">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <span class="relative z-30 font-bold" [ngClass]="{'transform translate-x-1 transition-colors duration-700 ease-in-out text-white': stage.isClicked, 'text-[#2B788B]': !stage.isClicked}">{{ stage.title }}</span>
+                  </div>
+                </div>
+                <div class="flex gap-4 justify-end" style="font-family: Montserrat">
+                  <button type="button" (click)="showDeleteStage(stage)" class="inline-flex w-auto cursor-pointer justify-center rounded-lg  px-3 py-2 text-xs lg:text-sm font-semibold underline text-gray-800  hover:scale-105">Delete</button>
+                  <button type="button" (click)="handleButtonClick(stage)" class="inline-flex w-auto cursor-pointer justify-center rounded-lg  px-3 py-2 text-xs lg:text-sm font-semibold underline text-gray-800  hover:scale-105">Edit Stage</button>
+                </div>
+              </div>
+
+              <!--      Attach exercise modal window start-->
+              <div [ngClass]="{'hidden' : !stage.isClicked}" class="bg-[#C3DCE3] w-full relative z-50 rounded-lg p-4">
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+                <div class="fixed inset-0 z-40 w-screen overflow-y-auto">
+                  <div class="block md:flex gap-4 lg:min-h-full w-full md:justify-center p-2 md:p-4 text-center items-center sm:p-0">
+                    <div class="relative transform overflow-hidden rounded-3xl bg-white text-left shadow-xl transition-all p-2 sm:my-8  sm:w-full md:max-w-[70%]">
+                      <div class="p-2 bg-[#C3DCE3] rounded-3xl p relative grid-cols-1 lg:flex items-start gap-8">
+                        <div class="flex justify-end  absolute top-1 right-1">
+                          <button type="button"
+                                  class="text-white hover:opacity-90  bg-[#945069] cursor-pointer tracking-widest focus:outline-none font-medium  rounded-full text-sm p-1 text-center"
+                                  (click)="toggleIsClicked(stage)"
+                                  style="font-family: DelaGothic"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          </button>
+                        </div>
+                        <div class="text-start p-2 lg:p-4 w-full lg:w-1/3 grid grid-cols-1" style="font-family: Montserrat">
+                          <div *ngFor="let type of exerciseTypes" class="">
+                            <button (click)="fetchExerciseData(type)" class="mb-3 bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">
+                              <span *ngIf="type == 'compile_phrase'">Compile Phrase</span>
+                              <span *ngIf="type == 'audit'">Phonetic Transcript</span>
+                              <span *ngIf="type == 'pair_exercise'">Pairs of Meaning</span>
+                              <span *ngIf="type == 'picture_exercise'">Picture Association</span>
+                              <span *ngIf="type == 'sentence'">Missing links</span>
+                            </button>
+                          </div>
+                        </div>
+                        <div *ngIf="exerciseData" class="flex justify-center items-center p-2 lg:p-5 w-full lg:w-2/4">
+
+                          <div *ngIf="selectedType === 'compile_phrase'" class="flex-col w-full justify-center justify-items-center gap-3">
+                            <mat-form-field class=" bg-[#C3DCE3] mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
+                              <mat-label class="text-[#2B788B] font-semibold text-sm" >Select an Exercise</mat-label>
+                              <mat-select [(ngModel)]="selectedExercise" (ngModelChange)="addSelectedExercise()" class="rounded-3xl">
+                                <mat-option *ngFor="let exercise of exerciseData.data" [value]="exercise" class="bg-[#C3DCE3] ">
+                                  <div class="text-[#2B788B] font-medium">
+                                    {{ exercise.phrase }}
+                                  </div>
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <div class="mt-2 grid grid-cols-1 lg:grid-cols-2 gap-2 items-center">
+                              <div *ngFor="let exercise of selectedExercises" class="flex justify-between gap-3 items-center bg-[#f5f5f5] hover:bg-gray-200 text-[#2B788B] font-medium px-4 p-2 rounded-lg">
+                                <span>
+                                  {{ exercise?.phrase }}
+                                </span>
+                                <button class="p-1 bg-[#cccccc] font-semibold text-[#f5f5f5] rounded-full" style="font-family: Montserrat" (click)="removeSelectedExercise(exercise)">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                  </svg>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div *ngIf="selectedType === 'audit'" class="flex-col w-full justify-center justify-items-center gap-3">
+                            <mat-form-field class=" bg-[#C3DCE3] mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
+                              <mat-label class="text-[#2B788B] font-semibold text-sm" >Select an Exercise</mat-label>
+                              <mat-select [(ngModel)]="selectedExercise" (ngModelChange)="addSelectedExercise()" class="rounded-3xl">
+                                <mat-option *ngFor="let exercise of exerciseData.data" [value]="exercise" class="bg-[#C3DCE3] ">
+                                  <div class="text-[#2B788B] font-medium">
+                                    {{ exercise.text }}
+                                  </div>
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <div class="mt-2 grid grid-cols-1 lg:grid-cols-2 gap-2 items-center">
+                              <div *ngFor="let exercise of selectedExercises" class="flex justify-between gap-3 items-center bg-[#f5f5f5] hover:bg-gray-200 text-[#2B788B] font-medium px-4 p-2 rounded-lg">
+                                <span>
+                                  {{ exercise.text}}
+                                </span>
+                                <button class="p-1 bg-[#cccccc] font-semibold text-[#f5f5f5] rounded-full" style="font-family: Montserrat" (click)="removeSelectedExercise(exercise)">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                  </svg>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div *ngIf="selectedType === 'pair_exercise'" class="flex-col w-full justify-center justify-items-center gap-3">
+                            <mat-form-field class=" bg-[#C3DCE3] mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
+                              <mat-label class="text-[#2B788B] font-semibold text-sm" >Select an Exercise</mat-label>
+                              <mat-select [(ngModel)]="selectedExercise" (ngModelChange)="addSelectedExercise()" class="rounded-3xl">
+                                <mat-option *ngFor="let exercise of exerciseData.data" [value]="exercise" class="bg-[#C3DCE3] w-full  border p-1 border-b-[#2B788B]">
+                                  <div class="text-[#2B788B] font-medium">
+                                    <div *ngFor="let option of exercise.options" class="grid gap-1 justify-center mx-auto items-center grid-cols-2">
+                                      <p class="bg-emerald-400 rounded-lg text-center p-1 px-2">
+                                        {{option.word}}
+                                      </p>
+                                      <p class="bg-amber-400 text-center p-1 px-2 rounded-lg">
+                                        {{option.translation}}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <div class="mt-2 grid grid-cols-1 lg:grid-cols-2 gap-2 items-center">
+                              <div *ngFor="let exercise of selectedExercises" class="flex justify-between gap-3 items-center bg-[#f5f5f5] hover:bg-gray-200 text-[#2B788B] font-medium px-4 p-2 rounded-lg">
+                                <div class="text-[#2B788B] w-full font-medium">
+                                  <div *ngFor="let option of exercise.options" class="grid gap-1 justify-center items-center grid-cols-2">
+                                    <p class="bg-emerald-400 rounded-lg text-center p-1 px-2">
+                                      {{option.word}}
+                                    </p>
+                                    <p class="bg-amber-400 text-center p-1 px-2 rounded-lg">
+                                      {{option.translation}}
+                                    </p>
+                                  </div>
+                                </div>
+                                <button class="p-1 bg-[#cccccc] font-semibold text-[#f5f5f5] rounded-full" style="font-family: Montserrat" (click)="removeSelectedExercise(exercise)">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                  </svg>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div *ngIf="selectedType === 'picture_exercise'" class="flex-col w-full justify-center justify-items-center gap-3">
+                            <mat-form-field class=" bg-[#C3DCE3] mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
+                              <mat-label class="text-[#2B788B] font-semibold text-sm" >Select an Exercise</mat-label>
+                              <mat-select [(ngModel)]="selectedExercise" (ngModelChange)="addSelectedExercise()" class="rounded-3xl">
+                                <mat-option *ngFor="let exercise of exerciseData.data" [value]="exercise" class="bg-[#C3DCE3] border-b-gray-200 border ">
+                                  <div class="text-[#2B788B] font-medium grid grid-cols-2 gap-2 py-1 ">
+                                    <div *ngFor="let option of exercise.options" class="">
+                                      <div *ngIf="!option.is_correct">
+                                        <p class="bg-rose-400 text-white rounded-lg text-center p-1 px-2">
+                                          {{ option.text }}
+                                        </p>
+                                      </div>
+                                      <div *ngIf="option.is_correct">
+                                        <p class="bg-emerald-400 rounded-lg text-center p-1 px-2">
+                                          {{ option.text }}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <div class="mt-2 grid grid-cols-1 lg:grid-cols-2 gap-2 items-center">
+                              <div *ngFor="let exercise of selectedExercises" class="flex justify-between gap-3 items-center bg-[#f5f5f5] hover:bg-gray-200 text-[#2B788B] font-medium px-4 p-2  rounded-lg">
+                                <div class="text-[#2B788B] font-medium grid grid-cols-2 gap-2">
+                                  <div *ngFor="let option of exercise.options">
+                                    <div *ngIf="!option.is_correct">
+                                      <span class="bg-rose-400 text-white rounded-lg text-center p-1 px-2">
+                                        {{ option.text }}
+                                      </span>
+                                    </div>
+                                    <div *ngIf="option.is_correct">
+                                      <span class="bg-emerald-400 rounded-lg text-center p-1 px-2">
+                                        {{ option.text }}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <button class="p-1 bg-[#cccccc] font-semibold text-[#f5f5f5] rounded-full" style="font-family: Montserrat" (click)="removeSelectedExercise(exercise)">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                  </svg>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div *ngIf="selectedType === 'sentence'" class="flex-col w-full justify-center justify-items-center gap-3">
+                            <mat-form-field class=" bg-[#C3DCE3] mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
+                              <mat-label class="text-[#2B788B] font-semibold text-sm" >Select an Exercise</mat-label>
+                              <mat-select [(ngModel)]="selectedExercise" (ngModelChange)="addSelectedExercise()" class="rounded-3xl">
+                                <mat-option *ngFor="let exercise of exerciseData.data" [value]="exercise" class="bg-[#C3DCE3] ">
+                                  <div class="text-[#2B788B] font-medium">
+                                    {{exercise.sentence_with_gaps}}
+                                  </div>
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <div class="mt-2 grid grid-cols-1 lg:grid-cols-2 gap-2 items-center">
+                              <div *ngFor="let exercise of selectedExercises" class="flex justify-between gap-3 items-center bg-[#f5f5f5] hover:bg-gray-200 text-[#2B788B] font-medium px-4 p-2 rounded-lg">
+                                <span>
+                                  {{exercise?.sentence_with_gaps}}
+                                </span>
+                                <button class="p-1 bg-[#cccccc] font-semibold text-[#f5f5f5] rounded-full" style="font-family: Montserrat" (click)="removeSelectedExercise(exercise)">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                  </svg>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                  <button type="button" (click)="deleteCourse()" class="inline-flex w-full justify-center rounded-md bg-[#945069] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:ml-3 sm:w-auto">Delete</button>
-                  <button (click)="deleteModalCourse = false"  type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
-                </div>
-
+              </div>
             </div>
           </div>
+
         </div>
-      </div>
-      <!--   end of the modal window for course deletion -->
-
-      <!--Attach the exercise to the stage Start-->
-      <div *ngIf="showMenuAttachExerciseStage" class="min-h-[28rem] relative overflow-visible" >
-        <div class="p-4">
-          <div class="flex justify-between items-center">
-            <div>
-              <p class="text-xl text-black md:text-2xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">Stages</p>
-            </div>
-            <div class="text-black">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-              </svg>
-            </div>
-          </div>
-          <div class="pt-6 space-y-4 bg-blue-50 p-6 rounded-lg">
-
-
-
-<!--            <a class="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden-->
-<!--    font-medium transition-all bg-white rounded hover:bg-white group">-->
-<!--              <span class="w-48 h-48 rounded rotate-[-40deg]-->
-<!--    bg-purple-600 absolute bottom-0 left-0 -translate-x-full ease-out duration-700-->
-<!--     transition-all translate-y-full group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>-->
-<!--              <span class="relative w-96 text-black transition-colors duration-700 ease-in-out group-hover:text-white">Button Text</span>-->
-<!--            </a>-->
-
-            <div *ngFor="let stage of courseData.course_stages; let i = index">
-              <div (click)="toggleCheck(i)" (click)="selectStage(stage)" class="relative cursor-pointer w-full bg-[#C3DCE3] items-center justify-start py-3 overflow-hidden font-medium transition-all rounded group" style="font-family: Montserrat">
-                <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all ease-out duration-700 translate-x-0 left-0 w-full h-48': stage.isClicked}" class="-translate-x-full"></div>
-                <div class="flex items-center px-2">
-                  <div [ngClass]="{'block': stage.isClicked, 'hidden': !stage.isClicked}">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-white duration-700 ease-in-out transform transition-all z-20" [ngClass]="{'translate-x-1': stage.isClicked}">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <span class="relative z-50 px-3 font-bold" [ngClass]="{'transform translate-x-1 transition-colors duration-700 ease-in-out text-white': stage.isClicked, 'text-[#2B788B]': !stage.isClicked}">{{ stage.title }}</span>
-                </div>
-              </div>
-              <div *ngIf="stage.isClicked" class="bg-[#C3DCE3] rounded-lg p-4">
-                <div class="bg-white text-start p-4 rounded-lg grid grid-cols-2 " style="font-family: Montserrat">
-                  <div *ngFor="let type of exerciseTypes" class="">
-                    <button (click)="fetchExerciseData(type)" class="w-48 mb-3 h-48 bg-blue-100">
-                      <span *ngIf="type == 'compile_phrase'">Compile Phrase</span>
-                      <span *ngIf="type == 'audit'">Phonetic Transcript</span>
-                      <span *ngIf="type == 'pair_exercise'">Pairs of Meaning</span>
-                      <span *ngIf="type == 'picture_exercise'">Picture Association</span>
-                      <span *ngIf="type == 'sentence'">Missing links</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div *ngIf="exerciseData" class="absolute top-0 left-0 z-50 bg-violet-100 rounded-lg p-3">
-                <div *ngIf="selectedType === 'compile_phrase'">
-                  <div *ngFor="let exercise of exerciseData.data">
-                    <p>{{exercise.id}}</p>
-                    <p>{{exercise.phrase}}</p>
-                  </div>
-                </div>
-                <div *ngIf="selectedType === 'audit'">
-                  <div *ngFor="let exercise of exerciseData.data">
-                    <p>{{exercise.id}}</p>
-                    <p>{{exercise.text}}</p>
-                  </div>
-                </div>
-                <div *ngIf="selectedType === 'pair_exercise'">
-                  <div *ngFor="let exercise of exerciseData.data">
-                    <p>{{exercise.id}}</p>
-                    <div *ngFor="let option of exercise.options">
-                      <p>
-                        {{option.word}}
-                      </p>
-                      <p>
-                        {{option.translation}}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div *ngIf="selectedType === 'picture_exercise'">
-                  <div *ngFor="let exercise of exerciseData.data">
-                    <p>{{exercise.id}}</p>
-                    <div *ngFor="let option of exercise.options">
-                      <p>
-                        {{option.text}}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div *ngIf="selectedType === 'sentence'">
-                  <div *ngFor="let exercise of exerciseData.data">
-                    <p>{{exercise.id}}</p>
-                    <p>{{exercise.sentence_with_gaps}}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!--            <div class="flex items-center gap-3 cursor-pointer p-3 rounded font-bold" [ngClass]="{'bg-[#C3DCE3]': !isClicked, 'bg-[#2B788B]': isClicked}" style="font-family: Montserrat">-->
-<!--              <div [ngClass]="{'block': isClicked, 'hidden': !isClicked}">-->
-<!--                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"-->
-<!--                     class="w-6 h-6 text-white transform transition-transform"-->
-<!--                     [ngClass]="{'translate-x-1': isClicked}">-->
-<!--                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />-->
-<!--                </svg>-->
-<!--              </div>-->
-<!--              <span (click)="toggleCheck()" [ngClass]="{'translate-x-3, text-white': isClicked, 'text-[#2B788B]': !isClicked}">Lorem ipsum.</span>-->
-<!--            </div>-->
-
-            <!--            <div class="space-y-2">-->
-<!--              <div class="text-lg font-bold">Stages:</div>-->
-<!--              <div *ngFor="let stage of courseData.course_stages">-->
-<!--                <div class="flex items-center space-x-2 cursor-pointer transition-transform transform-gpu hover:scale-105">-->
-<!--                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-500">-->
-<!--                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />-->
-<!--                  </svg>-->
-<!--                  <span>{{ stage.title }}</span>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-
-
-<!--            <div *ngFor="let stage of courseData.course_stages" class="px-8">-->
-<!--              <div class="bg-[#C3DCE3] p-2 rounded-lg flex items-center">-->
-<!--                <p class="text-lg font-bold text-[#2B788B] " style="font-family: DelaGothic">{{ stage.title }}</p>-->
-<!--              </div>-->
-<!--            </div>-->
-            <div class="flex gap-4 md:justify-center lg:justify-end" style="font-family: Montserrat">
-              <button type="button" (click)="showModalWindow('editCourse')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
-              <button type="submit" [disabled]="courseEditForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90">Edit Course</button>
-            </div>
-          </div>
+        <div class="flex px-3 pb-3 justify-end gap-4" style="font-family: Montserrat">
+          <button type="button" (click)="showModalWindow('attachExercise')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
         </div>
       </div>
       <!--Attach the exercise to the stage End-->
 
-    </div>
-    <div class="bg-white shadow-lg rounded-lg w-1/2 p-4 h-[28rem]">
-        <div class="w-full flex flex-col justify-between h-full">
 
-            <div class="space-y-2">
+
+    </div>
+<!--  h-[28rem]-->
+    <div *ngIf="!showMenuEditForm && !showMenuCreateStage && !showMenuAttachExerciseStage && !deleteModalCourse && !showMenuEditStage"
+         class="bg-white shadow-lg rounded-lg w-full md:max-w-lg lg:max-w-xl p-3 md:p-2 lg:p-4 ">
+        <div class="w-full flex flex-col justify-between h-full md:p-4">
+            <div class="space-y-2 lg:pb-12">
                 <div class="flex justify-between items-center">
                     <div>
-                        <p class="text-xl text-black md:text-2xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">{{courseData.title}}</p>
+                        <p class="text-lg text-black md:text-2xl lg:px-0" style="font-family: DelaGothic">{{courseData.title}}</p>
                     </div>
                     <div class="text-black" style="font-family: DelaGothic">
-                        <p class="text-end text-lg p-2 px-4 rounded-lg" *ngIf="courseData.price == 0">Free</p>
-                        <p class="text-end p-2 px-4 rounded-lg" *ngIf="courseData.price !== 0">${{courseData.price}}</p>
+                        <p class="text-end text-lg lg:p-2 lg:px-4 rounded-lg" *ngIf="courseData.price == 0">Free</p>
+                        <p class="text-end text-lg lg:p-2 lg:px-4 rounded-lg" *ngIf="courseData.price !== 0">${{courseData.price}}</p>
                     </div>
                 </div>
 
-                <div class="flex items-center">
-                    <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                      <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                         <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                    </svg>
-                    <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                      </svg>
+                      <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                         <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                    </svg>
-                    <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                      </svg>
+                      <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                         <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                    </svg>
-                    <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                      </svg>
+                      <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                         <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                    </svg>
-                    <svg class="w-4 h-4 text-gray-400 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                      </svg>
+                      <svg class="w-4 h-4 text-gray-400 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                         <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                    </svg>
-                    <p class="ml-2 text-sm font-medium text-gray-500" style="font-family: Montserrat">4.95 out of 5</p>
+                      </svg>
+                    </div>
+                    <span class="ml-2 text-sm font-medium text-gray-500" style="font-family: Montserrat">4.95 out of 5</span>
                 </div>
 
                 <div class="pt-4">
                     <p class="text-xs md:text-sm font-medium text-[#757575]" style="font-family: Montserrat">{{courseData.description}} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam, ratione similique. Consequuntur.</p>
                 </div>
 
-                <div class="flex gap-4 w-full  pt-6">
-                    <div class="bg-[#C3DCE3] relative rounded w-1/2 overflow-hidden p-4 flex justify-between space-y-2">
+                <div class="pt-6">
+                    <div class="bg-[#C3DCE3] relative rounded w-full overflow-hidden p-2 flex justify-between space-y-2">
                         <div class="flex flex-col justify-between gap-8 h-full z-10">
                             <div>
-                                <p class="text-lg text-[#2B788B] md:text-xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">
+                                <p class="text-lg text-[#2B788B] md:text-xl md:px-4 lg:px-0" style="font-family: DelaGothic">
                                     Attach Stages :
                                 </p>
                             </div>
-                            <div>
+                            <div class="md:px-4 lg:px-0">
                                 <button type="button" (click)="showModalWindow('attachExercise')" class="bg-[#2B788B] text-white hover:text-[#2B788B] hover:bg-gray-50 p-2 rounded">
                                     <svg *ngIf="!showMenuAttachExerciseStage" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -513,41 +811,20 @@
                         </div>
                         <img class="h-28 absolute transform -translate-y-1/2 top-1/2 right-2 z-0" src="./assets/img/course-view-page/3d-chart-column.png" alt="">
                     </div>
-
-                    <div class="bg-[#F2D4DC] rounded w-1/2 p-4 flex relative overflow-hidden justify-between space-y-2">
-                        <div class="flex flex-col justify-between gap-8 z-10 h-full">
-                            <div>
-                                <p class="text-lg text-[#945069] md:text-xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">
-                                    Attach Exercises:
-                                </p>
-                            </div>
-                            <div>
-                                <button type="button" class="bg-[#945069] text-white hover:text-[#945069] hover:bg-gray-50 p-2 rounded">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                    </svg>
-                                </button>
-
-                            </div>
-                        </div>
-                        <img class="h-32 absolute transform -translate-y-1/2 top-1/2 right-0 z-0" src="./assets/img/course-view-page/casual-life-3d-blue-notebook-highlighter-pen-and-tape.png" alt="">
-                    </div>
                 </div>
             </div>
 
-            <div class="flex justify-between items-center gap-4 p-2 border-t border-gray-200" style="font-family: Montserrat">
+            <div class="flex justify-between items-center pt-3 md:pt-5 lg:gap-4 lg:p-2 border-t border-gray-200" style="font-family: Montserrat">
                 <div>
-                    <button type="button" (click)="showModalWindow('createStage')"  class="inline-flex w-full justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Create Stage</button>
+                    <button type="button" (click)="showModalWindow('createStage')"  class="inline-flex w-full justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Create Stage</button>
                 </div>
                 <div class="flex gap-4 items-center">
-                    <button type="button" (click)="showModalWindow('editCourse')" class="inline-flex w-full justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Edit</button>
-                    <div class="w-px h-6 bg-gray-300"></div>
-                    <button type="button" (click)="deleteModalCourse = true" class="inline-flex w-full justify-center rounded-lg bg-[#945069] px-3 py-2 text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Delete</button>
+                    <button type="button" (click)="showModalWindow('editCourse')" class="inline-flex w-full justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Edit</button>
+                    <div class="hidden md:block w-px h-6 bg-gray-300"></div>
+                    <button type="button" (click)="showDeleteCourseMenu()" class="inline-flex w-full justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Delete</button>
                 </div>
             </div>
 
         </div>
     </div>
 </section>
-
-
