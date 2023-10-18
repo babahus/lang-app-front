@@ -69,26 +69,28 @@ export class ExerciseService extends BaseService
     }))
   }
 
-  solveExercise(id : number|string|null, type : string, data : UntypedFormGroup) : Promise<any> {
+  solveExercise(exerciseId:number ,id : number|string|null, type : string, data : UntypedFormGroup) : Promise<any> {
     if (type == 'compile_phrase')
     {
       this.body = {
         'id' : parseInt(id as string),
         'type' : type,
-        'data' : data.get('data')?.value.join(' ')
+        'data' : data.get('data')?.value.join(' '),
+        'exercise_id' : exerciseId
+      }
+    } else {
+      this.body = {
+        'id' : parseInt(id as string),
+        'type' : type,
+        'data' : data.get('data')?.value,
+        'exercise_id' : exerciseId
       }
     }
     return new Promise(((resolve, reject) => {
       this.http.post<any>(this.url + '/exercise/solve', this.body).pipe(catchError((error) => {
+        this.handleError(error, data);
         reject(error);
-        if (error.status === 422) {
-          data.setErrors(error.error.message);
-        }
-        if (error.status === 400) {
-          console.log(error.error.data);
-          data.setErrors(error.error.data);
-        }
-        return throwError(error)
+        return throwError(error);
       })).subscribe((data: any) => {
         resolve(data.data);
       });
@@ -104,6 +106,7 @@ export class ExerciseService extends BaseService
             }
             form.setErrors(errorsToForm);
         } else {
+          console.log(error);
             form.setErrors({ backend: error.error.data });
         }
 
@@ -260,6 +263,4 @@ export class ExerciseService extends BaseService
           return dataExercise;
       }
   }
-
-
 }

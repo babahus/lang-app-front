@@ -38,6 +38,7 @@ export class CompilePhraseComponent implements OnInit{
 
   async ngOnInit(): Promise<void> {
     this.compilePhrase = await this.exerciseService.getExerciseByTypeAndId('compile_phrase', this.id);
+    console.log(this.compilePhrase);
     let shuffledArray = this.compilePhrase.phrase.split( ' ');
     let different = false;
     this.compilePhraseForm.get('data')?.setValue([...shuffledArray]);
@@ -46,11 +47,11 @@ export class CompilePhraseComponent implements OnInit{
       this.compilePhraseForm.get('data')?.value.sort(() => Math.random() - 0.5);
       different = !this.compilePhraseForm.get('data')?.value.every((value: string, index: number) => value === shuffledArray[index]);
     }
-    console.log(this.compilePhraseForm.get('data')?.value);
   }
 
   async onSubmit() {
-    await this.exerciseService.solveExercise(this.id, 'compile_phrase', this.compilePhraseForm)
-
+    console.log(this.id);
+    console.log(this.compilePhraseForm);
+    await this.exerciseService.solveExercise(12 ,this.id, 'compile_phrase', this.compilePhraseForm)
   }
 }

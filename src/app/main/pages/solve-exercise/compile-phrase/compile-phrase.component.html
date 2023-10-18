@@ -1,3 +1,37 @@
+<section class="min-h-screen bg-[#C3DCE3] w-full  p-3 flex md:items-center justify-center">
+  <div class="w-full bg-white md:max-w-md lg:max-w-2xl rounded-lg p-4">
+    <div class="mb-4">
+      <span class="text-xl text-black md:text-2xl lg:px-0" style="font-family: DelaGothic">Compile Phrase {{id}}</span>
+    </div>
+    <div class="">
+      <form [formGroup]="compilePhraseForm">
+        <div  class="mb-4">
+          <div class="page-section">
+            <p class="text-sm font-medium indent-5 text-[#757575]" style="font-family: Montserrat">
+              <strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit.
+              <strong>dolores enim </strong>eos hic illo inventore iure libero magnam minima minus obcaecati optio pariatur porro quibusdam quos reiciendis.
+            </p>
+
+            <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let word of this.compilePhraseForm.get('data')?.value" cdkDrag>{{word}}</div>
+            </div>
+            <div class="mt-2 error" *ngIf="compilePhraseForm.errors">
+              {{compilePhraseForm.errors}}
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-end">
+          <button type="button" class="bg-[#2B788B] text-sm text-white font-semibold p-2 px-4 rounded-full"
+                  (click)="onSubmit()" style="font-family: Montserrat"
+          >
+            Answer
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!--<div ui-view="" class="ui-view-main ng-scope">-->
 <!--  <div class="parallax bg-green-uniq page-section ng-scope">-->
 <!--    <div class="parallax-layer container" data-opacity="true" style="transform: translate3d(0px, 0px, 0px); opacity: 1;">-->
@@ -33,7 +67,7 @@
 <!--            </div>-->
 <!--          </div>-->
 
-<!--          <a class="btn btn-solid-border" (click)="onSubmit()">Answer</a>-->
+<!--          <button type="button" class="bg-emerald-600 text-white font-semibold p-2 px-4 roundend-lg" (click)="onSubmit()">Answer</button>-->
 
 <!--        </div>-->
 <!--      </form>-->
