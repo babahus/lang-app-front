@@ -385,9 +385,10 @@ export class CourseViewComponent implements OnInit{
   }
 
   async getProgressDataForStage(stage: any) {
-    console.log(stage.id);
-    this.stagesProgress = await this.progressService.getStageProgressByUser(Number(sessionStorage.getItem('id')), stage.id);
-    console.log(this.stagesProgress)
+    if (stage.isClicked){
+      this.stagesProgress = await this.progressService.getStageProgressByUser(Number(sessionStorage.getItem('id')), stage.id);
+      console.log(this.stagesProgress)
+    }
   }
 
   isExerciseCompleted(exerciseId : number): boolean {

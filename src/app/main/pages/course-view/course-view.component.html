@@ -782,12 +782,12 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                           </svg>
                         </div>
-                        <p>Choose the stage to which you want to add exercises. Click on the stage, and its details will be displayed.</p>
+                        <p>Click on the stage, and its details will be displayed.</p>
                       </div>
                     </li>
                     <li class="flex flex-col">
                         <span class="text-xs font-medium text-gray-900">
-                          Choosing Exercise Types:
+                          Choosing Exercise:
                         </span>
                       <div class="flex gap-2 items-start">
                         <div class="text-[#2B788B]">
@@ -795,72 +795,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                           </svg>
                         </div>
-                        <p>Select the type of exercises you wish to add to this stage. You have various exercise types available, such as "Compile Phrase," "Phonetic Transcript," "Pairs of Meaning," "Picture Association," and "Missing Links."</p>
-                      </div>
-                    </li>
-                    <li class="flex flex-col">
-                        <span class="text-xs font-medium text-gray-900">
-                          Adding Exercises:
-                        </span>
-                      <div class="flex gap-2 items-start">
-                        <div class="text-[#2B788B]">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                          </svg>
-                        </div>
-                        <p>After selecting the exercise type, you will see a list of available exercises of that type. Pick the desired exercise from the list, and it will automatically be attached to your stage.</p>
-                      </div>
-                    </li>
-                    <li class="flex flex-col">
-                        <span class="text-xs font-medium text-gray-900">
-                          Detaching Exercises:
-                        </span>
-                      <div class="flex gap-2 items-start">
-                        <div class="text-[#2B788B]">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                          </svg>
-                        </div>
-                        <p>If you change your mind about using a particular exercise for a stage, you can easily detach it. Just click the corresponding button to detach the exercise.</p>
-                      </div>
-                    </li>
-                    <li class="flex flex-col">
-                        <span class="text-xs font-medium text-gray-900">
-                          Navigating Between Stages:
-                        </span>
-                      <div class="flex gap-2 items-start">
-                        <div class="text-[#2B788B]">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                          </svg>
-                        </div>
-                        <p>After filling one stage with exercises, you can move on to another stage. Select a different stage from the list.</p>
-                      </div>
-                    </li>
-                    <li class="flex flex-col">
-                        <span class="text-xs font-medium text-gray-900">
-                          Creating a New Stage:
-                        </span>
-                      <div class="flex gap-2 items-start">
-                        <div class="text-[#2B788B]">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                          </svg>
-                        </div>
-                        <p> If you need to create a new stage, you have that option available.</p>
-                      </div>
-                    </li>
-                    <li class="flex flex-col">
-                        <span class="text-xs font-medium text-gray-900">
-                          Support and Assistance:
-                        </span>
-                      <div class="flex gap-2 items-start">
-                        <div class="text-[#2B788B]">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                          </svg>
-                        </div>
-                        <p>Should you encounter any issues or difficulties when attaching or detaching exercises from stages, feel free to reach out to our customer support. We are here to help and address any questions you may have.</p>
+                        <p>Choose the exercise you want to solve, click on the exercise card to navigate to the exercise solution page. Please note that you can navigate to exercises only with the
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="orange" class="bi bi-exclamation-square-fill" viewBox="0 0 16 16">
+                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                          </svg>  image.</p>
                       </div>
                     </li>
                   </ul>
@@ -910,7 +848,10 @@
 
                         <div *ngIf="exercise['type'] === 'compile_phrase'" class="flex items-center p-2 bg-gray-100 rounded">
                           <span class="text-sm text-gray-700 mr-2">Phrase:</span>
-                          <span class="font-medium text-center items-center">**** ***** *****</span>
+                          <span *ngIf="isExerciseCompleted(exercise['id'])" class="font-medium text-center items-center">
+                            {{exercise['data']['phrase']}}
+                          </span>
+                          <span *ngIf="!isExerciseCompleted(exercise['id'])" class="font-medium text-center items-center">**** ***** *****</span>
                         </div>
 
                         <div *ngIf="exercise['type'] === 'sentence'" class="flex items-center p-2 bg-gray-100 rounded">
@@ -926,8 +867,8 @@
                           <span class="text-sm text-gray-700 mr-2">Listen and translate Phrase</span>
                         </div>
 
-                        <div *ngIf="exercise['type'] === 'audit'" class="flex items-center p-2 bg-gray-100 rounded">
-                          <span class="text-sm text-gray-700 mr-2">Listen and translate Phrase</span>
+                        <div *ngIf="exercise['type'] === 'picture_exercise'" class="flex items-center p-2 bg-gray-100 rounded">
+                          <span class="text-sm text-gray-700 mr-2">Look at the picture and choose an answer option.</span>
                         </div>
                       </div>
                     </ng-container>
@@ -956,7 +897,7 @@
     <div *ngIf="!showMenuEditForm && !showMenuCreateStage && !showMenuProgressStages && !showMenuAttachExerciseStage && !deleteModalCourse && !showMenuEditStage"
          class="bg-white shadow-lg rounded-lg w-full md:max-w-lg lg:max-w-xl p-3 md:p-2 lg:p-4 ">
         <div class="w-full flex flex-col justify-between h-full md:p-4">
-            <div class="space-y-2 lg:pb-12">
+            <div [ngClass]="{'lg:pb-12' : currentUserRole != 'User'}" class="space-y-2">
                 <div class="flex justify-between items-center">
                     <div>
                         <p class="text-lg text-black md:text-2xl lg:px-0" style="font-family: DelaGothic">{{courseData.title}}</p>
@@ -1040,7 +981,7 @@
                 </div>
             </div>
 
-            <div class="flex justify-between items-center pt-3 md:pt-5 lg:gap-4 lg:p-2 border-t border-gray-200" style="font-family: Montserrat">
+            <div *ngIf="this.currentUserRole !== 'User'" class="flex justify-between items-center pt-3 md:pt-5 lg:gap-4 lg:p-2 border-t border-gray-200" style="font-family: Montserrat">
                 <div>
                     <button type="button" (click)="showModalWindow('createStage')"  class="inline-flex w-full justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Create Stage</button>
                 </div>
