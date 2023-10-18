@@ -6,6 +6,7 @@ import {UntypedFormGroup, ValidationErrors} from "@angular/forms";
 import {catchError, throwError} from "rxjs";
 import {Audit, CompilePhrase, Dictionary} from "../../main/models/exercise";
 import {AttachedExercise} from "../../main/models/attached-exercise";
+import {Store} from "@ngrx/store";
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,10 @@ export class ExerciseService extends BaseService
   constructor(protected override http: HttpClient,
               protected override route: Router,
               protected override router: ActivatedRoute,
+              protected override store: Store
               )
   {
-    super(http, route, router);
+    super(http, route, router, store);
   }
 
   getExercisesByType(strTypeExercise: string): Promise<Audit[]|CompilePhrase[]|Dictionary[]> {
@@ -94,21 +96,6 @@ export class ExerciseService extends BaseService
       });
     }))
   }
-
-  //////////////
-    private handleError(error: any, form: UntypedFormGroup) {
-        if (error.status === 422) {
-            let errorsToForm: ValidationErrors | null = {};
-            for (const key of Object.keys(error.error.errors)) {
-                errorsToForm[key] = error.error.errors[key][0];
-            }
-            form.setErrors(errorsToForm);
-        } else {
-            form.setErrors({ backend: error.error.data });
-        }
-
-        return throwError(error);
-    }
 
   getExerciseData(type: string): Promise<any>{
     return  new Promise((resolve, reject) => {

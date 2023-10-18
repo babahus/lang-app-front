@@ -33,6 +33,9 @@ import { FormsModule } from '@angular/forms';
 
 import { CourseViewComponent } from './pages/course-view/course-view.component';
 import { MaterialModule } from './material/material.module';
+import {StoreModule} from "@ngrx/store";
+import {userRoleReducer} from "../core/store/user-role-reducer";
+// import { AttachExerciseStageComponent } from './components/modals/attach-exercise-stage/attach-exercise-stage.component'
 
 const routes: Routes = [
   { path : '', component: IndexComponent},
@@ -90,6 +93,7 @@ const routes: Routes = [
     ExercisesCreateComponent,
     CourseCreateComponent,
     CourseViewComponent,
+    AttachExerciseStageComponent,
   ],
   exports: [
     HeaderComponent,
@@ -105,7 +109,8 @@ const routes: Routes = [
         SweetAlert2Module,
         FormsModule,
         TranslateModule,
-        MaterialModule
+        MaterialModule,
+      StoreModule.forRoot({ userRole: userRoleReducer }),
     ]
 })
 export class MainModule { }

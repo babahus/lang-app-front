@@ -6,7 +6,11 @@ import {FormBuilder, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
 import {StageService} from "../../../core/services/stage.service";
 import {ExerciseService} from "../../../core/services/exercise.service";
-import {catchError, throwError} from "rxjs";
+import {ProfileService} from "../../../core/services/profile-service.service";
+import {Store} from "@ngrx/store";
+import * as fromSelectors from "../../../core/selectors/role-selector";
+import {ProgressExercisesService} from "../../../core/services/progress-exercises.service";
+import {ProgressData} from "../../models/progress-data";
 
 @Component({
   selector: 'app-course-view',
@@ -30,12 +34,39 @@ export class CourseViewComponent implements OnInit{
   isCardInfoVisible = false;
   deleteModalCourse = false;
   showMenuEditStage = false;
+  showMenuProgressStages = false;
 
   selectedType: string = '';
   exerciseData: any;
   exerciseTypes: string[] = ['compile_phrase', 'audit', 'pair_exercise', 'picture_exercise', 'sentence'];
 
   selectedStage: any;
+  public currentUserRole!: string;
+  public stagesProgress: ProgressData[] = [];
+
+  constructor(
+    private route: ActivatedRoute,
+    private courseService: CourseService,
+    private profileService: ProfileService,
+    private fb: FormBuilder,
+    private router: Router,
+    private stageService: StageService,
+    private exerciseService: ExerciseService,
+    private progressService: ProgressExercisesService,
+    private store : Store
+  )
+  {
+    this.store.select(fromSelectors.selectRole).subscribe(async role => {
+      console.log('Your role is')
+      console.log(role);
+      if (role == undefined) {
+        this.currentUserRole = await this.profileService.getCachedInfo();
+        console.log(this.currentUserRole);
+      } else {
+        this.currentUserRole = role;
+      }
+    });
+  }
 
   selectStage(stage: any) {
     this.selectedStage = stage;
@@ -61,17 +92,6 @@ export class CourseViewComponent implements OnInit{
 
     this.courseData.course_stages[index].isClicked = !this.courseData.course_stages[index].isClicked;
   }
-
-
-  constructor(
-    private route: ActivatedRoute,
-    private courseService: CourseService,
-    private fb: FormBuilder,
-    private router: Router,
-    private stageService: StageService,
-    private exerciseService: ExerciseService,
-  )
-  {}
 
   courseEditForm = this.fb.group({
     title: this.fb.control('', Validators.compose([Validators.required, Validators.minLength(5)])),
@@ -101,6 +121,7 @@ export class CourseViewComponent implements OnInit{
   async fetchCourseData(courseId: string) {
     try {
       this.courseData =  await this.courseService.getCourseDetails(courseId);
+      console.log(this.courseData)
     } catch (error:any) {
       this.router.navigate(['/**']);
     }
@@ -205,30 +226,27 @@ export class CourseViewComponent implements OnInit{
   }
 
   showModalWindow(index: string) {
-    if (index === 'editCourse') {
-      this.showMenuEditForm = !this.showMenuEditForm;
-      this.showMenuCreateStage = false;
-      this.showMenuAttachExerciseStage = false;
-      this.showMenuEditStage = false;
-    } else if (index === 'createStage') {
-      this.showMenuEditForm = false;
-      this.showMenuCreateStage = !this.showMenuCreateStage;
-      this.showMenuAttachExerciseStage = false;
-      this.showMenuEditStage = false;
-    } else if (index === 'attachExercise') {
-      this.showMenuEditForm = false;
-      this.showMenuCreateStage = false;
-      this.showMenuEditStage = false;
-      this.showMenuAttachExerciseStage = !this.showMenuAttachExerciseStage;
-    } else if (index === 'editStage'){
-      this.showMenuEditForm = false;
-      this.showMenuCreateStage = false;
-      this.showMenuAttachExerciseStage = false;
-      this.showMenuEditStage = !this.showMenuEditStage;
-    } else {
-      this.showMenuEditForm = false;
-      this.showMenuCreateStage = false;
-      this.showMenuAttachExerciseStage = false;
+    switch (index) {
+      case 'editCourse':
+        this.showMenuEditForm = !this.showMenuEditForm;
+        break;
+      case 'createStage':
+        this.showMenuCreateStage = !this.showMenuCreateStage;
+        break;
+      case 'attachExercise':
+        this.showMenuAttachExerciseStage = !this.showMenuAttachExerciseStage;
+        break;
+      case 'editStage':
+        this.showMenuEditStage = !this.showMenuEditStage;
+        break;
+      case 'showProgressStages':
+        this.showMenuProgressStages = !this.showMenuProgressStages;
+        break;
+      default:
+        this.showMenuEditForm = false;
+        this.showMenuCreateStage = false;
+        this.showMenuAttachExerciseStage = false;
+        this.showMenuProgressStages = false;
     }
   }
 
@@ -365,5 +383,18 @@ export class CourseViewComponent implements OnInit{
       this.modalDeleteStage = false;
     }
   }
+
+  async getProgressDataForStage(stage: any) {
+    console.log(stage.id);
+    this.stagesProgress = await this.progressService.getStageProgressByUser(Number(sessionStorage.getItem('id')), stage.id);
+    console.log(this.stagesProgress)
+  }
+
+  isExerciseCompleted(exerciseId : number): boolean {
+    const foundProgress = this.stagesProgress.find(progress => progress.exercise === exerciseId);
+
+    return !!foundProgress && foundProgress.user_progress !== null;
+  }
+
 
 }

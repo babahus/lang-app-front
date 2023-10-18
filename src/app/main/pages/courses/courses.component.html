@@ -205,16 +205,25 @@
           </div>
           <div class="p-5 w-full lg:w-1/2">
             <div class="flex justify-between items-center" style="font-family: Montserrat">
-              <div>
-                <h3 class="cursor-pointer text-xl font-bold tracking-tight text-gray-900">
-                  <a class="uppercase font-semibold text-base">{{ course.title }}</a>
-                </h3>
-              </div>
-              <div>
-                <p style="font-family: DelaGothic" class="text-[#2B788B]">
-                  ${{ course.price }}
-                </p>
-              </div>
+                <div>
+                  <h3 class="cursor-pointer text-xl font-bold tracking-tight text-gray-900">
+                    <a *ngIf="isCourseAttached(course.id); else noLink"
+                       [routerLink]="['/course', course.id]"
+                       class="uppercase font-semibold text-base hover:underline">
+                      {{ course.title }}
+                    </a>
+                    <ng-template #noLink>
+                      <span class="uppercase font-semibold text-base">
+                        {{ course.title }}
+                      </span>
+                    </ng-template>
+                  </h3>
+                </div>
+                <div>
+                  <p style="font-family: DelaGothic" class="text-[#2B788B]">
+                    ${{ course.price }}
+                  </p>
+                </div>
             </div>
             <p class="mt-3 mb-4 font-light text-xs text-[#757575]">{{ course.description }}</p>
             <div *ngIf="!isCourseAttached(course.id)" class="absolute cursor-pointer -bottom-2 -right-2 bg-[#C4A24C] rounded-xl p-2 text-white" (click)="attachCourseToUser(course.id)">
