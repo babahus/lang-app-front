@@ -35,6 +35,7 @@ import { CourseViewComponent } from './pages/course-view/course-view.component';
 import { MaterialModule } from './material/material.module';
 import {StoreModule} from "@ngrx/store";
 import {userRoleReducer} from "../core/store/user-role-reducer";
+import {CanAccessCourseGuard} from "../core/guards/can-access-course.guard";
 // import { AttachExerciseStageComponent } from './components/modals/attach-exercise-stage/attach-exercise-stage.component'
 
 const routes: Routes = [
@@ -56,7 +57,7 @@ const routes: Routes = [
 
   { path : 'exercises-create', component : ExercisesCreateComponent, canActivate : [AuthGuard]},
   { path : 'courses-create', component : CourseCreateComponent, canActivate : [AuthGuard]},
-  { path : 'course/:id', component : CourseViewComponent, canActivate : [AuthGuard]},
+  { path : 'course/:id', component : CourseViewComponent, canActivate : [AuthGuard,CanAccessCourseGuard]},
 
   { path : 'dashboard', component : DashboardComponent, canActivate : [AuthGuard]},
   { path : 'profile', component : ProfileComponent, canActivate : [AuthGuard]},
@@ -70,6 +71,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  providers : [CanAccessCourseGuard],
   declarations: [
     IndexComponent,
     AboutComponent,

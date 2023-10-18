@@ -142,4 +142,30 @@ export class CourseService extends BaseService {
     })
   }
 
+  checkIfUserIsCreator(courseId : number): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get<any>(this.url + `/course/${courseId}/is-creator`).pipe(
+        catchError((error) => {
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
+        resolve(data.data);
+      });
+    });
+  }
+
+  checkIfUserAttachedToCourse(courseId : number): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get<any>(this.url + `/course/${courseId}/is-attached`).pipe(
+        catchError((error) => {
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
+        resolve(data.data);
+      });
+    });
+  }
+
 }
