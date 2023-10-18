@@ -93,7 +93,6 @@ const routes: Routes = [
     ExercisesCreateComponent,
     CourseCreateComponent,
     CourseViewComponent,
-    AttachExerciseStageComponent,
   ],
   exports: [
     HeaderComponent,
