@@ -17,7 +17,6 @@ export class SentenceComponent implements OnInit {
   sentenceStr: string = '';
   sentenceArr: any = [];
   sentenceForm: FormGroup;
-  studentAnswers: string[] = [];
 
   changeSentence() {
     this.sentenceArr.forEach((word: any, index: any) => {
