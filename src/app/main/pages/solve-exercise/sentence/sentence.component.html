@@ -1,4 +1,4 @@
-<section class="min-h-screen bg-[#C3DCE3] w-full  p-3 flex md:items-center justify-center">
+<section class="md:min-h-screen bg-[#C3DCE3] w-full  p-3 flex md:items-center justify-center">
   <div class="w-full bg-white pb-4 md:max-w-md lg:max-w-2xl space-y-4 p-4 flex flex-col items-center justify-center rounded-3xl">
     <div class="w-full px-3 lg:px-0 lg:max-w-xl mb-4 lg:mb-0 space-y-3">
       <span class="text-xl text-center lg:text-start text-black md:text-2xl lg:px-0" style="font-family: DelaGothic">Missing links {{id}}</span>
@@ -12,7 +12,7 @@
       </span>
       <form [formGroup]="sentenceForm" class="flex gap-3">
         <div *ngFor="let word of sentenceArr; let i = index" >
-          <input type="text" id="input{{ i }}" formControlName="data{{ i }}"
+          <input type="text" id="input{{ i }}" formControlName="answer{{ i }}"
                  class="bg-blue-50 w-full text-[#2B788B] font-semibold placeholder-[#80a4ad] text-xs md:text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block p-2 "
           >
         </div>
