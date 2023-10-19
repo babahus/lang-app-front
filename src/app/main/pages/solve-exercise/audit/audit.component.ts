@@ -1,26 +1,35 @@
 import {Component, OnInit} from '@angular/core';
 import {ExerciseService} from "../../../../core/services/exercise.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Audit} from "../../../models/exercise";
 import {FormBuilder, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
+import {PseudoCryptService} from "../../../../core/services/pseudo-crypt.service";
+import {CourseService} from "../../../../core/services/course.service";
+import {
+  BaseSolveExerciseComponent
+} from "../../../../core/components/base-solve-exercise/base-solve-exercise.component";
 
 @Component({
   selector: 'app-audit',
   templateUrl: './audit.component.html',
   styleUrls: ['./audit.component.css']
 })
-export class AuditComponent implements OnInit {
+export class AuditComponent extends BaseSolveExerciseComponent implements OnInit {
 
-  exerciseService: ExerciseService;
-  id: string | null | number;
   audit!: Audit;
   audioElement: HTMLAudioElement;
 
-  constructor(exerciseService: ExerciseService, private route: ActivatedRoute, private fb: FormBuilder) {
+  constructor(protected override exerciseService : ExerciseService,
+              protected override route: ActivatedRoute,
+              protected override cryptoService: PseudoCryptService,
+              protected override router: Router,
+              protected override courseService : CourseService,
+              private fb: FormBuilder
+  )
+  {
+    super(exerciseService, route, cryptoService, router, courseService);
     this.audioElement = new Audio();
-    this.exerciseService = exerciseService;
-    this.id = this.route.snapshot.params['id'];
   }
 
   audioForm = this.fb.group({
@@ -28,8 +37,12 @@ export class AuditComponent implements OnInit {
   })
 
   async ngOnInit(): Promise<void> {
-    this.audit = await this.exerciseService.getExerciseByTypeAndId('audit', this.id);
-    this.audioElement.src = this.audit.path;
+    try {
+      this.audit = await this.exerciseService.getExerciseByTypeAndId('audit', this.id);
+      this.audioElement.src = this.audit.path;
+    } catch (error : any) {
+      this.errorWithRedirect(error!.error.data)
+    }
   }
 
   audioPlaying: boolean = false;
@@ -44,26 +57,21 @@ export class AuditComponent implements OnInit {
 
   async onSubmit() {
     try {
-      const result = await this.exerciseService.solveExercise(43 ,this.id, 'audit', this.audioForm);
+      const result = await this.exerciseService.solveExercise(this.exerciseId,this.id, 'audit', this.audioForm);
       this.success(result);
+      if (this.courseId) {
+        await this.router.navigate(['/course', this.courseId], {
+          queryParams: {
+            stage: this.stageId,
+            flag: 'showProgressStages'
+          }
+        });
+      }
     } catch (error) {
       console.log(error);
     } finally {
       this.audioForm.reset();
     }
-  }
-
-  success(text:string){
-    Swal.fire({
-      title: 'Success',
-      text: text,
-      icon: 'success',
-      confirmButtonText: 'Ok',
-      width: 600,
-      padding: '3em',
-      color: '#2B788B',
-      background: '#F6F5F4'
-    })
   }
 
 }

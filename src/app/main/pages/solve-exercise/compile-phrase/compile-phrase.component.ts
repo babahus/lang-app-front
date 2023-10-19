@@ -5,14 +5,20 @@ import {
 } from "@angular/cdk/drag-drop";
 import {ExerciseService} from "../../../../core/services/exercise.service";
 import {CompilePhrase} from "../../../models/exercise";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {PseudoCryptService} from "../../../../core/services/pseudo-crypt.service";
+import {
+  BaseSolveExerciseComponent
+} from "../../../../core/components/base-solve-exercise/base-solve-exercise.component";
+import Swal from "sweetalert2";
+import {CourseService} from "../../../../core/services/course.service";
 
 @Component({
   selector: 'app-compile-phrase',
   templateUrl: './compile-phrase.component.html',
   styleUrls: ['./compile-phrase.component.css']
 })
-export class CompilePhraseComponent implements OnInit{
+export class CompilePhraseComponent extends BaseSolveExerciseComponent implements OnInit{
 
   public compilePhraseForm: UntypedFormGroup = new UntypedFormGroup({
     data: new UntypedFormControl(null, [
@@ -20,15 +26,17 @@ export class CompilePhraseComponent implements OnInit{
     ]),
   });
 
-  exerciseService : ExerciseService;
   compilePhrase! : CompilePhrase;
   compilePhraseArr : string[] = [];
-  id! : string | null | number;
 
-  constructor(exerciseService : ExerciseService,
-              private route: ActivatedRoute) {
-    this.exerciseService = exerciseService;
-    this.id = this.route.snapshot.params['id'];
+  constructor(protected override exerciseService : ExerciseService,
+              protected override route: ActivatedRoute,
+              protected override cryptoService: PseudoCryptService,
+              protected override router: Router,
+              protected override courseService : CourseService
+  )
+  {
+    super(exerciseService, route, cryptoService, router, courseService);
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -37,7 +45,11 @@ export class CompilePhraseComponent implements OnInit{
   }
 
   async ngOnInit(): Promise<void> {
-    this.compilePhrase = await this.exerciseService.getExerciseByTypeAndId('compile_phrase', this.id);
+    try {
+      this.compilePhrase = await this.exerciseService.getExerciseByTypeAndId('compile_phrase', this.id);
+    } catch (error : any) {
+      this.errorWithRedirect(error!.error.data)
+    }
     console.log(this.compilePhrase);
     let shuffledArray = this.compilePhrase.phrase.split( ' ');
     let different = false;
@@ -50,8 +62,19 @@ export class CompilePhraseComponent implements OnInit{
   }
 
   async onSubmit() {
-    console.log(this.id);
-    console.log(this.compilePhraseForm);
-    await this.exerciseService.solveExercise(12 ,this.id, 'compile_phrase', this.compilePhraseForm)
+    try {
+      const data = await this.exerciseService.solveExercise(this.exerciseId, this.id, 'compile_phrase', this.compilePhraseForm);
+      this.success(data);
+      if (this.courseId) {
+        await this.router.navigate(['/course', this.courseId], {
+          queryParams: {
+            stage: this.stageId,
+            flag: 'showProgressStages'
+          }
+        });
+      }
+    } catch (error : any){
+
+    }
   }
 }

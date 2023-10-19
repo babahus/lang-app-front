@@ -1,30 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { ExerciseService } from '../../../../core/services/exercise.service';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Pair, PairOption } from '../../../models/exercise';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import Swal from 'sweetalert2';
 import { FormBuilder, Validators } from '@angular/forms';
+import {
+  BaseSolveExerciseComponent
+} from "../../../../core/components/base-solve-exercise/base-solve-exercise.component";
+import {PseudoCryptService} from "../../../../core/services/pseudo-crypt.service";
+import {CourseService} from "../../../../core/services/course.service";
 
 @Component({
   selector: 'app-pair',
   templateUrl: './pair.component.html',
   styleUrls: ['./pair.component.css'],
 })
-export class PairComponent implements OnInit {
-  exerciseService: ExerciseService;
-  id: string | null | number;
+export class PairComponent extends BaseSolveExerciseComponent implements OnInit {
   pair!: Pair;
   words: string[] = [];
   translations: string[] = [];
 
-  constructor(
-    exerciseService: ExerciseService,
-    private route: ActivatedRoute,
-    private fb: FormBuilder
-  ) {
-    this.exerciseService = exerciseService;
-    this.id = this.route.snapshot.params['id'];
+  constructor(protected override exerciseService : ExerciseService,
+              protected override route: ActivatedRoute,
+              protected override cryptoService: PseudoCryptService,
+              protected override router: Router,
+              protected override courseService : CourseService,
+              private fb: FormBuilder
+  )
+  {
+    super(exerciseService, route, cryptoService, router, courseService);
   }
 
   pairForm = this.fb.group({
@@ -32,13 +37,16 @@ export class PairComponent implements OnInit {
   });
 
   async ngOnInit(): Promise<void> {
-    this.pair = await this.exerciseService.getExerciseByTypeAndId(
-      'pair_exercise',
-      this.id
-    );
-
-    this.words = this.pair.options.map((option) => option.word);
-    this.translations = this.pair.options.map((option) => option.translation);
+    try {
+      this.pair = await this.exerciseService.getExerciseByTypeAndId(
+        'pair_exercise',
+        this.id
+      );
+      this.words = this.pair.options.map((option) => option.word);
+      this.translations = this.pair.options.map((option) => option.translation);
+    } catch (error : any) {
+      this.errorWithRedirect(error!.error.data)
+    }
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -57,27 +65,22 @@ export class PairComponent implements OnInit {
       });
 
       const result = await this.exerciseService.solveExercise(
-        72,
+        this.exerciseId,
         this.id,
         'pair_exercise',
         this.pairForm
       );
       this.success(result);
+      if (this.courseId) {
+        await this.router.navigate(['/course', this.courseId], {
+          queryParams: {
+            stage: this.stageId,
+            flag: 'showProgressStages'
+          }
+        });
+      }
     } catch (error) {
       console.log(error);
     }
-  }
-
-  success(text: string) {
-    Swal.fire({
-      title: 'Success',
-      text: text,
-      icon: 'success',
-      confirmButtonText: 'Ok',
-      width: 600,
-      padding: '3em',
-      color: '#2B788B',
-      background: '#F6F5F4',
-    });
   }
 }
