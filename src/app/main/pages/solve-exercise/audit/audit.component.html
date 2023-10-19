@@ -1,0 +1,68 @@
+<section class="min-h-screen bg-[#C3DCE3] w-full  p-3 flex md:items-center justify-center">
+  <div class="w-full bg-white pb-8 md:max-w-md lg:max-w-2xl space-y-4 p-4 flex flex-col items-center justify-center rounded-3xl">
+    <div class="w-full px-3 lg:px-0 lg:w-2/3 mb-4 space-y-3">
+      <span class="text-xl text-center lg:text-start text-black md:text-2xl lg:px-0" style="font-family: DelaGothic">Phonetic Transcript {{id}}</span>
+      <p class="text-sm font-medium indent-5 text-[#757575]" style="font-family: Montserrat">
+        <strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit.
+        <strong>dolores enim </strong>eos hic illo inventore iure libero magnam minima minus obcaecati optio pariatur porro quibusdam quos reiciendis.
+      </p>
+    </div>
+    <div (click)="playAudio()" [ngClass]="{'bg-[#2B788B] text-white': audioPlaying}" class="cursor-pointer border-2 border-[#2B788B] text-[#2B788B] grid grid-cols-1 justify-center items-center justify-items-center rounded-full  h-32 w-32">
+      <div class="flex items-center justify-center justify-items-center">
+        <div class="grid grid-cols-1 gap-1">
+          <svg viewBox="0 0 48 51" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" stroke="currentColor" class="w-8 h-8  fill-current">
+            <path d="M38.961 3.04788C38.8905 2.62486 38.7301 2.22187 38.4907 1.86608C38.2513 1.51028 37.9383 1.20996 37.573 0.985358C37.2077 0.760754 36.7984 0.617089 36.3729 0.564049C35.9473 0.511009 35.5153 0.549826 35.106 0.677883L14.106 7.23888C13.4954 7.42951 12.9617 7.81033 12.5828 8.32575C12.2039 8.84117 11.9997 9.4642 12 10.1039V34.4999C10.6484 33.4862 8.99409 32.9585 7.30514 33.0024C5.61619 33.0463 3.99154 33.6592 2.6944 34.7417C1.39727 35.8243 0.503653 37.3131 0.158335 38.967C-0.186984 40.6208 0.0362281 42.3428 0.791805 43.854C1.54738 45.3651 2.79106 46.5769 4.32133 47.293C5.85161 48.009 7.57883 48.1874 9.22316 47.7992C10.8675 47.4111 12.3326 46.4791 13.3811 45.1543C14.4296 43.8294 15 42.1894 15 40.4999V19.1039L36 12.5399V21.0689C37.029 21.1589 38.034 21.3479 39 21.6209V3.53988C39 3.37188 38.985 3.20988 38.961 3.04788ZM48 37.4999C48 41.0803 46.5777 44.5141 44.0459 47.0458C41.5142 49.5776 38.0804 50.9999 34.5 50.9999C30.9196 50.9999 27.4858 49.5776 24.9541 47.0458C22.4223 44.5141 21 41.0803 21 37.4999C21 33.9195 22.4223 30.4857 24.9541 27.9539C27.4858 25.4222 30.9196 23.9999 34.5 23.9999C38.0804 23.9999 41.5142 25.4222 44.0459 27.9539C46.5777 30.4857 48 33.9195 48 37.4999ZM41.211 36.1949L32.229 31.2449C32.0008 31.1186 31.7435 31.0541 31.4827 31.0576C31.2219 31.0611 30.9665 31.1326 30.7418 31.265C30.517 31.3974 30.3307 31.586 30.2011 31.8124C30.0716 32.0388 30.0033 32.295 30.003 32.5559V42.4559C30.0028 42.717 30.0707 42.9736 30.2 43.2004C30.3294 43.4272 30.5157 43.6163 30.7405 43.749C30.9653 43.8817 31.2209 43.9535 31.482 43.9571C31.743 43.9608 32.0005 43.8962 32.229 43.7699L41.211 38.8199C41.4455 38.6902 41.6409 38.5 41.777 38.2692C41.9131 38.0384 41.9848 37.7753 41.9848 37.5074C41.9848 37.2394 41.9131 36.9764 41.777 36.7456C41.6409 36.5148 41.4455 36.3246 41.211 36.1949Z"/>
+          </svg>
+          <span class="font-semibold text-base" style="font-family: Montserrat">{{ audioPlaying ? 'Pause' : 'Play' }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center text-[#A95151] pt-4">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="fill-current w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="fill-current w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="fill-current w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="fill-current w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="fill-current w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+      </svg>
+    </div>
+    <form [formGroup]="audioForm" class="pt-4 w-full lg:w-2/3 space-y-3">
+      <div class="">
+        <div style="font-family: Montserrat">
+          <label for="dataAudit" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">Audio-text</label>
+          <input id="dataAudit" formControlName="data" type="text" class="bg-[#C3DCE3]  w-full text-[#2B788B] font-semibold placeholder-[#80a4ad] text-xs md:text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block p-2 " placeholder="..." >
+        </div>
+        <div class="error-message" *ngIf="audioForm.errors && audioForm.getError('data')">
+          <p class="pt-2 text-[#945069]  font-medium text-xs">
+            {{ audioForm.getError('data') }}
+          </p>
+        </div>
+        <div *ngIf="audioForm.get('data')?.hasError('required') && audioForm.controls.data.touched">
+          <p class="pt-2 text-[#945069] font-medium text-xs">
+            Audio-text is required.
+          </p>
+        </div>
+        <div class="error-message" *ngIf="audioForm.errors && audioForm.getError('backend')">
+          <p class="pt-2 text-[#945069]  font-medium text-xs">
+            {{ audioForm.getError('backend') }}
+          </p>
+        </div>
+      </div>
+      <div class="w-full flex justify-end">
+        <button type="button" class="bg-[#2B788B] text-sm text-white hover:opacity-80 font-semibold p-2 px-4 rounded-full"
+                (click)="onSubmit()" [disabled]="audioForm.invalid" style="font-family: Montserrat"
+        >
+          Answer
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

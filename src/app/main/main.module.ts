@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import {CommonModule, NgFor, NgOptimizedImage} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import { IndexComponent } from './pages/index/index.component';
 import { AboutComponent } from './pages/about/about.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { FooterComponent } from '../core/components/footer/footer.component';
 import {HeaderComponent} from "../core/components/header/header.component";
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import {CdkDrag, CdkDropList, CdkDropListGroup, DragDropModule} from '@angular/cdk/drag-drop';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import {ReactiveFormsModule} from "@angular/forms";
@@ -30,13 +30,18 @@ import { CoursesComponent } from './pages/courses/courses.component';
 import { ExercisesCreateComponent } from './pages/exercises-create/exercises-create.component';
 import { CourseCreateComponent } from './pages/course-create/course-create.component';
 import { FormsModule } from '@angular/forms';
-
 import { CourseViewComponent } from './pages/course-view/course-view.component';
 import { MaterialModule } from './material/material.module';
 import {StoreModule} from "@ngrx/store";
 import {userRoleReducer} from "../core/store/user-role-reducer";
 import {CanAccessCourseGuard} from "../core/guards/can-access-course.guard";
 // import { AttachExerciseStageComponent } from './components/modals/attach-exercise-stage/attach-exercise-stage.component'
+import { AuditComponent } from './pages/solve-exercise/audit/audit.component';
+import { PairComponent } from './pages/solve-exercise/pair/pair.component';
+import { PictureComponent } from './pages/solve-exercise/picture/picture.component';
+import {CdkOption} from "@angular/cdk/listbox";
+import { CdkListboxModule } from '@angular/cdk/listbox';
+import { SentenceComponent } from './pages/solve-exercise/sentence/sentence.component';
 
 const routes: Routes = [
   { path : '', component: IndexComponent},
@@ -65,6 +70,10 @@ const routes: Routes = [
   { path : 'courses', component : CoursesComponent, canActivate : [AuthGuard]},
   { path : 'exercises-my', component : ExercisesMyComponent, canActivate : [AuthGuard]},
   { path : 'exercises/compile_phrase/:id', component : CompilePhraseComponent, canActivate : [AuthGuard]},
+  { path : 'exercises/audit/:id', component : AuditComponent, canActivate : [AuthGuard]},
+  { path : 'exercises/pair/:id', component : PairComponent, canActivate : [AuthGuard]},
+  { path : 'exercises/picture/:id', component : PictureComponent, canActivate : [AuthGuard]},
+  { path : 'exercises/sentence/:id', component : SentenceComponent, canActivate : [AuthGuard]},
   {
     path : '**', component: NotFoundComponent
   }
@@ -95,6 +104,10 @@ const routes: Routes = [
     ExercisesCreateComponent,
     CourseCreateComponent,
     CourseViewComponent,
+    AuditComponent,
+    PairComponent,
+    PictureComponent,
+    SentenceComponent,
   ],
   exports: [
     HeaderComponent,
@@ -102,15 +115,21 @@ const routes: Routes = [
     ExerciseCardComponent
   ],
     imports: [
-        DragDropModule,
-        CommonModule,
-        RouterModule.forChild(routes),
-        ReactiveFormsModule,
-        NgOptimizedImage,
-        SweetAlert2Module,
-        FormsModule,
-        TranslateModule,
-        MaterialModule,
+      CdkListboxModule,
+      DragDropModule,
+      CdkDropListGroup,
+      CdkDropList,
+      NgFor,
+      CdkDrag,
+      CommonModule,
+      RouterModule.forChild(routes),
+      ReactiveFormsModule,
+      NgOptimizedImage,
+      SweetAlert2Module,
+      FormsModule,
+      TranslateModule,
+      MaterialModule,
+      CdkOption,
       StoreModule.forRoot({ userRole: userRoleReducer }),
     ]
 })
