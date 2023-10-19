@@ -3,6 +3,7 @@ import { ExerciseService } from "../../../../core/services/exercise.service";
 import { ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Sentence } from "../../../models/exercise";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-sentence',
@@ -16,11 +17,12 @@ export class SentenceComponent implements OnInit {
   sentenceStr: string = '';
   sentenceArr: any = [];
   sentenceForm: FormGroup;
+  studentAnswers: string[] = [];
 
   changeSentence() {
     this.sentenceArr.forEach((word: any, index: any) => {
       this.sentenceStr = this.sentenceStr.replace(word, "___");
-      this.sentenceForm.addControl(`data${index}`, this.fb.control(''));
+      this.sentenceForm.addControl(`answer${index}`, this.fb.control(''));
     });
     console.log(this.sentenceStr);
   }
@@ -33,7 +35,7 @@ export class SentenceComponent implements OnInit {
     this.exerciseService = exerciseService;
     this.id = this.route.snapshot.params['id'];
 
-    this.sentenceForm = fb.group({});
+    this.sentenceForm = fb.group({data:[]});
   }
 
   async ngOnInit(): Promise<void> {
@@ -47,7 +49,35 @@ export class SentenceComponent implements OnInit {
     this.changeSentence();
   }
 
-  checkAnswer(){
-    console.log(this.sentenceForm);
+  async checkAnswer() {
+    try {
+      this.sentenceForm.patchValue({
+        data: this.sentenceArr.map((word: any, index: any) => this.sentenceForm.get(`answer${index}`)?.value || '')
+      });
+      const result = await this.exerciseService.solveExercise(
+        29,
+        this.id,
+        'sentence',
+        this.sentenceForm
+      );
+      this.success(result);
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+
+  success(text: string) {
+    Swal.fire({
+      title: 'Success',
+      text: text,
+      icon: 'success',
+      confirmButtonText: 'Ok',
+      width: 600,
+      padding: '3em',
+      color: '#2B788B',
+      background: '#F6F5F4',
+    });
+  }
+
 }

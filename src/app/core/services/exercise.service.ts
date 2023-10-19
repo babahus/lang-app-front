@@ -82,11 +82,12 @@ export class ExerciseService extends BaseService
       this.body = {
         'id' : parseInt(id as string),
         'type' : type,
-        'data' : data.get('data')?.value,
+        'data' : JSON.stringify(data.get('data')?.value),
         'exercise_id' : exerciseId
       }
     }
     return new Promise(((resolve, reject) => {
+      console.log(this.body);
       this.http.post<any>(this.url + '/exercise/solve', this.body).pipe(catchError((error) => {
         this.handleError(error, data);
         reject(error);
