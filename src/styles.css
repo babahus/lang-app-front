@@ -21,3 +21,28 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+button[disabled] {
+  background-color: #A7B5B7; /* Светло-серый цвет, например */
+  cursor: not-allowed; /* Курсор, указывающий, что действие недоступно */
+  opacity: 0.6; /* Делает кнопку более прозрачной */
+}
+
+.close-button {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.underline-header::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px; /* или любая другая высота, которую вы предпочитаете для подчеркивания */
+  background-color: rgba(87, 87, 87, 0.69); /* цвет подчеркивания */
+  margin-top: 2px; /* отступ сверху */
+}

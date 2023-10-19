@@ -5,6 +5,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, Observable, throwError} from "rxjs";
 import {UntypedFormGroup, ValidationErrors} from "@angular/forms";
 import {BaseService} from "./base-service/base.service";
+import { Store } from '@ngrx/store';
+import * as UserActions from '../actions/set-role-id';
+import {clearRoleAndId} from "../actions/clear-role-id";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +17,9 @@ export class AuthService extends BaseService {
     protected override http: HttpClient,
     protected override route: Router,
     protected override router: ActivatedRoute,
+    protected override store: Store
   ) {
-    super(http, route, router);
+    super(http, route, router, store);
   }
 
   get isAuthenticate() {
@@ -39,6 +43,8 @@ export class AuthService extends BaseService {
     this.storage.removeItem('WSToken')
     sessionStorage.removeItem('role');
     sessionStorage.removeItem('id');
+
+    this.store.dispatch(clearRoleAndId());
   }
 
   public logout() {
@@ -53,20 +59,6 @@ export class AuthService extends BaseService {
         resolve(data);
       });
     });
-  }
-
-  private handleError(error: any, form: UntypedFormGroup) {
-    if (error.status === 422) {
-      let errorsToForm: ValidationErrors | null = {};
-      for (const key of Object.keys(error.error.errors)) {
-        errorsToForm[key] = error.error.errors[key][0];
-      }
-      form.setErrors(errorsToForm);
-    } else {
-      form.setErrors({ backend: error.error.data });
-    }
-
-    return throwError(error);
   }
 
   login(loginForm: UntypedFormGroup, role: string): Promise<any> {
@@ -171,6 +163,8 @@ export class AuthService extends BaseService {
   addDataInSessionStorage(role : string, id : number){
     sessionStorage.setItem('role', role);
     sessionStorage.setItem('id', String(id));
+
+    this.store.dispatch(UserActions.setRoleAndId({ role, id }));
   }
 
 }

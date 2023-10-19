@@ -3,6 +3,7 @@ import {BaseService} from "./base-service/base.service";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, throwError} from "rxjs";
+import {Store} from "@ngrx/store";
 import {UntypedFormGroup, ValidationErrors} from "@angular/forms";
 
 @Injectable({
@@ -14,8 +15,9 @@ export class StageService extends BaseService {
     protected override http: HttpClient,
     protected override route: Router,
     protected override router: ActivatedRoute,
+    protected override store: Store
   ) {
-    super(http, route, router);
+    super(http, route, router, store);
   }
 
   async getStages(courseId: number): Promise<any>{
@@ -78,19 +80,5 @@ export class StageService extends BaseService {
         resolve(data);
       })
     })
-  }
-
-  private handleError(error: any, form: UntypedFormGroup) {
-    if (error.status === 422) {
-      let errorsToForm: ValidationErrors | null = {};
-      for (const key of Object.keys(error.error.errors)) {
-        errorsToForm[key] = error.error.errors[key][0];
-      }
-      form.setErrors(errorsToForm);
-    } else {
-      form.setErrors({ backend: error.error.data });
-    }
-
-    return throwError(error);
   }
 }

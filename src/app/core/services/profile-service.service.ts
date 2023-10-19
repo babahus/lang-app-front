@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UntypedFormGroup, ValidationErrors} from "@angular/forms";
 import {catchError, throwError} from "rxjs";
+import {Store} from "@ngrx/store";
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,9 @@ export class ProfileService extends BaseService{
   constructor(protected override http: HttpClient,
               protected override route: Router,
               protected override router: ActivatedRoute,
+              protected override store: Store
               ) {
-    super(http, route, router);
+    super(http, route, router, store);
   }
 
   getProfileInfo(): Promise<any> {
@@ -79,17 +81,16 @@ export class ProfileService extends BaseService{
     });
   }
 
-  private handleError(error: any, form: UntypedFormGroup) {
-    if (error.status === 422) {
-      let errorsToForm: ValidationErrors | null = {};
-      for (const key of Object.keys(error.error.errors)) {
-        errorsToForm[key] = error.error.errors[key][0];
-      }
-      form.setErrors(errorsToForm);
-    } else {
-      form.setErrors({ backend: error.error.data });
-    }
-
-    return throwError(error);
+  getCachedInfo(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get<any>(this.url + '/get-cache-info').pipe(
+        catchError((error) => {
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
+        resolve(data.data);
+      });
+    });
   }
 }

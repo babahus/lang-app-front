@@ -60,7 +60,7 @@
   <!--   end of the modal window for stage deletion -->
 
 
-  <div [ngClass]="'block ' + (showMenuEditForm || showMenuCreateStage || showMenuAttachExerciseStage || showMenuEditStage? '' : 'hidden')" class="rounded-lg bg-white shadow-lg md:max-w-lg w-full relative overflow-hidden">
+  <div [ngClass]="'block ' + (showMenuEditForm || showMenuCreateStage || showMenuProgressStages || showMenuAttachExerciseStage || showMenuEditStage? '' : 'hidden')" class="rounded-lg bg-white shadow-lg md:max-w-lg w-full relative overflow-hidden">
 <!--        <div *ngIf="!showMenuEditForm && !showMenuCreateStage && !showMenuAttachExerciseStage" class="hidden w-full lg:flex justify-center p-4 h-96">-->
 <!--            <img src="./assets/img/course-view-page/experimental-modern-house-with-a-backdrop-of-hills.png" alt="">-->
 <!--        </div>-->
@@ -189,6 +189,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
                             </svg>
                         </button>
+                        <!-- Toogle Card Info Block -->
                         <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg z-10 p-3 w-[90%] md:w-3/4 overflow-y-auto" *ngIf="isCardInfoVisible">
                           <div class="p-2 md:pt-4 lg:p-4 ">
                             <div class="absolute top-1 right-1">
@@ -238,6 +239,7 @@
                             </div>
                           </div>
                         </div>
+                        <!-- Toogle Card Info Block End-->
                     </div>
                 </div>
                 <div class="pt-3 lg:pt-6">
@@ -738,14 +740,156 @@
       </div>
       <!--Attach the exercise to the stage End-->
 
+      <!-- Show Stages Progress for User -->
+      <div *ngIf="showMenuProgressStages" class="relative overflow-visible" >
+      <div class="p-3 md:p-6 lg:p-4">
+        <div class="flex mb-2 md:mb-4 justify-between items-center">
+          <div>
+            <span class="text-xl text-black md:text-2xl px-4 md:px-0" style="font-family: DelaGothic">Stages</span>
+          </div>
+          <div class="text-black">
+            <button type="button" (click)="toggleCardVisibility()" class="bg-amber-400 hover:bg-amber-500 p-2 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+              </svg>
+            </button>
+            <div class="fixed top-0 lg:top-1/2 lg:-translate-y-1/2 left-1/2 transform -translate-x-1/2 bg-white border border-[#2B788B] rounded-lg shadow-lg z-40 w-[90%] lg:w-2/5 overflow-y-auto" *ngIf="isCardInfoVisible">
+              <div class="p-4 relative">
+                <div class="absolute top-1 right-1">
+                  <button type="button" (click)="toggleCardVisibility()" class="bg-[#945069] hover:opacity-90 text-white p-1 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                <div class='text-sm'  style="font-family: Montserrat">
+                  <ul class="lg:px-4 list-disc text-xs list-inside">
+                    <li class="flex flex-col">
+                        <span class="text-xs font-medium text-gray-900">
+                          Selecting a Stage:
+                        </span>
+                      <div class="flex gap-2 items-start">
+                        <div class="text-[#2B788B]">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                          </svg>
+                        </div>
+                        <p>Click on the stage, and its details will be displayed.</p>
+                      </div>
+                    </li>
+                    <li class="flex flex-col">
+                        <span class="text-xs font-medium text-gray-900">
+                          Choosing Exercise:
+                        </span>
+                      <div class="flex gap-2 items-start">
+                        <div class="text-[#2B788B]">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                          </svg>
+                        </div>
+                        <p>Choose the exercise you want to solve, click on the exercise card to navigate to the exercise solution page. Please note that you can navigate to exercises only with the
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="orange" class="bi bi-exclamation-square-fill" viewBox="0 0 16 16">
+                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                          </svg>  image.</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-2 md:p-4 lg:pt-6 space-y-4 bg-blue-50 lg:p-6 rounded-lg">
+          <div *ngFor="let stage of courseData.course_stages; let i = index">
+            <div class="grid grid-cols-1 gap-2">
+              <div (click)="toggleCheck(i)" (click)="getProgressDataForStage(stage)" class="relative cursor-pointer w-full bg-[#C3DCE3] p-2 items-center justify-start lg:py-3 overflow-hidden font-medium transition-all rounded group" style="font-family: Montserrat">
+                <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all ease-out duration-700 translate-x-0 left-0 w-full h-48': stage.isClicked}" class="-translate-x-full"></div>
+                <div class="flex items-center lg:px-2">
+                  <div [ngClass]="{'block': stage.isClicked, 'hidden': !stage.isClicked}">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-white duration-700 ease-in-out transform transition-all z-20" [ngClass]="{'translate-x-1': stage.isClicked}">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span class="relative z-30 font-bold" [ngClass]="{'transform translate-x-1 transition-colors duration-700 ease-in-out text-white': stage.isClicked, 'text-[#2B788B]': !stage.isClicked}">{{ stage.title }}</span>
+                </div>
+              </div>
+              <div *ngIf="stage.isClicked" class="bg-[#C3DCE3] rounded-lg p-2">
+                <div class="p-1">
+                  <p class="text-xl text-black md:text-2xl mb-4" style="font-family: DelaGothic;">{{ stage?.title }}</p>
+                  <p class="text-xs md:text-sm font-medium text-[#757575] mb-6" style="font-family: Montserrat;">{{ stage?.description }}</p>
+                  <div *ngIf="stage.isClicked" class="bg-[#C3DCE3] rounded-lg p-2 shadow-lg">
+                    <div class="p-2 border-b-2 border-gray-300 mb-2">
+                      <h3 class="text-lg font-bold" style="font-family: Montserrat; margin-bottom: 5px">Exercises</h3>
+                    </div>
 
+                    <ng-container *ngIf="this.stagesProgress.length > 0">
+                      <div class="p-2 bg-white rounded-lg mb-3 shadow-md" *ngFor="let exercise of stage.stage_exercises">
+                        <div class="flex justify-between">
+                          <p class="text-sm text-gray-500 mb-1">Exercise №{{ exercise['id'] }}</p>
+                          <div class="">
+                            <!-- Checkmark SVG for completed exercises -->
+                            <svg *ngIf="isExerciseCompleted(exercise['id'])" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check-square-fill" viewBox="0 0 16 16">
+                              <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z"/>
+                            </svg>
+                            <!-- Question mark SVG for incomplete exercises -->
+                            <svg *ngIf="!isExerciseCompleted(exercise['id'])" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="orange" class="bi bi-exclamation-square-fill" viewBox="0 0 16 16">
+                              <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                            </svg>
+                          </div>
+                        </div>
 
+                        <div *ngIf="exercise['type'] === 'compile_phrase'" class="flex items-center p-2 bg-gray-100 rounded">
+                          <span class="text-sm text-gray-700 mr-2">Phrase:</span>
+                          <span *ngIf="isExerciseCompleted(exercise['id'])" class="font-medium text-center items-center">
+                            {{exercise['data']['phrase']}}
+                          </span>
+                          <span *ngIf="!isExerciseCompleted(exercise['id'])" class="font-medium text-center items-center">**** ***** *****</span>
+                        </div>
+
+                        <div *ngIf="exercise['type'] === 'sentence'" class="flex items-center p-2 bg-gray-100 rounded">
+                          <span class="text-sm text-gray-700 mr-2">Sentence:</span>
+                          <span class="font-medium text-center items-center">{{ exercise['data']['sentence_with_gaps'] }}</span>
+                        </div>
+
+                        <div *ngIf="exercise['type'] === 'pair_exercise'" class="flex items-center p-2 bg-gray-100 rounded">
+                          <span class="text-sm text-gray-700 mr-2">Choose Pair For Words</span>
+                        </div>
+
+                        <div *ngIf="exercise['type'] === 'audit'" class="flex items-center p-2 bg-gray-100 rounded">
+                          <span class="text-sm text-gray-700 mr-2">Listen and translate Phrase</span>
+                        </div>
+
+                        <div *ngIf="exercise['type'] === 'picture_exercise'" class="flex items-center p-2 bg-gray-100 rounded">
+                          <span class="text-sm text-gray-700 mr-2">Look at the picture and choose an answer option.</span>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+<!--              <div class="flex gap-4 justify-end" style="font-family: Montserrat">-->
+<!--                <button type="button" (click)="showDeleteStage(stage)" class="inline-flex w-auto cursor-pointer justify-center rounded-lg  px-3 py-2 text-xs lg:text-sm font-semibold underline text-gray-800  hover:scale-105">Delete</button>-->
+<!--                <button type="button" (click)="handleButtonClick(stage)" class="inline-flex w-auto cursor-pointer justify-center rounded-lg  px-3 py-2 text-xs lg:text-sm font-semibold underline text-gray-800  hover:scale-105">Edit Stage</button>-->
+<!--              </div>-->
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="flex px-3 pb-3 justify-end gap-4" style="font-family: Montserrat">
+        <button type="button" (click)="showModalWindow('showProgressStages')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
+      </div>
     </div>
+      <!-- End Show Show Stages Progress for User -->
+
+
+  </div>
 <!--  h-[28rem]-->
-    <div *ngIf="!showMenuEditForm && !showMenuCreateStage && !showMenuAttachExerciseStage && !deleteModalCourse && !showMenuEditStage"
+    <div *ngIf="!showMenuEditForm && !showMenuCreateStage && !showMenuProgressStages && !showMenuAttachExerciseStage && !deleteModalCourse && !showMenuEditStage"
          class="bg-white shadow-lg rounded-lg w-full md:max-w-lg lg:max-w-xl p-3 md:p-2 lg:p-4 ">
         <div class="w-full flex flex-col justify-between h-full md:p-4">
-            <div class="space-y-2 lg:pb-12">
+            <div [ngClass]="{'lg:pb-12' : currentUserRole != 'User'}" class="space-y-2">
                 <div class="flex justify-between items-center">
                     <div>
                         <p class="text-lg text-black md:text-2xl lg:px-0" style="font-family: DelaGothic">{{courseData.title}}</p>
@@ -782,31 +926,54 @@
                 </div>
 
                 <div class="pt-6">
-                    <div class="bg-[#C3DCE3] relative rounded w-full overflow-hidden p-2 flex justify-between space-y-2">
+                    <ng-container *ngIf="this.currentUserRole == 'Teacher'">
+                      <div class="bg-[#C3DCE3] relative rounded w-full overflow-hidden p-2 flex justify-between space-y-2">
                         <div class="flex flex-col justify-between gap-8 h-full z-10">
-                            <div>
-                                <p class="text-lg text-[#2B788B] md:text-xl md:px-4 lg:px-0" style="font-family: DelaGothic">
-                                    Attach Stages :
-                                </p>
-                            </div>
-                            <div class="md:px-4 lg:px-0">
-                                <button type="button" (click)="showModalWindow('attachExercise')" class="bg-[#2B788B] text-white hover:text-[#2B788B] hover:bg-gray-50 p-2 rounded">
-                                    <svg *ngIf="!showMenuAttachExerciseStage" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                    </svg>
-                                    <svg *ngIf="showMenuAttachExerciseStage" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
-                                    </svg>
-                                </button>
-                            </div>
-
+                          <div>
+                            <p class="text-lg text-[#2B788B] md:text-xl md:px-4 lg:px-0" style="font-family: DelaGothic">
+                              Attach Stages :
+                            </p>
+                          </div>
+                          <div class="md:px-4 lg:px-0">
+                            <button type="button" (click)="showModalWindow('attachExercise')" class="bg-[#2B788B] text-white hover:text-[#2B788B] hover:bg-gray-50 p-2 rounded">
+                              <svg *ngIf="!showMenuAttachExerciseStage" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                              </svg>
+                              <svg *ngIf="showMenuAttachExerciseStage" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+                              </svg>
+                            </button>
+                          </div>
                         </div>
                         <img class="h-28 absolute transform -translate-y-1/2 top-1/2 right-2 z-0" src="./assets/img/course-view-page/3d-chart-column.png" alt="">
+                      </div>
+                    </ng-container>
+                    <ng-container *ngIf="this.currentUserRole == 'User'">
+                    <div class="bg-[#C3DCE3] relative rounded w-full overflow-hidden p-2 flex justify-between space-y-2">
+                      <div class="flex flex-col justify-between gap-8 h-full z-10">
+                        <div>
+                          <p class="text-lg text-[#2B788B] md:text-xl md:px-4 lg:px-0" style="font-family: DelaGothic">
+                            Show Stages :
+                          </p>
+                        </div>
+                        <div class="md:px-4 lg:px-0">
+                          <button type="button" (click)="showModalWindow('showProgressStages')" class="bg-[#2B788B] text-white hover:text-[#2B788B] hover:bg-gray-50 p-2 rounded">
+                            <svg *ngIf="!showMenuProgressStages" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                            <svg *ngIf="showMenuProgressStages" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                      <img class="h-28 absolute transform -translate-y-1/2 top-1/2 right-2 z-0" src="./assets/img/course-view-page/3d-chart-column.png" alt="">
                     </div>
+                  </ng-container>
                 </div>
             </div>
 
-            <div class="flex justify-between items-center pt-3 md:pt-5 lg:gap-4 lg:p-2 border-t border-gray-200" style="font-family: Montserrat">
+            <div *ngIf="this.currentUserRole !== 'User'" class="flex justify-between items-center pt-3 md:pt-5 lg:gap-4 lg:p-2 border-t border-gray-200" style="font-family: Montserrat">
                 <div>
                     <button type="button" (click)="showModalWindow('createStage')"  class="inline-flex w-full justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Create Stage</button>
                 </div>

@@ -3,9 +3,9 @@ import {CourseService} from "../../../core/services/course.service";
 import {LoaderService} from "../../../core/services/loader.service";
 import {Course} from "../../models/course.model";
 import {Pagination} from "../../models/pagination.model";
-import {HttpClient} from "@angular/common/http";
-import {error} from "@angular/compiler-cli/src/transformers/util";
+import * as fromSelectors from '../../../core/selectors/role-selector';
 import Swal from "sweetalert2";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-courses',
@@ -27,15 +27,24 @@ export class CoursesComponent implements OnInit {
 
   public showFreeCourses = true;
   public showPaidCourses = true;
+  public showCourseDetailModal = false;
   public courses: Course[] = [];
+  selectedCourse: null|Course = null;
   public filteredCourses: Course[] = [];
   public pagination: Pagination|null = null;
   pages: number[] = [0];
   public attachedCourses: Course[] = [];
   private studentId: string | null;
+  selectedStage: any;
+  isCardInfoVisible = false;
 
-  constructor(private courseService: CourseService) {
+  constructor(private courseService: CourseService, private store : Store) {
     this.studentId = sessionStorage.getItem('id');
+
+    this.store.select(fromSelectors.selectRole).subscribe(role => {
+      console.log('Your role is')
+      console.log(role);
+    });
   }
 
   async getCourses(page : number = 1){
@@ -144,6 +153,22 @@ export class CoursesComponent implements OnInit {
     if (Array.isArray(this.attachedCourses)) {
       return this.attachedCourses.some(course => course.id === courseId);
     }
+
     return false;
+  }
+
+  openCourseDetailModal(course: Course) {
+    this.selectedCourse = course;
+    this.showCourseDetailModal = true;
+  }
+
+  toggleCheck(index: number) {
+    this.selectedCourse!.course_stages.forEach((stage, i) => {
+      if (i !== index) {
+        stage.isClicked = false;
+      }
+    });
+
+    this.selectedCourse!.course_stages[index].isClicked = !this.selectedCourse!.course_stages[index].isClicked;
   }
 }

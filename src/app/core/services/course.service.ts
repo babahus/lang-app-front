@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {BaseService} from "./base-service/base.service";
 import {catchError, throwError} from "rxjs";
 import {UntypedFormGroup, ValidationErrors} from "@angular/forms";
+import {Store} from "@ngrx/store";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,9 @@ export class CourseService extends BaseService {
     protected override http: HttpClient,
     protected override route: Router,
     protected override router: ActivatedRoute,
+    protected override store: Store
   ) {
-    super(http, route, router);
+    super(http, route, router, store);
   }
 
   getCourses(page : number = 1): Promise<any> {
@@ -140,18 +142,30 @@ export class CourseService extends BaseService {
     })
   }
 
-  private handleError(error: any, form: UntypedFormGroup) {
-    if (error.status === 422) {
-      let errorsToForm: ValidationErrors | null = {};
-      for (const key of Object.keys(error.error.errors)) {
-        errorsToForm[key] = error.error.errors[key][0];
-      }
-      form.setErrors(errorsToForm);
-    } else {
-      form.setErrors({ backend: error.error.data });
-    }
+  checkIfUserIsCreator(courseId : number): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get<any>(this.url + `/course/${courseId}/is-creator`).pipe(
+        catchError((error) => {
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
+        resolve(data.data);
+      });
+    });
+  }
 
-    return throwError(error);
+  checkIfUserAttachedToCourse(courseId : number): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get<any>(this.url + `/course/${courseId}/is-attached`).pipe(
+        catchError((error) => {
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
+        resolve(data.data);
+      });
+    });
   }
 
 }

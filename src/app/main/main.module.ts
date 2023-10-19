@@ -32,6 +32,10 @@ import { CourseCreateComponent } from './pages/course-create/course-create.compo
 import { FormsModule } from '@angular/forms';
 import { CourseViewComponent } from './pages/course-view/course-view.component';
 import { MaterialModule } from './material/material.module';
+import {StoreModule} from "@ngrx/store";
+import {userRoleReducer} from "../core/store/user-role-reducer";
+import {CanAccessCourseGuard} from "../core/guards/can-access-course.guard";
+// import { AttachExerciseStageComponent } from './components/modals/attach-exercise-stage/attach-exercise-stage.component'
 import { AuditComponent } from './pages/solve-exercise/audit/audit.component';
 import { PairComponent } from './pages/solve-exercise/pair/pair.component';
 import { PictureComponent } from './pages/solve-exercise/picture/picture.component';
@@ -58,7 +62,7 @@ const routes: Routes = [
 
   { path : 'exercises-create', component : ExercisesCreateComponent, canActivate : [AuthGuard]},
   { path : 'courses-create', component : CourseCreateComponent, canActivate : [AuthGuard]},
-  { path : 'course/:id', component : CourseViewComponent, canActivate : [AuthGuard]},
+  { path : 'course/:id', component : CourseViewComponent, canActivate : [AuthGuard,CanAccessCourseGuard]},
 
   { path : 'dashboard', component : DashboardComponent, canActivate : [AuthGuard]},
   { path : 'profile', component : ProfileComponent, canActivate : [AuthGuard]},
@@ -76,6 +80,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  providers : [CanAccessCourseGuard],
   declarations: [
     IndexComponent,
     AboutComponent,
@@ -109,22 +114,23 @@ const routes: Routes = [
     FooterComponent,
     ExerciseCardComponent
   ],
-  imports: [
-    CdkListboxModule,
-    DragDropModule,
-    CdkDropListGroup,
-    CdkDropList,
-    NgFor,
-    CdkDrag,
-    CommonModule,
-    RouterModule.forChild(routes),
-    ReactiveFormsModule,
-    NgOptimizedImage,
-    SweetAlert2Module,
-    FormsModule,
-    TranslateModule,
-    MaterialModule,
-    CdkOption
-  ]
+    imports: [
+      CdkListboxModule,
+      DragDropModule,
+      CdkDropListGroup,
+      CdkDropList,
+      NgFor,
+      CdkDrag,
+      CommonModule,
+      RouterModule.forChild(routes),
+      ReactiveFormsModule,
+      NgOptimizedImage,
+      SweetAlert2Module,
+      FormsModule,
+      TranslateModule,
+      MaterialModule,
+      CdkOption,
+      StoreModule.forRoot({ userRole: userRoleReducer }),
+    ]
 })
 export class MainModule { }
