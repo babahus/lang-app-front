@@ -42,6 +42,7 @@ import { PictureComponent } from './pages/solve-exercise/picture/picture.compone
 import {CdkOption} from "@angular/cdk/listbox";
 import { CdkListboxModule } from '@angular/cdk/listbox';
 import { SentenceComponent } from './pages/solve-exercise/sentence/sentence.component';
+import { ExercisesCardComponent } from './components/dashboard/exercises-card/exercises-card.component';
 
 const routes: Routes = [
   { path : '', component: IndexComponent},
@@ -108,6 +109,7 @@ const routes: Routes = [
     PairComponent,
     PictureComponent,
     SentenceComponent,
+    ExercisesCardComponent,
   ],
   exports: [
     HeaderComponent,

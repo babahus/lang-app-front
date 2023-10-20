@@ -32,4 +32,17 @@ export class ProgressExercisesService extends BaseService{
       });
     });
   }
+
+  getExercisesProgressByUser(userId : number) : Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      this.http.get<ProgressData[]>(`${this.url}/users/completed-exercises/${userId}`).pipe(
+        catchError((error) => {
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
+        resolve(data.data);
+      });
+    });
+  }
 }
