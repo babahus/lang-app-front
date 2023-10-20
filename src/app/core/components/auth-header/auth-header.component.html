@@ -59,8 +59,8 @@
               <a routerLink="/profile" class=" cursor-pointer block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">{{'profile' | translate}}</a>
               <a href="#" class="cursor-pointer block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">{{'myExercise' | translate}}</a>
               <a routerLink="/courses" class="cursor-pointer block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">Courses</a>
-              <a routerLink="/exercises-create" class="cursor-pointer block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">Create Exercises</a>
-              <a routerLink="/courses-create" class="cursor-pointer block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">Create Courses</a>
+              <a *ngIf="this.currentUserRole !== 'User'" routerLink="/exercises-create" class="cursor-pointer block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">Create Exercises</a>
+              <a *ngIf="this.currentUserRole !== 'User'" routerLink="/courses-create" class="cursor-pointer block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">Create Courses</a>
               <a (click)="toggleLanguageDropdown()"
                  class="block cursor-pointer px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50"
               >
