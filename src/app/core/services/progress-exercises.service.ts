@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {catchError, throwError} from "rxjs";
 import {ProgressData} from "../../main/models/progress-data";
+import {ProgressExercisesCount} from "../../main/models/progress-exercises-count";
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,19 @@ export class ProgressExercisesService extends BaseService{
   getExercisesProgressByUser(userId : number) : Promise<any[]> {
     return new Promise((resolve, reject) => {
       this.http.get<ProgressData[]>(`${this.url}/users/completed-exercises/${userId}`).pipe(
+        catchError((error) => {
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
+        resolve(data.data);
+      });
+    });
+  }
+
+  getExercisesCountByUser(userId : number) : Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get<ProgressExercisesCount>(`${this.url}/user/${userId}/count-exercises`).pipe(
         catchError((error) => {
           reject(error);
           return throwError(error);

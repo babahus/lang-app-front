@@ -44,6 +44,8 @@ import { CdkListboxModule } from '@angular/cdk/listbox';
 import { SentenceComponent } from './pages/solve-exercise/sentence/sentence.component';
 import { ExercisesCardComponent } from './components/dashboard/exercises-card/exercises-card.component';
 import { CoursesCardComponent } from './components/dashboard/courses-card/courses-card.component';
+import { ProgressionCardComponent } from './components/dashboard/progression-card/progression-card.component';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 
 const routes: Routes = [
   { path : '', component: IndexComponent},
@@ -112,6 +114,8 @@ const routes: Routes = [
     SentenceComponent,
     ExercisesCardComponent,
     CoursesCardComponent,
+    ProgressionCardComponent,
+    ProgressBarComponent,
   ],
   exports: [
     HeaderComponent,
