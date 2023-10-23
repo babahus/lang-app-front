@@ -7,6 +7,7 @@ import * as fromSelectors from "../../selectors/role-selector";
 import {Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 import {ProfileService} from "../../services/profile-service.service";
+import {combineLatest} from "rxjs";
 
 @Component({
   selector: 'app-auth-header',
@@ -16,7 +17,7 @@ import {ProfileService} from "../../services/profile-service.service";
 
 export class AuthHeaderComponent extends HeaderComponent implements OnInit
 {
-  public currentUserRole!: string;
+  public currentUserRole!: string | undefined;
   constructor(protected override authService : AuthService,
               protected override router : Router,
               protected override translate : TranslateService,
@@ -24,13 +25,14 @@ export class AuthHeaderComponent extends HeaderComponent implements OnInit
               private store : Store) {
     super(authService, router, translate);
 
-    this.store.select(fromSelectors.selectRole).subscribe(async role => {
-      if (role == undefined) {
-        this.currentUserRole = await this.profileService.getCachedInfo();
-        console.log(this.currentUserRole);
-      } else {
-        this.currentUserRole = role;
-      }
+    combineLatest([
+      this.profileService.currentUserRole$,
+      this.profileService.currentUserId$
+    ]).subscribe(([role, userId]) => {
+      this.currentUserRole = role;
+
+      console.log("User role:", role);
+      console.log("User ID:", userId);
     });
   }
 

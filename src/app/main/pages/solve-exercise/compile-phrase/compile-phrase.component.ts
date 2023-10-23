@@ -66,11 +66,9 @@ export class CompilePhraseComponent extends BaseSolveExerciseComponent implement
       const data = await this.exerciseService.solveExercise(this.exerciseId, this.id, 'compile_phrase', this.compilePhraseForm);
       this.success(data);
       if (this.courseId) {
+        const queryParams = { data: this.getEncryptedParams(this.stageId, 'showProgressStages')};
         await this.router.navigate(['/course', this.courseId], {
-          queryParams: {
-            stage: this.stageId,
-            flag: 'showProgressStages'
-          }
+          queryParams: queryParams
         });
       }
     } catch (error : any){

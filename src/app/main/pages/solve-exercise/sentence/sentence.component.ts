@@ -69,11 +69,9 @@ export class SentenceComponent extends BaseSolveExerciseComponent implements OnI
       );
       this.success(result);
       if (this.courseId) {
+        const queryParams = { data: this.getEncryptedParams(this.stageId, 'showProgressStages')};
         await this.router.navigate(['/course', this.courseId], {
-          queryParams: {
-            stage: this.stageId,
-            flag: 'showProgressStages'
-          }
+          queryParams: queryParams
         });
       }
     } catch (error) {

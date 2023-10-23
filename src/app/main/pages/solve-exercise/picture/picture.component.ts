@@ -65,6 +65,12 @@ export class PictureComponent extends BaseSolveExerciseComponent implements OnIn
       const result = await this.exerciseService.solveExercise(this.exerciseId, this.id, 'picture_exercise', this.pictureForm);
       this.success(result);
       this.pictureForm.reset();
+      if (this.courseId) {
+        const queryParams = { data: this.getEncryptedParams(this.stageId, 'showProgressStages')};
+        await this.router.navigate(['/course', this.courseId], {
+          queryParams: queryParams
+        });
+      }
     } catch (error) {
     }
   }

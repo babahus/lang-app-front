@@ -13,7 +13,7 @@ import {ProgressExercisesService} from "../../../core/services/progress-exercise
 import {ProgressData} from "../../models/progress-data";
 import {StageData} from "../../models/stage-data";
 import {PseudoCryptService} from "../../../core/services/pseudo-crypt.service";
-import {BehaviorSubject, filter} from "rxjs";
+import {BehaviorSubject, combineLatest, filter} from "rxjs";
 
 @Component({
   selector: 'app-course-view',
@@ -42,10 +42,10 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
 
   selectedType: string = '';
   exerciseData: any;
-  exerciseTypes: string[] = ['compile_phrase', 'audit', 'pair_exercise', 'picture_exercise', 'sentence'];
+  exerciseTypes: string[] = ['compile_phrase', 'audit', 'pair', 'picture', 'sentence'];
 
   selectedStage: any|StageData;
-  public currentUserRole!: string;
+  public currentUserRole!: string | undefined;
   public stagesProgress: ProgressData[] = [];
 
   constructor(
@@ -61,15 +61,14 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
     private cryptoService: PseudoCryptService
   )
   {
-    this.store.select(fromSelectors.selectRole).subscribe(async role => {
-      console.log('Your role is')
-      console.log(role);
-      if (role == undefined) {
-        this.currentUserRole = await this.profileService.getCachedInfo();
-        console.log(this.currentUserRole);
-      } else {
-        this.currentUserRole = role;
-      }
+    combineLatest([
+      this.profileService.currentUserRole$,
+      this.profileService.currentUserId$
+    ]).subscribe(([role, userId]) => {
+      this.currentUserRole = role;
+
+      console.log("User role:", role);
+      console.log("User ID:", userId);
     });
   }
 
@@ -133,13 +132,15 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
       filter(loaded => loaded)
     ).subscribe(() => {
       this.route.queryParams.subscribe(queryParams => {
-        const stageId = queryParams['stage'];
-        const flag = queryParams['flag'];
+        // const stageId = queryParams['stage'];
+        // const flag = queryParams['flag'];
+        const encryptData = queryParams['data'];
 
-        if (stageId && flag) {
+        if (encryptData) {
+          const { stage: stageId, flag } = this.getDecryptedParams(encryptData);
           this.showModalWindow(flag);
-          let index = this.courseData.course_stages.findIndex(stage => stage.id == stageId);
-          let stage = this.courseData.course_stages.find(stage => stage.id == stageId);
+          let index = this.courseData.course_stages.findIndex(stage => stage.id == Number(stageId));
+          let stage = this.courseData.course_stages.find(stage => stage.id == Number(stageId));
           if (stage) {
             stage.isClicked = false;
             this.toggleCheck(index);
@@ -148,6 +149,12 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
         }
       });
     });
+  }
+
+  getDecryptedParams(encryptedData: string): { stage: string, flag: string } {
+    const decryptedData = this.cryptoService.decrypt(encryptedData);
+    const splitData = decryptedData.split(',');
+    return { stage: splitData[0], flag: splitData[1] };
   }
 
   async fetchCourseData(courseId: string) {

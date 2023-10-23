@@ -68,4 +68,9 @@ export class BaseSolveExerciseComponent {
     });
   }
 
+  getEncryptedParams(stageId: number, flag: string): string {
+    const paramString = `${stageId},${flag}`;
+    return this.cryptoService.encrypt(paramString);
+  }
+
 }
