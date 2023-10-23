@@ -1,24 +1,33 @@
 import {Component, OnInit} from '@angular/core';
 import {ExerciseService} from "../../../../core/services/exercise.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, Validators} from "@angular/forms";
 import {Picture} from "../../../models/exercise";
 import Swal from "sweetalert2";
+import {
+  BaseSolveExerciseComponent
+} from "../../../../core/components/base-solve-exercise/base-solve-exercise.component";
+import {CourseService} from "../../../../core/services/course.service";
+import {PseudoCryptService} from "../../../../core/services/pseudo-crypt.service";
 
 @Component({
   selector: 'app-picture',
   templateUrl: './picture.component.html',
   styleUrls: ['./picture.component.css']
 })
-export class PictureComponent implements OnInit {
-  exerciseService: ExerciseService;
-  id: string | null | number;
+export class PictureComponent extends BaseSolveExerciseComponent implements OnInit {
   picture!: Picture;
   selectedOption: string = '';
 
-  constructor(exerciseService: ExerciseService, private route: ActivatedRoute, private fb: FormBuilder) {
-    this.exerciseService = exerciseService;
-    this.id = this.route.snapshot.params['id'];
+  constructor(protected override exerciseService : ExerciseService,
+              protected override route: ActivatedRoute,
+              protected override cryptoService: PseudoCryptService,
+              protected override router: Router,
+              protected override courseService : CourseService,
+              private fb: FormBuilder
+  )
+  {
+    super(exerciseService, route, cryptoService, router, courseService);
   }
 
   pictureForm = this.fb.group({
@@ -26,7 +35,24 @@ export class PictureComponent implements OnInit {
   })
 
   async ngOnInit(): Promise<void> {
-    this.picture = await this.exerciseService.getExerciseByTypeAndId('picture_exercise', this.id);
+    try {
+      this.picture = await this.exerciseService.getExerciseByTypeAndId('picture_exercise', this.id);
+    } catch (error : any){
+      Swal.fire({
+        title: 'Error',
+        text: error!.error.data,
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        width: 600,
+        padding: '3em',
+        color: '#2B788B',
+        background: '#F6F5F4'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/']);
+        }
+      });
+    }
   }
 
   selectAnswer(text: string) {
@@ -36,25 +62,17 @@ export class PictureComponent implements OnInit {
   async onSubmit() {
     try {
       this.pictureForm.patchValue({ data: this.selectedOption });
-      const result = await this.exerciseService.solveExercise(28, this.id, 'picture_exercise', this.pictureForm);
+      const result = await this.exerciseService.solveExercise(this.exerciseId, this.id, 'picture_exercise', this.pictureForm);
       this.success(result);
       this.pictureForm.reset();
+      if (this.courseId) {
+        const queryParams = { data: this.getEncryptedParams(this.stageId, 'showProgressStages')};
+        await this.router.navigate(['/course', this.courseId], {
+          queryParams: queryParams
+        });
+      }
     } catch (error) {
     }
-  }
-
-
-  success(text:string){
-    Swal.fire({
-      title: 'Success',
-      text: text,
-      icon: 'success',
-      confirmButtonText: 'Ok',
-      width: 600,
-      padding: '3em',
-      color: '#2B788B',
-      background: '#F6F5F4'
-    })
   }
 
 }

@@ -3,7 +3,8 @@ import {BaseService} from "./base-service/base.service";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UntypedFormGroup, ValidationErrors} from "@angular/forms";
-import {catchError, throwError} from "rxjs";
+import {BehaviorSubject, catchError, combineLatest, throwError} from "rxjs";
+import * as fromSelectors from '../selectors/role-selector';
 import {Store} from "@ngrx/store";
 
 @Injectable({
@@ -17,7 +18,30 @@ export class ProfileService extends BaseService{
               protected override store: Store
               ) {
     super(http, route, router, store);
+    combineLatest([
+      this.store.select(fromSelectors.selectRole),
+      this.store.select(fromSelectors.selectUserId)
+    ]).subscribe(async ([role, userId]) => {
+      if (role === undefined || userId === undefined) {
+        try {
+          const response = await this.getCachedInfo();
+          this.currentUserRole.next(response.userRole);
+          this.currentUserId.next(response.userId);
+        } catch (error) {
+          console.error("Error getting cached info:", error);
+        }
+      } else {
+        this.currentUserRole.next(role);
+        this.currentUserId.next(userId);
+      }
+    });
   }
+
+  private currentUserRole = new BehaviorSubject<string | undefined>(undefined);
+  private currentUserId = new BehaviorSubject<number | undefined>(undefined);
+
+  public currentUserRole$ = this.currentUserRole.asObservable();
+  public currentUserId$ = this.currentUserId.asObservable();
 
   getProfileInfo(): Promise<any> {
     return new Promise((resolve, reject) => {

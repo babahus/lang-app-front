@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CourseService} from "../../../core/services/course.service";
 import {CourseData} from "../../models/course-data";
@@ -11,6 +11,9 @@ import {Store} from "@ngrx/store";
 import * as fromSelectors from "../../../core/selectors/role-selector";
 import {ProgressExercisesService} from "../../../core/services/progress-exercises.service";
 import {ProgressData} from "../../models/progress-data";
+import {StageData} from "../../models/stage-data";
+import {PseudoCryptService} from "../../../core/services/pseudo-crypt.service";
+import {BehaviorSubject, combineLatest, filter} from "rxjs";
 
 @Component({
   selector: 'app-course-view',
@@ -18,7 +21,7 @@ import {ProgressData} from "../../models/progress-data";
   styleUrls: ['./course-view.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class CourseViewComponent implements OnInit{
+export class CourseViewComponent implements OnInit,AfterViewInit{
   courseData: CourseData = {
     title: '',
     description: '',
@@ -35,13 +38,14 @@ export class CourseViewComponent implements OnInit{
   deleteModalCourse = false;
   showMenuEditStage = false;
   showMenuProgressStages = false;
+  dataLoaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   selectedType: string = '';
   exerciseData: any;
-  exerciseTypes: string[] = ['compile_phrase', 'audit', 'pair_exercise', 'picture_exercise', 'sentence'];
+  exerciseTypes: string[] = ['compile_phrase', 'audit', 'pair', 'picture', 'sentence'];
 
-  selectedStage: any;
-  public currentUserRole!: string;
+  selectedStage: any|StageData;
+  public currentUserRole!: string | undefined;
   public stagesProgress: ProgressData[] = [];
 
   constructor(
@@ -53,19 +57,24 @@ export class CourseViewComponent implements OnInit{
     private stageService: StageService,
     private exerciseService: ExerciseService,
     private progressService: ProgressExercisesService,
-    private store : Store
+    private store : Store,
+    private cryptoService: PseudoCryptService
   )
   {
-    this.store.select(fromSelectors.selectRole).subscribe(async role => {
-      console.log('Your role is')
-      console.log(role);
-      if (role == undefined) {
-        this.currentUserRole = await this.profileService.getCachedInfo();
-        console.log(this.currentUserRole);
-      } else {
-        this.currentUserRole = role;
-      }
+    combineLatest([
+      this.profileService.currentUserRole$,
+      this.profileService.currentUserId$
+    ]).subscribe(([role, userId]) => {
+      this.currentUserRole = role;
+
+      console.log("User role:", role);
+      console.log("User ID:", userId);
     });
+  }
+
+  getEncryptedParams(courseId: number, stageId: number, exerciseId: number): string {
+    const paramString = `${courseId},${stageId},${exerciseId}`;
+    return this.cryptoService.encrypt(paramString);
   }
 
   selectStage(stage: any) {
@@ -110,18 +119,49 @@ export class CourseViewComponent implements OnInit{
   })
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe(async params => {
       const courseId = params['id'];
       if (courseId) {
-        this.fetchCourseData(courseId);
+        this.fetchCourseData(courseId)
       }
+    })
+  }
+
+  ngAfterViewInit(): void {
+    this.dataLoaded.pipe(
+      filter(loaded => loaded)
+    ).subscribe(() => {
+      this.route.queryParams.subscribe(queryParams => {
+        // const stageId = queryParams['stage'];
+        // const flag = queryParams['flag'];
+        const encryptData = queryParams['data'];
+
+        if (encryptData) {
+          const { stage: stageId, flag } = this.getDecryptedParams(encryptData);
+          this.showModalWindow(flag);
+          let index = this.courseData.course_stages.findIndex(stage => stage.id == Number(stageId));
+          let stage = this.courseData.course_stages.find(stage => stage.id == Number(stageId));
+          if (stage) {
+            stage.isClicked = false;
+            this.toggleCheck(index);
+            this.getProgressDataForStage(stage);
+          }
+        }
+      });
     });
+  }
+
+  getDecryptedParams(encryptedData: string): { stage: string, flag: string } {
+    const decryptedData = this.cryptoService.decrypt(encryptedData);
+    const splitData = decryptedData.split(',');
+    return { stage: splitData[0], flag: splitData[1] };
   }
 
   async fetchCourseData(courseId: string) {
     try {
-      this.courseData =  await this.courseService.getCourseDetails(courseId);
+      this.courseData = await this.courseService.getCourseDetails(courseId);
       console.log(this.courseData)
+      this.dataLoaded.next(true);
     } catch (error:any) {
       this.router.navigate(['/**']);
     }
@@ -386,6 +426,7 @@ export class CourseViewComponent implements OnInit{
 
   async getProgressDataForStage(stage: any) {
     if (stage.isClicked){
+      this.selectStage(stage);
       this.stagesProgress = await this.progressService.getStageProgressByUser(Number(sessionStorage.getItem('id')), stage.id);
       console.log(this.stagesProgress)
     }
@@ -397,5 +438,12 @@ export class CourseViewComponent implements OnInit{
     return !!foundProgress && foundProgress.user_progress !== null;
   }
 
+  navigateToExercise(exercise: any) {
+    if(!this.isExerciseCompleted(exercise['id'])) {
+      const link = ['/exercises/'+exercise['type'], exercise['data']['id']];
+      const queryParams = { data: this.getEncryptedParams(this.courseData.id, this.selectedStage.id, exercise['id']) };
+      this.router.navigate(link, { queryParams: queryParams });
+    }
+  }
 
 }

@@ -17,6 +17,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {LoaderInterceptor} from "./core/interceptors/request.interceptor";
+import { BaseSolveExerciseComponent } from './core/components/base-solve-exercise/base-solve-exercise.component';
 
 
 export function HttpLoaderFactory(http:HttpClient){
@@ -30,6 +31,7 @@ export function HttpLoaderFactory(http:HttpClient){
         NotFoundComponent,
         BaseComponent,
         LoaderComponent,
+        BaseSolveExerciseComponent,
     ],
     imports: [
         BrowserModule,

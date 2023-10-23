@@ -6,13 +6,15 @@ import {Pagination} from "../../models/pagination.model";
 import * as fromSelectors from '../../../core/selectors/role-selector';
 import Swal from "sweetalert2";
 import {Store} from "@ngrx/store";
+import {combineLatest} from "rxjs";
+import {ProfileService} from "../../../core/services/profile-service.service";
 
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.css']
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent{
   openDetails = false;
   isLoading: boolean = false;
 
@@ -34,16 +36,24 @@ export class CoursesComponent implements OnInit {
   public pagination: Pagination|null = null;
   pages: number[] = [0];
   public attachedCourses: Course[] = [];
-  private studentId: string | null;
+  private studentId!: number | undefined;
   selectedStage: any;
   isCardInfoVisible = false;
+  public currentUserRole!: string | undefined;
 
-  constructor(private courseService: CourseService, private store : Store) {
-    this.studentId = sessionStorage.getItem('id');
+  constructor(private profileService: ProfileService, private courseService: CourseService, private store: Store) {
+    combineLatest([
+      this.profileService.currentUserRole$,
+      this.profileService.currentUserId$
+    ]).subscribe(([role, userId]) => {
+      this.currentUserRole = role;
+      this.studentId = userId;
 
-    this.store.select(fromSelectors.selectRole).subscribe(role => {
-      console.log('Your role is')
-      console.log(role);
+      console.log("User role:", role);
+      console.log("User ID:", userId);
+      if (this.studentId){
+        this.getCourses();
+      }
     });
   }
 
@@ -62,10 +72,6 @@ export class CoursesComponent implements OnInit {
     } catch (error) {
       console.error(error);
     }
-  }
-
-  async ngOnInit(): Promise<void> {
-    await this.getCourses();
   }
 
   openListExercise(){

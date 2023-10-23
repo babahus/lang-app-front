@@ -1,22 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { ExerciseService } from "../../../../core/services/exercise.service";
-import { ActivatedRoute } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Sentence } from "../../../models/exercise";
 import Swal from "sweetalert2";
+import {
+  BaseSolveExerciseComponent
+} from "../../../../core/components/base-solve-exercise/base-solve-exercise.component";
+import {CourseService} from "../../../../core/services/course.service";
+import {PseudoCryptService} from "../../../../core/services/pseudo-crypt.service";
 
 @Component({
   selector: 'app-sentence',
   templateUrl: './sentence.component.html',
   styleUrls: ['./sentence.component.css']
 })
-export class SentenceComponent implements OnInit {
-  exerciseService: ExerciseService;
-  id: string | null | number;
+export class SentenceComponent extends BaseSolveExerciseComponent implements OnInit {
   sentence!: Sentence;
   sentenceStr: string = '';
   sentenceArr: any = [];
   sentenceForm: FormGroup;
+
+  constructor(protected override exerciseService : ExerciseService,
+              protected override route: ActivatedRoute,
+              protected override cryptoService: PseudoCryptService,
+              protected override router: Router,
+              protected override courseService : CourseService,
+              private fb: FormBuilder
+  )
+  {
+    super(exerciseService, route, cryptoService, router, courseService);
+    this.sentenceForm = fb.group({data:[]});
+  }
+
+  async ngOnInit(): Promise<void> {
+    try {
+      this.sentence = await this.exerciseService.getExerciseByTypeAndId(
+        'sentence',
+        this.id
+      );
+
+      this.sentenceStr = this.sentence.sentence_with_gaps;
+      this.sentenceArr = this.sentence.correct_answers_json;
+      this.changeSentence();
+    } catch (error : any) {
+      this.errorWithRedirect(error!.error.data)
+    }
+  }
 
   changeSentence() {
     this.sentenceArr.forEach((word: any, index: any) => {
@@ -26,57 +56,27 @@ export class SentenceComponent implements OnInit {
     console.log(this.sentenceStr);
   }
 
-  constructor(
-    exerciseService: ExerciseService,
-    private route: ActivatedRoute,
-    private fb: FormBuilder
-  ) {
-    this.exerciseService = exerciseService;
-    this.id = this.route.snapshot.params['id'];
-
-    this.sentenceForm = fb.group({data:[]});
-  }
-
-  async ngOnInit(): Promise<void> {
-    this.sentence = await this.exerciseService.getExerciseByTypeAndId(
-      'sentence',
-      this.id
-    );
-
-    this.sentenceStr = this.sentence.sentence_with_gaps;
-    this.sentenceArr = this.sentence.correct_answers_json;
-    this.changeSentence();
-  }
-
   async checkAnswer() {
     try {
       this.sentenceForm.patchValue({
         data: this.sentenceArr.map((word: any, index: any) => this.sentenceForm.get(`answer${index}`)?.value || '')
       });
       const result = await this.exerciseService.solveExercise(
-        29,
+        this.exerciseId,
         this.id,
         'sentence',
         this.sentenceForm
       );
       this.success(result);
+      if (this.courseId) {
+        const queryParams = { data: this.getEncryptedParams(this.stageId, 'showProgressStages')};
+        await this.router.navigate(['/course', this.courseId], {
+          queryParams: queryParams
+        });
+      }
     } catch (error) {
       console.log(error);
     }
-  }
-
-
-  success(text: string) {
-    Swal.fire({
-      title: 'Success',
-      text: text,
-      icon: 'success',
-      confirmButtonText: 'Ok',
-      width: 600,
-      padding: '3em',
-      color: '#2B788B',
-      background: '#F6F5F4',
-    });
   }
 
 }

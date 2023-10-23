@@ -60,7 +60,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  constructor( public authService:AuthService, private router: Router, private translate: TranslateService) {
+  constructor( protected authService:AuthService, protected router: Router, protected translate: TranslateService) {
     this.translate.setDefaultLang('en');
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))

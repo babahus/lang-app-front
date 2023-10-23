@@ -559,8 +559,8 @@
                             <button (click)="fetchExerciseData(type)" class="mb-3 bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">
                               <span *ngIf="type == 'compile_phrase'">Compile Phrase</span>
                               <span *ngIf="type == 'audit'">Phonetic Transcript</span>
-                              <span *ngIf="type == 'pair_exercise'">Pairs of Meaning</span>
-                              <span *ngIf="type == 'picture_exercise'">Picture Association</span>
+                              <span *ngIf="type == 'pair'">Pairs of Meaning</span>
+                              <span *ngIf="type == 'picture'">Picture Association</span>
                               <span *ngIf="type == 'sentence'">Missing links</span>
                             </button>
                           </div>
@@ -824,43 +824,55 @@
 
                     <ng-container *ngIf="this.stagesProgress.length > 0">
                       <div class="p-2 bg-white rounded-lg mb-3 shadow-md" *ngFor="let exercise of stage.stage_exercises">
-                        <div class="flex justify-between">
-                          <p class="text-sm text-gray-500 mb-1">Exercise №{{ exercise['id'] }}</p>
-                          <div class="">
-                            <!-- Checkmark SVG for completed exercises -->
-                            <svg *ngIf="isExerciseCompleted(exercise['id'])" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check-square-fill" viewBox="0 0 16 16">
-                              <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z"/>
-                            </svg>
-                            <!-- Question mark SVG for incomplete exercises -->
-                            <svg *ngIf="!isExerciseCompleted(exercise['id'])" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="orange" class="bi bi-exclamation-square-fill" viewBox="0 0 16 16">
-                              <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                            </svg>
+                        <div [ngClass]="{'cursor-pointer' : !isExerciseCompleted(exercise['id'])}" (click)="navigateToExercise(exercise)">
+                          <div class="flex justify-between">
+                            <p class="text-sm text-gray-500 mb-1">Exercise №{{ exercise['id'] }}</p>
+                            <div class="">
+                              <!-- Checkmark SVG for completed exercises -->
+                              <svg *ngIf="isExerciseCompleted(exercise['id'])" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check-square-fill" viewBox="0 0 16 16">
+                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z"/>
+                              </svg>
+                              <!-- Question mark SVG for incomplete exercises -->
+                              <svg *ngIf="!isExerciseCompleted(exercise['id'])" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="orange" class="bi bi-exclamation-square-fill" viewBox="0 0 16 16">
+                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                              </svg>
+                            </div>
                           </div>
-                        </div>
 
-                        <div *ngIf="exercise['type'] === 'compile_phrase'" class="flex items-center p-2 bg-gray-100 rounded">
-                          <span class="text-sm text-gray-700 mr-2">Phrase:</span>
-                          <span *ngIf="isExerciseCompleted(exercise['id'])" class="font-medium text-center items-center">
-                            {{exercise['data']['phrase']}}
-                          </span>
-                          <span *ngIf="!isExerciseCompleted(exercise['id'])" class="font-medium text-center items-center">**** ***** *****</span>
-                        </div>
+                          <div *ngIf="exercise['type'] === 'compile_phrase'" class="flex items-center p-2 bg-gray-100 rounded">
+                            <span class="text-sm text-gray-700 mr-2">Phrase:</span>
+                            <ng-container *ngIf="!isExerciseCompleted(exercise['id']); else completed">
+                            <span class="font-medium text-center items-center">
+                              **** ***** *****
+                            </span>
+                            </ng-container>
+                            <ng-template #completed>
+                              <span class="font-medium text-center items-center">{{exercise['data']['phrase']}}</span>
+                            </ng-template>
+                          </div>
 
-                        <div *ngIf="exercise['type'] === 'sentence'" class="flex items-center p-2 bg-gray-100 rounded">
-                          <span class="text-sm text-gray-700 mr-2">Sentence:</span>
-                          <span class="font-medium text-center items-center">{{ exercise['data']['sentence_with_gaps'] }}</span>
-                        </div>
+                          <a *ngIf="!isExerciseCompleted(exercise['id'])"
+                             [routerLink]="['/exercises/sentence', exercise['data']['id']]"
+                             [queryParams]="{ data: getEncryptedParams(courseData.id, selectedStage.id, exercise['id']) }">
 
-                        <div *ngIf="exercise['type'] === 'pair_exercise'" class="flex items-center p-2 bg-gray-100 rounded">
-                          <span class="text-sm text-gray-700 mr-2">Choose Pair For Words</span>
-                        </div>
+                            <div *ngIf="exercise['type'] === 'sentence'" class="flex items-center p-2 bg-gray-100 rounded">
+                              <span class="text-sm text-gray-700 mr-2">Sentence:</span>
+                              <span class="font-medium text-center items-center">{{ exercise['data']['sentence_with_gaps'] }}</span>
+                            </div>
 
-                        <div *ngIf="exercise['type'] === 'audit'" class="flex items-center p-2 bg-gray-100 rounded">
-                          <span class="text-sm text-gray-700 mr-2">Listen and translate Phrase</span>
-                        </div>
+                          </a>
 
-                        <div *ngIf="exercise['type'] === 'picture_exercise'" class="flex items-center p-2 bg-gray-100 rounded">
-                          <span class="text-sm text-gray-700 mr-2">Look at the picture and choose an answer option.</span>
+                          <div *ngIf="exercise['type'] === 'pair_exercise'" class="flex items-center p-2 bg-gray-100 rounded">
+                            <span class="text-sm text-gray-700 mr-2">Choose Pair For Words</span>
+                          </div>
+
+                          <div *ngIf="exercise['type'] === 'audit'" class="flex items-center p-2 bg-gray-100 rounded">
+                            <span class="text-sm text-gray-700 mr-2">Listen and translate Phrase</span>
+                          </div>
+
+                          <div *ngIf="exercise['type'] === 'picture_exercise'" class="flex items-center p-2 bg-gray-100 rounded">
+                            <span class="text-sm text-gray-700 mr-2">Look at the picture and choose an answer option.</span>
+                          </div>
                         </div>
                       </div>
                     </ng-container>
