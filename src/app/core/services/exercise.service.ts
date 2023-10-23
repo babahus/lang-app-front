@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from "./base-service/base.service";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UntypedFormGroup, ValidationErrors} from "@angular/forms";
 import {catchError, throwError} from "rxjs";
@@ -13,6 +13,7 @@ import {Store} from "@ngrx/store";
 })
 export class ExerciseService extends BaseService
 {
+  userId:number = 0;
   private body!: {};
   constructor(protected override http: HttpClient,
               protected override route: Router,
@@ -21,6 +22,11 @@ export class ExerciseService extends BaseService
               )
   {
     super(http, route, router, store);
+    const storedId = sessionStorage.getItem('id');
+
+    if (storedId !== null) {
+      this.userId = +storedId;
+    }
   }
 
   getExercisesByType(strTypeExercise: string): Promise<Audit[]|CompilePhrase[]|Dictionary[]> {
@@ -100,9 +106,10 @@ export class ExerciseService extends BaseService
     }))
   }
 
-  getExerciseData(type: string): Promise<any>{
+  getExerciseData(type: string, page: number): Promise<any>{
     return  new Promise((resolve, reject) => {
-      this.http.get(this.url + `/exercise/${type}`).pipe(
+      const params = new HttpParams().set('page', page.toString());
+      this.http.get(this.url + `/exercise/${type}`, { params }).pipe(
         catchError((error) => {
           reject(error);
           return throwError(error);
@@ -249,5 +256,53 @@ export class ExerciseService extends BaseService
           };
           return dataExercise;
       }
+    }
+
+  attachExerciseForUser(exerciseId: number, type: string){
+    return new Promise((resolve, reject) => {
+      this.http.post(this.url + '/exercise/attach', {
+        id: exerciseId,
+        exercise_type: type,
+        account_id: this.userId,
+      }).pipe(
+        catchError((error) => {
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
+        resolve(data);
+      });
+    });
+  }
+
+  getAttachedExerciseType(type:string): Promise<any>{
+    return  new Promise((resolve, reject) => {
+      this.http.get(this.url + `/exercises-attached/${type}`, ).pipe(
+        catchError((error) => {
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
+        resolve(data);
+      });
+    });
+  }
+
+
+  detachExerciseForUser(exerciseId: number, type: string){
+    return new Promise((resolve, reject) => {
+      this.http.post(this.url + '/exercise/detach', {
+        id: exerciseId,
+        exercise_type: type,
+        account_id: this.userId,
+      }).pipe(
+        catchError((error) => {
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
+        resolve(data);
+      });
+    });
   }
 }

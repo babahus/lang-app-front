@@ -1,0 +1,13 @@
+.current {
+  background-color: #2B788B;
+  color: white;
+}
+
+.disabled {
+  cursor: not-allowed !important;
+  opacity: 0.5;
+  pointer-events: none;
+  background-color: #5996A5;
+  color: white;
+  border: none;
+}

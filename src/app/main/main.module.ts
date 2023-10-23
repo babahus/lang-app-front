@@ -42,6 +42,8 @@ import { PictureComponent } from './pages/solve-exercise/picture/picture.compone
 import {CdkOption} from "@angular/cdk/listbox";
 import { CdkListboxModule } from '@angular/cdk/listbox';
 import { SentenceComponent } from './pages/solve-exercise/sentence/sentence.component';
+import { AttachExerciseComponent } from './pages/attach-exercise/attach-exercise.component';
+
 
 const routes: Routes = [
   { path : '', component: IndexComponent},
@@ -74,6 +76,7 @@ const routes: Routes = [
   { path : 'exercises/pair/:id', component : PairComponent, canActivate : [AuthGuard]},
   { path : 'exercises/picture/:id', component : PictureComponent, canActivate : [AuthGuard]},
   { path : 'exercises/sentence/:id', component : SentenceComponent, canActivate : [AuthGuard]},
+  { path : 'exercises/attach', component : AttachExerciseComponent, canActivate : [AuthGuard]},
   {
     path : '**', component: NotFoundComponent
   }
@@ -108,6 +111,7 @@ const routes: Routes = [
     PairComponent,
     PictureComponent,
     SentenceComponent,
+    AttachExerciseComponent,
   ],
   exports: [
     HeaderComponent,
