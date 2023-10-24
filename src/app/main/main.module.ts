@@ -46,6 +46,8 @@ import { ExercisesCardComponent } from './components/dashboard/exercises-card/ex
 import { CoursesCardComponent } from './components/dashboard/courses-card/courses-card.component';
 import { ProgressionCardComponent } from './components/dashboard/progression-card/progression-card.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { AttachExerciseComponent } from './pages/attach-exercise/attach-exercise.component';
+
 
 const routes: Routes = [
   { path : '', component: IndexComponent},
@@ -78,6 +80,7 @@ const routes: Routes = [
   { path : 'exercises/pair/:id', component : PairComponent, canActivate : [AuthGuard]},
   { path : 'exercises/picture/:id', component : PictureComponent, canActivate : [AuthGuard]},
   { path : 'exercises/sentence/:id', component : SentenceComponent, canActivate : [AuthGuard]},
+  { path : 'exercises/attach', component : AttachExerciseComponent, canActivate : [AuthGuard]},
   {
     path : '**', component: NotFoundComponent
   }
@@ -116,6 +119,7 @@ const routes: Routes = [
     CoursesCardComponent,
     ProgressionCardComponent,
     ProgressBarComponent,
+    AttachExerciseComponent,
   ],
   exports: [
     HeaderComponent,

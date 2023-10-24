@@ -249,7 +249,7 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
     try {
       this.selectedType = type;
       this.selectedExercises = this.filterExercisesByType(type);
-      this.exerciseData = await this.exerciseService.getExerciseData(type);
+      this.exerciseData = await this.exerciseService.getExerciseData(type, 1);
     } catch (error) {
       console.log(error);
     }
