@@ -90,7 +90,7 @@ export class ExerciseService extends BaseService
       this.body = {
         'id' : parseInt(id as string),
         'type' : type,
-        'data' : JSON.stringify(data.get('data')?.value),
+        'data' : data.get('data')?.value,
         'exercise_id' : exerciseId
       }
     }

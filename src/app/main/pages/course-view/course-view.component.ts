@@ -465,6 +465,11 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
   async toggleCheckForUser(index: number) {
     const clickedStage = this.courseData.course_stages[index];
 
+    if (clickedStage.isClicked){
+      clickedStage.isClicked =! clickedStage.isClicked;
+      return;
+    }
+
     try {
       await this.checkUserProgressForStage(clickedStage);
       this.resetOtherStages(index);
