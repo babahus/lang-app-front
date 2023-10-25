@@ -38,20 +38,7 @@ export class PictureComponent extends BaseSolveExerciseComponent implements OnIn
     try {
       this.picture = await this.exerciseService.getExerciseByTypeAndId('picture_exercise', this.id);
     } catch (error : any){
-      Swal.fire({
-        title: 'Error',
-        text: error!.error.data,
-        icon: 'error',
-        confirmButtonText: 'Ok',
-        width: 600,
-        padding: '3em',
-        color: '#2B788B',
-        background: '#F6F5F4'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.router.navigate(['/']);
-        }
-      });
+      this.errorWithRedirect(error!.error.data)
     }
   }
 

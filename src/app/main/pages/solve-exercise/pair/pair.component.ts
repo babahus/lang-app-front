@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ExerciseService } from '../../../../core/services/exercise.service';
+import {Component, OnInit} from '@angular/core';
+import {ExerciseService} from '../../../../core/services/exercise.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import { Pair, PairOption } from '../../../models/exercise';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import Swal from 'sweetalert2';
-import { FormBuilder, Validators } from '@angular/forms';
+import {Pair} from '../../../models/exercise';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {
   BaseSolveExerciseComponent
 } from "../../../../core/components/base-solve-exercise/base-solve-exercise.component";
@@ -33,7 +32,7 @@ export class PairComponent extends BaseSolveExerciseComponent implements OnInit 
   }
 
   pairForm = this.fb.group({
-    data: this.fb.control(''),
+    data: this.fb.array([]),
   });
 
   async ngOnInit(): Promise<void> {
@@ -55,14 +54,21 @@ export class PairComponent extends BaseSolveExerciseComponent implements OnInit 
 
   async checkAnswer() {
     try {
-      this.pairForm.patchValue({
-        data: JSON.stringify(
-          this.words.map((word, index) => ({
-            word,
-            translation: this.translations[index],
-          }))
-        ),
+      const dataFormArray = this.words.map((word, index) => {
+        const formData = new FormGroup({
+          word: new FormControl(word),
+          translation: new FormControl(this.translations[index]),
+        });
+        return formData;
       });
+
+      const dataArray = this.pairForm.get('data') as FormArray;
+      dataArray.clear();
+
+      dataFormArray.forEach((formData) => {
+        dataArray.push(formData);
+      });
+
 
       const result = await this.exerciseService.solveExercise(
         this.exerciseId,

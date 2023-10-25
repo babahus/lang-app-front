@@ -67,8 +67,6 @@ export class AuditComponent extends BaseSolveExerciseComponent implements OnInit
       }
     } catch (error) {
       console.log(error);
-    } finally {
-      this.audioForm.reset();
     }
   }
 

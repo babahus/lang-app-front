@@ -18,6 +18,11 @@
         </div>
       </form>
     </div>
+    <div class="error-message" *ngIf="sentenceForm.errors && sentenceForm.getError('error')">
+      <p class="pt-2 text-[#945069]  font-medium text-xs">
+        {{ sentenceForm.getError('error') }}
+      </p>
+    </div>
     <div class="error-message" *ngIf="sentenceForm.errors && sentenceForm.getError('backend')">
       <p class="pt-2 text-[#945069]  font-medium text-xs">
         {{ sentenceForm.getError('backend') }}

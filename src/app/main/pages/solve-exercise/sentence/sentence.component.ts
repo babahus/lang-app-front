@@ -59,8 +59,9 @@ export class SentenceComponent extends BaseSolveExerciseComponent implements OnI
   async checkAnswer() {
     try {
       this.sentenceForm.patchValue({
-        data: this.sentenceArr.map((word: any, index: any) => this.sentenceForm.get(`answer${index}`)?.value || '')
+        data: JSON.stringify(this.sentenceArr.map((word: any, index: any) => this.sentenceForm.get(`answer${index}`)?.value || ''))
       });
+
       const result = await this.exerciseService.solveExercise(
         this.exerciseId,
         this.id,

@@ -802,7 +802,7 @@
         <div class="p-2 md:p-4 lg:pt-6 space-y-4 bg-blue-50 lg:p-6 rounded-lg">
           <div *ngFor="let stage of courseData.course_stages; let i = index">
             <div class="grid grid-cols-1 gap-2">
-              <div (click)="toggleCheck(i)" (click)="getProgressDataForStage(stage)" class="relative cursor-pointer w-full bg-[#C3DCE3] p-2 items-center justify-start lg:py-3 overflow-hidden font-medium transition-all rounded group" style="font-family: Montserrat">
+              <div (click)="toggleCheckForUser(i)" class="relative cursor-pointer w-full bg-[#C3DCE3] p-2 items-center justify-start lg:py-3 overflow-hidden font-medium transition-all rounded group" style="font-family: Montserrat">
                 <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all ease-out duration-700 translate-x-0 left-0 w-full h-48': stage.isClicked}" class="-translate-x-full"></div>
                 <div class="flex items-center lg:px-2">
                   <div [ngClass]="{'block': stage.isClicked, 'hidden': !stage.isClicked}">
@@ -851,16 +851,10 @@
                             </ng-template>
                           </div>
 
-                          <a *ngIf="!isExerciseCompleted(exercise['id'])"
-                             [routerLink]="['/exercises/sentence', exercise['data']['id']]"
-                             [queryParams]="{ data: getEncryptedParams(courseData.id, selectedStage.id, exercise['id']) }">
-
-                            <div *ngIf="exercise['type'] === 'sentence'" class="flex items-center p-2 bg-gray-100 rounded">
-                              <span class="text-sm text-gray-700 mr-2">Sentence:</span>
-                              <span class="font-medium text-center items-center">{{ exercise['data']['sentence_with_gaps'] }}</span>
-                            </div>
-
-                          </a>
+                          <div *ngIf="exercise['type'] === 'sentence'" class="flex items-center p-2 bg-gray-100 rounded">
+                            <span class="text-sm text-gray-700 mr-2">Sentence:</span>
+                            <span class="font-medium text-center items-center">{{ exercise['data']['sentence_with_gaps'] }}</span>
+                          </div>
 
                           <div *ngIf="exercise['type'] === 'pair_exercise'" class="flex items-center p-2 bg-gray-100 rounded">
                             <span class="text-sm text-gray-700 mr-2">Choose Pair For Words</span>
