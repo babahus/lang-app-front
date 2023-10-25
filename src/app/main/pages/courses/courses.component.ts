@@ -29,6 +29,7 @@ export class CoursesComponent{
 
   public showFreeCourses = true;
   public showPaidCourses = true;
+  public showMyAttachedCourses = true;
   public showCourseDetailModal = false;
   public courses: Course[] = [];
   selectedCourse: null|Course = null;
@@ -89,10 +90,19 @@ export class CoursesComponent{
   }
 
   filterCourses(event: Event) {
-    this.filteredCourses = this.courses.filter(course =>
-      (this.showFreeCourses && course.price === 0) ||
-      (this.showPaidCourses && course.price > 0)
-    );
+    const showFree = this.showFreeCourses;
+    const showPaid = this.showPaidCourses;
+    const showAttached = this.showMyAttachedCourses;
+
+    this.filteredCourses = this.courses.filter(course => {
+      const isAttached = this.isCourseAttached(course.id);
+      const isFree = course.price === 0;
+      const isPaid = course.price > 0;
+
+      return (showFree && isFree && !isAttached) ||
+        (showPaid && isPaid && !isAttached) ||
+        (showAttached && isAttached);
+    });
   }
 
   async goToPage(url: number | null) {
