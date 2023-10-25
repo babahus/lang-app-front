@@ -42,11 +42,12 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
 
   selectedType: string = '';
   exerciseData: any;
-  exerciseTypes: string[] = ['compile_phrase', 'audit', 'pair', 'picture', 'sentence'];
+  exerciseTypes: string[] = ['compile_phrase', 'audit', 'pair_exercise', 'picture_exercise', 'sentence'];
 
   selectedStage: any|StageData;
   public currentUserRole!: string | undefined;
   public stagesProgress: ProgressData[] = [];
+  public currentUserId!: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -66,7 +67,9 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
       this.profileService.currentUserId$
     ]).subscribe(([role, userId]) => {
       this.currentUserRole = role;
-
+      if (userId){
+        this.currentUserId = userId;
+      }
       console.log("User role:", role);
       console.log("User ID:", userId);
     });
@@ -426,9 +429,9 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
 
   async getProgressDataForStage(stage: any) {
     if (stage.isClicked){
-      this.selectStage(stage);
-      this.stagesProgress = await this.progressService.getStageProgressByUser(Number(sessionStorage.getItem('id')), stage.id);
-      console.log(this.stagesProgress)
+        this.selectStage(stage);
+        this.stagesProgress = await this.progressService.getStageProgressByUser(this.currentUserId, stage.id);
+        console.log(this.stagesProgress)
     }
   }
 
@@ -445,5 +448,48 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
       this.router.navigate(link, { queryParams: queryParams });
     }
   }
+
+  showErrorModal(message : string, title : string = 'Access Denied'){
+    Swal.fire({
+      title: title,
+      text: message,
+      icon: 'error',
+      confirmButtonText: 'Ok',
+      width: 600,
+      padding: '3em',
+      color: '#2B788B',
+      background: '#F6F5F4'
+    })
+  }
+
+  async toggleCheckForUser(index: number) {
+    const clickedStage = this.courseData.course_stages[index];
+
+    try {
+      await this.checkUserProgressForStage(clickedStage);
+      this.resetOtherStages(index);
+      this.setClickedStage(index);
+      await this.getProgressDataForStage(clickedStage);
+    } catch (error) {
+      this.showErrorModal('You must complete the previous stage to proceed to the next one.');
+    }
+  }
+
+  async checkUserProgressForStage(stage : StageData) {
+    await this.progressService.canUserProceedToNextStage(stage.id);
+  }
+
+  resetOtherStages(clickedIndex : number) {
+    this.courseData.course_stages.forEach((stage, index) => {
+      if (index !== clickedIndex) {
+        stage.isClicked = false;
+      }
+    });
+  }
+
+  setClickedStage(index : number) {
+    this.courseData.course_stages[index].isClicked = true;
+  }
+
 
 }

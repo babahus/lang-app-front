@@ -59,4 +59,17 @@ export class ProgressExercisesService extends BaseService{
       });
     });
   }
+
+  canUserProceedToNextStage(stageId : number) : Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get<any>(`${this.url}/user/stage/${stageId}/can-proceed`).pipe(
+        catchError((error) => {
+          reject(error);
+          return throwError(error);
+        })
+      ).subscribe((data: any) => {
+        resolve(data.data);
+      });
+    });
+  }
 }
