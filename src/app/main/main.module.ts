@@ -47,6 +47,7 @@ import { CoursesCardComponent } from './components/dashboard/courses-card/course
 import { ProgressionCardComponent } from './components/dashboard/progression-card/progression-card.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { AttachExerciseComponent } from './pages/attach-exercise/attach-exercise.component';
+import {ClickOutsideDirective} from "../core/directives/click-outside.directive";
 
 
 const routes: Routes = [
@@ -120,6 +121,7 @@ const routes: Routes = [
     ProgressionCardComponent,
     ProgressBarComponent,
     AttachExerciseComponent,
+    ClickOutsideDirective,
   ],
   exports: [
     HeaderComponent,

@@ -1,8 +1,8 @@
 <section class="bg-[#C3DCE3] min-h-screen flex-col justify-center">
   <div class="pt-12 max-w-5xl mx-auto px-3 md:px-5">
-    <div class="bg-white rounded-lg w-full flex p-2 md:p-3 lg:p-4 relative justify-between items-center">
+    <div  class="bg-white rounded-lg w-full flex p-2 md:p-3 lg:p-4 relative justify-between items-center">
 
-      <div class="flex gap-2 items-center">
+      <div (appClickOutside)="closeCardInfo()" class="flex gap-2 items-center">
         <button type="button" (click)="isCardInfoVisible = !isCardInfoVisible" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-full">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
@@ -39,7 +39,7 @@
         </div>
         <!-- Card info for Courses Ended  -->
       </div>
-      <div (click)="openListExercise()" class="bg-gray-100 cursor-pointer rounded-lg text-[#757575] p-2">
+      <div (appClickOutside)="closeFilterDetails()" (click)="openListExercise()"  class="bg-gray-100 cursor-pointer rounded-lg text-[#757575] p-2">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z" />
           <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -86,86 +86,6 @@
 
     </div>
   </div>
-<!--  <div class="pt-6 max-w-5xl mx-auto">-->
-<!--    <div class=" grid grid-cols-2 gap-x-4 lg:flex justify-between justify-items-start px-3 md:px-5 items-center"  style="font-family: Montserrat">-->
-<!--      <div class="flex  justify-center w-full">-->
-<!--        <div class="flex w-2/3 md:w-1/2 lg:w-full justify-start items-center lg:justify-center gap-3 p-2 cursor-pointer"-->
-<!--          [ngClass]="{'border-b-2 border-black' : activeStages['stage1']}"-->
-<!--             (click)="showFocusStage('stage1')">-->
-<!--          <h1 style="font-family: DelaGothic" class="text-xl lg:text-2xl">A1</h1>-->
-<!--          <p [ngClass]="{'bg-teal-600 text-white' : activeStages['stage1'], 'bg-emerald-400 text-emerald-700' : !activeStages['stage1']}"-->
-<!--             class="p-1 px-2 rounded-lg font-semibold text-xs"-->
-<!--          >-->
-<!--            Easy-->
-<!--          </p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="flex justify-center w-full">-->
-<!--        <div class="flex w-2/3 md:w-1/2 lg:w-full justify-start items-center lg:justify-center gap-3 p-2 cursor-pointer"-->
-<!--             (click)="showFocusStage('stage2')"-->
-<!--             [ngClass]="{'border-b-2 border-black' : activeStages['stage2']}">-->
-<!--          <h1 style="font-family: DelaGothic" class="text-xl lg:text-2xl">A2</h1>-->
-<!--          <p [ngClass]="{'bg-teal-600 text-white' : activeStages['stage2'], 'bg-emerald-400 text-emerald-700' : !activeStages['stage2']}"-->
-<!--             class="bg-emerald-400 p-1 px-2 rounded-lg text-emerald-700 font-semibold text-xs"-->
-<!--          >-->
-<!--            Easy-->
-<!--          </p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="flex justify-center w-full">-->
-<!--        <div class="flex w-2/3 md:w-1/2 lg:w-full justify-start items-center lg:justify-center gap-3 p-2 cursor-pointer"-->
-<!--             (click)="showFocusStage('stage3')"-->
-<!--             [ngClass]="{'border-b-2 border-black' : activeStages['stage3']}"-->
-<!--        >-->
-<!--          <h1 style="font-family: DelaGothic" class="text-xl lg:text-2xl">B1</h1>-->
-<!--          <p [ngClass]="{'bg-amber-500 text-white' : activeStages['stage3'], 'bg-amber-200 text-amber-600' : !activeStages['stage3']}"-->
-<!--             class=" p-1 px-2 rounded-lg  font-semibold text-xs"-->
-<!--          >-->
-<!--            Medium-->
-<!--          </p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="flex justify-center w-full">-->
-<!--        <div class="flex w-2/3 md:w-1/2 lg:w-full justify-start items-center lg:justify-center gap-3 p-2 cursor-pointer"-->
-<!--             (click)="showFocusStage('stage4')"-->
-<!--             [ngClass]="{'border-b-2 border-black' : activeStages['stage4']}"-->
-<!--        >-->
-<!--          <h1 style="font-family: DelaGothic" class="text-xl lg:text-2xl">B2</h1>-->
-<!--          <p [ngClass]="{'bg-amber-500 text-white' : activeStages['stage4'], 'bg-amber-200 text-amber-600' : !activeStages['stage4']}"-->
-<!--             class="bg-amber-200 p-1 px-2 rounded-lg text-amber-600 font-semibold text-xs"-->
-<!--          >-->
-<!--            Medium-->
-<!--          </p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="flex justify-center w-full">-->
-<!--        <div class="flex w-2/3 md:w-1/2 lg:w-full justify-start items-center lg:justify-center gap-3 p-2 cursor-pointer"-->
-<!--             (click)="showFocusStage('stage5')"-->
-<!--             [ngClass]="{'border-b-2 border-black' : activeStages['stage5']}"-->
-<!--        >-->
-<!--          <h1 style="font-family: DelaGothic" class="text-xl lg:text-2xl">C1</h1>-->
-<!--          <p [ngClass]="{'bg-rose-500 text-white' : activeStages['stage5'], 'bg-rose-300 text-rose-700' : !activeStages['stage5']}"-->
-<!--             class=" p-1 px-2 rounded-lg  font-semibold text-xs"-->
-<!--          >-->
-<!--            Hard-->
-<!--          </p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="flex justify-center w-full">-->
-<!--        <div class="flex w-2/3 md:w-1/2 lg:w-full justify-start lg:justify-center items-center gap-3 p-2 cursor-pointer"-->
-<!--             (click)="showFocusStage('stage6')"-->
-<!--             [ngClass]="{'border-b-2 border-black' : activeStages['stage6']}"-->
-<!--        >-->
-<!--          <h1 style="font-family: DelaGothic" class="text-xl lg:text-2xl">C2</h1>-->
-<!--          <p [ngClass]="{'bg-rose-500 text-white' : activeStages['stage6'], 'bg-rose-300 text-rose-700' : !activeStages['stage6']}"-->
-<!--             class="bg-rose-300 p-1 px-2 rounded-lg text-rose-700 font-semibold text-xs"-->
-<!--          >-->
-<!--            Hard-->
-<!--          </p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
   <div class="pt-6 mx-auto max-w-5xl lg:pt-12 pb-12 ">
     <div *ngIf="filteredCourses" class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-1 px-3 md:px-5 lg:grid-cols-2 justify-items-center items-center">
 
@@ -208,7 +128,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12" />
               </svg>
             </div>
-            <div class="absolute cursor-pointer -top-2 -right-2 bg-green-500 rounded-xl p-2 text-white" (click)="openCourseDetailModal(course)">
+            <div (appClickOutside)="closeDetailCourseModal(selectedCourse, course)" class="absolute cursor-pointer -top-2 -right-2 bg-green-500 rounded-xl p-2 text-white" (click)="openCourseDetailModal(course)">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="w-6 h-6" viewBox="0 0 16 16">
                 <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
               </svg>

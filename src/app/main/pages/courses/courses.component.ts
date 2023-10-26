@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import {Store} from "@ngrx/store";
 import {combineLatest} from "rxjs";
 import {ProfileService} from "../../../core/services/profile-service.service";
+import {ClickOutsideDirective} from "../../../core/directives/click-outside.directive";
 
 @Component({
   selector: 'app-courses',
@@ -186,5 +187,20 @@ export class CoursesComponent{
     });
 
     this.selectedCourse!.course_stages[index].isClicked = !this.selectedCourse!.course_stages[index].isClicked;
+  }
+
+  closeCardInfo() {
+    this.isCardInfoVisible = false;
+  }
+
+  closeFilterDetails() {
+    this.openDetails = false;
+  }
+
+  closeDetailCourseModal(selectedCourse : Course| null, course : Course|null){
+    if (selectedCourse && course && selectedCourse.id == course.id){
+      this.showCourseDetailModal = false
+    }
+    //this.showCourseDetailModal = false
   }
 }
