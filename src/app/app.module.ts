@@ -18,6 +18,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {LoaderInterceptor} from "./core/interceptors/request.interceptor";
 import { BaseSolveExerciseComponent } from './core/components/base-solve-exercise/base-solve-exercise.component';
+import {AuthorizeInterceptor} from "./core/interceptors/authorize-interceptor.service";
 
 
 export function HttpLoaderFactory(http:HttpClient){
@@ -53,7 +54,8 @@ export function HttpLoaderFactory(http:HttpClient){
     ],
     providers: [
       {provide: HTTP_INTERCEPTORS, useClass: BearerInterceptor, multi: true},
-      {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+      {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+      {provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
     ],
     exports: [
     ],

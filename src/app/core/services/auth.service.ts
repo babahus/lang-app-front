@@ -8,6 +8,7 @@ import {BaseService} from "./base-service/base.service";
 import { Store } from '@ngrx/store';
 import * as UserActions from '../actions/set-role-id';
 import {clearRoleAndId} from "../actions/clear-role-id";
+import {PseudoCryptService} from "./pseudo-crypt.service";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class AuthService extends BaseService {
     protected override http: HttpClient,
     protected override route: Router,
     protected override router: ActivatedRoute,
-    protected override store: Store
+    protected override store: Store,
+    private cryptoService : PseudoCryptService
   ) {
     super(http, route, router, store);
   }
@@ -32,6 +34,12 @@ export class AuthService extends BaseService {
 
   private setToken(api_token: string) {
     this.storage.setItem('userToken', api_token);
+  }
+
+  private setExpiredAt(expired_at: string)
+  {
+    const encryptedExpiredAt = this.cryptoService.encrypt(expired_at);
+    this.storage.setItem('expired_at', encryptedExpiredAt)
   }
 
   public getToken() {
@@ -75,6 +83,7 @@ export class AuthService extends BaseService {
         })
       ).subscribe((data: any) => {
         this.setToken(data.data.token);
+        this.setExpiredAt(data.data.expired_at);
         this.addDataInSessionStorage(data.data.role,data.data.id)
         resolve(data.data);
         this.route.navigate(this.redirectTo('dashboard'));
@@ -98,6 +107,7 @@ export class AuthService extends BaseService {
         })
       ).subscribe((data: any) => {
         this.setToken(data.data.token);
+        this.setExpiredAt(data.data.expired_at);
         this.addDataInSessionStorage(data.data.role,data.data.id)
         resolve(data.data);
         this.route.navigate(this.redirectTo('dashboard'));
@@ -154,6 +164,7 @@ export class AuthService extends BaseService {
       }).subscribe((data: any) => {
         resolve(data)
         this.setToken(data.data.token);
+        this.setExpiredAt(data.data.expired_at);
         this.addDataInSessionStorage(data.data.role,data.data.id)
         this.route.navigate(['/']);
       })

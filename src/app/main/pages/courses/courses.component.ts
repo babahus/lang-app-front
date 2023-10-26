@@ -9,6 +9,7 @@ import {Store} from "@ngrx/store";
 import {combineLatest} from "rxjs";
 import {ProfileService} from "../../../core/services/profile-service.service";
 import {ClickOutsideDirective} from "../../../core/directives/click-outside.directive";
+import {PseudoCryptService} from "../../../core/services/pseudo-crypt.service";
 
 @Component({
   selector: 'app-courses',
@@ -43,7 +44,7 @@ export class CoursesComponent{
   isCardInfoVisible = false;
   public currentUserRole!: string | undefined;
 
-  constructor(private profileService: ProfileService, private courseService: CourseService, private store: Store) {
+  constructor(private profileService: ProfileService, private courseService: CourseService, private store: Store, public cryptoService : PseudoCryptService) {
     combineLatest([
       this.profileService.currentUserRole$,
       this.profileService.currentUserId$
@@ -57,6 +58,13 @@ export class CoursesComponent{
         this.getCourses();
       }
     });
+    const encryptedExpiredAt = localStorage.getItem('expired_at');
+    if (encryptedExpiredAt){
+      const expiredAt = this.cryptoService.decrypt(encryptedExpiredAt);
+      const currentDate = new Date();
+      const expirationDate = new Date(expiredAt);
+      console.log(expirationDate,currentDate)
+    }
   }
 
   async getCourses(page : number = 1){
