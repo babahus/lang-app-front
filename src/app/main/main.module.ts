@@ -61,11 +61,11 @@ const routes: Routes = [
   { path : 'about', component : AboutComponent},
   { path: 'api/email/verify/:id/:hash', component: EmailVerificationComponent, canActivate: [AuthGuard]},
   {
-    path: 'api/login/google/callback',
+    path: 'login/google/callback',
     component: LoginComponent,
   },
   {
-      path: 'api/login/facebook/callback',
+      path: 'login/facebook/callback',
       component: LoginComponent,
   },
 

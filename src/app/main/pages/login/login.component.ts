@@ -40,17 +40,21 @@ export class LoginComponent implements OnInit {
     this.passwordVisible = !this.passwordVisible;
   }
     async ngOnInit(): Promise<void> {
-        const roleFromStorage = sessionStorage.getItem('role') || '';
-
-        if (this.auth_code && this.auth_code.code != undefined) {
-            if (this.router.snapshot.queryParamMap.has('scope')) {
-                await this.authService.sendCodeForSocialAuth(this.auth_code.code, roleFromStorage, 'google');
-            } else {
-                await this.authService.sendCodeForSocialAuth(this.auth_code.code, roleFromStorage, 'facebook');
-            }
-
-            return;
+      console.log(this.auth_code)
+      if (this.auth_code && this.auth_code.code != undefined) {
+        const state = this.router.snapshot.queryParams['state'];
+        if (state) {
+          const parsedState = JSON.parse(state);
+          this.role = parsedState.role;
         }
+        if (this.router.snapshot.queryParamMap.has('scope')) {
+          await this.authService.sendCodeForSocialAuth(this.auth_code.code, this.role, 'google');
+        } else {
+          await this.authService.sendCodeForSocialAuth(this.auth_code.code, this.role, 'facebook');
+        }
+
+        return;
+      }
     }
 
   async loginWithGoogle(provider: string){
