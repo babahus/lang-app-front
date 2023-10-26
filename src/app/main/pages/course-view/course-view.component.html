@@ -22,7 +22,6 @@
             <button type="button" (click)="deleteCourse()" class="inline-flex w-full justify-center rounded-md bg-[#945069] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:ml-3 sm:w-auto">Delete</button>
             <button (click)="showDeleteCourseMenu()"  type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
           </div>
-
         </div>
       </div>
     </div>
@@ -60,11 +59,7 @@
   <!--   end of the modal window for stage deletion -->
 
 
-  <div [ngClass]="'block ' + (showMenuEditForm || showMenuCreateStage || showMenuProgressStages || showMenuAttachExerciseStage || showMenuEditStage? '' : 'hidden')" class="rounded-lg bg-white shadow-lg md:max-w-lg w-full relative overflow-hidden">
-<!--        <div *ngIf="!showMenuEditForm && !showMenuCreateStage && !showMenuAttachExerciseStage" class="hidden w-full lg:flex justify-center p-4 h-96">-->
-<!--            <img src="./assets/img/course-view-page/experimental-modern-house-with-a-backdrop-of-hills.png" alt="">-->
-<!--        </div>-->
-<!--        <div *ngIf="showMenuEditForm" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity lg:hidden"></div>-->
+  <div [ngClass]="'block ' + (showMenuEditForm || showMenuCreateStage || showMenuProgressStages || showMenuAttachExerciseStage || showMenuEditStage ? '' : 'hidden')" class="rounded-lg bg-white shadow-lg md:max-w-lg w-full relative overflow-hidden">
         <!--Edit Form Start-->
         <div *ngIf="showMenuEditForm" class="lg:min-h-[28rem]">
 
@@ -532,7 +527,7 @@
                 </div>
                 <div class="flex gap-4 justify-end" style="font-family: Montserrat">
                   <button type="button" (click)="showDeleteStage(stage)" class="inline-flex w-auto cursor-pointer justify-center rounded-lg  px-3 py-2 text-xs lg:text-sm font-semibold underline text-gray-800  hover:scale-105">Delete</button>
-                  <button type="button" (click)="handleButtonClick(stage)" class="inline-flex w-auto cursor-pointer justify-center rounded-lg  px-3 py-2 text-xs lg:text-sm font-semibold underline text-gray-800  hover:scale-105">Edit Stage</button>
+                  <button type="button" (click)="handleButtonClick(stage, 'editStage')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg  px-3 py-2 text-xs lg:text-sm font-semibold underline text-gray-800  hover:scale-105">Edit Stage</button>
                 </div>
               </div>
 
@@ -559,23 +554,46 @@
                             <button (click)="fetchExerciseData(type)" class="mb-3 bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">
                               <span *ngIf="type == 'compile_phrase'">Compile Phrase</span>
                               <span *ngIf="type == 'audit'">Phonetic Transcript</span>
-                              <span *ngIf="type == 'pair'">Pairs of Meaning</span>
-                              <span *ngIf="type == 'picture'">Picture Association</span>
+                              <span *ngIf="type == 'pair_exercise'">Pairs of Meaning</span>
+                              <span *ngIf="type == 'picture_exercise'">Picture Association</span>
                               <span *ngIf="type == 'sentence'">Missing links</span>
                             </button>
                           </div>
                         </div>
                         <div *ngIf="exerciseData" class="flex justify-center items-center p-2 lg:p-5 w-full lg:w-2/4">
-
                           <div *ngIf="selectedType === 'compile_phrase'" class="flex-col w-full justify-center justify-items-center gap-3">
                             <mat-form-field class=" bg-[#C3DCE3] mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
                               <mat-label class="text-[#2B788B] font-semibold text-sm" >Select an Exercise</mat-label>
                               <mat-select [(ngModel)]="selectedExercise" (ngModelChange)="addSelectedExercise()" class="rounded-3xl">
-                                <mat-option *ngFor="let exercise of exerciseData.data" [value]="exercise" class="bg-[#C3DCE3] ">
+                                <mat-option *ngFor="let exercise of exerciseData.data.data" [value]="exercise" class="bg-[#C3DCE3] ">
                                   <div class="text-[#2B788B] font-medium">
                                     {{ exercise.phrase }}
                                   </div>
                                 </mat-option>
+                                  <div *ngIf="exerciseData" class="flex justify-center my-3 items-center h-8 space-x-2">
+                                      <button (click)="goToPage(currentPage[selectedType] - 1, selectedType)"
+                                              [class.disabled]="currentPage[selectedType] === 1"
+                                              class="h-full flex justify-center items-center w-8 rounded-full text-[#2B788B] border-2 border-[#2B788B]">
+                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                          </svg>
+                                      </button>
+                                      <button *ngFor="let page of getPages(selectedType)"
+                                              (click)="goToPage(page,selectedType)"
+                                              [disabled]="page === currentPage[selectedType]"
+                                              [class.current]="page === currentPage[selectedType]"
+                                              class="h-full w-8 rounded-full text-[#2B788B] font-bold border-2 border-[#2B788B]"
+                                      >
+                                          {{ page }}
+                                      </button>
+                                      <button (click)="goToPage(currentPage[selectedType] + 1, selectedType)"
+                                              [class.disabled]="currentPage[selectedType] === totalPages"
+                                              class="h-full flex justify-center items-center w-8 rounded-full text-[#2B788B] border-2 border-[#2B788B]">
+                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                          </svg>
+                                      </button>
+                                  </div>
                               </mat-select>
                             </mat-form-field>
                             <div class="mt-2 grid grid-cols-1 lg:grid-cols-2 gap-2 items-center">
@@ -595,11 +613,35 @@
                             <mat-form-field class=" bg-[#C3DCE3] mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
                               <mat-label class="text-[#2B788B] font-semibold text-sm" >Select an Exercise</mat-label>
                               <mat-select [(ngModel)]="selectedExercise" (ngModelChange)="addSelectedExercise()" class="rounded-3xl">
-                                <mat-option *ngFor="let exercise of exerciseData.data" [value]="exercise" class="bg-[#C3DCE3] ">
+                                <mat-option *ngFor="let exercise of exerciseData.data.data" [value]="exercise" class="bg-[#C3DCE3] ">
                                   <div class="text-[#2B788B] font-medium">
                                     {{ exercise.text }}
                                   </div>
                                 </mat-option>
+                                  <div *ngIf="exerciseData" class="flex justify-center my-3 items-center h-8 space-x-2">
+                                      <button (click)="goToPage(currentPage[selectedType] - 1, selectedType)"
+                                              [class.disabled]="currentPage[selectedType] === 1"
+                                              class="h-full flex justify-center items-center w-8 rounded-full text-[#2B788B] border-2 border-[#2B788B]">
+                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                          </svg>
+                                      </button>
+                                      <button *ngFor="let page of getPages(selectedType)"
+                                              (click)="goToPage(page,selectedType)"
+                                              [disabled]="page === currentPage[selectedType]"
+                                              [class.current]="page === currentPage[selectedType]"
+                                              class="h-full w-8 rounded-full text-[#2B788B] font-bold border-2 border-[#2B788B]"
+                                      >
+                                          {{ page }}
+                                      </button>
+                                      <button (click)="goToPage(currentPage[selectedType] + 1, selectedType)"
+                                              [class.disabled]="currentPage[selectedType] === totalPages"
+                                              class="h-full flex justify-center items-center w-8 rounded-full text-[#2B788B] border-2 border-[#2B788B]">
+                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                          </svg>
+                                      </button>
+                                  </div>
                               </mat-select>
                             </mat-form-field>
                             <div class="mt-2 grid grid-cols-1 lg:grid-cols-2 gap-2 items-center">
@@ -619,7 +661,7 @@
                             <mat-form-field class=" bg-[#C3DCE3] mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
                               <mat-label class="text-[#2B788B] font-semibold text-sm" >Select an Exercise</mat-label>
                               <mat-select [(ngModel)]="selectedExercise" (ngModelChange)="addSelectedExercise()" class="rounded-3xl">
-                                <mat-option *ngFor="let exercise of exerciseData.data" [value]="exercise" class="bg-[#C3DCE3] w-full  border p-1 border-b-[#2B788B]">
+                                <mat-option *ngFor="let exercise of exerciseData.data.data" [value]="exercise" class="bg-[#C3DCE3] w-full  border p-1 border-b-[#2B788B]">
                                   <div class="text-[#2B788B] font-medium">
                                     <div *ngFor="let option of exercise.options" class="grid gap-1 justify-center mx-auto items-center grid-cols-2">
                                       <p class="bg-emerald-400 rounded-lg text-center p-1 px-2">
@@ -631,6 +673,30 @@
                                     </div>
                                   </div>
                                 </mat-option>
+                                  <div *ngIf="exerciseData" class="flex justify-center my-3 items-center h-8 space-x-2">
+                                      <button (click)="goToPage(currentPage[selectedType] - 1, selectedType)"
+                                              [class.disabled]="currentPage[selectedType] === 1"
+                                              class="h-full flex justify-center items-center w-8 rounded-full text-[#2B788B] border-2 border-[#2B788B]">
+                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                          </svg>
+                                      </button>
+                                      <button *ngFor="let page of getPages(selectedType)"
+                                              (click)="goToPage(page,selectedType)"
+                                              [disabled]="page === currentPage[selectedType]"
+                                              [class.current]="page === currentPage[selectedType]"
+                                              class="h-full w-8 rounded-full text-[#2B788B] font-bold border-2 border-[#2B788B]"
+                                      >
+                                          {{ page }}
+                                      </button>
+                                      <button (click)="goToPage(currentPage[selectedType] + 1, selectedType)"
+                                              [class.disabled]="currentPage[selectedType] === totalPages"
+                                              class="h-full flex justify-center items-center w-8 rounded-full text-[#2B788B] border-2 border-[#2B788B]">
+                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                          </svg>
+                                      </button>
+                                  </div>
                               </mat-select>
                             </mat-form-field>
                             <div class="mt-2 grid grid-cols-1 lg:grid-cols-2 gap-2 items-center">
@@ -658,7 +724,7 @@
                             <mat-form-field class=" bg-[#C3DCE3] mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
                               <mat-label class="text-[#2B788B] font-semibold text-sm" >Select an Exercise</mat-label>
                               <mat-select [(ngModel)]="selectedExercise" (ngModelChange)="addSelectedExercise()" class="rounded-3xl">
-                                <mat-option *ngFor="let exercise of exerciseData.data" [value]="exercise" class="bg-[#C3DCE3] border-b-gray-200 border ">
+                                <mat-option *ngFor="let exercise of exerciseData.data.data" [value]="exercise" class="bg-[#C3DCE3] border-b-gray-200 border ">
                                   <div class="text-[#2B788B] font-medium grid grid-cols-2 gap-2 py-1 ">
                                     <div *ngFor="let option of exercise.options" class="">
                                       <div *ngIf="!option.is_correct">
@@ -674,6 +740,30 @@
                                     </div>
                                   </div>
                                 </mat-option>
+                                  <div *ngIf="exerciseData" class="flex justify-center my-3 items-center h-8 space-x-2">
+                                      <button (click)="goToPage(currentPage[selectedType] - 1, selectedType)"
+                                              [class.disabled]="currentPage[selectedType] === 1"
+                                              class="h-full flex justify-center items-center w-8 rounded-full text-[#2B788B] border-2 border-[#2B788B]">
+                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                          </svg>
+                                      </button>
+                                      <button *ngFor="let page of getPages(selectedType)"
+                                              (click)="goToPage(page,selectedType)"
+                                              [disabled]="page === currentPage[selectedType]"
+                                              [class.current]="page === currentPage[selectedType]"
+                                              class="h-full w-8 rounded-full text-[#2B788B] font-bold border-2 border-[#2B788B]"
+                                      >
+                                          {{ page }}
+                                      </button>
+                                      <button (click)="goToPage(currentPage[selectedType] + 1, selectedType)"
+                                              [class.disabled]="currentPage[selectedType] === totalPages"
+                                              class="h-full flex justify-center items-center w-8 rounded-full text-[#2B788B] border-2 border-[#2B788B]">
+                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                          </svg>
+                                      </button>
+                                  </div>
                               </mat-select>
                             </mat-form-field>
                             <div class="mt-2 grid grid-cols-1 lg:grid-cols-2 gap-2 items-center">
@@ -704,11 +794,35 @@
                             <mat-form-field class=" bg-[#C3DCE3] mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
                               <mat-label class="text-[#2B788B] font-semibold text-sm" >Select an Exercise</mat-label>
                               <mat-select [(ngModel)]="selectedExercise" (ngModelChange)="addSelectedExercise()" class="rounded-3xl">
-                                <mat-option *ngFor="let exercise of exerciseData.data" [value]="exercise" class="bg-[#C3DCE3] ">
+                                <mat-option *ngFor="let exercise of exerciseData.data.data" [value]="exercise" class="bg-[#C3DCE3] ">
                                   <div class="text-[#2B788B] font-medium">
                                     {{exercise.sentence_with_gaps}}
                                   </div>
                                 </mat-option>
+                                  <div *ngIf="exerciseData" class="flex justify-center my-3 items-center h-8 space-x-2">
+                                      <button (click)="goToPage(currentPage[selectedType] - 1, selectedType)"
+                                              [class.disabled]="currentPage[selectedType] === 1"
+                                              class="h-full flex justify-center items-center w-8 rounded-full text-[#2B788B] border-2 border-[#2B788B]">
+                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                          </svg>
+                                      </button>
+                                      <button *ngFor="let page of getPages(selectedType)"
+                                              (click)="goToPage(page,selectedType)"
+                                              [disabled]="page === currentPage[selectedType]"
+                                              [class.current]="page === currentPage[selectedType]"
+                                              class="h-full w-8 rounded-full text-[#2B788B] font-bold border-2 border-[#2B788B]"
+                                      >
+                                          {{ page }}
+                                      </button>
+                                      <button (click)="goToPage(currentPage[selectedType] + 1, selectedType)"
+                                              [class.disabled]="currentPage[selectedType] === totalPages"
+                                              class="h-full flex justify-center items-center w-8 rounded-full text-[#2B788B] border-2 border-[#2B788B]">
+                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                          </svg>
+                                      </button>
+                                  </div>
                               </mat-select>
                             </mat-form-field>
                             <div class="mt-2 grid grid-cols-1 lg:grid-cols-2 gap-2 items-center">
@@ -815,11 +929,11 @@
               </div>
               <div *ngIf="stage.isClicked" class="bg-[#C3DCE3] rounded-lg p-2">
                 <div class="p-1">
-                  <p class="text-xl text-black md:text-2xl mb-4" style="font-family: DelaGothic;">{{ stage?.title }}</p>
-                  <p class="text-xs md:text-sm font-medium text-[#757575] mb-6" style="font-family: Montserrat;">{{ stage?.description }}</p>
-                  <div *ngIf="stage.isClicked" class="bg-[#C3DCE3] rounded-lg p-2 shadow-lg">
-                    <div class="p-2 border-b-2 border-gray-300 mb-2">
-                      <h3 class="text-lg font-bold" style="font-family: Montserrat; margin-bottom: 5px">Exercises</h3>
+                  <p class="text-lg text-[#2B788B] md:text-xl mb-4" style="font-family: DelaGothic;">{{ stage?.title }}</p>
+                  <p class="text-xs md:text-sm font-semibold text-[#757575] mb-6" style="font-family: Montserrat;">{{ stage?.description }}</p>
+                  <div *ngIf="stage.isClicked" class="p-2">
+                    <div class="border-b-2 border-cyan-700 mb-2">
+                      <span class="text-lg text-[#2B788B] font-bold" style="font-family: Montserrat;">Exercises:</span>
                     </div>
 
                     <ng-container *ngIf="this.stagesProgress.length > 0">
@@ -873,10 +987,6 @@
                   </div>
                 </div>
               </div>
-<!--              <div class="flex gap-4 justify-end" style="font-family: Montserrat">-->
-<!--                <button type="button" (click)="showDeleteStage(stage)" class="inline-flex w-auto cursor-pointer justify-center rounded-lg  px-3 py-2 text-xs lg:text-sm font-semibold underline text-gray-800  hover:scale-105">Delete</button>-->
-<!--                <button type="button" (click)="handleButtonClick(stage)" class="inline-flex w-auto cursor-pointer justify-center rounded-lg  px-3 py-2 text-xs lg:text-sm font-semibold underline text-gray-800  hover:scale-105">Edit Stage</button>-->
-<!--              </div>-->
             </div>
 
           </div>

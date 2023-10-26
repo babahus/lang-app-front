@@ -53,6 +53,7 @@ export class ExercisesCreateComponent {
     try {
       const result =  await this.exerciseService.createExercise(this.compilePhrase, 'compile_phrase');
       this.successCreateExercise();
+        this.compilePhrase.reset();
       this.compilePhraseModalShow = false;
     } catch (error) {
       console.log(error);
@@ -80,9 +81,18 @@ export class ExercisesCreateComponent {
             this.successCreateExercise();
             this.pictureForm.reset();
             this.pictureModalShow = false;
-        } catch (error) {
+        } catch (error:any) {
+            if (error.status === 422) {
+                let errorsToForm: ValidationErrors | null = {};
+                for (const key of Object.keys(error.error.errors)) {
+                    errorsToForm[key] = error.error.errors[key][0];
+                }
+                this.pictureForm.setErrors(errorsToForm);
+            } else {
+                this.pictureForm.setErrors({ backend: error.error.data });
+            }
             this.errorShow = true;
-
+            console.log(this.pictureForm);
             setTimeout(() => {
                 this.errorShow = false;
             }, 5000);
@@ -113,7 +123,7 @@ export class ExercisesCreateComponent {
   })
 
     wordPairsForm = this.fb.group({
-        wordPairs: this.fb.array([])
+        wordPairs: this.fb.array([], Validators.required)
     });
 
     pictureForm = this.fb.group({

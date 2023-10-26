@@ -30,9 +30,6 @@ export class AuthHeaderComponent extends HeaderComponent implements OnInit
       this.profileService.currentUserId$
     ]).subscribe(([role, userId]) => {
       this.currentUserRole = role;
-
-      console.log("User role:", role);
-      console.log("User ID:", userId);
     });
   }
 

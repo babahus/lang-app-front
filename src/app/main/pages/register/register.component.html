@@ -7,15 +7,15 @@
     </div>
     <div class="flex flex-col justify-items-center relative items-center justify-center px-3 py-2 mx-auto lg:py-0">
       <div class="w-full bg-white rounded-lg shadow mt-8 md:mt-0 md:max-w-md xl:p-0 relative overflow-hidden">
-        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4 md:space-y-6" action="#" style="font-family: Montserrat">
+        <div class="p-6 space-y-3 md:space-y-4 sm:p-8">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-3 md:space-y-4" action="#" style="font-family: Montserrat">
             <div>
               <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">{{'name' | translate}}</label>
               <input type="text"
                      name="name"
                      id="name"
                      formControlName="name"
-                     class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2.5 " placeholder="Your name" >
+                     class="bg-blue-50 mb-2 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2 " placeholder="Your name" >
               <div class="error-message" *ngIf="registerForm.errors && registerForm.getError('name')">
                 <p class="mt-2 text-[#945069]  font-medium text-xs">
                   {{ registerForm.getError('name') }}
@@ -38,7 +38,7 @@
                      name="email"
                      id="email"
                      formControlName="email"
-                     class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2.5 " placeholder="your@email.com" >
+                     class="bg-blue-50 mb-2 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2 " placeholder="your@email.com" >
               <div class="error-message" *ngIf="errorShow">
                 <p class="mt-2 text-[#945069]  font-medium text-xs">
                   {{ registerForm.getError('email') }}
@@ -63,7 +63,7 @@
                        id="password"
                        placeholder="••••••••"
                        formControlName="password"
-                       class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm  text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2.5" >
+                       class="bg-blue-50 mb-2  border border-[#C3DCE3] text-gray-900 sm:text-sm  text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2" >
                 <button type="button"
                         class="absolute inset-y-0 text-[#2B788B] right-0 pr-2 flex items-center focus:outline-none"
                         (click)="toggleShowPassword('password')"
@@ -105,13 +105,13 @@
             </div>
             <div>
               <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900 ">{{'passwordConfirmationLabel' | translate}}</label>
-              <div class="relative">
+              <div class="relative pb-2">
                 <input type="{{ showPasswordConfirmation ? 'text' : 'password' }}"
                        name="password_confirmation"
                        id="password_confirmation"
                        placeholder="••••••••"
                        formControlName="password_confirmation"
-                       class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm  text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2.5" >
+                       class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm  text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2" >
                 <button type="button"
                         class="absolute text-[#2B788B] inset-y-0 right-0 pr-2 flex items-center focus:outline-none"
                         (click)="toggleShowPassword('password_confirmation')"
@@ -156,7 +156,7 @@
               <div>
                 <button
                   type="button"
-                  class="inline-flex cursor-pointer bg-blue-50 justify-center w-full rounded-md border border-[#C3DCE3] shadow-sm px-4 py-2 text-sm font-medium text-gray-700"
+                  class="inline-flex z-50 cursor-pointer bg-blue-50 justify-center w-full rounded-md border border-[#C3DCE3] shadow-sm px-4 py-2 text-sm font-medium text-gray-700"
                   id="role-selector"
                   aria-haspopup="listbox"
                   (click)="toggleDropdown()"
@@ -179,7 +179,7 @@
               </div>
 
               <div
-                class="origin-top-right absolute left-10 mt-2 w-56 font-semibold rounded-md shadow-lg text-sm bg-blue-50 ring-1 ring-black ring-opacity-5"
+                class="origin-top-right absolute z-50 left-10 mt-2 w-56 font-semibold rounded-md shadow-lg text-sm bg-blue-50 ring-1 ring-black ring-opacity-5"
                 *ngIf="isOpen"
               >
                 <div
@@ -192,14 +192,14 @@
                     *ngFor="let role of roles"
                     (click)="selectRole(role)"
                     role="option"
-                    class="cursor-pointer rounded select-none relative px-4 py-2 text-[#757575]"
+                    class="cursor-pointer z-50 rounded select-none relative px-4 py-2 text-[#757575]"
                     [class.bg-[#2B788B]]="role === selectedRole"
                     [class.text-white]="role === selectedRole"
                   >
                     {{ role }}
                     <span
                       *ngIf="role === selectedRole"
-                      class="absolute inset-y-0 left-0 flex items-center pl-3"
+                      class="absolute inset-y-0 z-50 left-0 flex items-center pl-3"
                     >
                     </span>
                   </div>
@@ -215,7 +215,7 @@
             <button type="submit"
                     style="font-family: DelaGothic"
                     [disabled]="registerForm.invalid"
-                    class="w-full  cursor-pointer text-white bg-[#5996A5] tracking-widest focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    class="w-full z-0  cursor-pointer text-white bg-[#5996A5] tracking-widest focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
               {{'signUpLink' | translate}}
             </button>
 
@@ -261,19 +261,19 @@
         </div>
       </div>
       <div class="hidden xl:block">
-        <img src="./assets/img/register-page/business-3d-astronaut-waving.png"
-             class="object-contain absolute w-72 bottom-[5%]  xl:right-[5%]" alt=""
+        <img src="./assets/img/register-page/3d-business-guy-with-backpack-and-laptop.png"
+             class="object-contain absolute w-56 bottom-[5%]  xl:right-[5%]" alt=""
         >
       </div>
 
       <div class="hidden xl:block">
-        <img src="./assets/img/register-page/business-3d-astronaut-holding-blank-sign.png"
-             class="object-contain absolute w-64 bottom-[5%] xl:left-[10%]" alt=""
+        <img src="./assets/img/register-page/3d-business-guy-and-girl-students.png"
+             class="object-contain absolute w-72 bottom-[5%] xl:left-[10%]" alt=""
         >
       </div>
       <div class="hidden xl:block">
-        <img src="./assets/img/register-page/business-3d-dog-astronaut-sitting.png"
-             class="object-contain absolute w-44 -bottom-[17%] xl:left-[25%]" alt=""
+        <img src="./assets/img/register-page/casual-life-3d-orange-bird-figurine-turned-right.png"
+             class="object-contain absolute w-40 -bottom-[17%] xl:left-[23%]" alt=""
         >
       </div>
     </div>

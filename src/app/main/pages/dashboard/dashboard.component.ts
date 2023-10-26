@@ -4,6 +4,8 @@ import {AuthService} from "../../../core/services/auth.service";
 import {ExerciseService} from "../../../core/services/exercise.service";
 import {AttachedExercise} from "../../models/attached-exercise";
 import {Audit, CompilePhrase, Dictionary} from "../../models/exercise";
+import {ProfileService} from "../../../core/services/profile-service.service";
+import {combineLatest} from "rxjs";
 
 @Component({
   selector: 'app-dashboard',
@@ -16,10 +18,18 @@ export class DashboardComponent implements OnInit {
   exerciseService : ExerciseService;
   attachedExercises : any;
   listExercise = false;
+  public currentUserRole!: string | undefined;
   exercisesForDisplay! : (Audit|CompilePhrase|Dictionary)[];
-  constructor(authService : AuthService, exerciseService : ExerciseService) {
+  constructor(authService : AuthService, exerciseService : ExerciseService, private profileService: ProfileService) {
     this.authService = authService;
     this.exerciseService = exerciseService;
+    combineLatest([
+      this.profileService.currentUserRole$,
+      this.profileService.currentUserId$
+    ]).subscribe(([role, userId]) => {
+      this.currentUserRole = role;
+
+    });
   }
 
   ngOnInit() {

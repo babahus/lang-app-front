@@ -30,6 +30,8 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
     course_stages: [],
   };
 
+  currentPage: { [key: string]: number } = {};
+  totalPages: number = 0;
   errorShow= false;
   showMenuEditForm = false;
   showMenuCreateStage = false;
@@ -70,9 +72,15 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
       if (userId){
         this.currentUserId = userId;
       }
-      console.log("User role:", role);
-      console.log("User ID:", userId);
     });
+
+    this.currentPage = {
+      'compile_phrase': 1,
+      'sentence': 1,
+      'audit': 1,
+      'pair_exercise': 1,
+      'picture_exercise': 1
+    };
   }
 
   getEncryptedParams(courseId: number, stageId: number, exerciseId: number): string {
@@ -84,8 +92,8 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
     this.selectedStage = stage;
   }
 
-  handleButtonClick(stage: any) {
-    this.showModalWindow('editStage');
+  handleButtonClick(stage: any, index: string) {
+    this.showModalWindow(index);
     this.selectStage(stage);
   }
 
@@ -163,7 +171,6 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
   async fetchCourseData(courseId: string) {
     try {
       this.courseData = await this.courseService.getCourseDetails(courseId);
-      console.log(this.courseData)
       this.dataLoaded.next(true);
     } catch (error:any) {
       this.router.navigate(['/**']);
@@ -193,9 +200,6 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
   }
 
   async submitStageEdit(){
-    console.log(this.selectedStage.id);
-    console.log(this.courseData.id);
-    console.log(this.stageEditForm);
     try {
       await this.stageService.stageEdit(this.selectedStage.id, this.stageEditForm, this.courseData.id);
       this.success('You have successfully changed this stage');
@@ -252,10 +256,35 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
     try {
       this.selectedType = type;
       this.selectedExercises = this.filterExercisesByType(type);
-      this.exerciseData = await this.exerciseService.getExerciseData(type, 1);
+
+      this.exerciseData = await this.exerciseService.getExerciseData(type, this.currentPage[this.selectedType]);
+      const paginate = this.exerciseData.data.pagination;
+      this.currentPage[this.selectedType] = paginate.current_page;
+      this.totalPages = paginate.last_page;
     } catch (error) {
       console.log(error);
     }
+  }
+
+  goToPage(page: number, type:string) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage[type] = page;
+      this.fetchExerciseData(this.selectedType);
+    }
+  }
+
+  getPages(type:string) {
+    const pagesToShow = 5;
+    const pages = [];
+
+    const startPage = Math.max(1, this.currentPage[type] - Math.floor(pagesToShow / 2));
+    const endPage = Math.min(this.totalPages, startPage + pagesToShow - 1);
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+
+    return pages;
   }
 
   filterExercisesByType(type: string) {
@@ -281,6 +310,7 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
         break;
       case 'editStage':
         this.showMenuEditStage = !this.showMenuEditStage;
+        this.showMenuAttachExerciseStage = !this.showMenuAttachExerciseStage;
         break;
       case 'showProgressStages':
         this.showMenuProgressStages = !this.showMenuProgressStages;
@@ -290,6 +320,7 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
         this.showMenuCreateStage = false;
         this.showMenuAttachExerciseStage = false;
         this.showMenuProgressStages = false;
+        this.showMenuEditStage = false;
     }
   }
 

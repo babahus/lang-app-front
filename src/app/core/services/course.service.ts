@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BaseService} from "./base-service/base.service";
 import {catchError, throwError} from "rxjs";
 import {UntypedFormGroup, ValidationErrors} from "@angular/forms";
 import {Store} from "@ngrx/store";
+import {CourseData} from "../../main/models/course-data";
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,20 @@ export class CourseService extends BaseService {
         })
       ).subscribe((data: any) => {
         resolve(data.data);
+      });
+    });
+  }
+
+  getTeacherCourses(teacherId: number, page: number): Promise<any>{
+    return  new Promise((resolve, reject) => {
+      const params = new HttpParams().set('page', page.toString());
+      this.http.get(this.url + `/courses/teacher/${teacherId}`, { params }).pipe(
+          catchError((error) => {
+            reject(error);
+            return throwError(error);
+          })
+      ).subscribe((data: any) => {
+        resolve(data);
       });
     });
   }

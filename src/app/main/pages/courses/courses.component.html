@@ -85,158 +85,57 @@
               </label>
             </div>
           </li>
-<!--          <li class="hover:bg-blue-50 p-2 rounded hover:text-[#2B788B]">-->
-<!--            <div class="flex items-center space-x-2 h-5">-->
-<!--              <input id="rememberPair" aria-describedby="remember" type="checkbox" class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#2B788B]" required="">-->
-<!--              <label for="rememberPair" class="uppercase  cursor-pointer">-->
-<!--                pair-->
-<!--              </label>-->
-<!--            </div>-->
-<!--          </li>-->
-<!--          <li class="hover:bg-blue-50 p-2 rounded hover:text-[#2B788B]">-->
-<!--            <div class="flex items-center space-x-2 h-5 ">-->
-<!--              <input id="rememberPicture" aria-describedby="remember" type="checkbox" class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#2B788B]" required="">-->
-<!--              <label for="rememberPicture" class="uppercase cursor-pointer">-->
-<!--                picture-->
-<!--              </label>-->
-<!--            </div>-->
-<!--          </li>-->
-<!--          <li class="hover:bg-blue-50 p-2 rounded hover:text-[#2B788B]">-->
-<!--            <div class="flex items-center space-x-2 h-5 ">-->
-<!--              <input id="rememberSentence" aria-describedby="remember" type="checkbox" class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#2B788B]" required="">-->
-<!--              <label for="rememberSentence" class="uppercase cursor-pointer">-->
-<!--                sentence-->
-<!--              </label>-->
-<!--            </div>-->
-<!--          </li>-->
         </ul>
       </div>
 
     </div>
   </div>
-<!--  <div class="pt-6 max-w-5xl mx-auto">-->
-<!--    <div class=" grid grid-cols-2 gap-x-4 lg:flex justify-between justify-items-start px-3 md:px-5 items-center"  style="font-family: Montserrat">-->
-<!--      <div class="flex  justify-center w-full">-->
-<!--        <div class="flex w-2/3 md:w-1/2 lg:w-full justify-start items-center lg:justify-center gap-3 p-2 cursor-pointer"-->
-<!--          [ngClass]="{'border-b-2 border-black' : activeStages['stage1']}"-->
-<!--             (click)="showFocusStage('stage1')">-->
-<!--          <h1 style="font-family: DelaGothic" class="text-xl lg:text-2xl">A1</h1>-->
-<!--          <p [ngClass]="{'bg-teal-600 text-white' : activeStages['stage1'], 'bg-emerald-400 text-emerald-700' : !activeStages['stage1']}"-->
-<!--             class="p-1 px-2 rounded-lg font-semibold text-xs"-->
-<!--          >-->
-<!--            Easy-->
-<!--          </p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="flex justify-center w-full">-->
-<!--        <div class="flex w-2/3 md:w-1/2 lg:w-full justify-start items-center lg:justify-center gap-3 p-2 cursor-pointer"-->
-<!--             (click)="showFocusStage('stage2')"-->
-<!--             [ngClass]="{'border-b-2 border-black' : activeStages['stage2']}">-->
-<!--          <h1 style="font-family: DelaGothic" class="text-xl lg:text-2xl">A2</h1>-->
-<!--          <p [ngClass]="{'bg-teal-600 text-white' : activeStages['stage2'], 'bg-emerald-400 text-emerald-700' : !activeStages['stage2']}"-->
-<!--             class="bg-emerald-400 p-1 px-2 rounded-lg text-emerald-700 font-semibold text-xs"-->
-<!--          >-->
-<!--            Easy-->
-<!--          </p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="flex justify-center w-full">-->
-<!--        <div class="flex w-2/3 md:w-1/2 lg:w-full justify-start items-center lg:justify-center gap-3 p-2 cursor-pointer"-->
-<!--             (click)="showFocusStage('stage3')"-->
-<!--             [ngClass]="{'border-b-2 border-black' : activeStages['stage3']}"-->
-<!--        >-->
-<!--          <h1 style="font-family: DelaGothic" class="text-xl lg:text-2xl">B1</h1>-->
-<!--          <p [ngClass]="{'bg-amber-500 text-white' : activeStages['stage3'], 'bg-amber-200 text-amber-600' : !activeStages['stage3']}"-->
-<!--             class=" p-1 px-2 rounded-lg  font-semibold text-xs"-->
-<!--          >-->
-<!--            Medium-->
-<!--          </p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="flex justify-center w-full">-->
-<!--        <div class="flex w-2/3 md:w-1/2 lg:w-full justify-start items-center lg:justify-center gap-3 p-2 cursor-pointer"-->
-<!--             (click)="showFocusStage('stage4')"-->
-<!--             [ngClass]="{'border-b-2 border-black' : activeStages['stage4']}"-->
-<!--        >-->
-<!--          <h1 style="font-family: DelaGothic" class="text-xl lg:text-2xl">B2</h1>-->
-<!--          <p [ngClass]="{'bg-amber-500 text-white' : activeStages['stage4'], 'bg-amber-200 text-amber-600' : !activeStages['stage4']}"-->
-<!--             class="bg-amber-200 p-1 px-2 rounded-lg text-amber-600 font-semibold text-xs"-->
-<!--          >-->
-<!--            Medium-->
-<!--          </p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="flex justify-center w-full">-->
-<!--        <div class="flex w-2/3 md:w-1/2 lg:w-full justify-start items-center lg:justify-center gap-3 p-2 cursor-pointer"-->
-<!--             (click)="showFocusStage('stage5')"-->
-<!--             [ngClass]="{'border-b-2 border-black' : activeStages['stage5']}"-->
-<!--        >-->
-<!--          <h1 style="font-family: DelaGothic" class="text-xl lg:text-2xl">C1</h1>-->
-<!--          <p [ngClass]="{'bg-rose-500 text-white' : activeStages['stage5'], 'bg-rose-300 text-rose-700' : !activeStages['stage5']}"-->
-<!--             class=" p-1 px-2 rounded-lg  font-semibold text-xs"-->
-<!--          >-->
-<!--            Hard-->
-<!--          </p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="flex justify-center w-full">-->
-<!--        <div class="flex w-2/3 md:w-1/2 lg:w-full justify-start lg:justify-center items-center gap-3 p-2 cursor-pointer"-->
-<!--             (click)="showFocusStage('stage6')"-->
-<!--             [ngClass]="{'border-b-2 border-black' : activeStages['stage6']}"-->
-<!--        >-->
-<!--          <h1 style="font-family: DelaGothic" class="text-xl lg:text-2xl">C2</h1>-->
-<!--          <p [ngClass]="{'bg-rose-500 text-white' : activeStages['stage6'], 'bg-rose-300 text-rose-700' : !activeStages['stage6']}"-->
-<!--             class="bg-rose-300 p-1 px-2 rounded-lg text-rose-700 font-semibold text-xs"-->
-<!--          >-->
-<!--            Hard-->
-<!--          </p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-  <div class="pt-6 mx-auto max-w-5xl lg:pt-12 pb-12 ">
-    <div *ngIf="filteredCourses" class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-1 px-3 md:px-5 lg:grid-cols-2 justify-items-center items-center">
+  <div class="pt-6 mx-auto max-w-5xl px-5 lg:pt-12 pb-12 ">
+    <div *ngIf="filteredCourses" class=" bg-white rounded-lg grid gap-3 mb-6 lg:mb-16 md:grid-cols-1 p-3 lg:grid-cols-2 justify-items-center items-center">
 
 <!--///////////-->
       <ng-container *ngFor="let course of filteredCourses">
-        <div class="items-center relative bg-gray-50 overflow-hidden rounded-lg shadow sm:flex">
+        <div class="items-start relative bg-[#C3DCE3] overflow-hidden rounded-lg shadow sm:flex">
           <div class="h-48 md:h-full md:rounded-l-lg w-full md:w-1/2 lg:w-1/2 relative">
             <img src="./assets/img/courses-page/eleven-talking-points-tw.jpeg" class="rounded-l-lg object-cover object-center w-full h-full" alt="">
           </div>
-          <div class="p-5 w-full lg:w-1/2">
-            <div class="flex justify-between items-center" style="font-family: Montserrat">
+          <div class="px-2 pt-2 w-full lg:w-1/2">
+            <div class="flex justify-start items-center" style="font-family: Montserrat">
                 <div>
-                  <h3 class="cursor-pointer text-xl font-bold tracking-tight text-gray-900">
+                  <h3 class="cursor-pointer normal-case font-bold tracking-tight text-[#2B788B]" style="font-family: DelaGothic">
                     <a *ngIf="isCourseAttached(course.id); else noLink"
                        [routerLink]="['/course', course.id]"
-                       class="uppercase font-semibold text-base hover:underline">
-                      {{ course.title }}
+                       class=" hover:underline">
+                      <span class="normal-case font-semibold text-base">{{ course.title }}</span>
                     </a>
                     <ng-template #noLink>
-                      <span class="uppercase font-semibold text-base">
+                      <span class="normal-case font-semibold text-base">
                         {{ course.title }}
                       </span>
                     </ng-template>
                   </h3>
                 </div>
-                <div>
-                  <p style="font-family: DelaGothic" class="text-[#2B788B]">
-                    ${{ course.price }}
-                  </p>
-                </div>
             </div>
-            <p class="mt-3 mb-4 font-light text-xs text-[#757575]">{{ course.description }}</p>
-            <div *ngIf="!isCourseAttached(course.id)" class="absolute cursor-pointer -bottom-2 -right-2 bg-[#C4A24C] rounded-xl p-2 text-white" (click)="attachCourseToUser(course.id)">
+            <div style="font-family: Montserrat">
+              <div>
+                <p class="text-[#2B788B] uppercase text-sm lg:text-base font-bold">
+                  ${{ course.price }}
+                </p>
+              </div>
+              <p class="mt-3 mb-4 font-medium text-xs lg:text-sm text-gray-700">{{ course.description }}</p>
+            </div>
+
+            <div *ngIf="!isCourseAttached(course.id)" class="absolute cursor-pointer -bottom-2 -right-2 bg-[#2B788B] rounded-xl p-2 text-white" (click)="attachCourseToUser(course.id)">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
               </svg>
             </div>
-            <div *ngIf="isCourseAttached(course.id)" class="absolute cursor-pointer -bottom-2 -right-2 bg-red-500 rounded-xl p-2 text-white" (click)="detachCourseFromUser(course.id)">
+            <div *ngIf="isCourseAttached(course.id)" class="absolute cursor-pointer -bottom-2 -right-2 bg-[#945069] rounded-xl p-2 text-white" (click)="detachCourseFromUser(course.id)">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12" />
               </svg>
             </div>
-            <div class="absolute cursor-pointer -top-2 -right-2 bg-green-500 rounded-xl p-2 text-white" (click)="openCourseDetailModal(course)">
+            <div class="absolute cursor-pointer -top-2 -right-2 bg-[#A15993] rounded-xl p-2 text-white" (click)="openCourseDetailModal(course)">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="w-6 h-6" viewBox="0 0 16 16">
                 <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
               </svg>
@@ -245,86 +144,98 @@
         </div>
       </ng-container>
       <!-- Detail Course Modal -->
-      <div [ngClass]="{'hidden' : !showCourseDetailModal}" class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-        <div class="fixed inset-0 z-10 w-screen h-screen overflow-y-auto flex items-center justify-center">
-          <div class="flex min-h-[28rem] items-center justify-center p-4 text-center sm:items-center sm:p-0">
-            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-80 w-full sm:my-8 max-w-4xl">
-              <div class="p-6">
-                  <h1 class="text-2xl font-semibold mb-2 underline-header" style="font-family: DelaGothic;">Details of the Course</h1>
-                  <p class="text-xl text-black md:text-2xl mb-4" style="font-family: DelaGothic;">{{ selectedCourse?.title }}</p>
-                  <p class="text-xs md:text-sm font-medium text-[#757575] mb-6" style="font-family: Montserrat;">{{ selectedCourse?.description }}</p>
+        <div *ngIf="showCourseDetailModal" class="fixed inset-0 flex items-center justify-center z-50">
+          <div class="absolute inset-0 bg-gray-500 bg-opacity-75"></div>
+          <div class="relative overflow-hidden z-30 w-full p-2 md:w-1/2 lg:w-2/5">
+            <div class="bg-[#F6F5F4]  rounded-lg shadow-lg p-3">
+              <button type="button"
+                      class="text-white absolute top-1 right-1 hover:scale-105  bg-[#945069] cursor-pointer tracking-widest focus:outline-none font-medium  rounded-full text-sm p-1 text-center"
+                      (click)="this.showCourseDetailModal = false"
+                      style="font-family: DelaGothic"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              <div class="lg:p-6">
+                  <h1 class="text-xl text-[#2B788B] font-semibold mb-2 underline-header" style="font-family: DelaGothic;">Details of the Course</h1>
+                  <div class="bg-[#C3DCE3] rounded-3xl p-3">
+                    <p class="text-lg normal-case font-bold text-[#2B788B] md:text-xl mb-4" style="font-family: Montserrat;">{{ selectedCourse?.title }}</p>
+                    <p class="text-xs normal-case md:text-sm font-semibold text-[#757575] mb-6" style="font-family: Montserrat;">{{ selectedCourse?.description }}</p>
 
-                  <div *ngFor="let stage of selectedCourse?.course_stages; let i = index">
-                    <div (click)="toggleCheck(i)" class="relative cursor-pointer w-full bg-[#C3DCE3] items-center justify-start py-3 overflow-hidden font-medium transition-all rounded group" style="font-family: Montserrat">
-                      <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all ease-out duration-700 translate-x-0 left-0 w-full h-48': stage.isClicked}" class="-translate-x-full"></div>
-                      <div class="flex items-center px-2">
-                        <div [ngClass]="{'block': stage.isClicked, 'hidden': !stage.isClicked}">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-white duration-700 ease-in-out transform transition-all z-20" [ngClass]="{'translate-x-1': stage.isClicked}">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
+                    <div class="space-y-2">
+                      <div *ngFor="let stage of selectedCourse?.course_stages; let i = index">
+                        <div (click)="toggleCheck(i)" class="relative cursor-pointer w-full bg-[#F6F5F4] items-center justify-start py-3 overflow-hidden font-medium transition-all rounded-3xl group" style="font-family: Montserrat">
+                          <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all ease-out duration-700 translate-x-0 left-0 w-full h-48': stage.isClicked}" class="-translate-x-full"></div>
+                          <div class="flex items-center px-2">
+                            <div [ngClass]="{'block': stage.isClicked, 'hidden': !stage.isClicked}">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-white duration-700 ease-in-out transform transition-all z-20" [ngClass]="{'translate-x-1': stage.isClicked}">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                              </svg>
+                            </div>
+                            <span class="relative z-50 px-3 font-bold" [ngClass]="{'transform translate-x-1 transition-colors duration-700 ease-in-out text-white': stage.isClicked, 'text-[#2B788B]': !stage.isClicked}">{{ stage.title }}</span>
+                          </div>
                         </div>
-                        <span class="relative z-50 px-3 font-bold" [ngClass]="{'transform translate-x-1 transition-colors duration-700 ease-in-out text-white': stage.isClicked, 'text-[#2B788B]': !stage.isClicked}">{{ stage.title }}</span>
+                        <div *ngIf="stage.isClicked" class="bg-[#C3DCE3] rounded-lg p-2">
+                          <div class="p-1">
+                            <p class="text-base normal-case font-bold text-[#2B788B] md:text-lg mb-4" style="font-family: DelaGothic;">*{{ stage?.title }}</p>
+                            <div class="pl-2">
+                              <p class="text-xs md:text-sm  font-semibold text-[#757575] mb-6" style="font-family: Montserrat;">{{ stage?.description }}</p>
+                              <p class="text-xs md:text-sm font-medium text-[#757575] mb-6" style="font-family: Montserrat;">
+                                Stage contains <strong>{{ stage?.stage_exercises?.length }}</strong> exercises
+                              </p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div *ngIf="stage.isClicked" class="bg-[#C3DCE3] rounded-lg p-2">
-                      <div class="p-1">
-                        <p class="text-xl text-black md:text-2xl mb-4" style="font-family: DelaGothic;">{{ stage?.title }}</p>
-                        <p class="text-xs md:text-sm font-medium text-[#757575] mb-6" style="font-family: Montserrat;">{{ stage?.description }}</p>
-                        <p class="text-xs md:text-sm font-light text-[#757575] mb-6" style="font-family: Montserrat;">
-                          Stage contains {{ stage?.stage_exercises?.length }} exercises
-                        </p>
-                      </div>
-                    </div>
+                    <ng-container *ngIf="!selectedCourse?.course_stages">
+                      <p class="text-xs md:text-sm font-medium text-[#757575] mb-6" style="font-family: Montserrat;">There is no stages in this Course</p>
+                    </ng-container>
                   </div>
-                  <ng-container *ngIf="!selectedCourse?.course_stages">
-                    <p class="text-xs md:text-sm font-medium text-[#757575] mb-6" style="font-family: Montserrat;">There is no stages in this Course</p>
-                  </ng-container>
                   <button *ngIf="this.selectedCourse && !isCourseAttached(this.selectedCourse!.id)" (click)="attachCourseToUser(this.selectedCourse!.id)" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-full">
                     Attach Course
                   </button>
-                </div>
-
-              <button (click)="this.showCourseDetailModal = false" class="close-button">
-                <span class="hover:text-green-500">&times;</span>
-              </button>
+              </div>
             </div>
           </div>
-        </div>
+
       </div>
       <!-- Detail Course Modal -->
       <!--      ///////-->
     </div>
 
-    <div *ngIf="pagination" class="flex justify-center items-center space-x-2">
+    <div *ngIf="pagination" class="flex justify-center items-center h-10 space-x-2">
       <!-- Начальный элемент "страница назад" -->
       <button
         [disabled]="pagination!.current_page === 1"
         (click)="goToPage(pagination!.current_page - 1)"
-        class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-teal-500 bg-transparent text-teal-500 hover:bg-teal-100"
+        class="h-full flex justify-center items-center w-10 rounded-full text-[#2B788B] border-2 border-[#2B788B]"
       >
-        ←
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        </svg>
       </button>
 
       <!-- Цикл для отображения страниц -->
       <ng-container *ngFor="let page of pages">
         <ng-container *ngIf="page === 1 || page === pagination!.last_page || (page >= pagination!.current_page - 2 && page <= pagination!.current_page + 2)">
           <button
-            [class.bg-teal-500]="pagination!.current_page === page"
+            [class.bg-[#2B788B]]="pagination!.current_page === page"
             [class.text-white]="pagination!.current_page === page"
-            [class.text-teal-500]="pagination!.current_page !== page"
+            [class.text-[#2B788B]]="pagination!.current_page !== page"
             (click)="goToPage(page)"
-            class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-teal-500 hover:bg-teal-100 hover:text-teal-500"
+            class="h-full w-10 rounded-full text-[#2B788B] font-bold border-2 border-[#2B788B]"
           >
             {{ page }}
           </button>
         </ng-container>
 
         <!-- Троеточие для пропущенных страниц -->
-        <span *ngIf="page === 1 && pagination!.current_page > 4" class="w-8 h-8 flex items-center justify-center rounded-full text-teal-500">
+        <span *ngIf="page === 1 && pagination!.current_page > 4" class="w-10 h-full flex items-center justify-center rounded-full text-teal-500">
       ...
           </span>
-        <span *ngIf="page === pagination!.last_page && pagination!.current_page < pagination!.last_page - 3" class="w-8 h-8 flex items-center justify-center rounded-full text-teal-500">
+        <span *ngIf="page === pagination!.last_page && pagination!.current_page < pagination!.last_page - 3" class="w-10 h-full flex items-center justify-center rounded-full text-teal-500">
       ...
           </span>
       </ng-container>
@@ -333,9 +244,11 @@
       <button
         [disabled]="pagination!.current_page === pagination!.last_page"
         (click)="goToPage(pagination!.current_page + 1)"
-        class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-teal-500 bg-transparent text-teal-500 hover:bg-teal-100"
+        class="h-full flex justify-center items-center w-10  rounded-full text-[#2B788B] border-2 border-[#2B788B]"
       >
-        →
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+        </svg>
       </button>
     </div>
   </div>

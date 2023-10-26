@@ -42,11 +42,13 @@ import { PictureComponent } from './pages/solve-exercise/picture/picture.compone
 import {CdkOption} from "@angular/cdk/listbox";
 import { CdkListboxModule } from '@angular/cdk/listbox';
 import { SentenceComponent } from './pages/solve-exercise/sentence/sentence.component';
+import { AttachExerciseComponent } from './pages/attach-exercise/attach-exercise.component';
 import { ExercisesCardComponent } from './components/dashboard/exercises-card/exercises-card.component';
 import { CoursesCardComponent } from './components/dashboard/courses-card/courses-card.component';
 import { ProgressionCardComponent } from './components/dashboard/progression-card/progression-card.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
-import { AttachExerciseComponent } from './pages/attach-exercise/attach-exercise.component';
+import { CoursesTeacherCardComponent } from './components/dashboard-teacher/courses-teacher-card/courses-teacher-card.component';
+
 
 
 const routes: Routes = [
@@ -72,13 +74,13 @@ const routes: Routes = [
 
   { path : 'dashboard', component : DashboardComponent, canActivate : [AuthGuard]},
   { path : 'profile', component : ProfileComponent, canActivate : [AuthGuard]},
-  { path : 'exercises', component : ExercisesComponent, canActivate : [AuthGuard]},
+  // { path : 'exercises', component : ExercisesComponent, canActivate : [AuthGuard]},
   { path : 'courses', component : CoursesComponent, canActivate : [AuthGuard]},
   { path : 'exercises-my', component : ExercisesMyComponent, canActivate : [AuthGuard]},
   { path : 'exercises/compile_phrase/:id', component : CompilePhraseComponent, canActivate : [AuthGuard]},
   { path : 'exercises/audit/:id', component : AuditComponent, canActivate : [AuthGuard]},
-  { path : 'exercises/pair_exercise/:id', component : PairComponent, canActivate : [AuthGuard]},
-  { path : 'exercises/picture_exercise/:id', component : PictureComponent, canActivate : [AuthGuard]},
+  { path : 'exercises/pair/:id', component : PairComponent, canActivate : [AuthGuard]},
+  { path : 'exercises/picture/:id', component : PictureComponent, canActivate : [AuthGuard]},
   { path : 'exercises/sentence/:id', component : SentenceComponent, canActivate : [AuthGuard]},
   { path : 'exercises/attach', component : AttachExerciseComponent, canActivate : [AuthGuard]},
   {
@@ -115,11 +117,12 @@ const routes: Routes = [
     PairComponent,
     PictureComponent,
     SentenceComponent,
+    AttachExerciseComponent,
     ExercisesCardComponent,
     CoursesCardComponent,
     ProgressionCardComponent,
     ProgressBarComponent,
-    AttachExerciseComponent,
+    CoursesTeacherCardComponent,
   ],
   exports: [
     HeaderComponent,
