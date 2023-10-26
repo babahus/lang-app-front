@@ -519,7 +519,7 @@
           <div class="p-2 md:p-4 lg:pt-6 space-y-4 bg-blue-50 lg:p-6 rounded-lg">
             <div *ngFor="let stage of courseData.course_stages; let i = index">
               <div class="grid grid-cols-1 gap-2">
-                <div (click)="toggleCheck(i)" (click)="selectStage(stage)" class="relative cursor-pointer w-full bg-[#C3DCE3] p-2 items-center justify-start lg:py-3 overflow-hidden font-medium transition-all rounded group" style="font-family: Montserrat">
+                <div (click)="handleClick(i, stage)" class="relative cursor-pointer w-full bg-[#C3DCE3] p-2 items-center justify-start lg:py-3 overflow-hidden font-medium transition-all rounded group" style="font-family: Montserrat">
                   <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all ease-out duration-700 translate-x-0 left-0 w-full h-48': stage.isClicked}" class="-translate-x-full"></div>
                   <div class="flex items-center lg:px-2">
                     <div [ngClass]="{'block': stage.isClicked, 'hidden': !stage.isClicked}">
@@ -537,11 +537,11 @@
               </div>
 
               <!--      Attach exercise modal window start-->
-              <div [ngClass]="{'hidden' : !stage.isClicked}" class="bg-[#C3DCE3] w-full relative z-50 rounded-lg p-4">
+              <div (appClickOutside)="closeStageInfo(stage)" [ngClass]="{'hidden' : !stage.isClicked}" class="bg-[#C3DCE3] w-full relative z-50 rounded-lg p-4">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
                 <div class="fixed inset-0 z-40 w-screen overflow-y-auto">
                   <div class="block md:flex gap-4 lg:min-h-full w-full md:justify-center p-2 md:p-4 text-center items-center sm:p-0">
-                    <div class="relative transform overflow-hidden rounded-3xl bg-white text-left shadow-xl transition-all p-2 sm:my-8  sm:w-full md:max-w-[70%]">
+                    <div class="modal relative transform overflow-hidden rounded-3xl bg-white text-left shadow-xl transition-all p-2 sm:my-8  sm:w-full md:max-w-[70%]">
                       <div class="p-2 bg-[#C3DCE3] rounded-3xl p relative grid-cols-1 lg:flex items-start gap-8">
                         <div class="flex justify-end  absolute top-1 right-1">
                           <button type="button"
@@ -557,11 +557,11 @@
                         <div class="text-start p-2 lg:p-4 w-full lg:w-1/3 grid grid-cols-1" style="font-family: Montserrat">
                           <div *ngFor="let type of exerciseTypes" class="">
                             <button (click)="fetchExerciseData(type)" class="mb-3 bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">
-                              <span *ngIf="type == 'compile_phrase'">Compile Phrase</span>
-                              <span *ngIf="type == 'audit'">Phonetic Transcript</span>
-                              <span *ngIf="type == 'pair'">Pairs of Meaning</span>
-                              <span *ngIf="type == 'picture'">Picture Association</span>
-                              <span *ngIf="type == 'sentence'">Missing links</span>
+                              <span class="modal" *ngIf="type == 'compile_phrase'">Compile Phrase</span>
+                              <span class="modal" *ngIf="type == 'audit'">Phonetic Transcript</span>
+                              <span class="modal" *ngIf="type == 'pair_exercise'">Pairs of Meaning</span>
+                              <span class="modal" *ngIf="type == 'picture_exercise'">Picture Association</span>
+                              <span class="modal" *ngIf="type == 'sentence'">Missing links</span>
                             </button>
                           </div>
                         </div>
@@ -592,9 +592,9 @@
                             </div>
                           </div>
                           <div *ngIf="selectedType === 'audit'" class="flex-col w-full justify-center justify-items-center gap-3">
-                            <mat-form-field class=" bg-[#C3DCE3] mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
+                            <mat-form-field class="bg-[#C3DCE3] mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
                               <mat-label class="text-[#2B788B] font-semibold text-sm" >Select an Exercise</mat-label>
-                              <mat-select [(ngModel)]="selectedExercise" (ngModelChange)="addSelectedExercise()" class="rounded-3xl">
+                              <mat-select [(ngModel)]="selectedExercise" (ngModelChange)="addSelectedExercise()" class="modal rounded-3xl">
                                 <mat-option *ngFor="let exercise of exerciseData.data" [value]="exercise" class="bg-[#C3DCE3] ">
                                   <div class="text-[#2B788B] font-medium">
                                     {{ exercise.text }}

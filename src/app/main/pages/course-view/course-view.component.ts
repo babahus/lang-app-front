@@ -497,4 +497,16 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
   }
 
 
+  closeStageInfo(stage : StageData|null) {
+    if (stage && this.selectedStage && stage.id == this.selectedStage.id){
+      console.log(this.selectedStage)
+      this.selectedStage.isClicked = false;
+    }
+  }
+
+  handleClick(index: number, stage: StageData) {
+    this.toggleCheck(index);
+    this.selectStage(stage);
+  }
+
 }

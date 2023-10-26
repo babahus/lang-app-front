@@ -197,8 +197,8 @@ export class CoursesComponent{
     this.openDetails = false;
   }
 
-  closeDetailCourseModal(selectedCourse : Course| null, course : Course|null){
-    if (selectedCourse && course && selectedCourse.id == course.id){
+  closeDetailCourseModal(course : Course|null){
+    if (this.selectedCourse && course && this.selectedCourse.id == course.id){
       this.showCourseDetailModal = false
     }
     //this.showCourseDetailModal = false

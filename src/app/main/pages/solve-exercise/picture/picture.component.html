@@ -7,7 +7,7 @@
       </p>
     </div>
     <div *ngIf="picture" class="w-full lg:w-[70%] px-3 lg:px-0">
-      <img  [src]="picture.path" alt="Exercise Image" class="w-full h-full border border-gray-200">
+      <img [src]="picture.path" alt="Exercise Image" class="w-full h-full border border-gray-200">
     </div>
     <div class="w-full px-2 lg:px-0 lg:w-[90%] flex justify-center">
       <div cdkListbox cdkListboxOrientation="horizontal" class="flex justify-center w-full space-x-2" *ngIf="picture">
