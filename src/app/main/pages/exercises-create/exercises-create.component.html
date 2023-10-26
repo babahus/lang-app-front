@@ -3,27 +3,27 @@
     <div class="flex flex-col w-full">
       <div class="w-full bg-[#5996A5] p-3">
         <div class="flex-col justify-center text-center text-[#2B788B]" style="font-family: Montserrat">
-          <div (click)="showCreateExercise = !showCreateExercise" style="font-family: DelaGothic"  class="flex justify-center lg:w-1/3 lg:mx-auto items-center tracking-wider cursor-pointer hover:bg-blue-50 p-2 mx-3 hover:text-[#5996A5] font-semibold rounded text-white" >
-            <p>Create Exercise</p>
+          <div (click)="showCreateExercise = !showCreateExercise" style="font-family: DelaGothic"  class="flex justify-center  lg:w-1/3 lg:mx-auto items-center tracking-wider cursor-pointer hover:bg-blue-50 p-2 mx-3 hover:text-[#5996A5] font-semibold rounded text-white" >
+            <span>Create Exercise</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
             </svg>
           </div>
           <div [ngClass]="{'hidden' : !showCreateExercise}" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 px-3 pt-4 gap-3 lg:gap-6">
             <div (click)="compilePhraseModalShow = true" class="text-center bg-blue-50 hover:bg-[#945069] hover:text-white p-3 hover:underline decoration-2 rounded cursor-pointer">
-              <p class=" text-sm md:text-md font-semibold">Compile Phrase</p>
+              <span class=" text-sm md:text-md font-semibold">Compile Phrase</span>
             </div>
             <div (click)="auditModalShow = true" class="text-center bg-blue-50 hover:bg-[#639B6D] hover:text-white p-3 hover:underline decoration-2 rounded cursor-pointer">
-              <p class="text-sm md:text-md font-semibold">Audit</p>
+              <span class="text-sm md:text-md font-semibold">Audit</span>
             </div>
             <div (click)="pairModalShow = true" class="text-center bg-blue-50 hover:bg-[#A15993] hover:text-white p-3 hover:underline decoration-2 rounded cursor-pointer">
-              <p class=" text-sm md:text-md font-semibold">Pair</p>
+              <span class=" text-sm md:text-md font-semibold">Pair</span>
             </div>
             <div (click)="pictureModalShow = true" class="text-center bg-blue-50 hover:bg-[#C4A24C] hover:text-white p-3 hover:underline decoration-2 rounded cursor-pointer">
-              <p class=" text-sm md:text-md font-semibold">Picture</p>
+              <span class=" text-sm md:text-md font-semibold">Picture</span>
             </div>
             <div (click)="sentenceModalShow = true" class="text-center bg-blue-50 hover:bg-[#CB5B43] hover:text-white p-3 hover:underline decoration-2 rounded cursor-pointer">
-              <p class="text-sm md:text-md font-semibold">Sentence</p>
+              <span class="text-sm md:text-md font-semibold">Sentence</span>
             </div>
           </div>
         </div>
@@ -127,7 +127,7 @@
                              name="phrase"
                              id="phrase"
                              formControlName="phrase"
-                             class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2.5 " placeholder="Your phrase" >
+                             class="bg-blue-50 mb-2 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2 " placeholder="Your phrase" >
                     </div>
                   <div *ngIf="compilePhrase.get('phrase')?.hasError('required') && compilePhrase.controls.phrase.touched">
                     <p class="mt-2 text-[#945069] font-medium text-xs">
@@ -143,7 +143,7 @@
               </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-              <button type="submit" class="inline-flex w-full justify-center rounded-md bg-[#2B788B] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:ml-3 sm:w-auto">Create</button>
+              <button type="submit" [disabled]="compilePhrase.invalid" class="inline-flex w-full justify-center rounded-md bg-[#2B788B] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:ml-3 sm:w-auto">Create</button>
               <button (click)="compilePhraseModalShow = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
             </div>
             </form>
@@ -169,9 +169,9 @@
                   <div class="mt-2">
                     <p style="font-family: Montserrat" class="text-sm text-gray-500">Prepare audio files and phrases for a listening exercise where students will have to write down what they have heard.</p>
                   </div>
-                  <div class="pt-4">
+                  <div class="pt-4 mb-2">
                     <label for="audit-sentence" class="block mb-2 text-sm font-medium text-gray-900 ">Correct Sentence</label>
-                    <textarea formControlName="auditPhrase" id="audit-sentence" rows="4" style="font-family: Montserrat" class="block p-2.5 w-full text-sm text-gray-900 bg-blue-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+                    <textarea formControlName="auditPhrase" id="audit-sentence" rows="4" style="font-family: Montserrat" class="block p-2 w-full text-sm text-gray-900 bg-blue-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
                   </div>
                   <div *ngIf="errorShow && auditForm.getError('additional_data')">
                     <p class="mt-2 text-center font-medium text-[#945069] text-xs">
@@ -240,10 +240,10 @@
                   <form [formGroup]="wordPairsForm">
                     <div formArrayName="wordPairs">
                       <div *ngFor="let pair of wordPairs.controls; let i = index" [formGroupName]="i">
-                        <div class="grid grid-cols-2 gap-6 pt-4" style="font-family: Montserrat">
+                        <div class="grid grid-cols-2 gap-6 pt-2.5" style="font-family: Montserrat">
                           <div>
                             <label class="block mb-2 text-sm font-medium text-gray-900">Word:</label>
-                            <input type="text" formControlName="word" class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2" />
+                            <input type="text" formControlName="word" class="bg-blue-50 mb-2 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2" />
                             <div *ngIf="wordPairs.controls[i].get('word')?.hasError('required') && wordPairs.controls[i].get('word')?.touched" class="text-red-500">
                               <p class="mt-2 text-[#945069] font-medium text-xs">
                                 Word is required
@@ -252,7 +252,7 @@
                           </div>
                           <div>
                             <label class="block mb-2 text-sm font-medium text-gray-900">Translation:</label>
-                            <input type="text" formControlName="translation" class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2" />
+                            <input type="text" formControlName="translation" class="bg-blue-50 mb-2 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2" />
                             <div *ngIf="wordPairs.controls[i].get('translation')?.hasError('required') && wordPairs.controls[i].get('translation')?.touched" class="text-red-500">
                               <p class="mt-2 text-[#945069] font-medium text-xs">
                                 Word is required
@@ -310,16 +310,21 @@
                     <p style="font-family: Montserrat" class="text-[#757575] text-xs">
                       Write down the answer choices and choose one correct one
                     </p>
-                      <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-4 pt-4" formArrayName="options">
+                      <div class="grid grid-cols-1 mb-2 md:grid-cols-2 items-center gap-4 pt-4" formArrayName="options">
                         <div class="flex items-center gap-4" *ngFor="let option of pictureForm.controls.options.controls; let i = index" [formGroupName]="i">
                           <input type="radio" [id]="'default-radio-' + i" [name]="'correctOption'" [checked]="option.value?.is_correct" (change)="onCheckboxChange(option)" class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300" required>
                           <input type="text" style="font-family: Montserrat" class="block w-40 p-2 text-sm text-gray-900 bg-blue-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="..." formControlName="text">
                         </div>
                       </div>
+                      <div *ngIf="pictureForm.getError('additional_data')" class="pl-2">
+                        <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                          Invalid data for the selected exercise type.
+                        </p>
+                      </div>
                   </div>
                   <div class="pt-4">
                     <label for="picture-file" class="block mb-2 text-sm font-medium text-gray-900 ">Picture File</label>
-                    <input name="audit-file" accept=".jpg, .jpeg, .png" (change)="onFileSelectPicture($event)" required id="picture-file" type="file" class="block w-full text-xs md:text-sm text-[#2B788B]
+                    <input name="audit-file" accept=".jpg, .jpeg, .png" (change)="onFileSelectPicture($event)" required id="picture-file" type="file" class="block mb-2 w-full text-xs md:text-sm text-[#2B788B]
                       file:mr-4 file:py-2 file:px-4
                       file:rounded-full file:border-0
                       file:text-sm file:font-semibold
@@ -327,17 +332,22 @@
                       hover:file:bg-blue-100"
                     />
                   </div>
-                  <div *ngIf="pictureForm.get('pictureFile')?.hasError('required')">
+                  <div *ngIf="pictureForm.getError('data')" class="pl-2">
                     <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                      Picture is required
+                      Invalid file for the selected exercise type.
                     </p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-              <button type="submit" [disabled]="pictureForm.invalid" class="inline-flex w-full justify-center rounded-md bg-[#2B788B] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-opacity-90 sm:ml-3 sm:w-auto">Create</button>
+              <button type="submit" [disabled]="pictureForm.invalid"  class="inline-flex w-full justify-center rounded-md bg-[#2B788B] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-opacity-90 sm:ml-3 sm:w-auto">Create</button>
               <button (click)="pictureModalShow = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+            </div>
+            <div *ngIf="pictureForm.getError('backend')" class="pl-2">
+              <p class="mt-2 text-start font-medium text-[#945069] text-xs">
+                {{pictureForm.getError('backend')}}
+              </p>
             </div>
             </form>
           </div>

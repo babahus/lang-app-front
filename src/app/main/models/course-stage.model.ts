@@ -1,4 +1,9 @@
-import {Exercise} from "../pages/exercises/exercises.component";
+export interface Exercise {
+  header: string;
+  description: string;
+  creator: string;
+  // add any other properties here
+}
 
 export interface CourseStage {
   id: number;

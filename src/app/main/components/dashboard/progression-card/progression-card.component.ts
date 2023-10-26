@@ -24,6 +24,6 @@ export class ProgressionCardComponent {
   async ngOnInit(): Promise<void> {
     this.countProgressExercises = await this.progressService.getExercisesCountByUser(Number(sessionStorage.getItem('id')));
     this.cdr.detectChanges();
-    console.log(this.countProgressExercises)
+    // console.log(this.countProgressExercises)
   }
 }

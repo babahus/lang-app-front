@@ -1,19 +1,31 @@
-<section class="bg-blue-50 min-h-screen w-full mt-10%">
-  <div class="p-8">
-    <div class="flex justify-between items-center mb-8">
-      <div class="sm:flex sm:items-center sm:w-1/4 sm:h-24 w-full h-10 mb-8 bg-white rounded-lg justify-content-center">
-        <p style="font-family: DelaGothic" class="sm:text-2xl text-sm text-center justify-center">Welcome to Dashboard, User</p>
-      </div> <!-- Левый прямоугольник -->
+<section  class="bg-[#F6F5F4] min-h-screen w-full mt-10%">
+  <div *ngIf="currentUserRole">
+    <div class="p-8" *ngIf="this.currentUserRole === 'User'">
+      <div class="flex justify-start items-center mb-8">
+        <span class="uppercase text-[#2B788B] tracking-widest font-semibold text-xs md:text-base " style="font-family: Montserrat">
+          Welcome to Dashboard
+        </span>
+      </div>
+      <div class="grid sm:grid-cols-3 grid-cols-1 gap-8">
+        <div class="h-full bg-[#C3DCE3] rounded-3xl">
+          <app-exercises-card></app-exercises-card>
+        </div>
+        <div class="h-full bg-[#C3DCE3] rounded-3xl">
+          <app-progression-card></app-progression-card>
+        </div>
+        <div class="h-full bg-[#C3DCE3] rounded-3xl">
+          <app-courses-card></app-courses-card>
+        </div>
+      </div>
     </div>
-    <div class="grid sm:grid-cols-3 grid-cols-1 gap-8">
-      <div class="h-full bg-white rounded-lg">
-        <app-exercises-card></app-exercises-card>
+    <div class="p-2 pt-4 md:p-8 relative" *ngIf="this.currentUserRole === 'Teacher'">
+      <div class="flex max-w-2xl justify-center mx-auto">
+        <div class="h-full w-full bg-white rounded-3xl p-2">
+          <app-courses-teacher-card></app-courses-teacher-card>
+        </div>
       </div>
-      <div class="h-full bg-white rounded-lg">
-        <app-courses-card></app-courses-card>
-      </div>
-      <div class="h-full bg-white rounded-lg">
-        <app-progression-card></app-progression-card>
+      <div class="hidden lg:block overflow-hidden">
+        <img class="object-contain absolute w-48 bottom-0 lg:right-[0] xl:right-[10%] z-10" src="./assets/img/courses-teacher-card-page/3d-casual-life-chatgpt-robot-happy-raising-left-arm.png" alt="">
       </div>
     </div>
   </div>

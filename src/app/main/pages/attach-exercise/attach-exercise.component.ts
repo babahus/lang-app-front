@@ -37,7 +37,6 @@ export class AttachExerciseComponent implements OnInit {
 
   audioPlaying: boolean = false;
   audioStart(audit:string){
-    console.log(audit);
     this.audioElement.src = audit;
     if (this.audioPlaying) {
       this.audioElement.pause();

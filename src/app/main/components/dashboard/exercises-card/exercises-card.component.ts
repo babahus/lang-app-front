@@ -28,8 +28,8 @@ export class ExercisesCardComponent implements OnInit{
   async ngOnInit(): Promise<void> {
     this.exerciseProgress = await this.progressService.getExercisesProgressByUser(Number(sessionStorage.getItem('id')));
     this.attachedExercises = await this.exerciseService.getAttachedExercise();
-    console.log(this.attachedExercises)
-    console.log(this.exerciseProgress)
+    // console.log(this.attachedExercises)
+    // console.log(this.exerciseProgress)
   }
 
   isExerciseCompleted(exerciseId : number): boolean {

@@ -1,0 +1,250 @@
+<section>
+    <div *ngIf="showExerciseModal" class="fixed inset-0 flex items-center justify-center z-50">
+        <div class="absolute inset-0 bg-gray-500 bg-opacity-75"></div>
+        <div class="relative z-10 w-full p-2 md:w-1/2 lg:w-2/5">
+            <div class="bg-white rounded-lg shadow-lg p-3">
+                <div class="w-full">
+                    <div>
+                        <div class="mb-2">
+                            <span class="text-sm text-gray-800 font-semibold" style="font-family: DelaGothic;">
+                                List  completed of exercises
+                            </span>
+                        </div>
+                        <div *ngIf="exerciseData.length === 0">
+                            <span class="text-sm text-[#757575] font-semibold" style="font-family: Montserrat">
+                                No exercises of this type
+                            </span>
+                        </div>
+                        <div *ngFor="let exercise of exerciseData, let i = index" class="space-y-2">
+                            <div *ngIf="exercise" class="mb-2">
+                                <div *ngIf="selectedExerciseType === 'compile_phrase'">
+                                    <span  class="text-xs md:text-sm text-gray-800 font-semibold" style="font-family: Montserrat">Compile Phrase {{exercise.id}}</span>
+                                    <div *ngIf="exercise.progress_exercises.length === 0" class="bg-[#2B788B] mt-1 rounded-lg p-1">
+                                        <span class="text-xs md:text-sm text-white font-semibold" style="font-family: Montserrat">
+                                            No exercises completed
+                                        </span>
+                                    </div>
+                                    <div *ngIf="exercise.progress_exercises.length > 0" class="space-y-2 bg-[#2B788B] mt-1 rounded-lg p-2">
+                                        <div *ngFor="let progress of exercise.progress_exercises, let j = index">
+                                            <div *ngIf="progress.solved === 1">
+                                                <div class="flex items-center text-white text-xs md:text-sm font-semibold justify-between space-x-3">
+                                                    <div class="flex items-center gap-2">
+                                                        <svg class="flex-shrink-0 w-3.5 h-3.5 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                                        </svg>
+                                                        <span>{{ progress.user?.name }}</span>
+                                                    </div>
+                                                    <span>{{ progress.solved_at }}</span>
+                                                </div>
+                                                <hr class="text-white">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="selectedExerciseType === 'audit'">
+                                    <span  class="text-xs md:text-sm text-gray-800 font-semibold" style="font-family: Montserrat">Phonetic Transcript {{exercise.id}}</span>
+                                    <div *ngIf="exercise.progress_exercises.length === 0" class="bg-[#2B788B] mt-1 rounded-lg p-1">
+                                        <span class="text-xs md:text-sm text-white font-semibold" style="font-family: Montserrat">
+                                            No exercises completed
+                                        </span>
+                                    </div>
+                                    <div *ngIf="exercise.progress_exercises.length > 0" class="space-y-2 bg-[#2B788B] mt-1 rounded-lg p-2">
+                                        <div *ngFor="let progress of exercise.progress_exercises, let j = index">
+                                            <div *ngIf="progress.solved === 1">
+                                                <div class="flex items-center text-white text-xs md:text-sm font-semibold justify-between space-x-3">
+                                                    <div class="flex items-center gap-2">
+                                                        <svg class="flex-shrink-0 w-3.5 h-3.5 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                                        </svg>
+                                                        <span>{{ progress.user?.name }}</span>
+                                                    </div>
+                                                    <span>{{ progress.solved_at }}</span>
+                                                </div>
+                                                <hr class="text-white">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="selectedExerciseType === 'pair_exercise'">
+                                    <span  class="text-xs md:text-sm text-gray-800 font-semibold" style="font-family: Montserrat">Pairs of Meaning {{exercise.id}}</span>
+                                    <div *ngIf="exercise.progress_exercises.length === 0" class="bg-[#2B788B] mt-1 rounded-lg p-1">
+                                        <span class="text-xs md:text-sm text-white font-semibold" style="font-family: Montserrat">
+                                            No exercises completed
+                                        </span>
+                                    </div>
+                                    <div *ngIf="exercise.progress_exercises.length > 0" class="space-y-2 bg-[#2B788B] mt-1 rounded-lg p-2">
+                                        <div *ngFor="let progress of exercise.progress_exercises, let j = index">
+                                            <div *ngIf="progress.solved === 1">
+                                                <div class="flex items-center text-white text-xs md:text-sm font-semibold justify-between space-x-3">
+                                                    <div class="flex items-center gap-2">
+                                                        <svg class="flex-shrink-0 w-3.5 h-3.5 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                                        </svg>
+                                                        <span>{{ progress.user?.name }}</span>
+                                                    </div>
+                                                    <span>{{ progress.solved_at }}</span>
+                                                </div>
+                                                <hr class="text-white">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="selectedExerciseType === 'picture_exercise'">
+                                    <span  class="text-xs md:text-sm text-gray-800 font-semibold" style="font-family: Montserrat">Picture Association {{exercise.id}}</span>
+                                    <div *ngIf="exercise.progress_exercises.length === 0" class="bg-[#2B788B] mt-1 rounded-lg p-1">
+                                        <span class="text-xs md:text-sm text-white font-semibold" style="font-family: Montserrat">
+                                            No exercises completed
+                                        </span>
+                                    </div>
+                                    <div *ngIf="exercise.progress_exercises.length > 0" class="space-y-2 bg-[#2B788B] mt-1 rounded-lg p-2">
+                                        <div *ngFor="let progress of exercise.progress_exercises, let j = index">
+                                            <div *ngIf="progress.solved === 1">
+                                                <div class="flex items-center text-white text-xs md:text-sm font-semibold justify-between space-x-3">
+                                                    <div class="flex items-center gap-2">
+                                                        <svg class="flex-shrink-0 w-3.5 h-3.5 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                                        </svg>
+                                                        <span>{{ progress.user?.name }}</span>
+                                                    </div>
+                                                    <span>{{ progress.solved_at }}</span>
+                                                </div>
+                                                <hr class="text-white">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="selectedExerciseType === 'sentence'" class="bg-[#C3DCE3] rounded-lg p-2 mb-2">
+                                    <span  class="text-xs md:text-sm text-gray-800 font-semibold" style="font-family: Montserrat">Missing links {{exercise.id}}</span>
+                                    <div *ngIf="exercise.progress_exercises.length === 0" class="bg-[#2B788B] mt-1 rounded-lg p-1">
+                                        <span class="text-xs md:text-sm text-white font-semibold" style="font-family: Montserrat">
+                                            No exercises completed
+                                        </span>
+                                    </div>
+                                    <div *ngIf="exercise.progress_exercises.length > 0" class="space-y-2 bg-[#2B788B] mt-1 rounded-lg p-2">
+                                        <div *ngFor="let progress of exercise.progress_exercises, let j = index">
+                                            <div *ngIf="progress.solved === 1">
+                                                <div class="flex items-center text-white text-xs md:text-sm font-semibold justify-between space-x-3">
+                                                    <div class="flex items-center gap-2">
+                                                        <svg class="flex-shrink-0 w-3.5 h-3.5 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                                        </svg>
+                                                        <span>{{ progress.user?.name }}</span>
+                                                    </div>
+                                                    <span>{{ progress.solved_at }}</span>
+                                                </div>
+                                                <hr class="text-white">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="button" class="bg-[#945069] text-sm text-white font-semibold p-2 px-4 rounded-full"
+                                (click)="showExerciseModal = false" style="font-family: Montserrat"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--   end of the modal window -->
+    <div class="block md:flex gap-4 lg:min-h-full w-full md:justify-center md:p-3 text-center items-center sm:p-0">
+        <div class="relative transform overflow-hidden text-left  transition-all sm:w-full">
+            <h1 style="font-family: DelaGothic" class="px-2">My Courses</h1>
+            <div class="p-2 bg-[#C3DCE3] rounded-3xl pb-8 relative grid-cols-1 lg:flex items-start gap-8">
+                <div class="text-start space-y-2  p-2 lg:p-5 w-full grid grid-cols-1" style="font-family: Montserrat">
+                    <ng-container *ngFor="let course of attachedCourses; let i = index">
+                        <div class="flex w-full justify-between bg-[#f5f5f5] rounded-lg items-center">
+                            <div class="relative group w-3/4">
+                                <a [routerLink]="['/course', course.id]" class="bg-[#f5f5f5] cursor-pointer w-full items-center flex justify-between hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3">
+                                    <span class="font-semibold text-sm lg:text-base" style="font-family: Montserrat">{{ course.title }}</span>
+                                    <span class="font-semibold text-base lg:text-lg" style="font-family: Montserrat">${{ course.price }}</span>
+                                </a>
+                                <div class="hidden group-hover:flex items-center gap-2 absolute z-10 bg-[#2B788B] text-white font-semibold  p-2 uppercase text-xs rounded shadow-md mt-2" style="font-family: Montserrat">
+                                    <span>go to course</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="fill-current w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div [ngClass]="{'hidden': showStages[i], 'block': !showStages[i]}"  (click)="toggleStageList(i)" class="w-16 h-full flex justify-center cursor-pointer items-center hover:border border-[#2B788B] hover:bg-gray-200 text-[#2B788B]">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </div>
+                            <div [ngClass]="{'hidden': !showStages[i], 'block': showStages[i]}"  (click)="toggleStageList(i)" class="w-16 h-full flex justify-center cursor-pointer items-center hover:border border-[#2B788B] hover:bg-gray-200 text-[#2B788B]">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div [ngClass]="{'hidden': !showStages[i], 'block': showStages[i]}" class="space-y-2">
+                            <div *ngIf="course.course_stages.length === 0" class="pl-4 ">
+                                <div class="bg-[#f5f5f5] rounded-lg p-1.5">
+                                    <span class="text-xs md:text-sm text-[#2B788B] font-semibold" style="font-family: Montserrat">
+                                    You do not have stages for this course. Click on the link to the current course where you will be able to add new stages.
+                                </span>
+                                </div>
+                            </div>
+                            <div *ngFor="let stage of course.course_stages; let j = index" >
+                                <div class="w-full pl-4">
+                                    <div class="bg-[#f5f5f5] flex justify-between hover:bg-gray-200 rounded-lg cursor-pointer items-center" (click)="toggleExerciseTypeList(stage.id)">
+                                        <div class="items-center flex justify-between font-semibold text-[#2B788B] p-2 px-3">
+                                            <span class="font-semibold text-sm lg:text-base" style="font-family: Montserrat">{{ stage.title }}</span>
+                                        </div>
+                                        <div [ngClass]="{'hidden': showExerciseTypes[stage.id], 'block': !showExerciseTypes[stage.id]}" class="w-16 h-full flex justify-center cursor-pointer items-center text-[#2B788B]">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
+                                            </svg>
+                                        </div>
+                                        <div [ngClass]="{'hidden': !showExerciseTypes[stage.id], 'block': showExerciseTypes[stage.id]}" class="w-16 h-full flex justify-center cursor-pointer items-center text-[#2B788B]">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pl-8">
+                                    <div [ngClass]="{'hidden': !showExerciseTypes[stage.id], 'block': showExerciseTypes[stage.id]}" class=" p-2 grid grid-cols-1 md:grid-cols-2 gap-2">
+                                        <button (click)="selectExerciseType('compile_phrase', stage)" class="bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">Compile Phrase</button>
+                                        <button (click)="selectExerciseType('audit', stage)" class="bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">Phonetic Transcript</button>
+                                        <button (click)="selectExerciseType('pair_exercise', stage)" class="bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">Pairs of Meaning</button>
+                                        <button (click)="selectExerciseType('picture_exercise', stage)" class="bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">Picture Association</button>
+                                        <button (click)="selectExerciseType('sentence', stage)" class="bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">Missing links</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="attachedCourses" class="flex justify-center my-3 items-center h-8 space-x-2">
+        <button (click)="goToPage(currentPage - 1)"
+                [class.disabled]="currentPage === 1"
+                class="h-full flex justify-center items-center w-8 rounded-full text-[#2B788B] border-2 border-[#2B788B]">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+        </button>
+        <button *ngFor="let page of getPages()" (click)="goToPage(page)"
+                [disabled]="page === currentPage"
+                [class.current]="page === currentPage"
+                class="h-full w-8 rounded-full text-[#2B788B] font-bold border-2 border-[#2B788B]"
+        >
+            {{ page }}
+        </button>
+        <button (click)="goToPage(currentPage + 1)"
+                [class.disabled]="currentPage === totalPages"
+                class="h-full flex justify-center items-center w-8 rounded-full text-[#2B788B] border-2 border-[#2B788B]">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+        </button>
+    </div>
+</section>

@@ -48,6 +48,8 @@ import { ProgressionCardComponent } from './components/dashboard/progression-car
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { AttachExerciseComponent } from './pages/attach-exercise/attach-exercise.component';
 import {ClickOutsideDirective} from "../core/directives/click-outside.directive";
+import { CoursesTeacherCardComponent } from './components/dashboard-teacher/courses-teacher-card/courses-teacher-card.component';
+
 
 
 const routes: Routes = [
@@ -73,7 +75,7 @@ const routes: Routes = [
 
   { path : 'dashboard', component : DashboardComponent, canActivate : [AuthGuard]},
   { path : 'profile', component : ProfileComponent, canActivate : [AuthGuard]},
-  { path : 'exercises', component : ExercisesComponent, canActivate : [AuthGuard]},
+  // { path : 'exercises', component : ExercisesComponent, canActivate : [AuthGuard]},
   { path : 'courses', component : CoursesComponent, canActivate : [AuthGuard]},
   { path : 'exercises-my', component : ExercisesMyComponent, canActivate : [AuthGuard]},
   { path : 'exercises/compile_phrase/:id', component : CompilePhraseComponent, canActivate : [AuthGuard]},
@@ -120,6 +122,7 @@ const routes: Routes = [
     CoursesCardComponent,
     ProgressionCardComponent,
     ProgressBarComponent,
+    CoursesTeacherCardComponent,
     AttachExerciseComponent,
     ClickOutsideDirective,
   ],
