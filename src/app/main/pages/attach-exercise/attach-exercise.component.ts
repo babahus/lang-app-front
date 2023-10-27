@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ExerciseService } from "../../../core/services/exercise.service";
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import {Exercise} from "../../models/exercise";
+import {disableDebugTools} from "@angular/platform-browser";
+import {Router} from "@angular/router";
+import {PseudoCryptService} from "../../../core/services/pseudo-crypt.service";
 
 @Component({
   selector: 'app-attach-exercise',
@@ -17,7 +20,7 @@ export class AttachExerciseComponent implements OnInit {
   currentPage: { [key: string]: number } = {};
   audioElement: HTMLAudioElement;
 
-  constructor(private exerciseService: ExerciseService, private fb: FormBuilder) {
+  constructor(private exerciseService: ExerciseService, private fb: FormBuilder, private router:Router, private pseudoCryptService: PseudoCryptService) {
     this.audioElement = new Audio();
     this.attachExerciseForm = this.fb.group({
       selectedExercise: new FormControl([]),
@@ -71,11 +74,24 @@ export class AttachExerciseComponent implements OnInit {
       }));
 
       this.exerciseData = combinedExercises;
+      console.log(this.exerciseData);
       this.currentPage[this.selectedType] = responseExercise.data.pagination.current_page;
       this.totalPages = responseExercise.data.pagination.last_page;
     } catch (error) {
       console.log(error);
     }
+  }
+
+
+  navigateToExercise(exercise: any) {
+    const link = ['/exercises/'+ this.selectedType, exercise.id];
+    const queryParams = { data: this.getEncryptedParams(null, null, exercise.id) };
+    this.router.navigate(link, { queryParams: queryParams });
+  }
+
+  getEncryptedParams(courseId: number|null, stageId: number|null, exerciseId: number): string {
+    const paramString = `${courseId},${stageId},${exerciseId}`;
+    return this.pseudoCryptService.encrypt(paramString);
   }
 
   goToPage(page: number, type:string) {

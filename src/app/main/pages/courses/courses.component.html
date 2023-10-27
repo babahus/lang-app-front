@@ -1,6 +1,6 @@
 <section class="bg-[#C3DCE3] min-h-screen flex-col justify-center">
   <div class="pt-12 max-w-5xl mx-auto px-3 md:px-5">
-    <div  class="bg-white rounded-lg w-full flex p-2 md:p-3 lg:p-4 relative justify-between items-center">
+    <div class="bg-white rounded-lg w-full flex p-2 md:p-3 lg:p-4 relative justify-between items-center">
 
       <div class="flex gap-2 items-center">
         <button type="button" (click)="isCardInfoVisible = !isCardInfoVisible" class=" bg-gray-100 hover:bg-gray-200 p-2 rounded-full">
@@ -27,9 +27,9 @@
               </div>
 
               <ul>
-                <li><strong>1:</strong> This is title of Course. When you clicking on it, you will be redirected on course page ( If you attach it)</li>
-                <li><strong>2:</strong> This button for attach/detach course from your account. You can also attach course in modal window</li>
-                <li><strong>3:</strong> This button for additional info about course. When your click on it, it open modal window with information about course</li>
+                <li><strong>1:</strong>{{'courseTitleDescription2' | translate}}</li>
+                <li><strong>2:</strong>{{'attachButtonDescription' | translate}}</li>
+                <li><strong>3:</strong>{{'infoButtonDescription' | translate}}</li>
               </ul>
 
               <div class='text-sm' style="font-family: Montserrat">
@@ -40,7 +40,7 @@
         </div>
         <!-- Card info for Courses Ended  -->
       </div>
-      <div (click)="openListExercise()"  class="bg-gray-100 cursor-pointer rounded-lg text-[#757575] p-2">
+      <div (click)="openListExercise()" class="bg-gray-100 cursor-pointer rounded-lg text-[#757575] p-2">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z" />
           <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -58,7 +58,7 @@
                        class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#2B788B]"
                        required="" [(ngModel)]="showFreeCourses" (change)="filterCourses($event)">
                 <label for="remember_free_courses" class="uppercase cursor-pointer">
-                  <!--                Free Courses-->
+
                   {{'free_courses' | translate}}
                 </label>
               </div>
@@ -69,7 +69,7 @@
                        class="w-4 h-4 cursor-pointer border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#2B788B]"
                        required="" [(ngModel)]="showPaidCourses" (change)="filterCourses($event)" >
                 <label for="remember_paid_courses" class="uppercase cursor-pointer">
-                  <!--                Paid Courses-->
+
                   {{'paid_courses' | translate}}
                 </label>
               </div>
@@ -159,7 +159,7 @@
                 </svg>
               </button>
               <div class="lg:p-6">
-                  <h1 class="text-xl text-[#2B788B] font-semibold mb-2 underline-header" style="font-family: DelaGothic;">Details of the Course</h1>
+                  <h1 class="text-xl text-[#2B788B] font-semibold mb-2 underline-header" style="font-family: DelaGothic;">{{'courseDetailsTitle' | translate}}</h1>
                   <div class="bg-[#C3DCE3] rounded-3xl p-3">
                     <p class="text-lg normal-case font-bold text-[#2B788B] md:text-xl mb-4" style="font-family: Montserrat;">{{ selectedCourse?.title }}</p>
                     <p class="text-xs normal-case md:text-sm font-semibold text-[#757575] mb-6" style="font-family: Montserrat;">{{ selectedCourse?.description }}</p>
@@ -183,7 +183,7 @@
                             <div class="pl-2">
                               <p class="text-xs md:text-sm  font-semibold text-[#757575] mb-6" style="font-family: Montserrat;">{{ stage?.description }}</p>
                               <p class="text-xs md:text-sm font-medium text-[#757575] mb-6" style="font-family: Montserrat;">
-                                Stage contains <strong>{{ stage?.stage_exercises?.length }}</strong> exercises
+                                {{'stageContainsExercises1' | translate}} <strong>{{ stage?.stage_exercises?.length }}</strong> {{'stageContainsExercises2' | translate}}
                               </p>
                             </div>
                           </div>
@@ -191,12 +191,12 @@
                       </div>
                     </div>
                     <ng-container *ngIf="!selectedCourse?.course_stages">
-                      <p class="text-xs md:text-sm font-medium text-[#757575] mb-6" style="font-family: Montserrat;">There is no stages in this Course</p>
+                      <p class="text-xs md:text-sm font-medium text-[#757575] mb-6" style="font-family: Montserrat;">{{'no_stages_this_course' | translate}}</p>
                     </ng-container>
                   </div>
-                  <button *ngIf="this.selectedCourse && !isCourseAttached(this.selectedCourse!.id)" (click)="attachCourseToUser(this.selectedCourse!.id)" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-full">
-                    Attach Course
-                  </button>
+                  <div class="w-full px-12 pt-4 flex justify-center" style="font-family: DelaGothic">
+                    <button *ngIf="this.selectedCourse && !isCourseAttached(this.selectedCourse!.id)" (click)="attachCourseToUser(this.selectedCourse!.id)" type="button" class="inline-flex w-full justify-center rounded-full bg-[#2B788B] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:ml-3 sm:w-auto">{{'attachCourseButton' | translate}}</button>
+                  </div>
               </div>
             </div>
           </div>

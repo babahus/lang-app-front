@@ -4,34 +4,34 @@
       <div class="w-full bg-[#5996A5] p-3">
         <div class="flex-col justify-center text-center text-[#2B788B]" style="font-family: Montserrat">
           <div (click)="showCreateExercise = !showCreateExercise" style="font-family: DelaGothic"  class="flex justify-center  lg:w-1/3 lg:mx-auto items-center tracking-wider cursor-pointer hover:bg-blue-50 p-2 mx-3 hover:text-[#5996A5] font-semibold rounded text-white" >
-            <span>Create Exercise</span>
+            <span>{{'createExercise' | translate}}</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
             </svg>
           </div>
           <div [ngClass]="{'hidden' : !showCreateExercise}" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 px-3 pt-4 gap-3 lg:gap-6">
             <div (click)="compilePhraseModalShow = true" class="text-center bg-blue-50 hover:bg-[#945069] hover:text-white p-3 hover:underline decoration-2 rounded cursor-pointer">
-              <span class=" text-sm md:text-md font-semibold">Compile Phrase</span>
+              <span class=" text-sm md:text-md font-semibold">{{'compilePhrase' | translate}}</span>
             </div>
             <div (click)="auditModalShow = true" class="text-center bg-blue-50 hover:bg-[#639B6D] hover:text-white p-3 hover:underline decoration-2 rounded cursor-pointer">
-              <span class="text-sm md:text-md font-semibold">Audit</span>
+              <span class="text-sm md:text-md font-semibold">{{'audit' | translate}}</span>
             </div>
             <div (click)="pairModalShow = true" class="text-center bg-blue-50 hover:bg-[#A15993] hover:text-white p-3 hover:underline decoration-2 rounded cursor-pointer">
-              <span class=" text-sm md:text-md font-semibold">Pair</span>
+              <span class=" text-sm md:text-md font-semibold">{{'pair' | translate}}</span>
             </div>
             <div (click)="pictureModalShow = true" class="text-center bg-blue-50 hover:bg-[#C4A24C] hover:text-white p-3 hover:underline decoration-2 rounded cursor-pointer">
-              <span class=" text-sm md:text-md font-semibold">Picture</span>
+              <span class=" text-sm md:text-md font-semibold">{{'picture' | translate}}</span>
             </div>
             <div (click)="sentenceModalShow = true" class="text-center bg-blue-50 hover:bg-[#CB5B43] hover:text-white p-3 hover:underline decoration-2 rounded cursor-pointer">
-              <span class="text-sm md:text-md font-semibold">Sentence</span>
+              <span class="text-sm md:text-md font-semibold">{{'sentence' | translate}}</span>
             </div>
           </div>
         </div>
       </div>
       <div class="p-3 md:pt-8 md:pb-8 lg:p-6 bg-white text-center lg:text-start overflow-hidden grid grid-cols-1 lg:flex items-center justify-center gap-4 lg:gap-[15%]">
         <div class="w-full md:mx-auto md:w-[60%] lg:w-2/5 space-y-4">
-          <p class="text-2xl md:text-3xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">Welcome, teacher!</p>
-          <p class="text-sm md:text-md font-medium text-[#757575]" style="font-family: Montserrat">Welcome to the exercise creation page. Here you can design fun and educational activities for your students. We offer you handy tools to create different types of exercises to help you in your teaching.</p>
+          <p class="text-2xl md:text-3xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">{{'welcomeTeacher' | translate}}</p>
+          <p class="text-sm md:text-md font-medium text-[#757575]" style="font-family: Montserrat">{{'welcomeText' | translate}}</p>
         </div>
         <div class="w-full md:mx-auto md:w-[60%] lg:w-1/3">
           <img class="h-full w-full" src="./assets/img/exercise-create-page/casual-life-3d-young-woman-imagining-things-while-reading-e-book.png" alt="">
@@ -44,9 +44,9 @@
           <img class="h-full w-full" src="./assets/img/exercise-create-page/3d-casual-life-little-boy-looks-at-book.png" alt="">
         </div>
         <div class="w-full md:mx-auto md:w-[60%] lg:w-2/5 space-y-4">
-          <p class="text-2xl md:text-3xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">Compile Phrase</p>
+          <p class="text-2xl md:text-3xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">{{'compilePhrase' | translate}}</p>
           <p class="text-sm md:text-md font-medium text-[#757575]" style="font-family: Montserrat">
-            The "Compile Phrase" exercise develops the skills to create meaningful sentences based on the words and phrases provided. Students must use the provided elements to form a grammatically correct and logical sentence
+            {{'compilePhraseDescription' | translate}}
           </p>
         </div>
 
@@ -54,9 +54,9 @@
 
       <div class="p-3 md:pt-8 md:pb-8 lg:p-6 bg-white text-center lg:text-start overflow-hidden grid grid-cols-1 lg:flex items-center justify-center gap-4 lg:gap-[15%]">
         <div class="w-full md:mx-auto md:w-[60%] lg:w-2/5 space-y-4">
-          <p class="text-2xl md:text-3xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">Audit</p>
+          <p class="text-2xl md:text-3xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">{{'audit' | translate}}</p>
           <p class="text-sm md:text-md font-medium text-[#757575]" style="font-family: Montserrat">
-            The "Audit" exercise is aimed at developing listening skills and the ability to comprehend an oral text. Students listen to an audio file and write down the line or answer that will be considered correct after listening to it
+            {{'auditDescription' | translate}}
           </p>
         </div>
         <div class="w-full md:mx-auto md:w-[60%] lg:w-1/3 md:pl-[10%] lg:pl-0">
@@ -69,9 +69,9 @@
           <img class="h-full w-full" src="./assets/img/exercise-create-page/3d-casual-life-young-couple-with-a-book.png" alt="">
         </div>
         <div class="w-full md:mx-auto md:w-[60%] lg:w-2/5 space-y-4">
-          <p class="text-2xl md:text-3xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">Pair</p>
+          <p class="text-2xl md:text-3xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">{{'pair' | translate}}</p>
           <p class="text-sm md:text-md font-medium text-[#757575]" style="font-family: Montserrat">
-            The exercise "Pair" develops the skills of association and understanding of translating words from one language to another. Students have to find the correct pairs of words
+            {{'pairDescription' | translate}}
           </p>
         </div>
 
@@ -79,9 +79,9 @@
 
       <div class="p-3 md:pt-8 md:pb-8 lg:p-6 bg-white text-center lg:text-start overflow-hidden grid grid-cols-1 lg:flex items-center justify-center gap-4 lg:gap-[15%]">
         <div class="w-full  md:mx-auto md:w-[60%] lg:w-2/5 space-y-4">
-          <p class="text-2xl md:text-3xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">Picture</p>
+          <p class="text-2xl md:text-3xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">{{'picture' | translate}}</p>
           <p class="text-sm md:text-md font-medium text-[#757575]" style="font-family: Montserrat">
-            The "Picture" exercise develops the skills of perception and association of words with pictures. Students have to choose the correct word from several options according to the picture they see.
+            {{'pictureDescription' | translate}}
           </p>
         </div>
         <div class="w-full  md:mx-auto md:w-[60%] lg:w-1/3 px-4">
@@ -95,10 +95,10 @@
         </div>
         <div class="w-full md:mx-auto md:w-[60%] lg:w-2/5 space-y-4">
           <p class="text-2xl md:text-3xl px-4 md:px-8 lg:px-0" style="font-family: DelaGothic">
-            Sentence
+            {{'sentence' | translate}}
           </p>
           <p class="text-sm md:text-md font-medium text-[#757575]" style="font-family: Montserrat">
-            The "Sentence" exercise develops the skills of filling in sentence gaps and understanding which words should be inserted based on the context of the sentence. Students must choose the correct words to fill in the gaps in the sentence.
+            {{'sentenceDescription' | translate}}
           </p>
         </div>
       </div>
@@ -115,14 +115,14 @@
               <div class="sm:flex sm:items-start">
                 <div class="mt-3 text-left sm:ml-4 sm:mt-0 sm:text-left">
                   <h3 style="font-family: DelaGothic" class="text-base font-semibold leading-6 text-gray-900" id="modal-title">
-                    Compile Phrase:
+                    {{'compilePhrase' | translate}}
                   </h3>
                   <div class="mt-2">
-                    <p style="font-family: Montserrat" class="text-sm text-gray-500">Create an activity in which students form sentences from provided phrases.</p>
+                    <p style="font-family: Montserrat" class="text-sm text-gray-500">{{'createActivity' | translate}}</p>
                   </div>
 
                     <div class="pt-4">
-                      <label for="phrase" class="block mb-2 text-sm font-medium text-gray-900 ">Phrase</label>
+                      <label for="phrase" class="block mb-2 text-sm font-medium text-gray-900 ">{{'phraseLabel' | translate}}</label>
                       <input type="text"
                              name="phrase"
                              id="phrase"
@@ -131,20 +131,20 @@
                     </div>
                   <div *ngIf="compilePhrase.get('phrase')?.hasError('required') && compilePhrase.controls.phrase.touched">
                     <p class="mt-2 text-[#945069] font-medium text-xs">
-                      Phrase is required
+                      {{'phraseRequiredError' | translate}}
                     </p>
                   </div>
                   <div *ngIf="compilePhrase.get('phrase')?.hasError('minlength')">
                     <p class="mt-2 text-[#945069] font-medium text-xs">
-                      Phrase should have a minimum of 8 characters
+                      {{'phraseMinLengthError' | translate}}
                     </p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-              <button type="submit" [disabled]="compilePhrase.invalid" class="inline-flex w-full justify-center rounded-md bg-[#2B788B] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:ml-3 sm:w-auto">Create</button>
-              <button (click)="compilePhraseModalShow = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+              <button type="submit" [disabled]="compilePhrase.invalid" class="inline-flex w-full justify-center rounded-md bg-[#2B788B] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:ml-3 sm:w-auto">{{'createButton' | translate}}</button>
+              <button (click)="compilePhraseModalShow = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">{{'cancelButton' | translate}}</button>
             </div>
             </form>
           </div>
@@ -164,28 +164,28 @@
               <div class="sm:flex sm:items-start">
                 <div class="mt-3 text-left sm:ml-4 sm:mt-0 sm:text-left">
                   <h3 style="font-family: DelaGothic" class="text-base font-semibold leading-6 text-gray-900">
-                    Audit:
+                    {{'audit' | translate}}
                   </h3>
                   <div class="mt-2">
-                    <p style="font-family: Montserrat" class="text-sm text-gray-500">Prepare audio files and phrases for a listening exercise where students will have to write down what they have heard.</p>
+                    <p style="font-family: Montserrat" class="text-sm text-gray-500">{{'auditDescription2' | translate}}</p>
                   </div>
                   <div class="pt-4 mb-2">
-                    <label for="audit-sentence" class="block mb-2 text-sm font-medium text-gray-900 ">Correct Sentence</label>
+                    <label for="audit-sentence" class="block mb-2 text-sm font-medium text-gray-900 ">{{'correctSentenceLabel' | translate}}</label>
                     <textarea formControlName="auditPhrase" id="audit-sentence" rows="4" style="font-family: Montserrat" class="block p-2 w-full text-sm text-gray-900 bg-blue-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
                   </div>
                   <div *ngIf="errorShow && auditForm.getError('additional_data')">
                     <p class="mt-2 text-center font-medium text-[#945069] text-xs">
-                      Invalid data for the selected exercise type.
+                      {{'invalidDataError' | translate}}
                     </p>
                   </div>
                   <div *ngIf="auditForm.get('auditPhrase')?.hasError('required') && auditForm.controls.auditPhrase.touched">
                     <p class="mt-2 text-[#945069] font-medium text-xs">
-                      Phrase is required
+                      {{'phraseRequiredError' | translate}}
                     </p>
                   </div>
                   <div *ngIf="auditForm.get('auditPhrase')?.hasError('minlength')">
                     <p class="mt-2 text-[#945069] font-medium text-xs">
-                      Phrase should have a minimum of 8 characters
+                      {{'phraseMinLengthError' | translate}}
                     </p>
                   </div>
                   <div class="pt-4">
@@ -232,30 +232,30 @@
               <div class="sm:flex sm:items-start">
                 <div class="mt-3 text-start sm:ml-4 sm:mt-0 sm:text-left">
                   <h3 style="font-family: DelaGothic" class="text-base font-semibold leading-6 text-gray-900">
-                    Pair:
+                    {{'pairModalTitle' | translate}}:
                   </h3>
                   <div class="mt-2">
-                    <p style="font-family: Montserrat" class="text-sm text-gray-500">Develop an exercise in which you have to match words in English with their Russian translations.</p>
+                    <p style="font-family: Montserrat" class="text-sm text-gray-500">{{'pairDescription2' | translate}}</p>
                   </div>
                   <form [formGroup]="wordPairsForm">
                     <div formArrayName="wordPairs">
                       <div *ngFor="let pair of wordPairs.controls; let i = index" [formGroupName]="i">
                         <div class="grid grid-cols-2 gap-6 pt-2.5" style="font-family: Montserrat">
                           <div>
-                            <label class="block mb-2 text-sm font-medium text-gray-900">Word:</label>
+                            <label class="block mb-2 text-sm font-medium text-gray-900">{{'wordLabel' | translate}}</label>
                             <input type="text" formControlName="word" class="bg-blue-50 mb-2 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2" />
                             <div *ngIf="wordPairs.controls[i].get('word')?.hasError('required') && wordPairs.controls[i].get('word')?.touched" class="text-red-500">
                               <p class="mt-2 text-[#945069] font-medium text-xs">
-                                Word is required
+                                {{'wordRequiredError' | translate}}
                               </p>
                             </div>
                           </div>
                           <div>
-                            <label class="block mb-2 text-sm font-medium text-gray-900">Translation:</label>
+                            <label class="block mb-2 text-sm font-medium text-gray-900">{{'translationLabel' | translate}}</label>
                             <input type="text" formControlName="translation" class="bg-blue-50 mb-2 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2" />
                             <div *ngIf="wordPairs.controls[i].get('translation')?.hasError('required') && wordPairs.controls[i].get('translation')?.touched" class="text-red-500">
                               <p class="mt-2 text-[#945069] font-medium text-xs">
-                                Word is required
+                                {{'translationRequiredError' | translate}}
                               </p>
                             </div>
                           </div>
@@ -267,7 +267,7 @@
                               style="font-family: DelaGothic"
                               (click)="addWordPair()"
                               class="cursor-pointer text-white bg-[#5996A5] tracking-widest focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-xs px-2 py-2 text-center">
-                        Add Pair
+                        {{'addPairButton' | translate}}
                       </button>
                     </div>
                   </form>
@@ -280,8 +280,8 @@
               </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-              <button type="button" (click)="submitPair()" [disabled]="wordPairsForm.invalid" class="inline-flex w-full justify-center rounded-md bg-[#2B788B] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-opacity-90 sm:ml-3 sm:w-auto">Create</button>
-              <button (click)="pairModalShow = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+              <button type="button" (click)="submitPair()" [disabled]="wordPairsForm.invalid" class="inline-flex w-full justify-center rounded-md bg-[#2B788B] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-opacity-90 sm:ml-3 sm:w-auto">{{'createButton' | translate}}</button>
+              <button (click)="pairModalShow = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">{{'cancelButton' | translate}}</button>
             </div>
           </div>
         </div>
@@ -300,15 +300,15 @@
               <div class="sm:flex sm:items-start">
                 <div class="mt-3 text-start sm:ml-4 sm:mt-0 sm:text-left">
                   <h3 style="font-family: DelaGothic" class="text-base font-semibold leading-6 text-gray-900" >
-                    Picture:
+                    {{'pictureModalTitle' | translate}}
                   </h3>
                   <div class="mt-2">
-                    <p style="font-family: Montserrat" class="text-sm text-gray-500">Upload images and create activities where students must choose the correct word to match the image.</p>
+                    <p style="font-family: Montserrat" class="text-sm text-gray-500">{{'pictureDescription3' | translate}}</p>
                   </div>
                   <div class="pt-4">
-                    <span class="block mb-2 text-sm font-medium text-gray-900 ">Options:</span>
+                    <span class="block mb-2 text-sm font-medium text-gray-900 ">{{'optionsLabel' | translate}}</span>
                     <p style="font-family: Montserrat" class="text-[#757575] text-xs">
-                      Write down the answer choices and choose one correct one
+                      {{'optionsInfo' | translate}}
                     </p>
                       <div class="grid grid-cols-1 mb-2 md:grid-cols-2 items-center gap-4 pt-4" formArrayName="options">
                         <div class="flex items-center gap-4" *ngFor="let option of pictureForm.controls.options.controls; let i = index" [formGroupName]="i">
@@ -318,12 +318,12 @@
                       </div>
                       <div *ngIf="pictureForm.getError('additional_data')" class="pl-2">
                         <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                          Invalid data for the selected exercise type.
+                          {{'invalidDataError' | translate}}
                         </p>
                       </div>
                   </div>
                   <div class="pt-4">
-                    <label for="picture-file" class="block mb-2 text-sm font-medium text-gray-900 ">Picture File</label>
+                    <label for="picture-file" class="block mb-2 text-sm font-medium text-gray-900 ">{{'pictureFileLabel' | translate}}</label>
                     <input name="audit-file" accept=".jpg, .jpeg, .png" (change)="onFileSelectPicture($event)" required id="picture-file" type="file" class="block mb-2 w-full text-xs md:text-sm text-[#2B788B]
                       file:mr-4 file:py-2 file:px-4
                       file:rounded-full file:border-0
@@ -334,15 +334,15 @@
                   </div>
                   <div *ngIf="pictureForm.getError('data')" class="pl-2">
                     <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                      Invalid file for the selected exercise type.
+                      {{'invalidFileError' | translate}}
                     </p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-              <button type="submit" [disabled]="pictureForm.invalid"  class="inline-flex w-full justify-center rounded-md bg-[#2B788B] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-opacity-90 sm:ml-3 sm:w-auto">Create</button>
-              <button (click)="pictureModalShow = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+              <button type="submit" [disabled]="pictureForm.invalid"  class="inline-flex w-full justify-center rounded-md bg-[#2B788B] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-opacity-90 sm:ml-3 sm:w-auto">{{'createButton' | translate}}</button>
+              <button (click)="pictureModalShow = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">{{'cancelButton' | translate}}</button>
             </div>
             <div *ngIf="pictureForm.getError('backend')" class="pl-2">
               <p class="mt-2 text-start font-medium text-[#945069] text-xs">
@@ -367,16 +367,16 @@
               <div class="sm:flex sm:items-start">
                 <div class="mt-3 text-start sm:ml-4 sm:mt-0 sm:text-left">
                   <h3 style="font-family: DelaGothic" class="text-base font-semibold leading-6 text-gray-900" >
-                    Sentence:
+                    {{'sentenceModalTitle' | translate}}
                   </h3>
                   <div class="mt-2">
-                    <p style="font-family: Montserrat" class="text-sm text-gray-500">Write phrases with gaps and identify the correct word pairs to fill in the gaps.</p>
+                    <p style="font-family: Montserrat" class="text-sm text-gray-500">{{'sentenceDescription3' | translate}}</p>
                   </div>
                   <div class="pt-3 space-y-2">
-                    <label for="sentence-phrase" class="block mb-2 text-sm font-medium text-gray-900">Your phrase:</label>
+                    <label for="sentence-phrase" class="block mb-2 text-sm font-medium text-gray-900">{{'yourPhraseLabel' | translate}}</label>
                     <textarea id="sentence-phrase" type="text" formControlName="phrase" placeholder="Write your phrase..." class="bg-blue-50 border border-[#C3DCE3] text-gray-900 sm:text-sm text-sm rounded-lg focus:ring-[#2B788B] focus:border-[#2B788B] block w-full p-2"></textarea>
                     <ng-container *ngIf="missingWords.length > 0" >
-                      <span class="block mb-2 text-sm font-medium text-gray-900 pt-3">Your missing word:</span>
+                      <span class="block mb-2 text-sm font-medium text-gray-900 pt-3">{{'yourMissingWordLabel' | translate}}</span>
                       <div formArrayName="missingWords" class="flex-col justify-center items-center bg-[#C3DCE3] rounded-lg p-3 md:p-4 lg:p-6 space-y-3">
                         <div *ngFor="let missingWord of missingWords.controls; let i = index" class="">
                           <div class="flex justify-center gap-12 items-center">
@@ -390,14 +390,14 @@
                         </div>
                       </div>
                     </ng-container>
-                    <button type="button" class="cursor-pointer text-white bg-[#5996A5] tracking-widest focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-xs px-2 py-2 text-center" (click)="addMissingWord()">Add Missing Word</button>
+                    <button type="button" class="cursor-pointer text-white bg-[#5996A5] tracking-widest focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-xs px-2 py-2 text-center" (click)="addMissingWord()">{{'addMissingWordButton' | translate}}</button>
                   </div>
                 </div>
               </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-              <button type="submit"  class="inline-flex w-full justify-center rounded-md bg-[#2B788B] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:ml-3 sm:w-auto">Create</button>
-              <button (click)="sentenceModalShow = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+              <button type="submit"  class="inline-flex w-full justify-center rounded-md bg-[#2B788B] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:ml-3 sm:w-auto">{{'createButton' | translate}}</button>
+              <button (click)="sentenceModalShow = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">{{'cancelButton' | translate}}</button>
             </div>
             </form>
           </div>

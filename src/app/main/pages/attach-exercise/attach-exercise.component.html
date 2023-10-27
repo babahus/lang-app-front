@@ -20,77 +20,101 @@
               </div>
             </div>
             <div *ngIf="exerciseData" class="flex justify-center items-center p-2 lg:p-5 w-full lg-w-2/4">
+
               <div *ngIf="selectedType === 'compile_phrase'" class="flex-col w-full justify-center justify-items-center gap-3">
-                <div class="bg-[#f5f5f5] p-3 mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
+                <div class="bg-[#f5f5f5]  mb-3 p-3 mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
                   <div class="mb-3" style="font-family: DelaGothic">
                     <label class="text-[#2B788B] font-bold text-base">Select an Exercise:</label>
                   </div>
-                  <div cdkListbox cdkListboxMultiple class="cursor-pointer mb-3 w-full bg-[#C3DCE3] p-2 space-y-1 items-center justify-start lg:py-3 overflow-hidden font-medium transition-all rounded group" style="font-family: Montserrat">
-                    <div *ngFor="let exercise of exerciseData" [cdkOption]="exercise"
-                        (click)="addSelectedExercise(exercise)"
-                        class="bg-[#f5f5f5] relative overflow-hidden hover:bg-gray-200 cursor-pointer p-1.5 rounded "
-                    >
-                      <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all z-0 ease-out duration-700 translate-x-0 left-0 w-full h-48' : exercise.attached} " class="-translate-x-full"></div>
-                      <div class="flex items-center lg:px-2">
-                        <div [ngClass]="{'block': exercise.attached, 'hidden': !exercise.attached}">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-white duration-700 ease-in-out transform transition-all z-40">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  <div cdkListbox cdkListboxMultiple class="flex flex-col  p-2 space-y-1 bg-[#C3DCE3] overflow-hidden rounded">
+                    <div *ngFor="let exercise of exerciseData" [cdkOption]="exercise">
+                      <div class="flex gap-1 h-10 w-full items-center">
+                        <div (click)="addSelectedExercise(exercise)" class="w-full bg-[#f5f5f5] h-full relative flex items-center overflow-hidden hover:bg-gray-200 cursor-pointer p-1.5 rounded">
+                          <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all z-0 ease-out duration-700 translate-x-0 left-0 w-full h-48' : exercise.attached} " class="-translate-x-full"></div>
+                          <div class="flex gap-1 justify-start items-end lg:px-2">
+                            <div [ngClass]="{'block': exercise.attached, 'hidden': !exercise.attached}">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-white duration-700 ease-in-out transform transition-all z-40">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                              </svg>
+                            </div>
+                            <div class="w-56 relative overflow-hidden">
+                              <span class="whitespace-nowrap overflow-ellipsis z-30 font-bold" [ngClass]="{'transform translate-x-1 transition-colors duration-700 ease-in-out text-white': exercise.attached, 'text-[#2B788B]': !exercise.attached}">
+                                {{exercise.phrase}}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="cursor-pointer w-10 bg-[#2B788B] rounded h-full flex items-center justify-center"
+                             *ngIf="exercise.attached;"
+                             (click)="navigateToExercise(exercise)"
+                             matTooltip="Go to exercise page"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 fill-current h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
                           </svg>
                         </div>
-                        <span class="relative z-30 font-bold" [ngClass]="{'transform translate-x-1 transition-colors duration-700 ease-in-out text-white': exercise.attached, 'text-[#2B788B]': !exercise.attached}">
-                          {{ exercise.phrase }}
-                        </span>
-
                       </div>
                     </div>
                   </div>
-                  <div *ngIf="exerciseData" class="flex justify-center items-center h-8 space-x-2">
-                    <button (click)="goToPage(currentPage[selectedType] - 1, selectedType)"
-                            [class.disabled]="currentPage[selectedType] === 1"
-                            class="h-full flex justify-center items-center w-8 rounded-full text-[#2B788B] border-2 border-[#2B788B]">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                      </svg>
-                    </button>
-                    <button *ngFor="let page of getPages(selectedType)"
-                            (click)="goToPage(page,selectedType)"
-                            [disabled]="page === currentPage[selectedType]"
-                            [class.current]="page === currentPage[selectedType]"
-                            class="h-full w-8 rounded-full text-[#2B788B] font-bold border-2 border-[#2B788B]"
-                    >
-                      {{ page }}
-                    </button>
-                    <button (click)="goToPage(currentPage[selectedType] + 1, selectedType)"
-                            [class.disabled]="currentPage[selectedType] === totalPages"
-                            class="h-full flex justify-center items-center w-8 rounded-full text-[#2B788B] border-2 border-[#2B788B]">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                      </svg>
-                    </button>
-                  </div>
+                </div>
+                <div *ngIf="exerciseData" class="flex justify-center items-center h-8 space-x-2">
+                  <button (click)="goToPage(currentPage[selectedType] - 1, selectedType)"
+                          [class.disabled]="currentPage[selectedType] === 1"
+                          class="h-full flex justify-center items-center w-8 rounded-full text-[#2B788B] border-2 border-[#2B788B]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                  </button>
+                  <button *ngFor="let page of getPages(selectedType)"
+                          (click)="goToPage(page,selectedType)"
+                          [disabled]="page === currentPage[selectedType]"
+                          [class.current]="page === currentPage[selectedType]"
+                          class="h-full w-8 rounded-full text-[#2B788B] font-bold border-2 border-[#2B788B]"
+                  >
+                    {{ page }}
+                  </button>
+                  <button (click)="goToPage(currentPage[selectedType] + 1, selectedType)"
+                          [class.disabled]="currentPage[selectedType] === totalPages"
+                          class="h-full flex justify-center items-center w-8 rounded-full text-[#2B788B] border-2 border-[#2B788B]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                  </button>
                 </div>
               </div>
 
               <div *ngIf="selectedType === 'sentence'" class="flex-col w-full justify-center justify-items-center gap-3">
-                <div class="bg-[#f5f5f5] p-3 mb-3 mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
+                <div class="bg-[#f5f5f5]  mb-3 p-3 mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
                   <div class="mb-3" style="font-family: DelaGothic">
                     <label class="text-[#2B788B] font-bold text-base">Select an Exercise:</label>
                   </div>
-                  <div cdkListbox cdkListboxMultiple class="cursor-pointer w-full bg-[#C3DCE3] p-2 space-y-1 items-center justify-start lg:py-3 overflow-hidden font-medium transition-all rounded group" style="font-family: Montserrat">
-                    <div *ngFor="let exercise of exerciseData" [cdkOption]="exercise"
-                         (click)="addSelectedExercise(exercise)"
-                         class="bg-[#f5f5f5] relative overflow-hidden hover:bg-gray-200 cursor-pointer p-1.5 rounded "
-                    >
-                      <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all z-0 ease-out duration-700 translate-x-0 left-0 w-full h-48' : exercise.attached} " class="-translate-x-full"></div>
-                      <div class="flex items-center lg:px-2">
-                        <div [ngClass]="{'block': exercise.attached, 'hidden': !exercise.attached}">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-white duration-700 ease-in-out transform transition-all z-40">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  <div cdkListbox cdkListboxMultiple class="flex flex-col  p-2 space-y-1 bg-[#C3DCE3] overflow-hidden rounded">
+                    <div *ngFor="let exercise of exerciseData" [cdkOption]="exercise">
+                      <div class="flex gap-1 h-10 w-full items-center">
+                        <div (click)="addSelectedExercise(exercise)" class="w-full bg-[#f5f5f5] h-full relative flex items-center overflow-hidden hover:bg-gray-200 cursor-pointer p-1.5 rounded">
+                          <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all z-0 ease-out duration-700 translate-x-0 left-0 w-full h-48' : exercise.attached} " class="-translate-x-full"></div>
+                          <div class="flex gap-1 justify-start items-end lg:px-2">
+                            <div [ngClass]="{'block': exercise.attached, 'hidden': !exercise.attached}">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-white duration-700 ease-in-out transform transition-all z-40">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                              </svg>
+                            </div>
+                            <div class="w-56 relative overflow-hidden">
+                              <span class="whitespace-nowrap overflow-ellipsis z-30 font-bold" [ngClass]="{'transform translate-x-1 transition-colors duration-700 ease-in-out text-white': exercise.attached, 'text-[#2B788B]': !exercise.attached}">
+                                {{ changeSentence(exercise.sentence_with_gaps, exercise.correct_answers_json) }}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="cursor-pointer w-10 bg-[#2B788B] rounded h-full flex items-center justify-center"
+                             *ngIf="exercise.attached;"
+                             (click)="navigateToExercise(exercise)"
+                             matTooltip="Go to exercise page"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 fill-current h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
                           </svg>
                         </div>
-                        <span class="relative z-30 font-bold" [ngClass]="{'transform translate-x-1 transition-colors duration-700 ease-in-out text-white': exercise.attached, 'text-[#2B788B]': !exercise.attached}">
-                          {{ changeSentence(exercise.sentence_with_gaps, exercise.correct_answers_json) }}
-                        </span>
                       </div>
                     </div>
                   </div>
@@ -121,32 +145,40 @@
                 </div>
               </div>
               <div *ngIf="selectedType === 'audit'" class="flex-col w-full justify-center justify-items-center gap-3">
-                <div class="bg-[#f5f5f5] mb-3 p-3 mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
+                <div class="bg-[#f5f5f5]  mb-3 p-3 mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
                   <div class="mb-3" style="font-family: DelaGothic">
                     <label class="text-[#2B788B] font-bold text-base">Select an Exercise:</label>
                   </div>
-                  <div cdkListbox cdkListboxMultiple class="cursor-pointer w-full bg-[#C3DCE3] p-2 space-y-1 items-center justify-start lg:py-3 overflow-hidden font-medium transition-all rounded group" style="font-family: Montserrat">
-                    <div *ngFor="let exercise of exerciseData" [cdkOption]="exercise"
-                         (click)="addSelectedExercise(exercise)"
-                         class="bg-[#f5f5f5] relative overflow-hidden hover:bg-gray-200 cursor-pointer p-1.5 rounded "
-                    >
-                      <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all z-0 ease-out duration-700 translate-x-0 left-0 w-full h-48' : exercise.attached} " class="-translate-x-full"></div>
-                      <div class="flex items-center lg:px-2">
-                        <div [ngClass]="{'block': exercise.attached, 'hidden': !exercise.attached}">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-white duration-700 ease-in-out transform transition-all z-40">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  <div cdkListbox cdkListboxMultiple class="flex flex-col  p-2 space-y-1 bg-[#C3DCE3] overflow-hidden rounded">
+                    <div *ngFor="let exercise of exerciseData" [cdkOption]="exercise">
+                      <div class="flex gap-1 h-10 w-full items-center">
+                        <div (click)="addSelectedExercise(exercise)" class="w-full bg-[#f5f5f5] h-full relative overflow-hidden hover:bg-gray-200 cursor-pointer p-1.5 rounded">
+                          <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all z-0 ease-out duration-700 translate-x-0 left-0 w-full h-48' : exercise.attached} " class="-translate-x-full"></div>
+                          <div class="flex items-center lg:px-2">
+                            <div [ngClass]="{'block': exercise.attached, 'hidden': !exercise.attached}">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-white duration-700 ease-in-out transform transition-all z-40">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                              </svg>
+                            </div>
+                            <span class="relative flex gap-2 items-center z-30 font-bold" (click)="audioStart(exercise.path)" [ngClass]="{'transform translate-x-1 transition-colors duration-700 ease-in-out text-white': exercise.attached, 'text-[#2B788B]': !exercise.attached}">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5V18M15 7.5V18M3 16.811V8.69c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 010 1.954l-7.108 4.061A1.125 1.125 0 013 16.811z" />
+                              </svg>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="cursor-pointer w-10 bg-[#2B788B] rounded h-full flex items-center justify-center"
+                             *ngIf="exercise.attached;"
+                             (click)="navigateToExercise(exercise)"
+                             matTooltip="Go to exercise page"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 fill-current h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
                           </svg>
                         </div>
-                        <span class="relative z-30 font-bold" (click)="audioStart(exercise.path)" [ngClass]="{'transform translate-x-1 transition-colors duration-700 ease-in-out text-white': exercise.attached, 'text-[#2B788B]': !exercise.attached}">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5V18M15 7.5V18M3 16.811V8.69c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 010 1.954l-7.108 4.061A1.125 1.125 0 013 16.811z" />
-                          </svg>
-                        </span>
-
                       </div>
                     </div>
                   </div>
-
                 </div>
                 <div *ngIf="exerciseData" class="flex justify-center items-center h-8 space-x-2">
                   <button (click)="goToPage(currentPage[selectedType] - 1, selectedType)"
@@ -180,30 +212,39 @@
                   <div class="mb-3" style="font-family: DelaGothic">
                     <label class="text-[#2B788B] font-bold text-base">Select an Exercise:</label>
                   </div>
-                  <div cdkListbox cdkListboxMultiple class="cursor-pointer w-full bg-[#C3DCE3] p-2 space-y-1 items-center justify-start lg:py-3 overflow-hidden font-medium transition-all rounded group" style="font-family: Montserrat">
-                    <div *ngFor="let exercise of exerciseData" [cdkOption]="exercise"
-                         (click)="addSelectedExercise(exercise)"
-                         class="bg-[#f5f5f5] relative overflow-hidden hover:bg-gray-200 cursor-pointer p-1.5 rounded "
-                    >
-                      <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all z-0 ease-out duration-700 translate-x-0 left-0 w-full h-48' : exercise.attached} " class="-translate-x-full"></div>
-                      <div class="flex items-center lg:px-2">
-                        <div [ngClass]="{'block': exercise.attached, 'hidden': !exercise.attached}">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-white duration-700 ease-in-out transform transition-all z-40">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
-                        </div>
-                        <div [ngClass]="{'transform translate-x-1  transition-colors duration-700 ease-in-out text-[#2B788B]': exercise.attached, 'text-white': !exercise.attached}" class="text-white font-semibold flex space-x-2 justify-items-center justify-center  items-center" style="font-family: Montserrat">
-                          <div *ngFor="let option of exercise.options" class="p-1">
+                  <div cdkListbox cdkListboxMultiple class="flex flex-col  p-2 space-y-1 bg-[#C3DCE3] overflow-hidden rounded">
+                    <div *ngFor="let exercise of exerciseData" [cdkOption]="exercise">
+                      <div class="flex gap-1 w-full items-center">
+                        <div (click)="addSelectedExercise(exercise)" class="w-full bg-[#f5f5f5] relative overflow-hidden hover:bg-gray-200 cursor-pointer p-1.5 rounded">
+                          <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all z-0 ease-out duration-700 translate-x-0 left-0 w-full h-48' : exercise.attached} " class="-translate-x-full"></div>
+                          <div class="flex items-center lg:px-2">
+                            <div [ngClass]="{'block': exercise.attached, 'hidden': !exercise.attached}">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-white duration-700 ease-in-out transform transition-all z-40">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                              </svg>
+                            </div>
+                            <div [ngClass]="{'transform translate-x-1  transition-colors duration-700 ease-in-out text-[#2B788B]': exercise.attached, 'text-white': !exercise.attached}" class="text-white font-semibold flex space-x-2 justify-items-center justify-center  items-center" style="font-family: Montserrat">
+                              <div *ngFor="let option of exercise.options" class="p-1">
                             <span class="bg-[#2B788B] rounded-lg text-center p-1 px-2" [ngClass]="{'bg-white': exercise.attached}">
                               {{option.word}}
                             </span>
+                              </div>
+                            </div>
+
                           </div>
                         </div>
-
+                        <div class="cursor-pointer w-10 bg-[#2B788B] rounded h-10 flex items-center justify-center"
+                             *ngIf="exercise.attached;"
+                             (click)="navigateToExercise(exercise)"
+                             matTooltip="Go to exercise page"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 fill-current h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                          </svg>
+                        </div>
                       </div>
                     </div>
                   </div>
-
                 </div>
                 <div *ngIf="exerciseData" class="flex justify-center items-center h-8 space-x-2">
                   <button (click)="goToPage(currentPage[selectedType] - 1, selectedType)"
@@ -232,33 +273,43 @@
               </div>
 
               <div *ngIf="selectedType === 'picture_exercise'" class="flex-col w-full justify-center justify-items-center gap-3">
-                <div class="bg-[#f5f5f5] mb-3 p-3 mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
+                <div class="bg-[#f5f5f5]  mb-3 p-3 mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
                   <div class="mb-3" style="font-family: DelaGothic">
                     <label class="text-[#2B788B] font-bold text-base">Select an Exercise:</label>
                   </div>
-                  <div cdkListbox cdkListboxMultiple class="cursor-pointer w-full bg-[#C3DCE3] p-2 space-y-1 items-center justify-start lg:py-3 overflow-hidden font-medium transition-all rounded group" style="font-family: Montserrat">
-                    <div *ngFor="let exercise of exerciseData" [cdkOption]="exercise"
-                         (click)="addSelectedExercise(exercise)"
-                         class="bg-[#f5f5f5] relative overflow-hidden hover:bg-gray-200 cursor-pointer p-1.5 rounded "
-                    >
-                      <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all z-0 ease-out duration-700 translate-x-0 left-0 w-full h-48' : exercise.attached} " class="-translate-x-full"></div>
-                      <div class="flex items-center lg:px-2">
-                        <div [ngClass]="{'block': exercise.attached, 'hidden': !exercise.attached}">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-white duration-700 ease-in-out transform transition-all z-40">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
-                        </div>
-                        <div [ngClass]="{'transform translate-x-1  transition-colors duration-700 ease-in-out text-[#2B788B]': exercise.attached, 'text-white': !exercise.attached}" class="text-white font-semibold flex space-x-2 justify-items-center justify-center  items-center" style="font-family: Montserrat">
-                          <div *ngFor="let option of exercise.options" class="p-1">
-                            <span class="bg-[#2B788B] rounded-lg text-center p-1 px-2" [ngClass]="{'bg-white': exercise.attached}">
-                              {{option.text}}
-                            </span>
+                  <div cdkListbox cdkListboxMultiple class="flex flex-col  p-2 space-y-1 bg-[#C3DCE3] overflow-hidden rounded">
+                    <div *ngFor="let exercise of exerciseData" [cdkOption]="exercise">
+                      <div class="flex gap-1 h-10 w-full items-center">
+                        <div (click)="addSelectedExercise(exercise)" class="w-full bg-[#f5f5f5] h-full relative flex items-center overflow-hidden hover:bg-gray-200 cursor-pointer p-1.5 rounded">
+                          <div [ngClass]="{'bg-[#2B788B] absolute bottom-0 transition-all z-0 ease-out duration-700 translate-x-0 left-0 w-full h-48' : exercise.attached} " class="-translate-x-full"></div>
+                          <div class="flex gap-1 justify-start items-center lg:px-2">
+                            <div [ngClass]="{'block': exercise.attached, 'hidden': !exercise.attached}">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-white duration-700 ease-in-out transform transition-all z-40">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                              </svg>
+                            </div>
+                            <div [ngClass]="{'transform translate-x-1  transition-colors duration-700 ease-in-out text-[#2B788B]': exercise.attached, 'text-white': !exercise.attached}" class="text-white font-semibold flex space-x-2 justify-items-center justify-center  items-center" style="font-family: Montserrat">
+                              <div *ngFor="let option of exercise.options" class="p-1">
+                                <span class="bg-[#2B788B] rounded-lg text-center p-1 px-2" [ngClass]="{'bg-white': exercise.attached}">
+                                  {{option.text}}
+                                </span>
+                              </div>
+                            </div>
                           </div>
                         </div>
+                        <button
+                                matTooltip="Go to exercise page"
+                                class="cursor-pointer w-10 bg-[#2B788B] rounded h-full flex items-center justify-center"
+                                *ngIf="exercise.attached;"
+                                (click)="navigateToExercise(exercise)"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 fill-current h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                          </svg>
+                        </button>
                       </div>
                     </div>
                   </div>
-
                 </div>
                 <div *ngIf="exerciseData" class="flex justify-center items-center h-8 space-x-2">
                   <button (click)="goToPage(currentPage[selectedType] - 1, selectedType)"

@@ -1,8 +1,9 @@
-<div class="m-2 p-1">
-  <p class="mb-2">Solved {{completedExercises}} from {{totalExercises}} exercises</p>
+<div class="p-1">
+  <p class="mb-4 font-medium text-sm text-[#757575]">  {{'solved_exercises_text1' | translate}}
+    {{completedExercises}}  {{'solved_exercises_text2' | translate}} {{totalExercises}} {{'solved_exercises_text3' | translate}}</p>
 
-  <div class="relative bg-gray-300 rounded-lg h-4">
-    <div [style.width]="getPercentage(completedExercises, totalExercises) + '%'" class="absolute left-0 h-full bg-green-500 rounded-lg"></div>
+  <div class="relative bg-[#E0E0E0] rounded-lg h-4">
+    <div [style.width]="getPercentage(completedExercises, totalExercises) + '%'" class="absolute left-0 h-full bg-[#2B788B] rounded-lg"></div>
   </div>
 </div>
 

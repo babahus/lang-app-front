@@ -1,10 +1,10 @@
 <section class="p-2 flex flex-col h-full justify-between">
-  <p class="text-center w-full text-lg text-[#2B788B] pt-2" style="font-family: DelaGothic">My Exercises</p>
+  <p class="text-center w-full text-lg text-[#2B788B] pt-2" style="font-family: DelaGothic">{{'my_exercises_title' | translate}}</p>
   <ng-container *ngFor="let exercise of attachedExercises; let i = index" class="w-full">
     <div *ngIf="i < 3" class="m-2 p-2 bg-[#F6F5F4] rounded-xl mb-3 shadow-md hover:bg-[#2B788B]/10">
       <div [ngClass]="{'cursor-pointer' : !isExerciseCompleted(exercise['id'])}"  (click)="navigateToExercise(exercise)">
         <div class="flex justify-between">
-          <p class="text-sm text-gray-600 font-semibold mb-1" style="font-family: Montserrat">Exercise №{{ exercise['id'] }}</p>
+          <p class="text-sm text-gray-600 font-semibold mb-1" style="font-family: Montserrat">{{'exercise_number' | translate}} {{ exercise['id'] }}</p>
           <div class="">
             <!-- Checkmark SVG for completed exercises -->
             <svg *ngIf="isExerciseCompleted(exercise['id'])" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check-square-fill" viewBox="0 0 16 16">
@@ -18,7 +18,7 @@
         </div>
 
         <div *ngIf="exercise['type'] === 'compile_phrase'" class="flex items-center p-2 bg-[#C3DCE3] rounded">
-          <span class="text-sm font-semibold text-[#2B788B] mr-2">Phrase:</span>
+          <span class="text-sm font-semibold text-[#2B788B] mr-2">{{'phrase_label' | translate}}</span>
           <ng-container *ngIf="!isExerciseCompleted(exercise['id']); else completed">
                             <span class="font-medium text-center items-center">
                               **** ***** *****
@@ -30,25 +30,25 @@
         </div>
 
         <div *ngIf="exercise['type'] === 'sentence'" class="flex items-center p-2 bg-[#C3DCE3] rounded">
-          <span class="text-sm font-semibold text-[#2B788B] mr-2">Sentence:</span>
+          <span class="text-sm font-semibold text-[#2B788B] mr-2">{{ 'sentence_label' | translate }}</span>
           <span class="font-medium text-center items-center">{{ exercise['data']['sentence_with_gaps'] }}</span>
         </div>
 
         <div *ngIf="exercise['type'] === 'pair_exercise'" class="flex items-center p-2 bg-[#C3DCE3] rounded">
-          <span class="text-sm  font-semibold text-[#2B788B] mr-2">Choose Pair For Words</span>
+          <span class="text-sm  font-semibold text-[#2B788B] mr-2"> {{ 'pair_exercise_label' | translate }}</span>
         </div>
 
         <div *ngIf="exercise['type'] === 'audit'" class="flex items-center p-2 bg-[#C3DCE3] rounded">
-          <span class="text-sm font-semibold text-[#2B788B] mr-2">Listen and translate Phrase</span>
+          <span class="text-sm font-semibold text-[#2B788B] mr-2">{{ 'audit_label' | translate }}</span>
         </div>
 
         <div *ngIf="exercise['type'] === 'picture_exercise'" class="flex items-center p-2 bg-[#C3DCE3] rounded">
-          <span class="text-sm font-semibold text-[#2B788B] mr-2">Look at the picture and choose an answer option.</span>
+          <span class="text-sm font-semibold text-[#2B788B] mr-2">{{ 'picture_exercise_label' | translate }}</span>
         </div>
       </div>
     </div>
   </ng-container>
   <div class="flex justify-center items-center" style="font-family: Montserrat">
-    <button type="button" class="rounded-full bg-[#2B788B] p-2 px-4 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Show more</button>
+    <button routerLink="/exercises/attach" type="button" class="rounded-full bg-[#2B788B] p-2 px-4 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">{{'show_more_button' | translate}}</button>
   </div>
 </section>

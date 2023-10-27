@@ -7,21 +7,21 @@
                     <div>
                         <div class="mb-2">
                             <span class="text-sm text-gray-800 font-semibold" style="font-family: DelaGothic;">
-                                List  completed of exercises
+                                {{'list_completed_exercises' | translate}}
                             </span>
                         </div>
                         <div *ngIf="exerciseData.length === 0">
                             <span class="text-sm text-[#757575] font-semibold" style="font-family: Montserrat">
-                                No exercises of this type
+                                {{'no_exercises_of_this_type' | translate}}
                             </span>
                         </div>
                         <div *ngFor="let exercise of exerciseData, let i = index" class="space-y-2">
                             <div *ngIf="exercise" class="mb-2">
                                 <div *ngIf="selectedExerciseType === 'compile_phrase'">
-                                    <span  class="text-xs md:text-sm text-gray-800 font-semibold" style="font-family: Montserrat">Compile Phrase {{exercise.id}}</span>
+                                    <span  class="text-xs md:text-sm text-gray-800 font-semibold" style="font-family: Montserrat">{{'compile_phrase' | translate}} {{exercise.id}}</span>
                                     <div *ngIf="exercise.progress_exercises.length === 0" class="bg-[#2B788B] mt-1 rounded-lg p-1">
                                         <span class="text-xs md:text-sm text-white font-semibold" style="font-family: Montserrat">
-                                            No exercises completed
+                                            {{'no_exercises_completed' | translate}}
                                         </span>
                                     </div>
                                     <div *ngIf="exercise.progress_exercises.length > 0" class="space-y-2 bg-[#2B788B] mt-1 rounded-lg p-2">
@@ -42,10 +42,10 @@
                                     </div>
                                 </div>
                                 <div *ngIf="selectedExerciseType === 'audit'">
-                                    <span  class="text-xs md:text-sm text-gray-800 font-semibold" style="font-family: Montserrat">Phonetic Transcript {{exercise.id}}</span>
+                                    <span  class="text-xs md:text-sm text-gray-800 font-semibold" style="font-family: Montserrat">{{'phonetic_transcript' | translate}} {{exercise.id}}</span>
                                     <div *ngIf="exercise.progress_exercises.length === 0" class="bg-[#2B788B] mt-1 rounded-lg p-1">
                                         <span class="text-xs md:text-sm text-white font-semibold" style="font-family: Montserrat">
-                                            No exercises completed
+                                            {{'no_exercises_completed' | translate}}
                                         </span>
                                     </div>
                                     <div *ngIf="exercise.progress_exercises.length > 0" class="space-y-2 bg-[#2B788B] mt-1 rounded-lg p-2">
@@ -66,10 +66,10 @@
                                     </div>
                                 </div>
                                 <div *ngIf="selectedExerciseType === 'pair_exercise'">
-                                    <span  class="text-xs md:text-sm text-gray-800 font-semibold" style="font-family: Montserrat">Pairs of Meaning {{exercise.id}}</span>
+                                    <span  class="text-xs md:text-sm text-gray-800 font-semibold" style="font-family: Montserrat">{{'pairs_of_meaning' | translate}} {{exercise.id}}</span>
                                     <div *ngIf="exercise.progress_exercises.length === 0" class="bg-[#2B788B] mt-1 rounded-lg p-1">
                                         <span class="text-xs md:text-sm text-white font-semibold" style="font-family: Montserrat">
-                                            No exercises completed
+                                            {{'no_exercises_completed' | translate}}
                                         </span>
                                     </div>
                                     <div *ngIf="exercise.progress_exercises.length > 0" class="space-y-2 bg-[#2B788B] mt-1 rounded-lg p-2">
@@ -90,10 +90,10 @@
                                     </div>
                                 </div>
                                 <div *ngIf="selectedExerciseType === 'picture_exercise'">
-                                    <span  class="text-xs md:text-sm text-gray-800 font-semibold" style="font-family: Montserrat">Picture Association {{exercise.id}}</span>
+                                    <span  class="text-xs md:text-sm text-gray-800 font-semibold" style="font-family: Montserrat">{{'picture_association' | translate}} {{exercise.id}}</span>
                                     <div *ngIf="exercise.progress_exercises.length === 0" class="bg-[#2B788B] mt-1 rounded-lg p-1">
                                         <span class="text-xs md:text-sm text-white font-semibold" style="font-family: Montserrat">
-                                            No exercises completed
+                                            {{'no_exercises_completed' | translate}}
                                         </span>
                                     </div>
                                     <div *ngIf="exercise.progress_exercises.length > 0" class="space-y-2 bg-[#2B788B] mt-1 rounded-lg p-2">
@@ -114,10 +114,10 @@
                                     </div>
                                 </div>
                                 <div *ngIf="selectedExerciseType === 'sentence'" class="bg-[#C3DCE3] rounded-lg p-2 mb-2">
-                                    <span  class="text-xs md:text-sm text-gray-800 font-semibold" style="font-family: Montserrat">Missing links {{exercise.id}}</span>
+                                    <span  class="text-xs md:text-sm text-gray-800 font-semibold" style="font-family: Montserrat">{{'missing_links' | translate}} {{exercise.id}}</span>
                                     <div *ngIf="exercise.progress_exercises.length === 0" class="bg-[#2B788B] mt-1 rounded-lg p-1">
                                         <span class="text-xs md:text-sm text-white font-semibold" style="font-family: Montserrat">
-                                            No exercises completed
+                                            {{'no_exercises_completed' | translate}}
                                         </span>
                                     </div>
                                     <div *ngIf="exercise.progress_exercises.length > 0" class="space-y-2 bg-[#2B788B] mt-1 rounded-lg p-2">
@@ -144,7 +144,7 @@
                         <button type="button" class="bg-[#945069] text-sm text-white font-semibold p-2 px-4 rounded-full"
                                 (click)="showExerciseModal = false" style="font-family: Montserrat"
                         >
-                            Close
+                            {{'close' | translate}}
                         </button>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
     <!--   end of the modal window -->
     <div class="block md:flex gap-4 lg:min-h-full w-full md:justify-center md:p-3 text-center items-center sm:p-0">
         <div class="relative transform overflow-hidden text-left  transition-all sm:w-full">
-            <h1 style="font-family: DelaGothic" class="px-2">My Courses</h1>
+            <h1 style="font-family: DelaGothic" class="px-2">{{'my_courses_title' | translate}}</h1>
             <div class="p-2 bg-[#C3DCE3] rounded-3xl pb-8 relative grid-cols-1 lg:flex items-start gap-8">
                 <div class="text-start space-y-2  p-2 lg:p-5 w-full grid grid-cols-1" style="font-family: Montserrat">
                     <ng-container *ngFor="let course of attachedCourses; let i = index">
@@ -165,7 +165,7 @@
                                     <span class="font-semibold text-base lg:text-lg" style="font-family: Montserrat">${{ course.price }}</span>
                                 </a>
                                 <div class="hidden group-hover:flex items-center gap-2 absolute z-10 bg-[#2B788B] text-white font-semibold  p-2 uppercase text-xs rounded shadow-md mt-2" style="font-family: Montserrat">
-                                    <span>go to course</span>
+                                    <span>{{'go_to_course' | translate}}</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="fill-current w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
                                     </svg>
@@ -186,7 +186,7 @@
                             <div *ngIf="course.course_stages.length === 0" class="pl-4 ">
                                 <div class="bg-[#f5f5f5] rounded-lg p-1.5">
                                     <span class="text-xs md:text-sm text-[#2B788B] font-semibold" style="font-family: Montserrat">
-                                    You do not have stages for this course. Click on the link to the current course where you will be able to add new stages.
+                                    {{'you_do_not_have_stages' | translate}}
                                 </span>
                                 </div>
                             </div>
@@ -210,11 +210,11 @@
                                 </div>
                                 <div class="pl-8">
                                     <div [ngClass]="{'hidden': !showExerciseTypes[stage.id], 'block': showExerciseTypes[stage.id]}" class=" p-2 grid grid-cols-1 md:grid-cols-2 gap-2">
-                                        <button (click)="selectExerciseType('compile_phrase', stage)" class="bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">Compile Phrase</button>
-                                        <button (click)="selectExerciseType('audit', stage)" class="bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">Phonetic Transcript</button>
-                                        <button (click)="selectExerciseType('pair_exercise', stage)" class="bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">Pairs of Meaning</button>
-                                        <button (click)="selectExerciseType('picture_exercise', stage)" class="bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">Picture Association</button>
-                                        <button (click)="selectExerciseType('sentence', stage)" class="bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">Missing links</button>
+                                        <button (click)="selectExerciseType('compile_phrase', stage)" class="bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">{{'compile_phrase' | translate}}</button>
+                                        <button (click)="selectExerciseType('audit', stage)" class="bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">{{'phonetic_transcript' | translate}}</button>
+                                        <button (click)="selectExerciseType('pair_exercise', stage)" class="bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">{{'pairs_of_meaning' | translate}}</button>
+                                        <button (click)="selectExerciseType('picture_exercise', stage)" class="bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">{{'picture_association' | translate}}</button>
+                                        <button (click)="selectExerciseType('sentence', stage)" class="bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">{{'missing_links' | translate}}</button>
                                     </div>
                                 </div>
                             </div>
