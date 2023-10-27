@@ -223,6 +223,7 @@ export class ExerciseService extends BaseService
                   type: type,
                   additional_data: jsonString,
                 }).pipe(catchError((error) => {
+                this.handleError(error, sentenceForm);
                 reject(error);
                 return throwError(error);
             })).subscribe((responseData: any) => {

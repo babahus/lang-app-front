@@ -14,9 +14,6 @@
             <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
               <div class="example-box" *ngFor="let word of this.compilePhraseForm.get('data')?.value" cdkDrag>{{word}}</div>
             </div>
-            <div class="mt-2 error" *ngIf="compilePhraseForm.errors">
-              {{compilePhraseForm.errors}}
-            </div>
           </div>
         </div>
         <div class="flex justify-end">
@@ -26,6 +23,17 @@
             Answer
           </button>
         </div>
+        <div *ngIf="compilePhraseForm.getError('data')" class="pt-2">
+          <p class="mt-2 text-center font-medium text-[#945069] text-xs">
+            {{compilePhraseForm.getError('data')}}
+          </p>
+        </div>
+        <div *ngIf="compilePhraseForm.getError('backend')" class="pt-2">
+          <p class="mt-2 text-center font-medium text-[#945069] text-xs">
+            {{compilePhraseForm.getError('backend')}}
+          </p>
+        </div>
+
       </form>
     </div>
   </div>

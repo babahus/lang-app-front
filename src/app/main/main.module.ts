@@ -66,8 +66,8 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-      path: 'login/facebook/callback',
-      component: LoginComponent,
+    path: 'login/facebook/callback',
+    component: LoginComponent,
   },
 
   { path : 'exercises-create', component : ExercisesCreateComponent, canActivate : [AuthGuard, roleGuard], data: { requiredRole: 'Teacher' }},
