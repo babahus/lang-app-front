@@ -192,6 +192,7 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
     try {
       await this.stageService.stageCreate(this.stageCreateForm, this.courseData.id);
       this.success('You have successfully created this stage');
+      this.courseData = await this.courseService.getCourseDetails(String(this.courseData.id));
       this.stageCreateForm.reset();
       this.showMenuCreateStage = false;
     } catch (error) {

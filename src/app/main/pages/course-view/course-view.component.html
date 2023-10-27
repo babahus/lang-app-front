@@ -402,7 +402,8 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
                 </svg>
               </button>
-              <div class="fixed top-0 lg:top-1/2 lg:-translate-y-1/2 left-1/2 transform -translate-x-1/2 bg-white border border-[#2B788B] rounded-lg shadow-lg z-40 w-[90%] lg:w-2/5 overflow-y-auto" *ngIf="isCardInfoVisible">
+              <div (appClickOutside)="toggleCardVisibility()" [ngClass]="{'hidden' : !isCardInfoVisible}"  class="fixed inset-0 transition-opacity z-10"></div>
+              <div class="modal fixed top-0 lg:top-1/2 lg:-translate-y-1/2 left-1/2 transform -translate-x-1/2 bg-white border border-[#2B788B] rounded-lg shadow-lg z-40 w-[90%] lg:w-2/5 overflow-y-auto" *ngIf="isCardInfoVisible">
                 <div class="p-4 relative">
                   <div class="absolute top-1 right-1">
                     <button type="button" (click)="toggleCardVisibility()" class="bg-[#945069] hover:opacity-90 text-white p-1 rounded-full">
@@ -411,7 +412,7 @@
                       </svg>
                     </button>
                   </div>
-                  <div class='text-sm'  style="font-family: Montserrat">
+                  <div class='text-sm' style="font-family: Montserrat">
                     <ul class="lg:px-4 list-disc text-xs list-inside">
                       <li class="flex flex-col">
                         <span class="text-xs font-medium text-gray-900">
@@ -867,7 +868,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
               </svg>
             </button>
-            <div class="fixed top-0 lg:top-1/2 lg:-translate-y-1/2 left-1/2 transform -translate-x-1/2 bg-white border border-[#2B788B] rounded-lg shadow-lg z-40 w-[90%] lg:w-2/5 overflow-y-auto" *ngIf="isCardInfoVisible">
+            <div (appClickOutside)="toggleCardVisibility()" [ngClass]="{'hidden' : !isCardInfoVisible}"  class="fixed inset-0 transition-opacity z-10"></div>
+            <div class="modal fixed top-0 lg:top-1/2 lg:-translate-y-1/2 left-1/2 transform -translate-x-1/2 bg-white border border-[#2B788B] rounded-lg shadow-lg z-40 w-[90%] lg:w-2/5 overflow-y-auto" *ngIf="isCardInfoVisible">
               <div class="p-4 relative">
                 <div class="absolute top-1 right-1">
                   <button type="button" (click)="toggleCardVisibility()" class="bg-[#945069] hover:opacity-90 text-white p-1 rounded-full">
