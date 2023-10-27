@@ -3,7 +3,7 @@ import {BaseService} from "./base-service/base.service";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UntypedFormGroup, ValidationErrors} from "@angular/forms";
-import {BehaviorSubject, catchError, combineLatest, throwError} from "rxjs";
+import {BehaviorSubject, catchError, combineLatest, Observable, throwError} from "rxjs";
 import * as fromSelectors from '../selectors/role-selector';
 import {Store} from "@ngrx/store";
 
@@ -54,6 +54,10 @@ export class ProfileService extends BaseService{
         resolve(data.data);
       });
     });
+  }
+
+  public getCurrentUserRole(): Observable<string | undefined> {
+    return this.currentUserRole.asObservable();
   }
 
   sendEmailVerification(): Promise<any>{

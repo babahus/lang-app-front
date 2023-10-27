@@ -49,6 +49,7 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
 import { AttachExerciseComponent } from './pages/attach-exercise/attach-exercise.component';
 import {ClickOutsideDirective} from "../core/directives/click-outside.directive";
 import { CoursesTeacherCardComponent } from './components/dashboard-teacher/courses-teacher-card/courses-teacher-card.component';
+import {roleGuard} from "../core/guards/role.guard";
 
 
 
@@ -69,8 +70,8 @@ const routes: Routes = [
       component: LoginComponent,
   },
 
-  { path : 'exercises-create', component : ExercisesCreateComponent, canActivate : [AuthGuard]},
-  { path : 'courses-create', component : CourseCreateComponent, canActivate : [AuthGuard]},
+  { path : 'exercises-create', component : ExercisesCreateComponent, canActivate : [AuthGuard, roleGuard], data: { requiredRole: 'Teacher' }},
+  { path : 'courses-create', component : CourseCreateComponent, canActivate : [AuthGuard, roleGuard], data: { requiredRole: 'Teacher' }},
   { path : 'course/:id', component : CourseViewComponent, canActivate : [AuthGuard,CanAccessCourseGuard]},
 
   { path : 'dashboard', component : DashboardComponent, canActivate : [AuthGuard]},
@@ -83,7 +84,7 @@ const routes: Routes = [
   { path : 'exercises/pair_exercise/:id', component : PairComponent, canActivate : [AuthGuard]},
   { path : 'exercises/picture_exercise/:id', component : PictureComponent, canActivate : [AuthGuard]},
   { path : 'exercises/sentence/:id', component : SentenceComponent, canActivate : [AuthGuard]},
-  { path : 'exercises/attach', component : AttachExerciseComponent, canActivate : [AuthGuard]},
+  { path : 'exercises/attach', component : AttachExerciseComponent, canActivate : [AuthGuard, roleGuard], data: { requiredRole: 'User' }},
   {
     path : '**', component: NotFoundComponent
   }
