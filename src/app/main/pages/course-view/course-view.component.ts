@@ -433,6 +433,7 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
       await this.stageService.deleteStage(this.selectedStage.id);
       this.selectedStage = [];
       this.modalDeleteStage = false;
+      this.courseData = await this.courseService.getCourseDetails(String(this.courseData.id));
       Swal.fire({
         title: 'Success',
         text: 'Successfully delete stage',
