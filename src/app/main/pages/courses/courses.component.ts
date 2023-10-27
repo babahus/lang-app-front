@@ -162,7 +162,7 @@ export class CoursesComponent{
     }).catch((error) => {
       Swal.fire({
         title: 'Access Denied',
-        text: 'Curse is already detached',
+        text: (error && error.error && error.error.data) ? error.error.data : "You don't allow to do this action",
         icon: 'error',
         showCancelButton: true,
         cancelButtonText: 'Cancel',
