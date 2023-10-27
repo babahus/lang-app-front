@@ -181,6 +181,7 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
     try {
       await this.courseService.courseEdit(this.courseEditForm, this.courseData.id);
       this.success('You have successfully changed this course');
+      this.courseData = await this.courseService.getCourseDetails(String(this.courseData.id));
       this.courseEditForm.reset();
       this.showMenuEditForm = false;
     } catch (error) {
