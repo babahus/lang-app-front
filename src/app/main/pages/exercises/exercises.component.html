@@ -1,108 +1,108 @@
-<section class="md:min-h-screen bg-[#C3DCE3] w-full flex items-center justify-center p-3 lg:gap-12 lg:px-[10%] ">
-  <div class="w-full rounded-lg md:p-4">
-    <div class="">
+<!--<section class="md:min-h-screen bg-[#C3DCE3] w-full flex items-center justify-center p-3 lg:gap-12 lg:px-[10%] ">-->
+<!--  <div class="w-full rounded-lg md:p-4">-->
+<!--    <div class="">-->
 
-      <div class="block md:flex gap-4 lg:min-h-full w-full md:justify-center md:p-4 text-center items-center sm:p-0">
-        <div class="relative transform overflow-hidden rounded-3xl bg-white text-left shadow-xl transition-all p-2 sm:my-8  sm:w-full md:max-w-[70%]">
-          <h1 style="font-family: DelaGothic" class="px-2">Attach Exercise</h1>
-          <div class="p-2 bg-[#C3DCE3] rounded-3xl p relative grid-cols-1 lg:flex items-start gap-8">
-            <div class="text-start p-2 lg:p-5 w-full lg-w-1/3 grid grid-cols-1" style="font-family: Montserrat">
-              <div *ngFor="let type of exerciseTypes" >
-                <button (click)="fetchExerciseData(type)"
-                        [ngClass]="{'bg-green-200 ': type === selectedType}"
-                        class="mb-3 bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">
-                  <span *ngIf="type == 'compile_phrase'">Compile Phrase</span>
-                  <span *ngIf="type == 'audit'">Phonetic Transcript</span>
-                  <span *ngIf="type == 'pair_exercise'">Pairs of Meaning</span>
-                  <span *ngIf="type == 'picture_exercise'">Picture Association</span>
-                  <span *ngIf="type == 'sentence'">Missing links</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!--<div ui-view="" class="ui-view-main ng-scope">&lt;!&ndash; Fixed navbar &ndash;&gt;-->
-
-<!--  <div class="parallax bg-green-uniq page-section ng-scope">-->
-<!--    <div class="container parallax-layer" data-opacity="true" style="transform: translate3d(0px, 0px, 0px); opacity: 1;">-->
-<!--      <div class="media v-middle">-->
-<!--        <div class="media-body">-->
-<!--          <h1 class="text-display-2 text-white margin-none">Library</h1>-->
-<!--          <p class="text-light lead">Browse through thousands of lessons.</p>-->
-<!--        </div>-->
-<!--        <div class="media-right">-->
-<!--          <div class="width-100 text-right">-->
-<!--            <div class="btn-group">-->
-<!--              <a ng-class="{ 'btn-grey-900': $state.is('website-courses.grid'), 'btn-white': !$state.is('website-courses.grid') }" class="btn btn-white" ui-sref="website-courses.grid" href="#/website-courses/grid"><i class="fa fa-th"></i></a>-->
-<!--              <a ng-class="{ 'btn-grey-900': $state.is('website-courses.list'), 'btn-white': !$state.is('website-courses.list') }" class="btn btn-white btn-grey-900" ui-sref="website-courses.list" href="#/website-courses/list"><i class="fa fa-list"></i></a>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  <div class="container ng-scope">-->
-
-<!--    <div class="page-section">-->
-<!--      <div class="row">-->
-
-<!--        <div *ngIf="exercises != undefined" class="col-md-9">-->
-
-<!--          <div *ngFor="let exercise of exercises" class="panel panel-default paper-shadow" data-z="0.5">-->
-<!--            <app-exercise-card [exercise]="exercise" [exerciseType]="this.exerciseType"></app-exercise-card>-->
-<!--          </div>-->
-
-<!--          <ul class="pagination margin-top-none">-->
-<!--            <li class="disabled"><a href="#">«</a></li>-->
-<!--            <li class="active"><a href="#">1</a></li>-->
-<!--            <li><a href="#">2</a></li>-->
-<!--            <li><a href="#">3</a></li>-->
-<!--            <li><a href="#">»</a></li>-->
-<!--          </ul>-->
-
-<!--          <br>-->
-<!--          <br>-->
-
-<!--        </div>-->
-<!--        <div class="col-md-3">-->
-
-<!--          <div class="panel panel-default" data-toggle="panel-collapse" data-open="true">-->
-<!--            <div (click)="toggleMenu()"-->
-<!--                 [class.collapsed]="isToggle" class="panel-heading panel-collapse-trigger" data-toggle="collapse" data-target="#e6a082d3-675f-b23f-c13a-7a45640dac9d" aria-expanded="true">-->
-<!--              <h4 class="panel-title">Category</h4>-->
-<!--              <div class="panel-icon">-->
-<!--                <i *ngIf="isToggle" class="bi bi-chevron-right"></i>-->
-<!--                <i *ngIf="!isToggle" class="bi bi-chevron-down"></i>-->
+<!--      <div class="block md:flex gap-4 lg:min-h-full w-full md:justify-center md:p-4 text-center items-center sm:p-0">-->
+<!--        <div class="relative transform overflow-hidden rounded-3xl bg-white text-left shadow-xl transition-all p-2 sm:my-8  sm:w-full md:max-w-[70%]">-->
+<!--          <h1 style="font-family: DelaGothic" class="px-2">Attach Exercise</h1>-->
+<!--          <div class="p-2 bg-[#C3DCE3] rounded-3xl p relative grid-cols-1 lg:flex items-start gap-8">-->
+<!--            <div class="text-start p-2 lg:p-5 w-full lg-w-1/3 grid grid-cols-1" style="font-family: Montserrat">-->
+<!--              <div *ngFor="let type of exerciseTypes" >-->
+<!--                <button (click)="fetchExerciseData(type)"-->
+<!--                        [ngClass]="{'bg-green-200 ': type === selectedType}"-->
+<!--                        class="mb-3 bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">-->
+<!--                  <span *ngIf="type == 'compile_phrase'">Compile Phrase</span>-->
+<!--                  <span *ngIf="type == 'audit'">Phonetic Transcript</span>-->
+<!--                  <span *ngIf="type == 'pair_exercise'">Pairs of Meaning</span>-->
+<!--                  <span *ngIf="type == 'picture_exercise'">Picture Association</span>-->
+<!--                  <span *ngIf="type == 'sentence'">Missing links</span>-->
+<!--                </button>-->
 <!--              </div>-->
 <!--            </div>-->
-
-<!--            <div-->
-<!--                 [attr.aria-expanded]="!isToggle"-->
-<!--                 id="e6a082d3-675f-b23f-c13a-7a45640dac9d" class="collapse in">-->
-<!--              <div class="panel-body list-group">-->
-<!--              <ul *ngIf="exercises != undefined" class="list-group">-->
-<!--                <li class="list-group-item" [class.active]="this.exerciseType == 'compile_phrase'">-->
-<!--                  <span class="badge pull-right">{{this.compilePhraseExercises.length}}</span>-->
-<!--                  <a class="list-group-link" (click)="getExercises('compile_phrase')">Compile Phrase</a>-->
-<!--                </li>-->
-<!--                <li class="list-group-item" [class.active]="this.exerciseType == 'audit'">-->
-<!--                  <span class="badge pull-right">{{this.auditExercise.length}}</span>-->
-<!--                  <a class="list-group-link" (click)="getExercises('audit')">Audit</a>-->
-<!--                </li>-->
-<!--              </ul>-->
-<!--            </div>-->
-<!--            </div>-->
 <!--          </div>-->
-
 <!--        </div>-->
-
 <!--      </div>-->
 <!--    </div>-->
-
 <!--  </div>-->
-<!--</div>-->
+<!--</section>-->
+<!--&lt;!&ndash;<div ui-view="" class="ui-view-main ng-scope">&lt;!&ndash; Fixed navbar &ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;  <div class="parallax bg-green-uniq page-section ng-scope">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="container parallax-layer" data-opacity="true" style="transform: translate3d(0px, 0px, 0px); opacity: 1;">&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="media v-middle">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="media-body">&ndash;&gt;-->
+<!--&lt;!&ndash;          <h1 class="text-display-2 text-white margin-none">Library</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;          <p class="text-light lead">Browse through thousands of lessons.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="media-right">&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class="width-100 text-right">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="btn-group">&ndash;&gt;-->
+<!--&lt;!&ndash;              <a ng-class="{ 'btn-grey-900': $state.is('website-courses.grid'), 'btn-white': !$state.is('website-courses.grid') }" class="btn btn-white" ui-sref="website-courses.grid" href="#/website-courses/grid"><i class="fa fa-th"></i></a>&ndash;&gt;-->
+<!--&lt;!&ndash;              <a ng-class="{ 'btn-grey-900': $state.is('website-courses.list'), 'btn-white': !$state.is('website-courses.list') }" class="btn btn-white btn-grey-900" ui-sref="website-courses.list" href="#/website-courses/list"><i class="fa fa-list"></i></a>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;  <div class="container ng-scope">&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="page-section">&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="row">&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <div *ngIf="exercises != undefined" class="col-md-9">&ndash;&gt;-->
+
+<!--&lt;!&ndash;          <div *ngFor="let exercise of exercises" class="panel panel-default paper-shadow" data-z="0.5">&ndash;&gt;-->
+<!--&lt;!&ndash;            <app-exercise-card [exercise]="exercise" [exerciseType]="this.exerciseType"></app-exercise-card>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;          <ul class="pagination margin-top-none">&ndash;&gt;-->
+<!--&lt;!&ndash;            <li class="disabled"><a href="#">«</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li class="active"><a href="#">1</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li><a href="#">2</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li><a href="#">3</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li><a href="#">»</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;          </ul>&ndash;&gt;-->
+
+<!--&lt;!&ndash;          <br>&ndash;&gt;-->
+<!--&lt;!&ndash;          <br>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="col-md-3">&ndash;&gt;-->
+
+<!--&lt;!&ndash;          <div class="panel panel-default" data-toggle="panel-collapse" data-open="true">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div (click)="toggleMenu()"&ndash;&gt;-->
+<!--&lt;!&ndash;                 [class.collapsed]="isToggle" class="panel-heading panel-collapse-trigger" data-toggle="collapse" data-target="#e6a082d3-675f-b23f-c13a-7a45640dac9d" aria-expanded="true">&ndash;&gt;-->
+<!--&lt;!&ndash;              <h4 class="panel-title">Category</h4>&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="panel-icon">&ndash;&gt;-->
+<!--&lt;!&ndash;                <i *ngIf="isToggle" class="bi bi-chevron-right"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                <i *ngIf="!isToggle" class="bi bi-chevron-down"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <div&ndash;&gt;-->
+<!--&lt;!&ndash;                 [attr.aria-expanded]="!isToggle"&ndash;&gt;-->
+<!--&lt;!&ndash;                 id="e6a082d3-675f-b23f-c13a-7a45640dac9d" class="collapse in">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="panel-body list-group">&ndash;&gt;-->
+<!--&lt;!&ndash;              <ul *ngIf="exercises != undefined" class="list-group">&ndash;&gt;-->
+<!--&lt;!&ndash;                <li class="list-group-item" [class.active]="this.exerciseType == 'compile_phrase'">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <span class="badge pull-right">{{this.compilePhraseExercises.length}}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <a class="list-group-link" (click)="getExercises('compile_phrase')">Compile Phrase</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                <li class="list-group-item" [class.active]="this.exerciseType == 'audit'">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <span class="badge pull-right">{{this.auditExercise.length}}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <a class="list-group-link" (click)="getExercises('audit')">Audit</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                </li>&ndash;&gt;-->
+<!--&lt;!&ndash;              </ul>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->

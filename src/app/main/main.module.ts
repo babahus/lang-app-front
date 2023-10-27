@@ -79,8 +79,8 @@ const routes: Routes = [
   { path : 'exercises-my', component : ExercisesMyComponent, canActivate : [AuthGuard]},
   { path : 'exercises/compile_phrase/:id', component : CompilePhraseComponent, canActivate : [AuthGuard]},
   { path : 'exercises/audit/:id', component : AuditComponent, canActivate : [AuthGuard]},
-  { path : 'exercises/pair/:id', component : PairComponent, canActivate : [AuthGuard]},
-  { path : 'exercises/picture/:id', component : PictureComponent, canActivate : [AuthGuard]},
+  { path : 'exercises/pair_exercise/:id', component : PairComponent, canActivate : [AuthGuard]},
+  { path : 'exercises/picture_exercise/:id', component : PictureComponent, canActivate : [AuthGuard]},
   { path : 'exercises/sentence/:id', component : SentenceComponent, canActivate : [AuthGuard]},
   { path : 'exercises/attach', component : AttachExerciseComponent, canActivate : [AuthGuard]},
   {

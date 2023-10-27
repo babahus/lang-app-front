@@ -27,23 +27,7 @@ export class ExercisesComponent implements OnInit{
 
   }
 
-  async fetchExerciseData(type: string) {
-    try {
-      this.selectedType = type;
-      const responseAttachedExercise = await this.exerciseService.getAttachedExerciseType(type);
-      const responseExercise = await this.exerciseService.getExerciseData(type, this.currentPage[this.selectedType]);
-      const combinedExercises = responseExercise.data.data.map((exercise: Exercise) => ({
-        ...exercise,
-        attached: responseAttachedExercise.data.data.some((studentExercise: Exercise) => studentExercise.id === exercise.id),
-      }));
 
-      this.exerciseData = combinedExercises;
-      this.currentPage[this.selectedType] = responseExercise.data.pagination.current_page;
-      this.totalPages = responseExercise.data.pagination.last_page;
-    } catch (error) {
-      console.log(error);
-    }
-  }
   // override async ngOnInit() {
   //   this.auditExercise = await this.exerciseService.getExercisesByType('audit');
   //   this.exercises = await this.exerciseService.getExercisesByType('compile_phrase');

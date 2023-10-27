@@ -1,14 +1,14 @@
 <section class="p-2 px-4 flex flex-col h-full">
   <div>
-    <p class="text-center w-full text-lg text-[#2B788B] pt-2" style="font-family: DelaGothic">My Progress</p>
+    <p class="text-center w-full text-lg text-[#2B788B] pt-2" style="font-family: DelaGothic">{{'my_progress_title' | translate}}</p>
   </div>
   <div class="space-y-6 pt-2">
-    <div *ngIf="this.countProgressExercises" class="bg-[#F6F5F4] rounded-xl ">
-      <p class="text-center text-[#2B788B] text-base mb-1" style="font-family: DelaGothic">Progress of Course Exercises</p>
+    <div *ngIf="this.countProgressExercises" class="bg-[#F6F5F4] rounded-xl p-2">
+      <p class="text-center text-[#2B788B] text-base mb-1" style="font-family: DelaGothic">{{'progress_course_text' | translate}}</p>
       <app-progress-bar [totalExercises]="this.countProgressExercises.countExercisesWithCourse" [completedExercises]="this.countProgressExercises.countSolvedExercisesWithCourse"></app-progress-bar>
     </div>
-    <div *ngIf="this.countProgressExercises" class="bg-[#F6F5F4] rounded-xl">
-      <p class="text-center text-[#2B788B] text-base" style="font-family: DelaGothic">Progress of Non-Course Exercises</p>
+    <div *ngIf="this.countProgressExercises" class="bg-[#F6F5F4] rounded-xl p-2">
+      <p class="text-center text-[#2B788B] text-base" style="font-family: DelaGothic">{{'progress_non_course_text' | translate}}</p>
       <app-progress-bar [totalExercises]="this.countProgressExercises.countExercisesWithoutCourse" [completedExercises]="this.countProgressExercises.countSolvedExercisesWithoutCourse"></app-progress-bar>
     </div>
   </div>

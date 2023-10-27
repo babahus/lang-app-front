@@ -10,17 +10,17 @@
             <div class="sm:flex sm:items-start">
               <div class="mt-3 text-left sm:ml-4 sm:mt-0 sm:text-left">
                 <h3 style="font-family: DelaGothic" class="text-base font-semibold leading-6 text-gray-900">
-                  Deleting a course: WARNING!
+                  {{'deleteCourseWarningTitle' | translate}}
                 </h3>
                 <div class="mt-2">
-                  <p style="font-family: Montserrat" class="text-sm text-gray-500">You are about to delete the course. Please make sure you have a backup of all the necessary data.</p>
+                  <p style="font-family: Montserrat" class="text-sm text-gray-500">{{'deleteCourseWarningMessage' | translate}}</p>
                 </div>
               </div>
             </div>
           </div>
           <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-            <button type="button" (click)="deleteCourse()" class="inline-flex w-full justify-center rounded-md bg-[#945069] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:ml-3 sm:w-auto">Delete</button>
-            <button (click)="showDeleteCourseMenu()"  type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+            <button type="button" (click)="deleteCourse()" class="inline-flex w-full justify-center rounded-md bg-[#945069] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:ml-3 sm:w-auto">{{'deleteCourseButton' | translate}}</button>
+            <button (click)="showDeleteCourseMenu()"  type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">{{'deleteCourseCancelButton' | translate}}</button>
           </div>
         </div>
       </div>
@@ -39,17 +39,17 @@
             <div class="sm:flex sm:items-start">
               <div class="mt-3 text-left sm:ml-4 sm:mt-0 sm:text-left">
                 <h3 style="font-family: DelaGothic" class="text-base font-semibold leading-6 text-gray-900">
-                  Deleting a stage: WARNING!
+                  {{'deleteStageWarningTitle' | translate}}
                 </h3>
                 <div class="mt-2">
-                  <p style="font-family: Montserrat" class="text-sm text-gray-500">You are about to delete a stage. Make sure you have a backup of all the data you need.</p>
+                  <p style="font-family: Montserrat" class="text-sm text-gray-500">{{'deleteStageWarningMessage' | translate}}</p>
                 </div>
               </div>
             </div>
           </div>
           <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-            <button type="button" (click)="deleteStage()" class="inline-flex w-full justify-center rounded-md bg-[#945069] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:ml-3 sm:w-auto">Delete</button>
-            <button (click)="showModalDeleteStage()"  type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+            <button type="button" (click)="deleteStage()" class="inline-flex w-full justify-center rounded-md bg-[#945069] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:ml-3 sm:w-auto">{{'deleteCourseButton' | translate}}</button>
+            <button (click)="showModalDeleteStage()"  type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">{{'deleteCourseCancelButton' | translate}}</button>
           </div>
 
         </div>
@@ -66,7 +66,7 @@
             <div class="p-3 md:p-6 lg:p-4">
                 <div class="flex justify-between items-center">
                     <div>
-                        <span class="text-xl text-black md:text-2xl lg:px-0" style="font-family: DelaGothic">Course Edit</span>
+                        <span class="text-xl text-black md:text-2xl lg:px-0" style="font-family: DelaGothic">{{'courseEditTitle' | translate}}</span>
                     </div>
                     <div class="text-black">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
@@ -78,7 +78,7 @@
                     <form [formGroup]="courseEditForm" (ngSubmit)="submitCourseEdit()" class="space-y-4 bg-blue-50 p-2 md:p-4 lg:p-6 rounded-lg">
                         <div class="rounded-r-lg space-y-2 w-full">
                             <div class="space-y-2" style="font-family: Montserrat">
-                                <label for="title" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">Title</label>
+                                <label for="title" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">{{'courseModalTitleLabel' | translate}}</label>
                                 <input type="text"
                                        name="title"
                                        id="title"
@@ -87,12 +87,12 @@
 
                                 <div *ngIf="courseEditForm.get('title')?.hasError('required') && courseEditForm.controls.title.touched" class="error-message">
                                     <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                                        Title is required.
+                                        {{'titleRequired' | translate}}
                                     </p>
                                 </div>
                                 <div *ngIf="courseEditForm.get('title')?.hasError('minlength')" class="error-message">
                                     <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                                        Title should have a minimum of 5 characters
+                                        {{'titleMinLength' | translate}}
                                     </p>
                                 </div>
                                 <div *ngIf="errorShow && courseEditForm.errors && courseEditForm.getError('title')" class="error-message">
@@ -104,7 +104,7 @@
                         </div>
                         <div class="rounded-r-lg  space-y-2  w-full">
                             <div class="space-y-2" style="font-family: Montserrat">
-                                <label for="description" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">Description</label>
+                                <label for="description" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">{{'courseModalDescriptionLabel' | translate}}</label>
                                 <textarea type="text"
                                           name="description"
                                           id="description"
@@ -113,12 +113,12 @@
 
                                 <div *ngIf="courseEditForm.get('description')?.hasError('required') && courseEditForm.controls.description.touched" class="error-message">
                                     <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                                        Description is required.
+                                        {{'descriptionRequired' | translate}}
                                     </p>
                                 </div>
                                 <div *ngIf="courseEditForm.get('description')?.hasError('minlength')" class="error-message">
                                     <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                                        Description should have a minimum of 12 characters
+                                        {{'descriptionMinLength' | translate}}
                                     </p>
                                 </div>
                                 <div *ngIf="errorShow && courseEditForm.errors && courseEditForm.getError('description')" class="error-message">
@@ -130,7 +130,7 @@
                         </div>
                         <div class="rounded-r-lg space-y-2 w-full">
                             <div class="space-y-2" style="font-family: Montserrat">
-                                <label for="price" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">Price</label>
+                                <label for="price" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">{{'priceLabel' | translate}}</label>
                                 <div class="flex flex-row h-8 md:h-9 lg:h-10 w-1/3 rounded-lg relative bg-transparent mt-1">
                                     <button type="button" (click)="decrementPrice()" class="bg-[#C3DCE3] text-[#2B788B] hover:bg-[#5996A5] hover:text-white h-full w-20 rounded-l flex justify-center items-center cursor-pointer outline-none">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 md:w-6 md:h-6">
@@ -146,7 +146,7 @@
                                 </div>
                                 <div *ngIf="courseEditForm.get('price')?.hasError('negativeNumber')" class="error-message">
                                     <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                                        Price cannot be negative.
+                                        {{'priceNegative' | translate}}
                                     </p>
                                 </div>
                                 <div *ngIf="errorShow && courseEditForm.errors && courseEditForm.getError('price')" class="error-message">
@@ -157,8 +157,8 @@
                             </div>
                         </div>
                         <div class="flex gap-4 justify-end" style="font-family: Montserrat">
-                            <button type="button" (click)="showModalWindow('editCourse')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
-                            <button type="submit" [disabled]="courseEditForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">Edit Course</button>
+                            <button type="button" (click)="showModalWindow('editCourse')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">{{'courseEditButtonClose' | translate}}</button>
+                            <button type="submit" [disabled]="courseEditForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90"> {{'courseEditButtonSave' | translate}}</button>
                         </div>
                         <div *ngIf="errorShow" class="error-message">
                             <p class="mt-2 text-start font-medium text-[#945069] text-xs">
@@ -176,7 +176,7 @@
             <div class="p-3 md:p-6 lg:p-4">
                 <div class="flex justify-between items-center">
                     <div>
-                        <span class="text-xl text-black md:text-2xl px-4 md:px-0" style="font-family: DelaGothic">Create Stage</span>
+                        <span class="text-xl text-black md:text-2xl px-4 md:px-0" style="font-family: DelaGothic">{{'createStageTitle' | translate}}</span>
                     </div>
                     <div class="text-black">
                         <button type="button" (click)="toggleCardVisibility()" class="bg-amber-400 hover:bg-amber-500 p-2 rounded-full">
@@ -195,7 +195,7 @@
                               </button>
                             </div>
                             <div class='text-sm'  style="font-family: Montserrat">
-                                <p class="indent-4"><strong>Stage</strong> - this is a part of your course that students will progress through sequentially.</p>
+                                <p class="indent-4"><strong>{{'stageExplanation1' | translate}}</strong>{{'stageExplanation2' | translate}}</p>
                                 <ul class="px-4 list-disc text-xs list-inside">
                                     <li class="flex gap-2 items-start">
                                         <div class="text-[#2B788B]">
@@ -203,7 +203,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                                             </svg>
                                         </div>
-                                        <p>Please provide a title and description for the stage to help students better understand what to expect.</p>
+                                        <p>{{'stageDetails' | translate}}</p>
                                     </li>
                                     <li class="flex gap-2 items-start">
                                         <div class="text-[#2B788B]">
@@ -211,7 +211,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                                             </svg>
                                         </div>
-                                        <p>Keep in mind that stages organize the course and represent its logical sections. Each stage can contain multiple exercises.</p>
+                                        <p>{{'stageDetails2' | translate}}</p>
                                     </li>
                                     <li class="flex gap-2 items-start">
                                         <div class="text-[#2B788B]">
@@ -219,7 +219,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                                             </svg>
                                         </div>
-                                        <p>After creating the stage, you can link your exercises to it. </p>
+                                        <p>{{'stageDetails3' | translate}}</p>
                                     </li>
                                     <li class="flex gap-2 items-start">
                                         <div class="text-[#2B788B]">
@@ -227,7 +227,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                                             </svg>
                                         </div>
-                                        <p>If you encounter any issues or difficulties while creating a stage, don't hesitate to contact our support team.</p>
+                                        <p>{{'stageDetails4' | translate}}</p>
                                     </li>
                                 </ul>
 
@@ -241,7 +241,7 @@
                     <form [formGroup]="stageCreateForm" (ngSubmit)="submitStageCreate()" class="space-y-4 bg-blue-50 p-2 md:p-4 lg:p-6 rounded-lg">
                         <div class="rounded-r-lg space-y-2 w-full">
                             <div class="space-y-2" style="font-family: Montserrat">
-                                <label for="titleStage" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">Title</label>
+                                <label for="titleStage" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">{{'titleLabel' | translate}}</label>
                                 <input type="text"
                                        name="titleStage"
                                        id="titleStage"
@@ -250,12 +250,12 @@
 
                                 <div *ngIf="stageCreateForm.get('title')?.hasError('required') && stageCreateForm.controls.title.touched" class="error-message">
                                     <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                                        Title is required.
+                                        {{'titleRequired' | translate}}
                                     </p>
                                 </div>
                                 <div *ngIf="stageCreateForm.get('title')?.hasError('minlength')" class="error-message">
                                     <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                                        Title should have a minimum of 5 characters
+                                        {{'titleMinLength' | translate}}
                                     </p>
                                 </div>
                                 <div *ngIf="errorShow && stageCreateForm.errors && stageCreateForm.getError('title')" class="error-message">
@@ -267,7 +267,7 @@
                         </div>
                         <div class="rounded-r-lg  space-y-2  w-full">
                             <div class="space-y-2" style="font-family: Montserrat">
-                                <label for="descriptionStage" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">Description</label>
+                                <label for="descriptionStage" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">{{'descriptionLabel' | translate}}</label>
                                 <textarea type="text"
                                           name="descriptionStage"
                                           id="descriptionStage"
@@ -276,12 +276,12 @@
 
                                 <div *ngIf="stageCreateForm.get('description')?.hasError('required') && stageCreateForm.controls.description.touched" class="error-message">
                                     <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                                        Description is required.
+                                       {{'descriptionRequired' | translate}}
                                     </p>
                                 </div>
                                 <div *ngIf="stageCreateForm.get('description')?.hasError('minlength')" class="error-message">
                                     <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                                        Description should have a minimum of 12 characters
+                                       {{'descriptionMinLength' | translate}}
                                     </p>
                                 </div>
                                 <div *ngIf="errorShow && stageCreateForm.errors && stageCreateForm.getError('description')" class="error-message">
@@ -292,8 +292,8 @@
                             </div>
                         </div>
                         <div class="flex gap-4 justify-end" style="font-family: Montserrat">
-                          <button type="button" (click)="showModalWindow('createStage')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
-                          <button type="submit" [disabled]="stageCreateForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">Create</button>
+                          <button type="button" (click)="showModalWindow('createStage')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">{{'courseEditButtonClose' | translate}}</button>
+                          <button type="submit" [disabled]="stageCreateForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">{{'createButton' | translate}}</button>
                         </div>
                         <div *ngIf="errorShow" class="error-message">
                             <p class="mt-2 text-start font-medium text-[#945069] text-xs">
@@ -312,7 +312,7 @@
       <div class="p-3 md:p-6 lg:p-4">
         <div class="flex justify-between items-center">
           <div>
-            <span class="text-xl text-black md:text-2xl md:px-0" style="font-family: DelaGothic">Stage Edit</span>
+            <span class="text-xl text-black md:text-2xl md:px-0" style="font-family: DelaGothic">{{'stageEditTitle' | translate}}</span>
           </div>
           <div class="text-black">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
@@ -324,7 +324,7 @@
           <form [formGroup]="stageEditForm" (ngSubmit)="submitStageEdit()" class="space-y-4 bg-blue-50 p-2 md:p-4 lg:p-6 rounded-lg">
             <div class="rounded-r-lg space-y-2 w-full">
               <div class="space-y-2" style="font-family: Montserrat">
-                <label for="titleStageEdit" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">Title</label>
+                <label for="titleStageEdit" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">{{'titleLabel' | translate}}</label>
                 <input type="text"
                        name="title"
                        id="titleStageEdit"
@@ -333,12 +333,12 @@
 
                 <div *ngIf="stageEditForm.get('title')?.hasError('required') && stageEditForm.controls.title.touched" class="error-message">
                   <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                    Title is required.
+                      {{'titleRequired' | translate}}
                   </p>
                 </div>
                 <div *ngIf="stageEditForm.get('title')?.hasError('minlength')" class="error-message">
                   <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                    Title should have a minimum of 5 characters
+                      {{'titleMinLength' | translate}}
                   </p>
                 </div>
                 <div *ngIf="errorShow && stageEditForm.errors && stageEditForm.getError('title')" class="error-message">
@@ -350,7 +350,7 @@
             </div>
             <div class="rounded-r-lg  space-y-2  w-full">
               <div class="space-y-2" style="font-family: Montserrat">
-                <label for="descriptionStageEdit" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">Description</label>
+                <label for="descriptionStageEdit" class="block mb-2 text-xs md:text-sm font-semibold text-gray-700">{{'descriptionLabel' | translate}}</label>
                 <textarea type="text"
                           name="description"
                           id="descriptionStageEdit"
@@ -359,12 +359,12 @@
 
                 <div *ngIf="stageEditForm.get('description')?.hasError('required') && stageEditForm.controls.description.touched" class="error-message">
                   <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                    Description is required.
+                      {{'descriptionRequired' | translate}}
                   </p>
                 </div>
                 <div *ngIf="stageEditForm.get('description')?.hasError('minlength')" class="error-message">
                   <p class="mt-2 text-start font-medium text-[#945069] text-xs">
-                    Description should have a minimum of 12 characters
+                      {{'descriptionMinLength' | translate}}
                   </p>
                 </div>
                 <div *ngIf="errorShow && stageEditForm.errors && stageEditForm.getError('description')" class="error-message">
@@ -380,8 +380,8 @@
               </p>
             </div>
             <div class="flex gap-4 justify-end" style="font-family: Montserrat">
-              <button type="button" (click)="showModalWindow('editStage')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
-              <button type="submit" [disabled]="stageEditForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">Save</button>
+              <button type="button" (click)="showModalWindow('editStage')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">{{'closeButton' | translate}}</button>
+              <button type="submit" [disabled]="stageEditForm.invalid" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">{{'saveButton' | translate}}</button>
             </div>
           </form>
         </div>
@@ -394,7 +394,7 @@
         <div class="p-3 md:p-6 lg:p-4">
           <div class="flex mb-2 md:mb-4 justify-between items-center">
             <div>
-              <span class="text-xl text-black md:text-2xl px-4 md:px-0" style="font-family: DelaGothic">Stages</span>
+              <span class="text-xl text-black md:text-2xl px-4 md:px-0" style="font-family: DelaGothic">{{'stagesTitle' | translate}}</span>
             </div>
             <div class="text-black">
               <button type="button" (click)="toggleCardVisibility()" class="bg-amber-400 hover:bg-amber-500 p-2 rounded-full">
@@ -415,7 +415,7 @@
                     <ul class="lg:px-4 list-disc text-xs list-inside">
                       <li class="flex flex-col">
                         <span class="text-xs font-medium text-gray-900">
-                          Selecting a Stage:
+                          {{'selectingStage' | translate}}
                         </span>
                         <div class="flex gap-2 items-start">
                           <div class="text-[#2B788B]">
@@ -423,12 +423,12 @@
                               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
                           </div>
-                          <p>Choose the stage to which you want to add exercises. Click on the stage, and its details will be displayed.</p>
+                          <p>{{'chooseStageDescription' | translate}}</p>
                         </div>
                       </li>
                       <li class="flex flex-col">
                         <span class="text-xs font-medium text-gray-900">
-                          Choosing Exercise Types:
+                          {{'chooseExerciseTypes' | translate}}
                         </span>
                         <div class="flex gap-2 items-start">
                           <div class="text-[#2B788B]">
@@ -436,12 +436,12 @@
                               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
                           </div>
-                          <p>Select the type of exercises you wish to add to this stage. You have various exercise types available, such as "Compile Phrase," "Phonetic Transcript," "Pairs of Meaning," "Picture Association," and "Missing Links."</p>
+                          <p>{{'chooseExerciseTypesDescription' | translate}}</p>
                         </div>
                       </li>
                       <li class="flex flex-col">
                         <span class="text-xs font-medium text-gray-900">
-                          Adding Exercises:
+                          {{'addingExercises' | translate}}
                         </span>
                         <div class="flex gap-2 items-start">
                           <div class="text-[#2B788B]">
@@ -449,12 +449,12 @@
                               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
                           </div>
-                          <p>After selecting the exercise type, you will see a list of available exercises of that type. Pick the desired exercise from the list, and it will automatically be attached to your stage.</p>
+                          <p>{{'addingExercisesDescription' | translate}}</p>
                         </div>
                       </li>
                       <li class="flex flex-col">
                         <span class="text-xs font-medium text-gray-900">
-                          Detaching Exercises:
+                          {{'detachingExercises' | translate}}
                         </span>
                         <div class="flex gap-2 items-start">
                           <div class="text-[#2B788B]">
@@ -462,12 +462,12 @@
                               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
                           </div>
-                          <p>If you change your mind about using a particular exercise for a stage, you can easily detach it. Just click the corresponding button to detach the exercise.</p>
+                          <p>{{'detachingExercisesDescription' | translate}}</p>
                         </div>
                       </li>
                       <li class="flex flex-col">
                         <span class="text-xs font-medium text-gray-900">
-                          Navigating Between Stages:
+                          {{'navigatingStages' | translate}}
                         </span>
                         <div class="flex gap-2 items-start">
                           <div class="text-[#2B788B]">
@@ -475,12 +475,12 @@
                               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
                           </div>
-                          <p>After filling one stage with exercises, you can move on to another stage. Select a different stage from the list.</p>
+                          <p>{{'navigatingStagesDescription' | translate}}</p>
                         </div>
                       </li>
                       <li class="flex flex-col">
                         <span class="text-xs font-medium text-gray-900">
-                          Creating a New Stage:
+                          {{'creatingNewStage' | translate}}
                         </span>
                         <div class="flex gap-2 items-start">
                           <div class="text-[#2B788B]">
@@ -488,12 +488,12 @@
                               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
                           </div>
-                          <p> If you need to create a new stage, you have that option available.</p>
+                          <p>{{'creatingNewStageDescription' | translate}}</p>
                         </div>
                       </li>
                       <li class="flex flex-col">
                         <span class="text-xs font-medium text-gray-900">
-                          Support and Assistance:
+                          {{'supportAssistance' | translate}}
                         </span>
                         <div class="flex gap-2 items-start">
                           <div class="text-[#2B788B]">
@@ -501,7 +501,7 @@
                               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
                           </div>
-                          <p>Should you encounter any issues or difficulties when attaching or detaching exercises from stages, feel free to reach out to our customer support. We are here to help and address any questions you may have.</p>
+                          <p>{{'supportAssistanceDescription' | translate}}</p>
                         </div>
                       </li>
                     </ul>
@@ -526,8 +526,8 @@
                   </div>
                 </div>
                 <div class="flex gap-4 justify-end" style="font-family: Montserrat">
-                  <button type="button" (click)="showDeleteStage(stage)" class="inline-flex w-auto cursor-pointer justify-center rounded-lg  px-3 py-2 text-xs lg:text-sm font-semibold underline text-gray-800  hover:scale-105">Delete</button>
-                  <button type="button" (click)="handleButtonClick(stage, 'editStage')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg  px-3 py-2 text-xs lg:text-sm font-semibold underline text-gray-800  hover:scale-105">Edit Stage</button>
+                  <button type="button" (click)="showDeleteStage(stage)" class="inline-flex w-auto cursor-pointer justify-center rounded-lg  px-3 py-2 text-xs lg:text-sm font-semibold underline text-gray-800  hover:scale-105">{{'deleteButton' | translate}}</button>
+                  <button type="button" (click)="handleButtonClick(stage, 'editStage')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg  px-3 py-2 text-xs lg:text-sm font-semibold underline text-gray-800  hover:scale-105">{{'editStageButton' | translate}}</button>
                 </div>
               </div>
 
@@ -552,18 +552,18 @@
                         <div class="text-start p-2 lg:p-4 w-full lg:w-1/3 grid grid-cols-1" style="font-family: Montserrat">
                           <div *ngFor="let type of exerciseTypes" class="">
                             <button (click)="fetchExerciseData(type)" class="mb-3 bg-[#f5f5f5] w-full hover:bg-gray-200 font-semibold text-[#2B788B] p-2 px-3 rounded-lg">
-                              <span *ngIf="type == 'compile_phrase'">Compile Phrase</span>
-                              <span *ngIf="type == 'audit'">Phonetic Transcript</span>
-                              <span *ngIf="type == 'pair_exercise'">Pairs of Meaning</span>
-                              <span *ngIf="type == 'picture_exercise'">Picture Association</span>
-                              <span *ngIf="type == 'sentence'">Missing links</span>
+                              <span *ngIf="type == 'compile_phrase'">{{'selectCompilePhrase' | translate}}</span>
+                              <span *ngIf="type == 'audit'">{{'selectAudit' | translate}}</span>
+                              <span *ngIf="type == 'pair_exercise'">{{'selectPairExercise' | translate}}</span>
+                              <span *ngIf="type == 'picture_exercise'">{{'selectPictureExercise' | translate}}</span>
+                              <span *ngIf="type == 'sentence'">{{'selectSentence' | translate}}</span>
                             </button>
                           </div>
                         </div>
                         <div *ngIf="exerciseData" class="flex justify-center items-center p-2 lg:p-5 w-full lg:w-2/4">
                           <div *ngIf="selectedType === 'compile_phrase'" class="flex-col w-full justify-center justify-items-center gap-3">
                             <mat-form-field class=" bg-[#C3DCE3] mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
-                              <mat-label class="text-[#2B788B] font-semibold text-sm" >Select an Exercise</mat-label>
+                              <mat-label class="text-[#2B788B] font-semibold text-sm" >{{'selectAnExercise' | translate}}</mat-label>
                               <mat-select [(ngModel)]="selectedExercise" (ngModelChange)="addSelectedExercise()" class="rounded-3xl">
                                 <mat-option *ngFor="let exercise of exerciseData.data.data" [value]="exercise" class="bg-[#C3DCE3] ">
                                   <div class="text-[#2B788B] font-medium">
@@ -611,7 +611,7 @@
                           </div>
                           <div *ngIf="selectedType === 'audit'" class="flex-col w-full justify-center justify-items-center gap-3">
                             <mat-form-field class=" bg-[#C3DCE3] mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
-                              <mat-label class="text-[#2B788B] font-semibold text-sm" >Select an Exercise</mat-label>
+                              <mat-label class="text-[#2B788B] font-semibold text-sm" >{{'selectAnExercise' | translate}}</mat-label>
                               <mat-select [(ngModel)]="selectedExercise" (ngModelChange)="addSelectedExercise()" class="rounded-3xl">
                                 <mat-option *ngFor="let exercise of exerciseData.data.data" [value]="exercise" class="bg-[#C3DCE3] ">
                                   <div class="text-[#2B788B] font-medium">
@@ -659,7 +659,7 @@
                           </div>
                           <div *ngIf="selectedType === 'pair_exercise'" class="flex-col w-full justify-center justify-items-center gap-3">
                             <mat-form-field class=" bg-[#C3DCE3] mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
-                              <mat-label class="text-[#2B788B] font-semibold text-sm" >Select an Exercise</mat-label>
+                              <mat-label class="text-[#2B788B] font-semibold text-sm" >{{'selectAnExercise' | translate}}</mat-label>
                               <mat-select [(ngModel)]="selectedExercise" (ngModelChange)="addSelectedExercise()" class="rounded-3xl">
                                 <mat-option *ngFor="let exercise of exerciseData.data.data" [value]="exercise" class="bg-[#C3DCE3] w-full  border p-1 border-b-[#2B788B]">
                                   <div class="text-[#2B788B] font-medium">
@@ -722,7 +722,7 @@
 
                           <div *ngIf="selectedType === 'picture_exercise'" class="flex-col w-full justify-center justify-items-center gap-3">
                             <mat-form-field class=" bg-[#C3DCE3] mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
-                              <mat-label class="text-[#2B788B] font-semibold text-sm" >Select an Exercise</mat-label>
+                              <mat-label class="text-[#2B788B] font-semibold text-sm" >{{'selectAnExercise' | translate}}</mat-label>
                               <mat-select [(ngModel)]="selectedExercise" (ngModelChange)="addSelectedExercise()" class="rounded-3xl">
                                 <mat-option *ngFor="let exercise of exerciseData.data.data" [value]="exercise" class="bg-[#C3DCE3] border-b-gray-200 border ">
                                   <div class="text-[#2B788B] font-medium grid grid-cols-2 gap-2 py-1 ">
@@ -792,7 +792,7 @@
                           </div>
                           <div *ngIf="selectedType === 'sentence'" class="flex-col w-full justify-center justify-items-center gap-3">
                             <mat-form-field class=" bg-[#C3DCE3] mx-auto w-full justify-center text-white rounded-lg" style="font-family: Montserrat">
-                              <mat-label class="text-[#2B788B] font-semibold text-sm" >Select an Exercise</mat-label>
+                              <mat-label class="text-[#2B788B] font-semibold text-sm" >{{'selectAnExercise' | translate}}</mat-label>
                               <mat-select [(ngModel)]="selectedExercise" (ngModelChange)="addSelectedExercise()" class="rounded-3xl">
                                 <mat-option *ngFor="let exercise of exerciseData.data.data" [value]="exercise" class="bg-[#C3DCE3] ">
                                   <div class="text-[#2B788B] font-medium">
@@ -849,7 +849,7 @@
 
         </div>
         <div class="flex px-3 pb-3 justify-end gap-4" style="font-family: Montserrat">
-          <button type="button" (click)="showModalWindow('attachExercise')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
+          <button type="button" (click)="showModalWindow('attachExercise')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">{{'closeButton' | translate}}</button>
         </div>
       </div>
       <!--Attach the exercise to the stage End-->
@@ -859,7 +859,7 @@
       <div class="p-3 md:p-6 lg:p-4">
         <div class="flex mb-2 md:mb-4 justify-between items-center">
           <div>
-            <span class="text-xl text-black md:text-2xl px-4 md:px-0" style="font-family: DelaGothic">Stages</span>
+            <span class="text-xl text-black md:text-2xl px-4 md:px-0" style="font-family: DelaGothic">{{'menuProgressStages' | translate}}</span>
           </div>
           <div class="text-black">
             <button type="button" (click)="toggleCardVisibility()" class="bg-amber-400 hover:bg-amber-500 p-2 rounded-full">
@@ -880,7 +880,7 @@
                   <ul class="lg:px-4 list-disc text-xs list-inside">
                     <li class="flex flex-col">
                         <span class="text-xs font-medium text-gray-900">
-                          Selecting a Stage:
+                          {{'selectingStage' | translate}}
                         </span>
                       <div class="flex gap-2 items-start">
                         <div class="text-[#2B788B]">
@@ -888,12 +888,12 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                           </svg>
                         </div>
-                        <p>Click on the stage, and its details will be displayed.</p>
+                        <p>{{'clickStageDetails' | translate}}</p>
                       </div>
                     </li>
                     <li class="flex flex-col">
                         <span class="text-xs font-medium text-gray-900">
-                          Choosing Exercise:
+                          {{'chooseExercise' | translate}}
                         </span>
                       <div class="flex gap-2 items-start">
                         <div class="text-[#2B788B]">
@@ -901,10 +901,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                           </svg>
                         </div>
-                        <p>Choose the exercise you want to solve, click on the exercise card to navigate to the exercise solution page. Please note that you can navigate to exercises only with the
+                        <p>{{'chooseExerciseToSolve' | translate}}
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="orange" class="bi bi-exclamation-square-fill" viewBox="0 0 16 16">
                             <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                          </svg>  image.</p>
+                          </svg></p>
                       </div>
                     </li>
                   </ul>
@@ -933,14 +933,14 @@
                   <p class="text-xs md:text-sm font-semibold text-[#757575] mb-6" style="font-family: Montserrat;">{{ stage?.description }}</p>
                   <div *ngIf="stage.isClicked" class="p-2">
                     <div class="border-b-2 border-cyan-700 mb-2">
-                      <span class="text-lg text-[#2B788B] font-bold" style="font-family: Montserrat;">Exercises:</span>
+                      <span class="text-lg text-[#2B788B] font-bold" style="font-family: Montserrat;">{{'exerciseLabel' | translate}}</span>
                     </div>
 
                     <ng-container *ngIf="this.stagesProgress.length > 0">
                       <div class="p-2 bg-white rounded-lg mb-3 shadow-md" *ngFor="let exercise of stage.stage_exercises">
                         <div [ngClass]="{'cursor-pointer' : !isExerciseCompleted(exercise['id'])}" (click)="navigateToExercise(exercise)">
                           <div class="flex justify-between">
-                            <p class="text-sm text-gray-500 mb-1">Exercise №{{ exercise['id'] }}</p>
+                            <p class="text-sm text-gray-500 mb-1">{{'exerciseNumber' | translate}} {{ exercise['id'] }}</p>
                             <div class="">
                               <!-- Checkmark SVG for completed exercises -->
                               <svg *ngIf="isExerciseCompleted(exercise['id'])" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check-square-fill" viewBox="0 0 16 16">
@@ -954,7 +954,7 @@
                           </div>
 
                           <div *ngIf="exercise['type'] === 'compile_phrase'" class="flex items-center p-2 bg-gray-100 rounded">
-                            <span class="text-sm text-gray-700 mr-2">Phrase:</span>
+                            <span class="text-sm text-gray-700 mr-2">{{'phraseLabel' | translate}}</span>
                             <ng-container *ngIf="!isExerciseCompleted(exercise['id']); else completed">
                             <span class="font-medium text-center items-center">
                               **** ***** *****
@@ -966,20 +966,20 @@
                           </div>
 
                           <div *ngIf="exercise['type'] === 'sentence'" class="flex items-center p-2 bg-gray-100 rounded">
-                            <span class="text-sm text-gray-700 mr-2">Sentence:</span>
+                            <span class="text-sm text-gray-700 mr-2">{{'sentenceLabel' | translate}}</span>
                             <span class="font-medium text-center items-center">{{ exercise['data']['sentence_with_gaps'] }}</span>
                           </div>
 
                           <div *ngIf="exercise['type'] === 'pair_exercise'" class="flex items-center p-2 bg-gray-100 rounded">
-                            <span class="text-sm text-gray-700 mr-2">Choose Pair For Words</span>
+                            <span class="text-sm text-gray-700 mr-2">{{'pairExerciseLabel' | translate}}</span>
                           </div>
 
                           <div *ngIf="exercise['type'] === 'audit'" class="flex items-center p-2 bg-gray-100 rounded">
-                            <span class="text-sm text-gray-700 mr-2">Listen and translate Phrase</span>
+                            <span class="text-sm text-gray-700 mr-2">{{'auditExerciseLabel' | translate}}</span>
                           </div>
 
                           <div *ngIf="exercise['type'] === 'picture_exercise'" class="flex items-center p-2 bg-gray-100 rounded">
-                            <span class="text-sm text-gray-700 mr-2">Look at the picture and choose an answer option.</span>
+                            <span class="text-sm text-gray-700 mr-2">{{'pictureExerciseLabel' | translate}}</span>
                           </div>
                         </div>
                       </div>
@@ -994,7 +994,7 @@
 
       </div>
       <div class="flex px-3 pb-3 justify-end gap-4" style="font-family: Montserrat">
-        <button type="button" (click)="showModalWindow('showProgressStages')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">Close</button>
+        <button type="button" (click)="showModalWindow('showProgressStages')" class="inline-flex w-auto cursor-pointer justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90">{{'closeButton' | translate}}</button>
       </div>
     </div>
       <!-- End Show Show Stages Progress for User -->
@@ -1047,7 +1047,7 @@
                         <div class="flex flex-col justify-between gap-8 h-full z-10">
                           <div>
                             <p class="text-lg text-[#2B788B] md:text-xl md:px-4 lg:px-0" style="font-family: DelaGothic">
-                              Attach Stages :
+                                {{'courseDetails_attachStages' | translate}}
                             </p>
                           </div>
                           <div class="md:px-4 lg:px-0">
@@ -1069,7 +1069,7 @@
                       <div class="flex flex-col justify-between gap-8 h-full z-10">
                         <div>
                           <p class="text-lg text-[#2B788B] md:text-xl md:px-4 lg:px-0" style="font-family: DelaGothic">
-                            Show Stages :
+                            {{'courseDetails_showStages' | translate}}
                           </p>
                         </div>
                         <div class="md:px-4 lg:px-0">
@@ -1091,12 +1091,12 @@
 
             <div *ngIf="this.currentUserRole !== 'User'" class="flex justify-between items-center pt-3 md:pt-5 lg:gap-4 lg:p-2 border-t border-gray-200" style="font-family: Montserrat">
                 <div>
-                    <button type="button" (click)="showModalWindow('createStage')"  class="inline-flex w-full justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Create Stage</button>
+                    <button type="button" (click)="showModalWindow('createStage')"  class="inline-flex w-full justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">{{'courseDetails_createStage' | translate}}</button>
                 </div>
                 <div class="flex gap-4 items-center">
-                    <button type="button" (click)="showModalWindow('editCourse')" class="inline-flex w-full justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Edit</button>
+                    <button type="button" (click)="showModalWindow('editCourse')" class="inline-flex w-full justify-center rounded-lg bg-[#2B788B] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">{{'courseDetails_editCourse' | translate}}</button>
                     <div class="hidden md:block w-px h-6 bg-gray-300"></div>
-                    <button type="button" (click)="showDeleteCourseMenu()" class="inline-flex w-full justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Delete</button>
+                    <button type="button" (click)="showDeleteCourseMenu()" class="inline-flex w-full justify-center rounded-lg bg-[#945069] px-3 py-2 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">{{'deleteCourseButton' | translate}}</button>
                 </div>
             </div>
 

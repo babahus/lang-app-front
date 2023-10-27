@@ -277,7 +277,7 @@ export class ExerciseService extends BaseService
 
   getAttachedExerciseType(type:string): Promise<any>{
     return  new Promise((resolve, reject) => {
-      this.http.get(this.url + `/exercises-attached/${type}`, ).pipe(
+      this.http.get(this.url + `/exercises-attached/${type}`).pipe(
         catchError((error) => {
           reject(error);
           return throwError(error);
@@ -287,9 +287,7 @@ export class ExerciseService extends BaseService
       });
     });
   }
-
-
-  detachExerciseForUser(exerciseId: number, type: string){
+    detachExerciseForUser(exerciseId: number, type: string){
     return new Promise((resolve, reject) => {
       this.http.post(this.url + '/exercise/detach', {
         id: exerciseId,

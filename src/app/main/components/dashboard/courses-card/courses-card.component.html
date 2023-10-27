@@ -1,6 +1,6 @@
 <section class="p-2 flex flex-col h-full">
   <div>
-    <p class="text-center w-full text-lg text-[#2B788B] pt-2" style="font-family: DelaGothic">My Courses</p>
+    <p class="text-center w-full text-lg text-[#2B788B] pt-2" style="font-family: DelaGothic">{{'my_courses_title' | translate}}</p>
   </div>
   <div class=" flex-grow space-y-6">
     <ng-container *ngFor="let course of attachedCourses; let i = index" class="w-full">
@@ -37,6 +37,6 @@
 
   </div>
   <div class="flex justify-center items-center" style="font-family: Montserrat">
-    <button type="button" routerLink="/courses" class="rounded-full bg-[#2B788B] p-2 px-4 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">Show more</button>
+    <button type="button" routerLink="/courses" class="rounded-full bg-[#2B788B] p-2 px-4 text-xs md:text-sm font-bold text-white shadow-sm hover:opacity-90 sm:w-auto">{{'show_more_button' | translate}}</button>
   </div>
 </section>
