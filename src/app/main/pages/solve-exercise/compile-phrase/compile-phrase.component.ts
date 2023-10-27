@@ -70,6 +70,8 @@ export class CompilePhraseComponent extends BaseSolveExerciseComponent implement
         await this.router.navigate(['/course', this.courseId], {
           queryParams: queryParams
         });
+      } else {
+        await this.router.navigate(['/dashboard'])
       }
     } catch (error : any){
       console.log(this.compilePhraseForm);

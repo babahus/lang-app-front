@@ -32,7 +32,7 @@ export class PairComponent extends BaseSolveExerciseComponent implements OnInit 
   }
 
   pairForm = this.fb.group({
-    data: this.fb.array([]),
+    data: this.fb.control(''),
   });
 
   async ngOnInit(): Promise<void> {
@@ -54,19 +54,13 @@ export class PairComponent extends BaseSolveExerciseComponent implements OnInit 
 
   async checkAnswer() {
     try {
-      const dataFormArray = this.words.map((word, index) => {
-        const formData = new FormGroup({
-          word: new FormControl(word),
-          translation: new FormControl(this.translations[index]),
-        });
-        return formData;
-      });
-
-      const dataArray = this.pairForm.get('data') as FormArray;
-      dataArray.clear();
-
-      dataFormArray.forEach((formData) => {
-        dataArray.push(formData);
+      this.pairForm.patchValue({
+        data: JSON.stringify(
+          this.words.map((word, index) => ({
+            word,
+            translation: this.translations[index],
+          }))
+        ),
       });
 
 
@@ -82,6 +76,8 @@ export class PairComponent extends BaseSolveExerciseComponent implements OnInit 
         await this.router.navigate(['/course', this.courseId], {
           queryParams: queryParams
         });
+      } else {
+        await this.router.navigate(['/dashboard'])
       }
     } catch (error) {
       console.log(error);

@@ -64,6 +64,8 @@ export class AuditComponent extends BaseSolveExerciseComponent implements OnInit
         await this.router.navigate(['/course', this.courseId], {
           queryParams: queryParams
         });
+      } else {
+        await this.router.navigate(['/dashboard'])
       }
     } catch (error) {
       console.log(error);

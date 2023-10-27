@@ -57,6 +57,8 @@ export class PictureComponent extends BaseSolveExerciseComponent implements OnIn
         await this.router.navigate(['/course', this.courseId], {
           queryParams: queryParams
         });
+      } else {
+        await this.router.navigate(['/dashboard'])
       }
     } catch (error) {
     }

@@ -74,6 +74,8 @@ export class SentenceComponent extends BaseSolveExerciseComponent implements OnI
         await this.router.navigate(['/course', this.courseId], {
           queryParams: queryParams
         });
+      } else {
+        await this.router.navigate(['/dashboard'])
       }
     } catch (error) {
       console.log(error);
