@@ -72,7 +72,7 @@ export class CompilePhraseComponent extends BaseSolveExerciseComponent implement
         });
       }
     } catch (error : any){
-
+      console.log(this.compilePhraseForm);
     }
   }
 }

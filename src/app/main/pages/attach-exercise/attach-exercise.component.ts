@@ -72,9 +72,7 @@ export class AttachExerciseComponent implements OnInit {
         ...exercise,
         attached: responseAttachedExercise.data.data.some((studentExercise: Exercise) => studentExercise.id === exercise.id),
       }));
-
       this.exerciseData = combinedExercises;
-      console.log(this.exerciseData);
       this.currentPage[this.selectedType] = responseExercise.data.pagination.current_page;
       this.totalPages = responseExercise.data.pagination.last_page;
     } catch (error) {
@@ -83,9 +81,17 @@ export class AttachExerciseComponent implements OnInit {
   }
 
 
+  // navigateToExercise(exercise: any) {
+  //   if(!this.isExerciseCompleted(exercise['id'])) {
+  //     const link = ['/exercises/'+exercise['type'], exercise['data']['id']];
+  //     const queryParams = { data: this.getEncryptedParams(null, null, exercise['id']) };
+  //     this.router.navigate(link, { queryParams: queryParams });
+  //   }
+  // }
+
   navigateToExercise(exercise: any) {
     const link = ['/exercises/'+ this.selectedType, exercise.id];
-    const queryParams = { data: this.getEncryptedParams(null, null, exercise.id) };
+    const queryParams = { data: this.getEncryptedParams(null, null, exercise.exercises_id) };
     this.router.navigate(link, { queryParams: queryParams });
   }
 

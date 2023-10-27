@@ -1,4 +1,4 @@
-<header #menu class="w-full z-50" [ngClass]="{'fixed top-0': burgerMenu }">
+<header #menu class="w-full z-50" [ngClass]="{'fixed top-0 ': burgerMenu }">
   <nav class="bg-[#F6F5F4]">
     <div class="mx-auto px-2 sm:px-6 flex justify-center lg:px-8 border border-b ">
       <div class="relative max-w-screen-lg  w-full md:w-[90%] lg:w-[70%] flex h-16 items-center justify-between">
@@ -54,7 +54,7 @@
               </button>
             </div>
 
-            <div [ngClass]="{'hidden': !authMenu }" class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" style="font-family: Montserrat">
+            <div [ngClass]="{'hidden': !authMenu }" class="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" style="font-family: Montserrat">
               <a routerLink="/dashboard" class="block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">{{'dashboard' | translate}}</a>
               <a routerLink="/profile" class=" cursor-pointer block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">{{'profile' | translate}}</a>
               <a routerLink="/courses" class="cursor-pointer block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">{{'courses' | translate}}</a>
@@ -68,7 +68,7 @@
               </a>
               <a (click)="authService.logout()" class=" cursor-pointer block px-4 py-2 text-sm font-semibold text-[#757575] tracking-wider hover:text-[#2B788B] hover:bg-gray-50">{{'logout' | translate}}</a>
             </div>
-            <div [ngClass]="{'hidden': !languageDropdownOpen}" class="absolute  right-0 z-40 mt-2 w-56 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="language-dropdown" style="font-family: Montserrat">
+            <div [ngClass]="{'hidden': !languageDropdownOpen}" class="absolute  right-0 z-50 mt-2 w-56 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="language-dropdown" style="font-family: Montserrat">
               <div class="flex items-center justify-start gap-4 mx-auto text-center text-sm font-semibold text-[#757575] tracking-wider" role="menuitem">
                 <div (click)="toggleLanguageMenu()" class="cursor-pointer text-[#757575] rounded-full p-2 hover:text-[#2B788B] hover:bg-gray-50">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
@@ -98,7 +98,7 @@
       </div>
     </div>
 
-    <div class="fixed w-max-full inset-0 top-[12%] flex justify-center" [ngClass]="{'hidden': !burgerMenu  }" style="z-index: 50">
+    <div class="fixed w-max-full inset-0 top-[65px] flex justify-center" [ngClass]="{'hidden': !burgerMenu  }" style="z-index: 50">
       <div class="bg-[#F6F5F4] w-full h-full p-4 flex justify-center items-center">
         <ul class="space-y-4 text-center font-semibold text-[#757575] tracking-wider text-lg" style="font-family: Montserrat">
           <li>
