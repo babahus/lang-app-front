@@ -125,8 +125,10 @@ export class AttachExerciseComponent implements OnInit {
     try {
       const result = await this.exerciseService.attachExerciseForUser(exerciseId, type);
       if (result) {
-        const exercise = this.exerciseData.find((ex: Exercise) => ex.id === exerciseId);
+        let exercise = this.exerciseData.find((ex: Exercise) => ex.id === exerciseId);
         if (exercise) {
+          exercise.exercises_id = result;
+          console.log(exercise,result)
           exercise.attached = true;
         }
       }

@@ -149,7 +149,7 @@
   "invalidFileError": "Invalid file for the selected exercise type",
 
   "sentenceModalTitle": "Sentence:",
-  "sentenceDescription3": "Write phrases with gaps and identify the correct word pairs to fill in the gaps.",
+  "sentenceDescription3": "Write a sentence and indicate the missing words by pressing the \"Add Missing Word\" button. Note that this word should be in your sentence.",
   "yourPhraseLabel": "Your phrase:",
   "yourMissingWordLabel": "Your missing word:",
   "addMissingWordButton": "Add Missing Word",

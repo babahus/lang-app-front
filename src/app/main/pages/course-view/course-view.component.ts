@@ -363,7 +363,8 @@ export class CourseViewComponent implements OnInit,AfterViewInit{
         exerciseId,
         type
       );
-    } catch (error) {
+    } catch (error : any) {
+      if (error && error.error.data) this.showErrorModal(error.error.data,'Already attached')
       console.log(error);
     }
   }

@@ -271,7 +271,7 @@ export class ExerciseService extends BaseService
           return throwError(error);
         })
       ).subscribe((data: any) => {
-        resolve(data);
+        resolve(data.data);
       });
     });
   }

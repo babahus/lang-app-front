@@ -1,5 +1,5 @@
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +19,9 @@ import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {LoaderInterceptor} from "./core/interceptors/request.interceptor";
 import { BaseSolveExerciseComponent } from './core/components/base-solve-exercise/base-solve-exercise.component';
 import {AuthorizeInterceptor} from "./core/interceptors/authorize-interceptor.service";
+import {AuthService} from "./core/services/auth.service";
+import {ProfileService} from "./core/services/profile-service.service";
+import {first} from "rxjs";
 
 
 export function HttpLoaderFactory(http:HttpClient){

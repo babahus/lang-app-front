@@ -37,7 +37,7 @@ export class ProfileService extends BaseService{
     });
   }
 
-  private currentUserRole = new BehaviorSubject<string | undefined>(undefined);
+  currentUserRole = new BehaviorSubject<string | undefined>(undefined);
   private currentUserId = new BehaviorSubject<number | undefined>(undefined);
 
   public currentUserRole$ = this.currentUserRole.asObservable();

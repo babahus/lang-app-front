@@ -107,8 +107,8 @@
                               </svg>
                             </div>
                             <div class="w-56 relative overflow-hidden">
-                              <span class="whitespace-nowrap overflow-ellipsis z-30 font-bold" [ngClass]="{'transform translate-x-1 transition-colors duration-700 ease-in-out text-white': exercise.attached, 'text-[#2B788B]': !exercise.attached}">
-                                {{ changeSentence(exercise.sentence_with_gaps, exercise.correct_answers_json) }}
+                              <span class="z-30 font-bold" [ngClass]="{'transform translate-x-1 transition-colors duration-700 ease-in-out text-white': exercise.attached, 'text-[#2B788B]': !exercise.attached}">
+                                {{ changeSentence(exercise.sentence_with_gaps, exercise.correct_answers_json) | truncate:26 }}
                               </span>
                             </div>
                           </div>

@@ -50,6 +50,7 @@ import { AttachExerciseComponent } from './pages/attach-exercise/attach-exercise
 import {ClickOutsideDirective} from "../core/directives/click-outside.directive";
 import { CoursesTeacherCardComponent } from './components/dashboard-teacher/courses-teacher-card/courses-teacher-card.component';
 import {roleGuard} from "../core/guards/role.guard";
+import {TruncatePipe} from "../core/pipes/truncate-pipe";
 
 
 
@@ -126,6 +127,7 @@ const routes: Routes = [
     CoursesTeacherCardComponent,
     AttachExerciseComponent,
     ClickOutsideDirective,
+    TruncatePipe
   ],
   exports: [
     HeaderComponent,
