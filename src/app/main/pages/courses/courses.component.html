@@ -96,7 +96,7 @@
 
 <!--///////////-->
       <ng-container *ngFor="let course of filteredCourses">
-        <div class="items-start relative bg-[#C3DCE3] overflow-hidden rounded-lg shadow sm:flex">
+        <div class="items-start  overflow-hidden relative bg-[#C3DCE3] rounded-lg shadow sm:flex max-w-md">
           <div class="h-48 md:h-full md:rounded-l-lg w-full md:w-1/2 lg:w-1/2 relative">
             <img src="./assets/img/courses-page/eleven-talking-points-tw.jpeg" class="rounded-l-lg object-cover object-center w-full h-full" alt="">
           </div>
@@ -119,11 +119,14 @@
             </div>
             <div style="font-family: Montserrat">
               <div>
-                <p class="text-[#2B788B] uppercase text-sm lg:text-base font-bold">
+                <p *ngIf="course.price > 0" class="text-[#2B788B] uppercase text-sm lg:text-base font-bold">
                   ${{ course.price }}
                 </p>
+                <p *ngIf="course.price === 0" class="text-[#2B788B] uppercase text-sm lg:text-base font-bold">
+                  Free
+                </p>
               </div>
-              <p class="truncate-text mt-3 mb-4 font-medium text-xs lg:text-sm text-gray-700">{{ course.description }}</p>
+              <p class="truncate-text mt-3 mb-4 truncate font-medium text-xs lg:text-sm text-gray-700">{{ course.description }}</p>
             </div>
 
             <div *ngIf="!isCourseAttached(course.id)" class="absolute cursor-pointer -bottom-2 -right-2 bg-[#2B788B] rounded-xl p-2 text-white" (click)="attachCourseToUser(course.id)">

@@ -264,6 +264,35 @@
   "descriptionAudit": "Phonetic transcription is a special type of exercise designed to improve phonetic transcription skills and understanding of the pronunciation of words or phrases. In this exercise, students are asked to listen to an audio recording of a word or phrase and try to write down its phonetic transcription",
   "audioText": "Audio-text",
   "answerButton": "Answer",
-  "requiredErrorAudit": "Audio-text is required."
+  "requiredErrorAudit": "Audio-text is required.",
+
+  "noExercisesOfType": "No exercises of this type",
+
+  "forgotPassword": "Forgot your password? No problem. Just let us know your email address, and we will email you a password reset link that will allow you to choose a new one.",
+  "resetPassword": "Reset Password",
+  "successfullyCompleted": "Successfully Completed",
+  "instructionsSent": "An email with instructions to reset your password has been sent to your registered email address. Please check your inbox and follow the provided instructions to reset your password.",
+  "ok": "Ok",
+  "failed": "Failed",
+  "unableToSendEmail": "Unable to send password reset email. Please check your email address and try again. If the problem persists, please contact our support team for assistance.",
+
+  "changePassword": "Change Password",
+  "passwordResetMessage": "Your password has been successfully reset and updated. You can now proceed to log in using your new password.",
+  "errorOccurred": "An error occurred during password recovery. Please try again, if the problem persists, please contact our support team for assistance.",
+
+  "compilePhraseTitle": "Compile Phrase",
+  "instructions": "Drag and drop the word blocks to form a phrase. Once done, click on the 'Answer' button to proceed.",
+
+
+  "instruction": "Drag the words from the 'Translations' column to match the 'Words' column, then click the 'Answer' button.",
+  "wordsLabel": "Words:",
+  "translationsLabel": "Translations:",
+
+
+  "instructionPicture": "Choose one of the answer options that is shown in the picture, then click the 'Answer' button.",
+
+
+
+  "instructionSentence": "Write the missing words in the sentence"
 
 }

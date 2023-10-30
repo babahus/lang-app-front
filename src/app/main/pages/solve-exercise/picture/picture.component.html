@@ -1,9 +1,9 @@
 <section class="min-h-screen bg-[#C3DCE3] w-full  p-3 flex md:items-center justify-center">
   <div class="w-full bg-white pb-4 md:pb-8 md:max-w-md lg:max-w-xl space-y-2 md:space-y-4 p-4 flex flex-col items-center justify-center rounded-3xl">
     <div class="w-full px-3 lg:px-0 pt-2 lg:w-[90%] mb-4 space-y-3">
-      <span class="text-xl text-center lg:text-start text-black md:text-2xl lg:px-0" style="font-family: DelaGothic">Picture Association {{id}}</span>
+      <span class="text-xl text-center lg:text-start text-black md:text-2xl lg:px-0" style="font-family: DelaGothic">{{'selectPictureExercise' | translate}} {{id}}</span>
       <p class="text-sm font-medium indent-5 text-[#757575]" style="font-family: Montserrat">
-        <strong>Choose one of the answer options that is shown in the picture, then click the "Answer" button.</strong>
+        <strong>{{'instructionPicture' | translate}}</strong>
       </p>
     </div>
     <div *ngIf="picture" class="w-full lg:w-[70%] px-3 lg:px-0">
@@ -38,7 +38,7 @@
       <button type="button" class="bg-[#2B788B] text-sm text-white hover:opacity-80 font-semibold p-2 px-4 rounded-full"
              (click)="onSubmit()" style="font-family: Montserrat"
       >
-        Answer
+        {{'answerButton' | translate}}
       </button>
 
     </div>
