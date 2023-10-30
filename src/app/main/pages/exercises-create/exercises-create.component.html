@@ -418,12 +418,12 @@
 
               <div *ngIf="sentenceForm.getError('additional_data')">
                 <p class="mt-2 text-center font-medium text-[#945069] text-xs">
-                  Invalid data for the selected exercise type.
+                  {{'invalidDataError' | translate}}
                 </p>
               </div>
               <div *ngIf="sentenceForm.getError('backend')">
                 <p class="mt-2 text-center font-medium text-[#945069] text-xs">
-                  Invalid data for the selected exercise type.
+                  {{'Invalid data for the selected exercise type.' | translate}}
                 </p>
               </div>
             <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
