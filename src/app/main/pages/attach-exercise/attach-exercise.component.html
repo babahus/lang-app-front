@@ -46,7 +46,7 @@
                             </div>
                             <div class="w-56 relative overflow-hidden">
                               <span class="whitespace-nowrap overflow-ellipsis z-30 font-bold" [ngClass]="{'transform translate-x-1 transition-colors duration-700 ease-in-out text-white': exercise.attached, 'text-[#2B788B]': !exercise.attached}">
-                                {{exercise.phrase}}
+                                {{exercise.phrase | truncate:20}}
                               </span>
                             </div>
                           </div>
