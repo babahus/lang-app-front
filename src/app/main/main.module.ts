@@ -77,7 +77,7 @@ const routes: Routes = [
   { path : 'dashboard', component : DashboardComponent, canActivate : [AuthGuard]},
   { path : 'profile', component : ProfileComponent, canActivate : [AuthGuard]},
   // { path : 'exercises', component : ExercisesComponent, canActivate : [AuthGuard]},
-  { path : 'courses', component : CoursesComponent, canActivate : [AuthGuard]},
+  { path : 'courses', component : CoursesComponent, canActivate : [AuthGuard,roleGuard], data: { requiredRole: 'User' }},
   { path : 'exercises-my', component : ExercisesMyComponent, canActivate : [AuthGuard]},
   { path : 'exercises/compile_phrase/:id', component : CompilePhraseComponent, canActivate : [AuthGuard]},
   { path : 'exercises/audit/:id', component : AuditComponent, canActivate : [AuthGuard]},

@@ -166,7 +166,7 @@ export class AuthService extends BaseService {
         this.setToken(data.data.token);
         this.setExpiredAt(data.data.expired_at);
         this.addDataInSessionStorage(data.data.role,data.data.id)
-        this.route.navigate(['/']);
+        this.route.navigate(['/dashboard']);
       })
     }))
   }

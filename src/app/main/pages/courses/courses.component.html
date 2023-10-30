@@ -106,11 +106,11 @@
                   <h3 class="cursor-pointer normal-case font-bold tracking-tight text-[#2B788B]" style="font-family: DelaGothic">
                     <a *ngIf="isCourseAttached(course.id); else noLink"
                        [routerLink]="['/course', course.id]"
-                       class=" hover:underline">
-                      <span class="normal-case font-semibold text-base">{{ course.title }}</span>
+                       class="hover:underline">
+                      <span class="truncate-text normal-case font-semibold text-base">{{ course.title }}</span>
                     </a>
                     <ng-template #noLink>
-                      <span class="normal-case font-semibold text-base">
+                      <span class="truncate-text normal-case font-semibold text-base">
                         {{ course.title }}
                       </span>
                     </ng-template>
@@ -123,7 +123,7 @@
                   ${{ course.price }}
                 </p>
               </div>
-              <p class="mt-3 mb-4 font-medium text-xs lg:text-sm text-gray-700">{{ course.description }}</p>
+              <p class="truncate-text mt-3 mb-4 font-medium text-xs lg:text-sm text-gray-700">{{ course.description }}</p>
             </div>
 
             <div *ngIf="!isCourseAttached(course.id)" class="absolute cursor-pointer -bottom-2 -right-2 bg-[#2B788B] rounded-xl p-2 text-white" (click)="attachCourseToUser(course.id)">

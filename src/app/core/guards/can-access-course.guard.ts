@@ -2,12 +2,13 @@ import {ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, UrlT
 import {CourseService} from "../services/course.service";
 import {catchError, combineLatest, map, Observable, of} from "rxjs";
 import {Injectable} from "@angular/core";
+import {ProfileService} from "../services/profile-service.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CanAccessCourseGuard {
-  constructor(private courseService: CourseService, private router: Router) {}
+  constructor(private courseService: CourseService, private router: Router, private profileService: ProfileService ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -21,22 +22,26 @@ export class CanAccessCourseGuard {
 
     return combineLatest([
       this.courseService.checkIfUserIsCreator(courseId),
-      this.courseService.checkIfUserAttachedToCourse(courseId)
+      this.courseService.checkIfUserAttachedToCourse(courseId),
+      this.profileService.currentUserRole$,
     ]).pipe(
-      map(([isCreator, isAttached]) => {
+      map(([isCreator, isAttached, userRole]) => {
         console.log([isCreator, isAttached])
-        if (isCreator || isAttached) {
+        if (isCreator) {
           console.log(isAttached)
           return true;
         }
-        console.log('This HERE')
-        // Redirect to '/courses' if user doesn't have access
-        return this.router.createUrlTree(['/courses']); // используем createUrlTree
+
+        if (isAttached && userRole == 'User'){
+          return true;
+        }
+        // Redirect to '/dashboard' if user doesn't have access
+        return this.router.createUrlTree(['/dashboard']);
       }),
       catchError(err => {
         console.error(err);
         // Redirect to '/courses' in case of an error
-        return of(this.router.createUrlTree(['/courses']));
+        return of(this.router.createUrlTree(['/dashboard']));
       })
     );
   }
